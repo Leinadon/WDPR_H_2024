@@ -21,5 +21,6 @@ public class Bedrijfsaccount : Gebruiker
         this.Bedrijf = bedrijf;
         this.Created = setDateTimeNow();
         this.LastUpdate = setDateTimeNow();
+        bedrijf.VoegNieuweAccountToe(this);
     }
 }   

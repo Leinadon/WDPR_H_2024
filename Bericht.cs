@@ -6,7 +6,7 @@ public class Bericht{
     private Gebruiker Gebruiker {get; set;}
     private DateTime Created {get; set;}
     private DateTime LastUpdate {get; set;}
-    private Chat chat;
+    private Chat chat{get; set;}
     private string Inhoud {get; set;}
     public Bericht(Gebruiker gebruiker, Chat chat, String inhoud)
     {

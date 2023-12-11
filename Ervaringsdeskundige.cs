@@ -27,7 +27,7 @@ public class Ervaringsdeskundige : Gebruiker
         this.HeeftVoogd = heeftVoogd;
     }
 
-    public void addNewOnderzoek(Onderzoek onderzoek){
+    public void VoegNieuweOnderzoekToe(Onderzoek onderzoek){
         Onderzoeken.Add(onderzoek);
     }
 }

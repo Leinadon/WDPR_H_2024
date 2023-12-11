@@ -27,8 +27,8 @@ public class Bedrijf{
     private DateTime SetDateTimeNow(){
         return DateTime.Now;
     }
-
-    private void VoegNieuweAccountToe(){
-        
+    //Methode om een gebruikersaccount toe te voegen
+    private void VoegNieuweAccountToe(Bedrijfsaccount bedrijfsaccount){
+        bedrijfsaccounts.Add(bedrijfsaccount);
     }
 }
