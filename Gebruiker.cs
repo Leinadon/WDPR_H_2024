@@ -17,7 +17,7 @@ public class Gebruiker
     protected DateTime Created {get; set;}
     protected DateTime LastUpdate {get; set;}
 
-        //Default constructor
+    //Default constructor
     public Gebruiker(){
         this.ID= 0;
         this.Voornaam ="Default voornaam";
