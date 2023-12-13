@@ -10,7 +10,6 @@ public class Beheerder : Gebruiker{
         this.Email = email;
         this.Telefoonnummer = telefoonnummer;
         this.Rol = "Beheerder";
-        this.ID = GetNextID();
         
     }
 }

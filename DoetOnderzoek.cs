@@ -1,9 +1,8 @@
 public class DoetOnderzoek
 {
-    private static int NextID = 1;
     public int ID {get; private set;}
     public Onderzoek Onderzoek{get;}
-    public Ervaringsdeskundige Ervaringsdeskundige;
+    public Ervaringsdeskundige Ervaringsdeskundige {get; set;}
     public string? Resultaat{get; set;}
     public string? InformatieTrackingScript{get; set;}
     public Boolean Voltooid{get; set;}
@@ -11,8 +10,6 @@ public class DoetOnderzoek
     public DoetOnderzoek(Onderzoek onderzoek, Ervaringsdeskundige ervaringsdeskundige){
         this.Onderzoek = onderzoek;
         this.Ervaringsdeskundige = ervaringsdeskundige;
-        this.ID = NextID;
-        NextID++;
         Voltooid = false;
     }
 

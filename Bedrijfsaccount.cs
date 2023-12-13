@@ -15,7 +15,6 @@ public class Bedrijfsaccount : Gebruiker
         this.Email = email;
         this.Telefoonnummer = telefoonnummer;
         this.Rol = rol;
-        this.ID = GetNextID();
         this.Functie = functie;
         this.Beheerder = beheerder;
         this.Bedrijf = bedrijf;

@@ -3,9 +3,6 @@ using System.Globalization;
 
 public class Gebruiker
 {
-    //Static attirbuut currentID zorgt ervoor dat elke Gebruiker die aangemaakt wordt een andere ID krijgt.
-    private static int CurrentID;
-
     //properties van Gebruiker
     public int ID {get; protected set;}
     public string Voornaam {get; set;}
@@ -35,18 +32,7 @@ public class Gebruiker
         this.Email = email;
         this.Telefoonnummer = telefoonnummer;
         this.Rol = rol; 
-    }
-
-    // statische contstructor om de statische ID te initialiseren. 
-    static Gebruiker() => CurrentID = 0;
-
-    //Methode die voor elke child object een id genereert. 
-    protected int GetNextID() => ++CurrentID;
-
-    //methode die de datum en tijd genereert
-    protected DateTime setDateTimeNow(){
-        return DateTime.Now;
-    }    
+    }   
 }
 
 

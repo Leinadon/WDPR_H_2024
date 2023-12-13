@@ -12,7 +12,6 @@ public class OnlineOpdracht : Onderzoek{
         this.Locatie = locatie;
         this.Beloning = beloning;
         this.Status = status;
-        this.ID = GetNextID();
     }
 
     private void NieuwResultaat(string opmerking, Ervaringsdeskundige ervaringsdeskundige){

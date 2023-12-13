@@ -1,7 +1,6 @@
 using System.Dynamic;
 
 public class Vraag{
-    private static int NextID = 1;
     public int ID {get; private set;}
     public string Text{get; set;}
     public Vragenlijst? Vragenlijst{get; set;}
@@ -10,16 +9,12 @@ public class Vraag{
     public Vraag(string text, Vragenlijst vragenlijst)
     {
         this.Text = text;
-        this.ID = NextID;
         this.Vragenlijst = vragenlijst;
-        NextID++;
     }
     public Vraag(string text, Interview interview)
     {
         this.Text = text;
-        this.ID = NextID;
         this.Interview = interview;
-        NextID++;
     }
 
     public void VoegNieuweAntwoordToe(string antwoord, Ervaringsdeskundige ervaringsdeskundige)

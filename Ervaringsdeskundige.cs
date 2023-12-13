@@ -18,7 +18,6 @@ public class Ervaringsdeskundige : Gebruiker
         this.Email = email;
         this.Telefoonnummer = telefoonnummer;
         this.Rol = "Ervaringsdeskundige";
-        this.ID = GetNextID();
         this.Benaderingsvoorkeur = benaderingsvoorkeur;
         this.Beschikbaarheid = beschikbaarheid;
         this.BenaderingCommercielePartijen = BenaderingCommercielePartijen;

@@ -10,7 +10,6 @@ public class Vragenlijst : Onderzoek{
         this.Locatie = locatie;
         this.Beloning = beloning;
         this.Status = status;
-        this.ID = GetNextID();
         this.Bedrijfsaccount = bedrijfsaccount;
     }
     private void VoegVraagToe(string text){

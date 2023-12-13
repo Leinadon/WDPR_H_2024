@@ -8,7 +8,6 @@ public class Interview : Onderzoek{
         this.Locatie = locatie;
         this.Beloning = beloning;
         this.Status = status;
-        this.ID = GetNextID();
         this.OprichtingsDatum = setDateTimeNow();
         this.Ervaringsdeskundige = ervaringsdeskundige;
     }

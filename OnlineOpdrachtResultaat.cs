@@ -1,5 +1,4 @@
 public class OnlineOpdrachtResultaat{
-    private static int NextID =1;
     public int ID{get; private set;}
     public Boolean Afgerond{get; set;}
     public string Opmerking{get; set;}
@@ -12,7 +11,5 @@ public class OnlineOpdrachtResultaat{
         this.Opmerking = opmerking;
         this.Ervaringsdeskundige = ervaringsdeskundige;
         this.OnlineOpdracht = onlineOpdracht;
-        this.ID = NextID;
-        NextID++;
     }
 }

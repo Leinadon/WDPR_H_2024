@@ -2,7 +2,6 @@ using System.Dynamic;
 
 public class Voogd
 {   
-    private static int nextID = 1;
     public int ID {get; private set;}
     public string Voornaam {get; set;}
     public string Achternaam {get; set;}
@@ -15,8 +14,5 @@ public class Voogd
         this.Achternaam = achernaam;
         this.Telefoonnummer = telefoonnummer;
         this.Email = email;
-        this.ID = nextID;
-        nextID++;
-
     }
 }
