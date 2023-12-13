@@ -1,7 +1,7 @@
 using System.Reflection;
 
 public class Vragenlijst : Onderzoek{
-    private List<Vraag> Vragen = new List<Vraag>();
+    public List<Vraag> Vragen = new List<Vraag>();
      
     public Vragenlijst(string titel, string? beschrijving, string? locatie, string? beloning, string status, Bedrijfsaccount bedrijfsaccount)
     {

@@ -1,6 +1,6 @@
 public class Interview : Onderzoek{
-    private List<Vraag> Vragen = new List<Vraag>();
-    private Ervaringsdeskundige Ervaringsdeskundige{get; set;}
+    public List<Vraag> Vragen = new List<Vraag>();
+    public Ervaringsdeskundige Ervaringsdeskundige{get; set;}
 
     public Interview(string titel, string beschrijving, string locatie, string beloning, string status, Ervaringsdeskundige ervaringsdeskundige){
         this.Titel = titel;

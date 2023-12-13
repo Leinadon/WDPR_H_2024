@@ -6,8 +6,8 @@ public class Beperkingstype
 {  
     private static int nextID = 1;
     public int ID{get; private set;}
-    private string Type;
-    private string Details;
+    public string Type{get; private set;}
+    public string Details{get; private set;}
     public Beperkingstype(string type, string details)
     {   
         this.Type = type;

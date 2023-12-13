@@ -1,12 +1,12 @@
 public class OnlineOpdrachtResultaat{
     private static int NextID =1;
     public int ID{get; private set;}
-    private Boolean Afgerond{get; set;}
-    private string Opmerking{get; set;}
-    private Ervaringsdeskundige Ervaringsdeskundige{get; set;}
-    private OnlineOpdracht OnlineOpdracht{get; set;}
-    private DateTime Created {get; set;}
-    private DateTime LastUpdated {get; set;}
+    public Boolean Afgerond{get; set;}
+    public string Opmerking{get; set;}
+    public Ervaringsdeskundige Ervaringsdeskundige{get; set;}
+    public OnlineOpdracht OnlineOpdracht{get; set;}
+    public DateTime Created {get; set;}
+    public DateTime LastUpdated {get; set;}
 
 
     public OnlineOpdrachtResultaat(string opmerking, Ervaringsdeskundige ervaringsdeskundige, OnlineOpdracht onlineOpdracht){

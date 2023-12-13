@@ -8,14 +8,14 @@ public class Gebruiker
 
     //properties van Gebruiker
     public int ID {get; protected set;}
-    protected string Voornaam {get; set;}
-    protected string Achternaam {get; set;}
-    protected string Postcode {get; set;}
-    protected string Email {get; set;}
-    protected string? Telefoonnummer {get; set;}
-    protected string Rol {get;set;}
-    protected DateTime Created {get; set;}
-    protected DateTime LastUpdate {get; set;}
+    public string Voornaam {get; set;}
+    public string Achternaam {get; set;}
+    public string Postcode {get; set;}
+    public string Email {get; set;}
+    public string? Telefoonnummer {get; set;}
+    public string Rol {get;set;}
+    public DateTime Created {get; set;}
+    public DateTime LastUpdate {get; set;}
 
     //Default constructor
     public Gebruiker(){

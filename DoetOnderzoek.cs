@@ -2,13 +2,13 @@ public class DoetOnderzoek
 {
     private static int NextID = 1;
     public int ID {get; private set;}
-    private Onderzoek Onderzoek{get;}
-    private Ervaringsdeskundige Ervaringsdeskundige;
-    private string? Resultaat{get; set;}
-    private string? InformatieTrackingScript{get; set;}
-    private Boolean Voltooid{get; set;}
-    private DateTime Created{get;}
-    private DateTime LastUpdated{get;set;}
+    public Onderzoek Onderzoek{get;}
+    public Ervaringsdeskundige Ervaringsdeskundige;
+    public string? Resultaat{get; set;}
+    public string? InformatieTrackingScript{get; set;}
+    public Boolean Voltooid{get; set;}
+    public DateTime CreatedDate{get;}
+    public DateTime LastUpdated{get;set;}
 
     public DoetOnderzoek(Onderzoek onderzoek, Ervaringsdeskundige ervaringsdeskundige){
         this.Onderzoek = onderzoek;

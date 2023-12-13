@@ -3,9 +3,9 @@ using System.Data;
 
 public class Bedrijfsaccount : Gebruiker
 {
-    private string? Functie {get; set;}
-    private bool Beheerder {get; set;}
-    private Bedrijf Bedrijf {get; set;}
+    public string? Functie {get; set;}
+    public bool Beheerder {get; set;}
+    public Bedrijf Bedrijf {get; set;}
 
     public Bedrijfsaccount(string voornaam, string achternaam, string postcode, string email, string? telefoonnummer, string rol, string functie, bool beheerder, Bedrijf bedrijf)
     {

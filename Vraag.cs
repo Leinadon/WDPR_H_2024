@@ -3,12 +3,12 @@ using System.Dynamic;
 public class Vraag{
     private static int NextID = 1;
     public int ID {get; private set;}
-    private string Text{get; set;}
-    private DateTime Created {get; set;}
-    private DateTime LastUpdated {get; set;}
-    private Vragenlijst? Vragenlijst{get; set;}
-    private Interview? Interview{get;set;}
-    private List<Antwoord> Antwoorden = new List<Antwoord>();
+    public string Text{get; set;}
+    public DateTime CreatedDate {get; set;}
+    public DateTime LastUpdated {get; set;}
+    public Vragenlijst? Vragenlijst{get; set;}
+    public Interview? Interview{get;set;}
+    public List<Antwoord> Antwoorden = new List<Antwoord>();
     public Vraag(string text, Vragenlijst vragenlijst)
     {
         this.Text = text;

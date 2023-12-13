@@ -1,9 +1,9 @@
 using System.Reflection.Metadata;
 
 public class OnlineOpdracht : Onderzoek{
-    private string Link{get; set;}
-    private string Uitleg{get; set;}
-    private List<OnlineOpdrachtResultaat> OnlineOpdrachtResultaten = new List<OnlineOpdrachtResultaat>();
+    public string Link{get; set;}
+    public string Uitleg{get; set;}
+    public List<OnlineOpdrachtResultaat> OnlineOpdrachtResultaten = new List<OnlineOpdrachtResultaat>();
     public OnlineOpdracht(string titel, string beschrijving, string locatie, string beloning, string status,string link, string uitleg){
         this.Link = link;
         this.Uitleg = uitleg;

@@ -3,17 +3,17 @@ using System.Runtime.CompilerServices;
 public class Onderzoek{
     private static int CurrtentID;
     public int ID {get; protected set;}
-    protected string Titel{get; set;}
-    protected string? Beschrijving{get; set;}
-    protected DateTime OprichtingsDatum{get; set;}
-    protected string? Locatie{get; set;}
-    protected string? Beloning{get; set;}
-    protected string? Status{get; set;}
-    protected DateTime Created{get; set;}
-    protected DateTime LastUpdated{get; set;}
-    protected List<Ervaringsdeskundige> Ervaringsdeskundigen = new List<Ervaringsdeskundige>();
-    protected Bedrijfsaccount Bedrijfsaccount{get; set;}
-    protected Boolean Engelstalig{get;set;}
+    public string Titel{get; set;}
+    public string? Beschrijving{get; set;}
+    public DateTime OprichtingsDatum{get; set;}
+    public string? Locatie{get; set;}
+    public string? Beloning{get; set;}
+    public string? Status{get; set;}
+    public DateTime Created{get; set;}
+    public DateTime LastUpdated{get; set;}
+    public List<Ervaringsdeskundige> Ervaringsdeskundigen = new List<Ervaringsdeskundige>();
+    public Bedrijfsaccount Bedrijfsaccount{get; set;}
+    public Boolean Engelstalig{get;set;}
 
     //Default constructor
     public Onderzoek(){

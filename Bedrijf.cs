@@ -3,14 +3,14 @@
 public class Bedrijf{
     private static int nextID = 1;
     public int ID {get; private set;}
-    private string Naam {get;set;}
-    private string Branche {get;set;}
-    private string Locatie {get;set;}
-    private string Link {get;set;}
-    private string Email {get;set;}
-    private DateTime Created {get;}
-    private DateTime LastUpdated {get;set;}
-    private List<Bedrijfsaccount> bedrijfsaccounts = new List<Bedrijfsaccount>();
+    public string Naam {get; private set;}
+    public string Branche {get; private set;}
+    public string Locatie {get; private set;}
+    public string Link {get; private set;}
+    public string Email {get; private set;}
+    public DateTime Created {get; private set}
+    public DateTime LastUpdated {get; private set;}
+    public List<Bedrijfsaccount> bedrijfsaccounts = new List<Bedrijfsaccount>();
     //constructor
     public Bedrijf(string naam, string branche, string locatie, string link, string email){
         this.Naam = naam;
@@ -24,11 +24,11 @@ public class Bedrijf{
         nextID++;
     }
     //Datum en tijd genereren van dit moment.
-    private DateTime SetDateTimeNow(){
+    public DateTime SetDateTimeNow(){
         return DateTime.Now;
     }
     //Methode om een gebruikersaccount toe te voegen
-    private void VoegNieuweAccountToe(Bedrijfsaccount bedrijfsaccount){
+    public void VoegNieuweAccountToe(Bedrijfsaccount bedrijfsaccount){
         bedrijfsaccounts.Add(bedrijfsaccount);
     }
 }

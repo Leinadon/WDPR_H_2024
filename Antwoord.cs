@@ -6,11 +6,11 @@ using System.Runtime.CompilerServices;
 public class Antwoord{
     private static int NextID = 1;
     public int ID {get; private set;}
-    private string Text{get; set;}
-    private Vraag Vraag{get; set;}
-    private Ervaringsdeskundige Ervaringsdeskundige{get; set;}
-    private DateTime Created{get; set;}
-    private DateTime LastUpdated{get; set;}
+    public string Text{get; private set;}
+    public Vraag Vraag{get; private set;}
+    public Ervaringsdeskundige Ervaringsdeskundige{get; private set;}
+    public DateTime Created{get; private set;}
+    public DateTime LastUpdated{get; private set;}
 
     public Antwoord(string text, Vraag vraag, Ervaringsdeskundige ervaringsdeskundige){
         this.Text = text;
@@ -22,7 +22,7 @@ public class Antwoord{
         this.LastUpdated = setDateTimeNow();
     }
     //Datum en tijd genereren van dit moment.
-    protected DateTime setDateTimeNow(){
+    public DateTime setDateTimeNow(){
         return DateTime.Now;
     } 
 }

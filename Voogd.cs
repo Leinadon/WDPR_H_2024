@@ -4,12 +4,12 @@ public class Voogd
 {   
     private static int nextID = 1;
     public int ID {get; private set;}
-    private string Voornaam {get; set;}
-    private string Achternaam {get; set;}
-    private string Telefoonnummer{get; set;}
-    private string Email{get; set;}
-    private DateTime Created {get; set;}
-    private DateTime LastUpdated {get; set;}
+    public string Voornaam {get; set;}
+    public string Achternaam {get; set;}
+    public string Telefoonnummer{get; set;}
+    public string Email{get; set;}
+    public DateTime Created {get; set;}
+    public DateTime LastUpdated {get; set;}
 
     public Voogd(string voornaam, string achernaam, string telefoonnummer, string email)
     {

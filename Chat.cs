@@ -5,12 +5,12 @@ public class Chat
 {
     private static int NextID = 1;
     public int ID {get; private set;}
-    private Onderzoek? Onderzoek {get; set;}
-    private Gebruiker  Gebruiker1{get; set;}
-    private Gebruiker  Gebruiker2{get; set;}
-    private DateTime Created{get; set;}
-    private DateTime LastUpdated{get; set;}
-    private List<Bericht> Berichten = new List<Bericht>();
+    public Onderzoek? Onderzoek {get; set;}
+    public Gebruiker  Gebruiker1{get; set;}
+    public Gebruiker  Gebruiker2{get; set;}
+    public DateTime Created{get; set;}
+    public DateTime LastUpdated{get; set;}
+    public List<Bericht> Berichten = new List<Bericht>();
     public Chat(Onderzoek onderzoek, Bedrijfsaccount bedrijfsaccount, Ervaringsdeskundige ervaringsdeskundige)
     {
         this.Onderzoek = onderzoek;
@@ -30,7 +30,7 @@ public class Chat
         this.Created = setDateTimeNow();
         this.LastUpdated = setDateTimeNow();
     }
-    private DateTime setDateTimeNow(){
+    public DateTime setDateTimeNow(){
         return DateTime.Now;
     }
     public void NieuwBericht(string inhoud, Gebruiker gebruiker){

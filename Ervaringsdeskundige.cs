@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 
 public class Ervaringsdeskundige : Gebruiker
 {
-    private string? Benaderingsvoorkeur {get; set;}
-    private DateTime? Beschikbaarheid { get; set; }
-    private bool? BenaderingCommercielePartijen {get; set;}
-    private bool? HeeftVoogd {get; set;}
-    private List<Onderzoek> Onderzoeken = new List<Onderzoek>();
+    public string? Benaderingsvoorkeur {get; set;}
+    public DateTime? Beschikbaarheid { get; set; }
+    public bool? BenaderingCommercielePartijen {get; set;}
+    public bool? HeeftVoogd {get; set;}
+    public List<Onderzoek> Onderzoeken = new List<Onderzoek>();
     public Ervaringsdeskundige(string voornaam, string achternaam, string postcode, string email, string? telefoonnummer, string? benaderingsvoorkeur, DateTime?  beschikbaarheid, bool? BenaderingCommercielePartijen, bool? heeftVoogd)
     {   
         this.Voornaam = voornaam;
