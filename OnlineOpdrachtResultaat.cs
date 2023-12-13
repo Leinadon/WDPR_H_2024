@@ -5,8 +5,6 @@ public class OnlineOpdrachtResultaat{
     public string Opmerking{get; set;}
     public Ervaringsdeskundige Ervaringsdeskundige{get; set;}
     public OnlineOpdracht OnlineOpdracht{get; set;}
-    public DateTime Created {get; set;}
-    public DateTime LastUpdated {get; set;}
 
 
     public OnlineOpdrachtResultaat(string opmerking, Ervaringsdeskundige ervaringsdeskundige, OnlineOpdracht onlineOpdracht){
@@ -14,12 +12,7 @@ public class OnlineOpdrachtResultaat{
         this.Opmerking = opmerking;
         this.Ervaringsdeskundige = ervaringsdeskundige;
         this.OnlineOpdracht = onlineOpdracht;
-        this.Created =setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
         this.ID = NextID;
         NextID++;
     }
-    private DateTime setDateTimeNow(){
-        return DateTime.Now;
-    } 
 }

@@ -14,8 +14,6 @@ public class Gebruiker
     public string Email {get; set;}
     public string? Telefoonnummer {get; set;}
     public string Rol {get;set;}
-    public DateTime Created {get; set;}
-    public DateTime LastUpdate {get; set;}
 
     //Default constructor
     public Gebruiker(){
@@ -26,8 +24,6 @@ public class Gebruiker
         this.Email = "Default email";
         this.Telefoonnummer = "Default telefoonnummer";
         this.Rol = "Default rol";
-        this.Created = setDateTimeNow();
-        this.LastUpdate = setDateTimeNow();
     }
     
     //Constructor met alle kenmerken in de parameters.
@@ -39,8 +35,6 @@ public class Gebruiker
         this.Email = email;
         this.Telefoonnummer = telefoonnummer;
         this.Rol = rol; 
-        this.Created = setDateTimeNow();
-        this.LastUpdate = setDateTimeNow();
     }
 
     // statische contstructor om de statische ID te initialiseren. 

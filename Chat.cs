@@ -8,8 +8,6 @@ public class Chat
     public Onderzoek? Onderzoek {get; set;}
     public Gebruiker  Gebruiker1{get; set;}
     public Gebruiker  Gebruiker2{get; set;}
-    public DateTime Created{get; set;}
-    public DateTime LastUpdated{get; set;}
     public List<Bericht> Berichten = new List<Bericht>();
     public Chat(Onderzoek onderzoek, Bedrijfsaccount bedrijfsaccount, Ervaringsdeskundige ervaringsdeskundige)
     {
@@ -18,8 +16,6 @@ public class Chat
         this.Gebruiker2 = ervaringsdeskundige;
         this.ID = NextID;
         NextID++;
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
 
     }
     public Chat(Gebruiker gebruiker1, Gebruiker gebruiker2){
@@ -27,11 +23,6 @@ public class Chat
         this.Gebruiker2 = gebruiker2;
         this.ID = NextID;
         NextID++;
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
-    }
-    public DateTime setDateTimeNow(){
-        return DateTime.Now;
     }
     public void NieuwBericht(string inhoud, Gebruiker gebruiker){
         Bericht bericht = new Bericht(gebruiker, this, inhoud);

@@ -9,8 +9,6 @@ public class Interview : Onderzoek{
         this.Beloning = beloning;
         this.Status = status;
         this.ID = GetNextID();
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
         this.OprichtingsDatum = setDateTimeNow();
         this.Ervaringsdeskundige = ervaringsdeskundige;
     }

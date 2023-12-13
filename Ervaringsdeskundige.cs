@@ -19,8 +19,6 @@ public class Ervaringsdeskundige : Gebruiker
         this.Telefoonnummer = telefoonnummer;
         this.Rol = "Ervaringsdeskundige";
         this.ID = GetNextID();
-        this.Created = setDateTimeNow();
-        this.LastUpdate = setDateTimeNow();
         this.Benaderingsvoorkeur = benaderingsvoorkeur;
         this.Beschikbaarheid = beschikbaarheid;
         this.BenaderingCommercielePartijen = BenaderingCommercielePartijen;

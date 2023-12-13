@@ -7,8 +7,6 @@ public class DoetOnderzoek
     public string? Resultaat{get; set;}
     public string? InformatieTrackingScript{get; set;}
     public Boolean Voltooid{get; set;}
-    public DateTime CreatedDate{get;}
-    public DateTime LastUpdated{get;set;}
 
     public DoetOnderzoek(Onderzoek onderzoek, Ervaringsdeskundige ervaringsdeskundige){
         this.Onderzoek = onderzoek;
@@ -16,8 +14,6 @@ public class DoetOnderzoek
         this.ID = NextID;
         NextID++;
         Voltooid = false;
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
     }
 
     public void setResultaat(string resultaat){
@@ -29,9 +25,4 @@ public class DoetOnderzoek
     public void setInformatieTrackingScript(String infromatie){
         this.InformatieTrackingScript = infromatie;
     }
-    private DateTime setDateTimeNow(){
-        return DateTime.Now;
-    }  
-
-    
 }

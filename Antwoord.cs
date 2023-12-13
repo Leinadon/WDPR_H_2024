@@ -9,8 +9,6 @@ public class Antwoord{
     public string Text{get; private set;}
     public Vraag Vraag{get; private set;}
     public Ervaringsdeskundige Ervaringsdeskundige{get; private set;}
-    public DateTime Created{get; private set;}
-    public DateTime LastUpdated{get; private set;}
 
     public Antwoord(string text, Vraag vraag, Ervaringsdeskundige ervaringsdeskundige){
         this.Text = text;
@@ -18,11 +16,6 @@ public class Antwoord{
         this.Ervaringsdeskundige = ervaringsdeskundige;
         this.ID = NextID;
         NextID++;
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
+        
     }
-    //Datum en tijd genereren van dit moment.
-    public DateTime setDateTimeNow(){
-        return DateTime.Now;
-    } 
 }

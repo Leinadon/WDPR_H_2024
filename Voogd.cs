@@ -8,8 +8,6 @@ public class Voogd
     public string Achternaam {get; set;}
     public string Telefoonnummer{get; set;}
     public string Email{get; set;}
-    public DateTime Created {get; set;}
-    public DateTime LastUpdated {get; set;}
 
     public Voogd(string voornaam, string achernaam, string telefoonnummer, string email)
     {
@@ -19,13 +17,6 @@ public class Voogd
         this.Email = email;
         this.ID = nextID;
         nextID++;
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
 
     }
-
-    //methode die de datum en tijd genereert
-    private DateTime setDateTimeNow(){
-        return DateTime.Now;
-    } 
 }

@@ -19,8 +19,6 @@ public class Bedrijfsaccount : Gebruiker
         this.Functie = functie;
         this.Beheerder = beheerder;
         this.Bedrijf = bedrijf;
-        this.Created = setDateTimeNow();
-        this.LastUpdate = setDateTimeNow();
         bedrijf.VoegNieuweAccountToe(this);
     }
 }   

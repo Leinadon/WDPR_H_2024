@@ -10,9 +10,6 @@ public class Vragenlijst : Onderzoek{
         this.Locatie = locatie;
         this.Beloning = beloning;
         this.Status = status;
-        this.OprichtingsDatum = setDateTimeNow();
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
         this.ID = GetNextID();
         this.Bedrijfsaccount = bedrijfsaccount;
     }

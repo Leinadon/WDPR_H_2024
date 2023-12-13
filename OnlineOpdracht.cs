@@ -13,10 +13,6 @@ public class OnlineOpdracht : Onderzoek{
         this.Beloning = beloning;
         this.Status = status;
         this.ID = GetNextID();
-        this.OprichtingsDatum = setDateTimeNow();
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
-
     }
 
     private void NieuwResultaat(string opmerking, Ervaringsdeskundige ervaringsdeskundige){

@@ -9,8 +9,6 @@ public class Onderzoek{
     public string? Locatie{get; set;}
     public string? Beloning{get; set;}
     public string? Status{get; set;}
-    public DateTime Created{get; set;}
-    public DateTime LastUpdated{get; set;}
     public List<Ervaringsdeskundige> Ervaringsdeskundigen = new List<Ervaringsdeskundige>();
     public Bedrijfsaccount Bedrijfsaccount{get; set;}
     public Boolean Engelstalig{get;set;}
@@ -22,9 +20,7 @@ public class Onderzoek{
         this.Beloning = "Defeault belonging";
         this.Beschrijving = "Default beschrijving";
         this.Locatie = "Default Locatie";
-        this.OprichtingsDatum = setDateTimeNow();
-        this.Created = setDateTimeNow();
-        this.LastUpdated = setDateTimeNow();
+        this.OprichtingsDatum = DateTime.now();
         this.Bedrijfsaccount = new Bedrijfsaccount("default voornaam", "default achternaam", "default postcode", "defail email", null, "default rol", "default functie", false,null);
         this.Engelstalig = false;
     }
@@ -38,10 +34,8 @@ public class Onderzoek{
         this.Status = status;
         this.ID = CurrtentID;
         this.Engelstalig = Engelstalig;
+        this.OprichtingsDatum = DateTime.now();
         CurrtentID++;
-        Created = setDateTimeNow();
-        LastUpdated = setDateTimeNow();
-        OprichtingsDatum = setDateTimeNow();
         this.Bedrijfsaccount = bedrijfsaccount;
         
 
@@ -49,9 +43,6 @@ public class Onderzoek{
     //Methoide om de volgende ID te krijgen
     protected int GetNextID() => CurrtentID++;
     //methode die de datum en tijd genereert
-    protected DateTime setDateTimeNow(){
-        return DateTime.Now;
-    } 
     public void addNewErvaringsdeskundige(Ervaringsdeskundige ervaringsdeskundige){
         Ervaringsdeskundigen.Add(ervaringsdeskundige);
     }
