@@ -8,6 +8,6 @@ class TestClass
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("De applicatie wordt nu gestart");
+        Console.WriteLine("The Application had been started.");
     }
 }

@@ -4,22 +4,22 @@ using System.Dynamic;
 public class Chat
 {
     public int ID {get; private set;}
-    public Onderzoek? Onderzoek {get; set;}
-    public Gebruiker  Gebruiker1{get; set;}
-    public Gebruiker  Gebruiker2{get; set;}
-    public List<Bericht> Berichten = new List<Bericht>();
-    public Chat(Onderzoek onderzoek, Bedrijfsaccount bedrijfsaccount, Ervaringsdeskundige ervaringsdeskundige)
+    public Research? Research {get; set;}
+    public User User1{get; set;}
+    public User User2{get; set;}
+    public List<Message> Messages = new List<Message>();
+    public Chat(Research research, CompanyAccount companyAccount, Specialist specialist)
     {
-        this.Onderzoek = onderzoek;
-        this.Gebruiker1 = bedrijfsaccount;
-        this.Gebruiker2 = ervaringsdeskundige;
+        this.Research = research;
+        this.User1 = companyAccount;
+        this.User2 = specialist;
     }
-    public Chat(Gebruiker gebruiker1, Gebruiker gebruiker2){
-        this.Gebruiker1 = gebruiker1;
-        this.Gebruiker2 = gebruiker2;
+    public Chat(User user1, User user2){
+        this.User1 = user1;
+        this.User2 = user2;
     }
-    public void NieuwBericht(string inhoud, Gebruiker gebruiker){
-        Bericht bericht = new Bericht(gebruiker, this, inhoud);
-        Berichten.Add(bericht);
+    public void NewMessage(string inhoud, User user){
+        Message message = new Message(user, this, inhoud);
+        Messages.Add(message);
     }    
 }
