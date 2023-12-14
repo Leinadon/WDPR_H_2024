@@ -9,7 +9,7 @@ public class Onderzoek{
     public string? Beloning{get; set;}
     public string? Status{get; set;}
     public List<Ervaringsdeskundige> Ervaringsdeskundigen = new List<Ervaringsdeskundige>();
-    public Bedrijfsaccount Bedrijfsaccount{get; set;}
+    public Bedrijf bedrijf{get; set;}
     public Boolean Engelstalig{get;set;}
 
     //Default constructor
@@ -23,7 +23,7 @@ public class Onderzoek{
         this.Bedrijfsaccount = new Bedrijfsaccount("default voornaam", "default achternaam", "default postcode", "defail email", null, "default rol", "default functie", false,null);
         this.Engelstalig = false;
     }
-    public Onderzoek(string titel, string? beschrijving, string? locatie, string? Beloning, string? status, Bedrijfsaccount bedrijfsaccount, Boolean Engelstalig)
+    public Onderzoek(string titel, string? beschrijving, string? locatie, string? Beloning, string? status, Bedrijf bedrijf , Boolean Engelstalig)
     {
         this.Titel = titel;
         this.Beschrijving = beschrijving;
@@ -32,7 +32,7 @@ public class Onderzoek{
         this.Status = status;
         this.Engelstalig = Engelstalig;
         this.OprichtingsDatum = DateTime.now();
-        this.Bedrijfsaccount = bedrijfsaccount;
+        this.Bedrijf = bedrijf;
         
 
     }
