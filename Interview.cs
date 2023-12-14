@@ -8,7 +8,7 @@ public class Interview : Onderzoek{
         this.Locatie = locatie;
         this.Beloning = beloning;
         this.Status = status;
-        this.OprichtingsDatum = setDateTimeNow();
+        this.OprichtingsDatum = DateTime.Now;
         this.Ervaringsdeskundige = ervaringsdeskundige;
     }
     private void VoegVraagToe(string text){
