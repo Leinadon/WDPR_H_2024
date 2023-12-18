@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 
 public class Research{
-    public int ID {get; private set;}
+    public int ID {get; protected set;}
     public string Titel{get; set;}
     public string? Description{get; set;}
     public DateTime OprichtingsDatum{get; set;}
