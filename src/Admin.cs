@@ -10,6 +10,5 @@ public class Admin : User{
         this.Email = email;
         this.TelephoneNumber = telephoneNumber;
         this.SortUser = "Admin";
-        
     }
 }

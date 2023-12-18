@@ -8,6 +8,7 @@ public class Company{
     public string Link {get; set;}
     public string Email {get; set;}
     public List<CompanyAccount> CompanyAccounts = new List<CompanyAccount>();
+    public List<Research> Researches = new List<Research>();
     //constructor
     public Company(string name, string branche, string location, string link, string email){
         this.Name = name;
@@ -15,6 +16,10 @@ public class Company{
         this.Location = location;
         this.Link = link;
         this.Email = email;
+    }
+    //Methode om een Onderzoek toe te voegen
+    public void AddNewResearch(Research research){
+        Researches.Add(research);
     }
     //Methode om een gebruikersaccount toe te voegen
     public void AddNewAccount(CompanyAccount bedrijfsaccount){

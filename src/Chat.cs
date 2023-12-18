@@ -7,16 +7,19 @@ public class Chat
     public Research? Research {get; set;}
     public User User1{get; set;}
     public User User2{get; set;}
+    public Boolean IsOpen{get; private set;}
     public List<Message> Messages = new List<Message>();
     public Chat(Research research, CompanyAccount companyAccount, Specialist specialist)
     {
         this.Research = research;
         this.User1 = companyAccount;
         this.User2 = specialist;
+        this.IsOpen = true; 
     }
     public Chat(User user1, User user2){
         this.User1 = user1;
         this.User2 = user2;
+        this.IsOpen = true; 
     }
     public void NewMessage(string inhoud, User user){
         Message message = new Message(user, this, inhoud);
