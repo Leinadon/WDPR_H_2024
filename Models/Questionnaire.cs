@@ -7,8 +7,7 @@ namespace WPR.Models
     public class Questionnaire
     {
         [Key]
-        [JsonIgnore]
-        public int Id { get; set; }
+        public int QuestionnaireId { get; private set; }
 
         public string Title { get; set; }
         public string Description { get; set; }

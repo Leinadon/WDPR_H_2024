@@ -7,9 +7,10 @@ namespace WPR
     public interface IQuestionnaireRepository
     {
         Task<List<Questionnaire>> Get();
-        Task<Questionnaire> GetById(int id);
-        Task Create(Questionnaire questionnaire);
-        Task Update(Questionnaire questionnaire);
+        Task<Questionnaire?> GetById(int id);
+        Task<int> Create(Questionnaire questionnaire);
+        Task Update(int id, Questionnaire questionnaire);
+        Task Delete(int id);
     }
 
     public class QuestionnaireRepository : IQuestionnaireRepository
@@ -26,19 +27,29 @@ namespace WPR
             return await _dbContext.Questionnaires.ToListAsync();
         }
 
-        public async Task<Questionnaire> GetById(int id)
+        public async Task<Questionnaire?> GetById(int id)
         {
-            return await _dbContext.Questionnaires.FirstAsync(c => c.Id == id);
+            return await _dbContext.Questionnaires.FindAsync(id);
         }
 
-        public async Task Create(Questionnaire questionnaire)
+        public async Task<int> Create(Questionnaire questionnaire)
         {
-            await _dbContext.Questionnaires.AddAsync(questionnaire);
+            _dbContext.Questionnaires.Add(questionnaire);
+            await _dbContext.SaveChangesAsync();
+            return questionnaire.QuestionnaireId;
         }
 
-        public async Task Update(Questionnaire questionnaire)
+        public async Task Update(int id, Questionnaire questionnaire)
         {
-            
+            _dbContext.Update(questionnaire);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task Delete(int id)
+        {
+            Questionnaire questionnaire = await _dbContext.Questionnaires.FirstAsync(q => q.QuestionnaireId == id);
+            _dbContext.Questionnaires.Remove(questionnaire);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

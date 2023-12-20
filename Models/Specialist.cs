@@ -15,7 +15,6 @@
         public bool ApproachCommercialParties { get; set; }
         public string TrackingID { get; set; }
         public Guardian Guardian { get; set; }
-        // public ?? Availability { get; set; }
 
     }
 }

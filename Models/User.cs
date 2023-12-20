@@ -6,7 +6,7 @@ namespace WPR
     public abstract class User: IdentityUser
     {
         [Key]
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public string FirstName { get; set; }

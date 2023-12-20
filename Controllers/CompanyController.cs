@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WPR.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,7 +24,7 @@ namespace WPR
             return companies;
         }
 
-        // GET api/companies/5
+        // GET api/companies/3
         [HttpGet("{id}")]
         public async Task<Company> Get(int id)
         {
@@ -31,6 +32,39 @@ namespace WPR
             return company;
         }
 
+        // POST api/companies/3
+        [HttpPost("{id}")]
+        public async Task<IActionResult> Create([FromBody] Company company)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
+            Company createdCompany = await _companyRepository.Create(company);
+
+            return Ok(createdCompany.CompanyId);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] Company company)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await _companyRepository.Update(id, company);
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _companyRepository.Delete(id);
+
+            return Ok();
+        }
     }
 }

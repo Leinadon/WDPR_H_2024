@@ -5,12 +5,13 @@ namespace WPR
     public class Company
     {
         [Key]
-        public int Id { get; set; }
+        public int CompanyId { get; private set; }
 
         [Required]
         public string Name { get; set; }
-
-        public string[] Sectors { get; set; }
+            
+        // public string[] Sectors { get; set; }
+            
         public string StreetName { get; set; }
         public string HouseNumber { get; set; }
         public string Place { get; set; }

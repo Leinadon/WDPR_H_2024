@@ -7,18 +7,19 @@ namespace WPR
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         // GET: api/users
         [HttpGet]
+        // TODO: check user == admin
         public async Task<List<User>> Get()
         {
-            List<User> users = await _userRepository.Get();
+            List<User> users = await _userService.Get();
             return users;
         }
 
@@ -26,7 +27,9 @@ namespace WPR
         [HttpGet("{id}")]
         public async Task<User> Get(int id)
         {
-            User users = await _userRepository.GetById(id);
+            // TODO: if user != admin, use GetById(id, userId);
+
+            User users = await _userService.GetById(id);
             return users;
         }
 

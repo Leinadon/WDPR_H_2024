@@ -6,7 +6,7 @@ namespace WPR
     public interface IUserRepository
     {
         Task<List<User>> Get();
-        Task<User> GetById(int id);
+        Task<User?> GetById(int id);
     }
 
     public class UserRepository : IUserRepository
@@ -23,9 +23,9 @@ namespace WPR
             return await _dbContext.Users.ToListAsync();
         }
 
-        public async Task<User> GetById(int id)
+        public async Task<User?> GetById(int id)
         {
-            return await _dbContext.Users.FirstAsync(c => c.Id == id);
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
         }
     }
 }

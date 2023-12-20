@@ -5,7 +5,7 @@ using WPR.Models;
 
 namespace WPR
 {
-    [Route("api/questionnaire")]
+    [Route("api/questionnaires")]
     [ApiController]
     public class QuestionnaireController : ControllerBase
     {
@@ -16,7 +16,7 @@ namespace WPR
             _questionnaireRepository = questionnaireRepository;
         }
 
-        // GET: api/questionnaire
+        // GET: api/questionnaires
         [HttpGet]
         public async Task<List<Questionnaire>> Get()
         {
@@ -24,15 +24,15 @@ namespace WPR
             return questionnaires;
         }
 
-        // GET api/questionnaire/3
+        // GET api/questionnaires/3
         [HttpGet("{id}")]
-        public async Task<Questionnaire> Get(int id)
+        public async Task<Questionnaire?> Get(int id)
         {
-            Questionnaire questionnaire = await _questionnaireRepository.GetById(id);
+            Questionnaire? questionnaire = await _questionnaireRepository.GetById(id);
             return questionnaire;
         }
 
-        // POST api/questionnaire
+        // POST api/questionnaires
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Questionnaire questionnaire)
         {
@@ -46,18 +46,34 @@ namespace WPR
             return Ok();
         }
 
-        // PUT api/questionnaire/3
+        // PUT api/questionnaires/3
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromBody] Questionnaire questionnaire)
+        public async Task<IActionResult> Update(int id, [FromBody] Questionnaire questionnaire)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _questionnaireRepository.Update(questionnaire);
+            await _questionnaireRepository.Update(id, questionnaire);
 
             return Ok();
+        }
+
+        // DELETE api/questionnaires/3
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _questionnaireRepository.Delete(id);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return Ok();
+            }
         }
     }
 }
