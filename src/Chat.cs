@@ -9,14 +9,7 @@ public class Chat
     public User User2{get; set;}
     public Boolean IsOpen{get; private set;}
     public List<Message> Messages = new List<Message>();
-    public Chat(Research research, CompanyAccount companyAccount, Specialist specialist)
-    {
-        this.Research = research;
-        this.User1 = companyAccount;
-        this.User2 = specialist;
-        this.IsOpen = true; 
-    }
-    public Chat(User user1, User user2){
+    public Chat(User user1, User user2, Research? research){
         this.User1 = user1;
         this.User2 = user2;
         this.IsOpen = true; 
