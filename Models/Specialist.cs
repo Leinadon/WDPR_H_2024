@@ -1,4 +1,4 @@
-﻿using WPR.Models;
+﻿using WPR;
 
 namespace WPR
 {

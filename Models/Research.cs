@@ -3,9 +3,9 @@ namespace WPR
 {
     public class Research{
         public int ID {get; protected set;}
-        public string Titel{get; set;}
+        public string Title{get; set;}
         public string? Description{get; set;}
-        public DateTime OprichtingsDatum{get; set;}
+        public DateTime StartDate{get; set;}
         public string? Location{get; set;}
         public string? Reward{get; set;}
         public string? Status{get; set;}
@@ -16,23 +16,22 @@ namespace WPR
         //Default constructor
         public Research(){
             this.ID=0;
-            this.Titel = "Default voornaam";
+            this.Title = "Default voornaam";
             this.Reward = "Defeault belonging";
             this.Description = "Default beschrijving";
             this.Location = "Default Locatie";
-            this.OprichtingsDatum = DateTime.Now;
-            this.Company = new Company("Default naam", "Default Branche", "Default Locatie", "Default Link", "Default Email");
+            this.StartDate = DateTime.Now;
             this.English = false;
         }
-        public Research(string titel, string? description, string? location, string? reward, string? status, Company company , Boolean english)
+        public Research(string title, string? description, string? location, string? reward, string? status, Company company , Boolean english)
         {
-            this.Titel = titel;
+            this.Title = title;
             this.Description = description;
             this.Location = location;
             this.Reward = Reward;
             this.Status = status;
             this.English = english;
-            this.OprichtingsDatum = DateTime.Now;
+            this.StartDate = DateTime.Now;
             this.Company = company;
             
 

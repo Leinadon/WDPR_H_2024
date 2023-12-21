@@ -11,9 +11,4 @@ namespace WPR
 
         public Disability() { }
     }
-
-    public class DisabilityType
-    {
-
-    }
 }
