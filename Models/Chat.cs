@@ -37,7 +37,7 @@ namespace WPR
         [ForeignKey("ChatId")]
         public Chat Chat { get; private set; }
 
-        public int SenderUserId { get; private set; }
+        public string SenderUserId { get; private set; }
 
         [ForeignKey("SenderUserId")]
         public User Sender { get; private set; }

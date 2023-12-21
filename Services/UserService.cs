@@ -3,7 +3,7 @@
 public interface IUserService
 {
     Task<List<User>> Get();
-    Task<User?> GetById(int id);
+    Task<User?> GetById(string id);
 }
 
 public class UserService : IUserService
@@ -20,7 +20,7 @@ public class UserService : IUserService
         return await _userRepository.Get();
     }
 
-    public async Task<User?> GetById(int id)
+    public async Task<User?> GetById(string id)
     {
         return await _userRepository.GetById(id);
     }

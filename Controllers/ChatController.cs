@@ -21,6 +21,7 @@ namespace WPR
         [HttpGet]
         public async Task<List<Chat>> Get()
         {
+
             // TODO: get user from cookie
 
             User loggedInUser = null;
@@ -43,11 +44,16 @@ namespace WPR
 
         // POST api/chats
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] int userId)
+        public async Task<IActionResult> Create([FromBody] string userId)
         {
             User loggedInUser = null;
 
-            User userToChat = await _userService.GetById(userId);
+            User? userToChat = await _userService.GetById(userId);
+
+            if (userToChat == null)
+            {
+                // TODO: throw error -> User not found
+            }
 
             Chat createdChat = await _chatService.Create(new() { loggedInUser, userToChat });
 

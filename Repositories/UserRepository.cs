@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WPR.Data;
 
 namespace WPR
 {
     public interface IUserRepository
     {
         Task<List<User>> Get();
-        Task<User?> GetById(int id);
+        Task<User?> GetById(string id);
     }
 
     public class UserRepository : IUserRepository
@@ -23,9 +22,9 @@ namespace WPR
             return await _dbContext.Users.ToListAsync();
         }
 
-        public async Task<User?> GetById(int id)
+        public async Task<User?> GetById(string id)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
+            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
     }
 }

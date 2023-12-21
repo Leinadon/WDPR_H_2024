@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WPR.Data;
-using WPR.Models;
 
 namespace WPR
 {

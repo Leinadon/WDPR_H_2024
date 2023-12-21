@@ -25,11 +25,11 @@ namespace WPR
 
         // GET api/users/5
         [HttpGet("{id}")]
-        public async Task<User> Get(int id)
+        public async Task<User> Get(string id)
         {
             // TODO: if user != admin, use GetById(id, userId);
 
-            User users = await _userService.GetById(id);
+            User? users = await _userService.GetById(id);
             return users;
         }
 

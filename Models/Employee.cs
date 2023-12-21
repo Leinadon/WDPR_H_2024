@@ -2,7 +2,7 @@
 
 namespace WPR.Models
 {
-    public class Employee : User
+    public class Employee
     {
 
     }
