@@ -1,17 +1,29 @@
-name: Super-Linter
+---
+name: Lint
 
-on: push
+on:  # yamllint disable-line rule:truthy
+  push: null
+  pull_request: null
 
 jobs:
-  super-lint:
-    name: Lint code base
-    runs-on: unbuntu-latest
-    steps:
-      -  name: Checkout code
-         uses: actions/checkout@v2
+  build:
+    name: Lint
+    runs-on: ubuntu-latest
 
-      -  name: Run Super-Linter
-         uses: github/super-Linter@v3
-         env:
-           DEFAULT_BRANCH: main
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    permissions:
+      contents: read
+      packages: read
+      # To report GitHub Actions status checks
+      statuses: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Super-linter
+        uses: super-linter/super-linter@v5
+        env:
+          DEFAULT_BRANCH: main
+          # To report GitHub Actions status checks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+...
