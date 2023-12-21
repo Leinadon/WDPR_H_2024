@@ -5,24 +5,17 @@ public class Company{
     public string Name {get; set;}
     public string Branche {get; set;}
     public string Location {get; set;}
-    public string Link {get; set;}
-    public string Email {get; set;}
-    public List<CompanyAccount> CompanyAccounts = new List<CompanyAccount>();
+    public string WebsiteURL {get; set;}
+    public string ContactEmail {get; set;}
+    public string TrackingID { get; set; }  
+    public List<Employee> CompanyAccounts = new List<Employee>();
     public List<Research> Researches = new List<Research>();
-    //constructor
-    public Company(string name, string branche, string location, string link, string email){
-        this.Name = name;
-        this.Branche = branche;
-        this.Location = location;
-        this.Link = link;
-        this.Email = email;
-    }
     //Methode om een Onderzoek toe te voegen
     public void AddNewResearch(Research research){
         Researches.Add(research);
     }
     //Methode om een gebruikersaccount toe te voegen
-    public void AddNewAccount(CompanyAccount bedrijfsaccount){
-        CompanyAccounts.Add(bedrijfsaccount);
+    public void AddNewAccount(Employee employee){
+        CompanyAccounts.Add(employee);
     }
 }

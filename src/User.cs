@@ -1,25 +1,12 @@
-using System;
-using System.Globalization;
+﻿using Microsoft.AspNetCore.Identity;
 
-public class User
+public class User : IdentityUser
 {
-    //properties van Gebruiker
-    public int ID {get; protected set;}
-    public string FirstName {get; set;}
-    public string LastName {get; set;}
-    public string Zipcode {get; set;}
-    public string HouseNumber {get; set;}
-    public DateTime Birthdate {get; set;}
-    public string Email {get; set;}
-    public string? TelephoneNumber {get; set;}
-    public string SortUser {get;set;}
 
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
     
-    //Constructor met alle kenmerken in de parameters.
-    public User()
-    {
-        
-    }   
+    // public string Email: Already in IdentityUser
+    public DateOnly BirthDate { get; set; }
+    public string Phone { get; set; }
 }
-
-

@@ -1,37 +1,25 @@
-using System;
-using System.Globalization;
-using System.Linq.Expressions;
+﻿using WPR.Models;
 
-
-public class Specialist : User
+namespace WPR
 {
-    public string? ContactPreference {get; set;}
-    public DateTime? Availability { get; set; }
-    public Boolean ApproachCommercialParties {get; set;}
-    public Boolean HasGuardian {get; set;}
-    public List<Research> researches = new List<Research>();
-    public Specialist(string firstName, string lastName, string zipcode, string email, string? telephoneNumber, string? contactPreference, DateTime?  availability, Boolean approachCommercialParties, Boolean hasGuardian)
-    {   
-        this.FirstName = firstName;
-        this.LastName = lastName;
-        this.Zipcode = zipcode;
-        this.Email = email;
-        this.TelephoneNumber = telephoneNumber;
-        this.SortUser = "Specialist";
-        this.ContactPreference = contactPreference;
-        this.Availability = availability;
-        this.ApproachCommercialParties = approachCommercialParties;
-        this.HasGuardian = hasGuardian;
+    public class Specialist : User
+    {
+        public Location Location { get; set; }
+
+        public string ToolsUsing { get; set; }
+        public MessagePrefence MessagePreference { get; set; }
+
+        public IEnumerable<Disability> Disabilities { get; set; }
+
+        public string DisabilityNote {  get; set; }
+        public bool ApproachCommercialParties { get; set; }
+        public string TrackingID { get; set; }
+        public Guardian Guardian { get; set; }
     }
 
-    public void VoegNieuweOnderzoekToe(Research research){
-        researches.Add(research);
-    }
+    public enum MessagePrefence
+    {
+        Phone,
+        Portal
+    } 
 }
-    
-
-
-
-
-
-

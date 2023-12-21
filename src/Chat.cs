@@ -1,21 +1,61 @@
-using System.Collections.Specialized;
-using System.Dynamic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Chat
+namespace WPR
 {
-    public int ID {get; private set;}
-    public Research? Research {get; set;}
-    public User User1{get; set;}
-    public User User2{get; set;}
-    public Boolean IsOpen{get; private set;}
-    public List<Message> Messages = new List<Message>();
-    public Chat(User user1, User user2, Research? research){
-        this.User1 = user1;
-        this.User2 = user2;
-        this.IsOpen = true; 
+    public class Chat
+    {
+        [Key]
+        public int ChatId { get; private set; }
+
+        public ICollection<User> Users { get; } = new List<User>();
+
+        public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
+
+        public ChatStatus Status { get; set; }
+
+        private Chat() { }
+
+        public Chat(List<User> users)
+        {
+            this.Users = new List<User>(users);
+            this.Status = ChatStatus.OPEN;
+        }
     }
-    public void NewMessage(string inhoud, User user){
-        Message message = new Message(user, this, inhoud);
-        Messages.Add(message);
-    }    
+
+    public class ChatMessage
+    {
+        [Key]
+        public int ChatMessageId { get; private set; }
+
+        public string Text { get; private set; }
+
+        public DateTime Date { get; } = DateTime.Now;
+
+        public int ChatId { get; private set; }
+
+        [ForeignKey("ChatId")]
+        public Chat Chat { get; private set; }
+
+        public string SenderUserId { get; private set; }
+
+        [ForeignKey("SenderUserId")]
+        public User Sender { get; private set; }
+
+        private ChatMessage() { }
+
+        public ChatMessage(int chatId, string text, User sender)
+        {
+            this.ChatId = chatId;
+            this.Text = text;
+            this.Sender = sender;
+        }
+
+    }
+
+    public enum ChatStatus
+    {
+        OPEN,
+        CLOSED
+    }
 }

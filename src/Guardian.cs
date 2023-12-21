@@ -1,18 +1,14 @@
-using System.Dynamic;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class Guardian
-{   
-    public int ID {get; private set;}
-    public string FirstName {get; set;}
-    public string LastName {get; set;}
-    public string TelephoneNumber{get; set;}
-    public string Email{get; set;}
-
-    public Guardian(string firstName, string lastName, string telephoneNumber, string email)
+namespace WPR.Models
+{
+    public class Guardian
     {
-        this.FirstName = firstName;
-        this.LastName = lastName;
-        this.TelephoneNumber = telephoneNumber;
-        this.Email = email;
+        [Key]
+        public int Id { get; private set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; } 
     }
 }
