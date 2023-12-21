@@ -30,6 +30,7 @@ namespace WPR
             // TODO: if user != admin, use GetById(id, userId);
 
             User? users = await _userService.GetById(id);
+
             return users;
         }
 

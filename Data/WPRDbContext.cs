@@ -31,6 +31,10 @@ public class WPRDbContext : IdentityDbContext<User>
             l.Property(loc => loc.HouseNumber);
             l.Property(loc => loc.Place).IsRequired();
         });
-        // ... other entity configurations
+
+        modelBuilder.Entity<Chat>()
+            .HasMany(c => c.Messages)
+            .WithOne(cm => cm.Chat)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

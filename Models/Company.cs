@@ -13,10 +13,12 @@ namespace WPR
 
         public Location Location { get; set; }
 
-        // public string[] Sectors { get; set; }
-        // 
+        public string Sectors { get; set; }
+        
         public string WebsiteURL { get; set; }
+
         public string ContactEmail { get; set; }
+
         public string TrackingID { get; set; }
     }
 }

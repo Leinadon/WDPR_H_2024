@@ -26,21 +26,21 @@ namespace WPR
     public class ChatMessage
     {
         [Key]
-        public int ChatMessageId { get; private set; }
+        public int ChatMessageId { get; set; }
 
-        public string Text { get; private set; }
+        public string Text { get; set; }
 
         public DateTime Date { get; } = DateTime.Now;
 
-        public int ChatId { get; private set; }
+        public int ChatId { get; set; }
 
         [ForeignKey("ChatId")]
-        public Chat Chat { get; private set; }
+        public virtual Chat Chat { get; set; }
 
-        public string SenderUserId { get; private set; }
+        public string SenderUserId { get; set; }
 
         [ForeignKey("SenderUserId")]
-        public User Sender { get; private set; }
+        public virtual User Sender { get; set; }
 
         private ChatMessage() { }
 

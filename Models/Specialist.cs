@@ -7,7 +7,7 @@ namespace WPR
         public Location Location { get; set; }
 
         public string ToolsUsing { get; set; }
-        public MessagePrefence MessagePreference { get; set; }
+        public MessagePrefences MessagePreference { get; set; }
 
         public IEnumerable<Disability> Disabilities { get; set; }
 
@@ -17,7 +17,7 @@ namespace WPR
         public Guardian Guardian { get; set; }
     }
 
-    public enum MessagePrefence
+    public enum MessagePrefences
     {
         Phone,
         Portal

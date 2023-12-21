@@ -6,5 +6,9 @@ namespace WPR
     {
         [Key]
         public int DisabilityId { get; private set; }
+
+        public enum DisabilityTypes {
+
+        }
     }
 }
