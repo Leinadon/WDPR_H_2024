@@ -3,7 +3,7 @@ using System.Data;
 
 namespace WPR
 {
-    public class Admin : User {
+    public class Administrator : User {
     
     }
 }

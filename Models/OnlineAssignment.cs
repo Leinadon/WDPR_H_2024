@@ -1,5 +1,7 @@
 using System.Reflection.Metadata;
 
+using WPR;
+
 public class OnlineAssignment : Research{
     public string Link{get; set;}
     public string Explanation{get; set;}
@@ -7,9 +9,8 @@ public class OnlineAssignment : Research{
     public OnlineAssignment(string titel, string description, string location, string reward, string status,string link, string explanation){
         this.Link = link;
         this.Explanation = explanation;
-        this.Titel = titel;
+        this.Title = titel;
         this.Description = description;
-        this.Location = location;
         this.Reward = reward;
         this.Status = status;
     }

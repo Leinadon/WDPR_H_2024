@@ -12,14 +12,13 @@ namespace WPR
 
         public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
 
-        public ChatStatus Status { get; set; }
+        public ChatStatus Status { get; set; } = ChatStatus.OPEN;
 
         private Chat() { }
 
         public Chat(List<User> users)
         {
             this.Users = new List<User>(users);
-            this.Status = ChatStatus.OPEN;
         }
     }
 

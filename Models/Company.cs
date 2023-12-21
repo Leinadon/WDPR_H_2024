@@ -27,5 +27,7 @@ namespace WPR
         public ICollection<Employee> Employees { get; } = new List<Employee>();
 
         public ICollection<Research> Researches { get; } = new List<Research>();
+
+        public Company () { }
     }
 }

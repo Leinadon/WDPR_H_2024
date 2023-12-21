@@ -22,7 +22,7 @@ namespace WPR
         public async Task<List<Chat>> Get(User user)
         {
             return await _dbContext.Chats
-                //.Where(c => c.Users.Any(u => u.UserId == user.UserId))
+                .Where(c => c.Users.Any(u => u.Id == user.Id))
                 .ToListAsync();
         }
 
@@ -30,7 +30,7 @@ namespace WPR
         {
             return await _dbContext.Chats
                 .Where(c => c.ChatId == id)
-                // .Where(c => c.Users.Any(u => u.UserId == user.UserId))
+                .Where(c => c.Users.Any(u => u.Id == user.Id))
                 .FirstOrDefaultAsync();
         }
 

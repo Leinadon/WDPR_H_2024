@@ -1,3 +1,5 @@
+using WPR;
+
 public class OnlineAssignmentResult{
     public int ID{get; private set;}
     public Boolean Afgerond{get; set;}

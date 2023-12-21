@@ -9,6 +9,7 @@ public class WPRDbContext : IdentityDbContext<User>
     public DbSet<Questionnaire> Questionnaires { get; set; }
     public DbSet<Chat> Chats { get; set; }
     public DbSet<ChatMessage> ChatMessages { get; set; }
+    public DbSet<Research> Researches { get; set; }
 
     public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) { }
 
