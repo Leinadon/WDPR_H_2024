@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WPR
@@ -26,7 +26,7 @@ namespace WPR
     public class ChatMessage
     {
         [Key]
-        public int ChatMessageId { get; set; }
+        public int ChatMessageId { get; private set; }
 
         public string Text { get; set; }
 

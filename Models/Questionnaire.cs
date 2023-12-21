@@ -1,22 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.Reflection;
 
-namespace WPR.Models
-{
-    public class Questionnaire
+public class Questionnaire : Research{
+    public List<Question> Questions = new List<Question>();
+     
+    public Questionnaire(string titel, string? description, string? location, string? reward, string status, Company company)
     {
-        [Key]
-        public int QuestionnaireId { get; private set; }
-
-        public string Title { get; set; }
-        public string Description { get; set; }
-        
-        [JsonIgnore]
-        public Company Company { get;set; }
-        
-        [JsonIgnore]
-        public string CreationDate { get; set; }
-
+        this.Titel = titel;
+        this.Description = description;
+        this.Location = location;
+        this.Reward = reward;
+        this.Status = status;
+        this.Company = company;
+    }
+    private void AddQuestion(string text){
+        Question question = new Question(text, this);
+        Questions.Add(question);
     }
 }

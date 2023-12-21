@@ -1,14 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
 
 namespace WPR
 {
     public class Disability
     {
-        [Key]
         public int DisabilityId { get; private set; }
 
-        public enum DisabilityTypes {
+        public Specialist Specialist { get; private set; }
 
-        }
+        public string Details { get; set; }
+
+        public Disability() { }
+    }
+
+    public class DisabilityType
+    {
+
     }
 }

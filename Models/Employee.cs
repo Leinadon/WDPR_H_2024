@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.Design.Serialization;
+using System.Data;
 
-namespace WPR.Models
+public class Employee : User
 {
-    public class Employee
-    {
-
-    }
-}
+    public string? Function {get; set;}
+    public Company Company {get; set;}
+}   
