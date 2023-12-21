@@ -1,5 +1,0 @@
-C:\Users\jasper.vorwerk\OneDrive - Operator Groep Delft BV\Bureaublad\WDPRGit\WPDR_H_2024\bin\Debug\net6.0\publish\WDPRProject.exe
-C:\Users\jasper.vorwerk\OneDrive - Operator Groep Delft BV\Bureaublad\WDPRGit\WPDR_H_2024\bin\Debug\net6.0\publish\WDPRProject.dll
-C:\Users\jasper.vorwerk\OneDrive - Operator Groep Delft BV\Bureaublad\WDPRGit\WPDR_H_2024\bin\Debug\net6.0\publish\WDPRProject.deps.json
-C:\Users\jasper.vorwerk\OneDrive - Operator Groep Delft BV\Bureaublad\WDPRGit\WPDR_H_2024\bin\Debug\net6.0\publish\WDPRProject.runtimeconfig.json
-C:\Users\jasper.vorwerk\OneDrive - Operator Groep Delft BV\Bureaublad\WDPRGit\WPDR_H_2024\bin\Debug\net6.0\publish\WDPRProject.pdb
