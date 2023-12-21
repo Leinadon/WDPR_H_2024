@@ -2,7 +2,6 @@
 //Bij een bedrijf kunnen verschillende Bedrijfsaccounts horen. Dit zijn de accounts van medewerkers.
 
 using System.ComponentModel.DataAnnotations;
-using WPR.Models;
 
 namespace WPR
 {

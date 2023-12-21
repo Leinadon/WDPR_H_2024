@@ -1,4 +1,6 @@
-public class DoesResearch
+namespace WPR
+{
+    public class DoesResearch
 {
     public int ID {get; private set;}
     public Research Research{get;}
@@ -19,4 +21,5 @@ public class DoesResearch
     public void SetCompleted(Boolean completed){
         this.Completed = completed;
     }
+}
 }

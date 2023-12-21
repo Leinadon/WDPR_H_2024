@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace WPR.Models
+namespace WPR
 {
     public class Location
 	{

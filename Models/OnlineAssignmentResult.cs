@@ -1,4 +1,6 @@
-public class OnlineAssignmentResult{
+namespace WPR
+{
+    public class OnlineAssignmentResult{
     public int ID{get; private set;}
     public Boolean Afgerond{get; set;}
     public string Comment{get; set;}
@@ -13,3 +15,5 @@ public class OnlineAssignmentResult{
         this.OnlineAssignment = onlineAssignment;
     }
 }
+}
+

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WPR.Models
+namespace WPR
 {
     public class Guardian
     {
