@@ -15,6 +15,9 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
+- script: |
+    echo "Project Root Directory: $(Build.SourcesDirectory)"
+  displayName: 'Print Root Directory'
 
 - script: |
     npm install
