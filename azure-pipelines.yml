@@ -20,9 +20,6 @@ steps:
   displayName: 'Print Root Directory'
 
 
-- script: |
-    ls -al "$(Build.SourcesDirectory)"
-  displayName: 'Check hierarchy'
   
 
 - script: |
