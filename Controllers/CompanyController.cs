@@ -26,9 +26,9 @@ namespace WPR
 
         // GET api/companies/3
         [HttpGet("{id}")]
-        public async Task<Company> Get(int id)
+        public async Task<Company?> Get(int id)
         {
-            Company company = await _companyRepository.GetById(id);
+            Company? company = await _companyRepository.GetById(id);
             return company;
         }
 

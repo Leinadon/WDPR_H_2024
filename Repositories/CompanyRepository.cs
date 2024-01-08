@@ -5,7 +5,7 @@ namespace WPR
     public interface ICompanyRepository
     {
         Task<List<Company>> Get();
-        Task<Company> GetById(int id);
+        Task<Company?> GetById(int id);
         Task<Company> Create(Company company);
         Task Update(int id, Company company);
         Task Delete(int id);
@@ -25,7 +25,7 @@ namespace WPR
             return await _dbContext.Companies.ToListAsync();
         }
 
-        public async Task<Company> GetById(int id)
+        public async Task<Company?> GetById(int id)
         {
             return await _dbContext.Companies.FirstAsync(c => c.CompanyId == id);
         }
