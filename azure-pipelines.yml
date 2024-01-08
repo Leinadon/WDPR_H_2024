@@ -16,21 +16,19 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    echo "Project Root Directory: $(Build.SourcesDirectory/client)"
+    echo "Project Root Directory: $(Build.SourcesDirectory)/client"
   displayName: 'Print Root Directory'
 
 
 - script: |
-    ls -al "$(Build.SourcesDirectory)/client"
+    ls -al "$(Build.SourcesDirectory)"
   displayName: 'Check hierarchy'
 
-- script: |
-    cd "$(Build.SourcesDirectory)/client"
-    npm install
-  displayName: 'npm install'
+
   
 
 - script: |
     cd "$(Build.SourcesDirectory)/client"
+    npm install
     npm run build
   displayName: 'npm build'
