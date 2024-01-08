@@ -9,7 +9,7 @@ namespace WPR
     {
         [Key]
         public int DisabilityId { get; private set; }
-
+        public DisabilityType DisabilityType {get; set;}
         public Specialist Specialist { get; private set; }
         public int SpecialistID{get; set;}
         [Required] [StringLength(1024, MinimumLength =5)]

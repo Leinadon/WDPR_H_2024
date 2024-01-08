@@ -22,19 +22,9 @@ namespace WPR
     public int QuestionID{get; set;}
     public Specialist Specialist{get; private set;}
     public int SpecialistID{get; set;}
-
+    public DoesResearch DoesResearch{ get; set;}
     public Answer(){
        
-        }
-    }
-    public class SampleContext : DbContext
-    {
-        
-        public DbSet<Answer> Answers {get; set;}
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {   
-            
-
         }
     }
 }

@@ -18,7 +18,7 @@ namespace WPR
 
         public string Phone { get; set; }
         [Required] [StringLength(64, MinimumLength =2)]
-
+        public Specialist specialist {get; set;}
         public string Email { get; set; } 
 
         public Guardian(){}

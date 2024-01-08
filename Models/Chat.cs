@@ -9,17 +9,17 @@ namespace WPR
         [Key]
         public int ChatId { get; private set; }
         
-        public ICollection<User> Users { get; } = new List<User>();
+        public User user1 {get; set;}
+        public User user2 {get; set;}
 
         public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
         [Required]
         public ChatStatus Status { get; set; }
+        public DoesResearch doesResearch {get;}
 
-        private Chat() { }
 
-        public Chat(List<User> users)
+        public Chat()
         {
-            this.Users = new List<User>(users);
             this.Status = ChatStatus.OPEN;
         }
     }

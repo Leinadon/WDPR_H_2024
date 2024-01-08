@@ -11,7 +11,7 @@ namespace WPR
         public int LocationId{get; set;}
         public string ToolsUsing { get; set; }
         public MessagePrefence MessagePreference { get; set; }
-
+        public ICollection<DoesResearch> doesResearches {get;} = new List<DoesResearch>();
         public IEnumerable<Disability> Disabilities { get; set; }
         [StringLength(1024, MinimumLength = 2)]
         public string DisabilityNote {  get; set; }

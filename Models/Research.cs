@@ -16,6 +16,7 @@ namespace WPR
         public string Reward{get; set;}
         [Required]
         public string Status{get; set;}
+        public ICollection<DoesResearch> doesResearches {get;} = new List<DoesResearch>();
         public List<Specialist> Specialists = new List<Specialist>();
         public Company Company{get; set;}
         public int CompanyId{get; set;}
