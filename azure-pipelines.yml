@@ -19,7 +19,6 @@ steps:
 - script: |
     npm install
   displayName: 'npm install'
-  workingDirectory: '$(build.sourcesdirectory)/client'
 
 - script: |
     npm run build
