@@ -1,15 +1,16 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WPR;
-using WPR.Models;
 
 public class WPRDbContext : IdentityDbContext<User>
 {
     public DbSet<Company> Companies { get; set; }
-    public DbSet<Questionnaire> Questionnaires { get; set; }
     public DbSet<Chat> Chats { get; set; }
     public DbSet<ChatMessage> ChatMessages { get; set; }
     public DbSet<Research> Researches { get; set; }
+    public DbSet<Questionnaire> Questionnaires { get; set; }
+    public DbSet<Interview> Interviews { get; set; }
+    public DbSet<OnlineAssignment> OnlineAssignment { get; set; }
 
     public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) { }
 
@@ -37,5 +38,11 @@ public class WPRDbContext : IdentityDbContext<User>
             .HasMany(c => c.Messages)
             .WithOne(cm => cm.Chat)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Research>()
+            .HasDiscriminator<string>("ResearchType")
+            .HasValue<Questionnaire>("Questionnaire")
+            .HasValue<Interview>("Interview")
+            .HasValue<OnlineAssignment>("OnlineAssignment");
     }
 }
