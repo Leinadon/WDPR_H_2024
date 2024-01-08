@@ -7,15 +7,15 @@ public interface IResearchService
     Task Delete(int id);
 
     // Questionnaire
-    Task<Questionnaire> Create(Questionnaire questionnaire);
+    Task Create(Questionnaire questionnaire);
     Task Update(int id, Questionnaire questionnaire);
     
     // Interview
-    Task<Interview> Create(Interview interview);
+    Task Create(Interview interview);
     Task Update(int id, Interview interview);
 
     // Online
-    Task<OnlineAssignment> Create(OnlineAssignment online);
+    Task Create(OnlineAssignment online);
     Task Update(int id, OnlineAssignment online);    
 }
 
@@ -43,9 +43,9 @@ public class ResearchService : IResearchService
         await _researchRepository.Delete(id);
     }
 
-    public async Task<Questionnaire> Create(Questionnaire questionnaire)
+    public async Task Create(Questionnaire questionnaire)
     {
-        return await _researchRepository.Create(questionnaire);
+        await _researchRepository.Create(questionnaire);
     }
 
     public async Task Update(int id, Questionnaire questionnaire)
@@ -53,9 +53,9 @@ public class ResearchService : IResearchService
         await _researchRepository.Update(id, questionnaire);
     }
 
-    public async Task<Interview> Create(Interview interview)
+    public async Task Create(Interview interview)
     {
-        return await _researchRepository.Create(interview);
+        await _researchRepository.Create(interview);
     }
 
     public async Task Update(int id, Interview interview)
@@ -63,9 +63,9 @@ public class ResearchService : IResearchService
         await _researchRepository.Update(id, interview);
     }
 
-    public async Task<OnlineAssignment> Create(OnlineAssignment onlineAssignment)
+    public async Task Create(OnlineAssignment onlineAssignment)
     {
-        return await _researchRepository.Create(onlineAssignment);
+        await _researchRepository.Create(onlineAssignment);
     }
 
     public async Task Update(int id, OnlineAssignment onlineAssignment)

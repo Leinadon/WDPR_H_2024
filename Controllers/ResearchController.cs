@@ -1,6 +1,4 @@
-﻿using System.IO.Pipelines;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Client;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace WPR
 {
@@ -29,6 +27,7 @@ namespace WPR
         }
 
         // GET: api/research/3
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try {
@@ -44,9 +43,121 @@ namespace WPR
             }
         }
 
-        public async Task Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
+            try {
+                await _researchService.Delete(id);
 
+                return Ok();
+            } catch {
+                return Problem();
+            }
+        }
+
+        [Route("questionnaire")]
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Questionnaire questionnaire)
+        {
+            try {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                await _researchService.Create(questionnaire);
+
+                return Ok(questionnaire.ResearchId);
+            } catch {
+                return Problem();
+            }
+        }
+
+        [HttpPut("questionnaire/{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] Questionnaire questionnaire)
+        {
+            try {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                await _researchService.Update(id, questionnaire);
+
+                return Ok();
+            } catch {
+                return Problem();
+            }
+        }
+
+        [Route("interview")]
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] Interview interview)
+        {
+            try {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                await _researchService.Create(interview);
+
+                return Ok(interview.ResearchId);
+            } catch {
+                return Problem();
+            }
+        }
+
+        [HttpPut("interview/{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] Interview interview)
+        {
+            try {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                
+                await _researchService.Update(id, interview);
+
+                return Ok();
+            } catch {
+                return Problem();
+            }
+        }
+        
+        [Route("online-assignment")]
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] OnlineAssignment onlineAssignment)
+        {
+            try {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                await _researchService.Create(onlineAssignment);
+
+                return Ok(onlineAssignment.ResearchId);
+            } catch {
+                return Problem();
+            }
+        }
+
+        [HttpPut("online-assignment/{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] OnlineAssignment onlineAssignment)
+        {
+            try {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                
+                await _researchService.Update(id, onlineAssignment);
+
+                return Ok();
+            } catch {
+                return Problem();
+            }
         }
     }
 }

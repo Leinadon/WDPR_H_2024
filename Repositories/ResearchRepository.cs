@@ -11,15 +11,15 @@ public interface IResearchRepository
     Task Delete(int id);
 
     // Questionnaire
-    Task<Questionnaire> Create(Questionnaire questionnaire);
+    Task Create(Questionnaire questionnaire);
     Task Update(int id, Questionnaire questionnaire);
     
     // Interview
-    Task<Interview> Create(Interview interview);
+    Task Create(Interview interview);
     Task Update(int id, Interview interview);
 
     // Online
-    Task<OnlineAssignment> Create(OnlineAssignment online);
+    Task Create(OnlineAssignment online);
     Task Update(int id, OnlineAssignment online);    
 }
 
@@ -55,11 +55,10 @@ public class ResearchRepository: IResearchRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<Questionnaire> Create(Questionnaire questionnaire)
+    public async Task Create(Questionnaire questionnaire)
     {
         _dbContext.Questionnaires.Add(questionnaire);
         await _dbContext.SaveChangesAsync();
-        return questionnaire;
     }
 
     public async Task Update(int id, Questionnaire questionnaire)
@@ -68,11 +67,10 @@ public class ResearchRepository: IResearchRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<Interview> Create(Interview interview)
+    public async Task Create(Interview interview)
     {
         _dbContext.Interviews.Add(interview);
         await _dbContext.SaveChangesAsync();
-        return interview;
     }
 
     public async Task Update(int id, Interview interview)
@@ -81,11 +79,10 @@ public class ResearchRepository: IResearchRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public async Task<OnlineAssignment> Create(OnlineAssignment onlineAssignment)
+    public async Task Create(OnlineAssignment onlineAssignment)
     {
         _dbContext.OnlineAssignment.Add(onlineAssignment);
         await _dbContext.SaveChangesAsync();
-        return onlineAssignment;
     }
 
     public async Task Update(int id, OnlineAssignment onlineAssignment)

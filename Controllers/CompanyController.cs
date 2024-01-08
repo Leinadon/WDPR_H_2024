@@ -32,8 +32,8 @@ namespace WPR
             return company;
         }
 
-        // POST api/companies/3
-        [HttpPost("{id}")]
+        // POST api/companies
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] Company company)
         {
             if (!ModelState.IsValid)
