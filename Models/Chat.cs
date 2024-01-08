@@ -3,15 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WPR
 {
+    [Table("Chats")]
     public class Chat
     {
         [Key]
         public int ChatId { get; private set; }
-
+        
         public ICollection<User> Users { get; } = new List<User>();
 
         public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
-
+        [Required]
         public ChatStatus Status { get; set; }
 
         private Chat() { }
@@ -22,34 +23,25 @@ namespace WPR
             this.Status = ChatStatus.OPEN;
         }
     }
-
+    [Table("ChatMessages")]
     public class ChatMessage
     {
         [Key]
         public int ChatMessageId { get; private set; }
-
+        [Required] [StringLength(1024, MinimumLength =2)]
         public string Text { get; set; }
 
         public DateTime Date { get; } = DateTime.Now;
 
         public int ChatId { get; set; }
 
-        [ForeignKey("ChatId")]
         public virtual Chat Chat { get; set; }
 
         public string SenderUserId { get; set; }
 
-        [ForeignKey("SenderUserId")]
         public virtual User Sender { get; set; }
 
-        private ChatMessage() { }
-
-        public ChatMessage(int chatId, string text, User sender)
-        {
-            this.ChatId = chatId;
-            this.Text = text;
-            this.Sender = sender;
-        }
+        public ChatMessage() { }
 
     }
 

@@ -1,40 +1,29 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 namespace WPR
 {
+    [Table("Researches")]
     public class Research{
-        public int ID {get; protected set;}
+        public int ResearchID {get; protected set;}
+        [Required] [StringLength(64, MinimumLength = 2)]
         public string Title{get; set;}
+        [Required] [StringLength(1024, MinimumLength = 2)]
         public string? Description{get; set;}
         public DateTime StartDate{get; set;}
         public string? Location{get; set;}
-        public string? Reward{get; set;}
-        public string? Status{get; set;}
+        [Required] [StringLength(256, MinimumLength = 2)]
+        public string Reward{get; set;}
+        [Required]
+        public string Status{get; set;}
         public List<Specialist> Specialists = new List<Specialist>();
         public Company Company{get; set;}
+        public int CompanyId{get; set;}
+        [Required]
         public Boolean English{get;set;}
-
-        //Default constructor
-        public Research(){
-            this.ID=0;
-            this.Title = "Default voornaam";
-            this.Reward = "Defeault belonging";
-            this.Description = "Default beschrijving";
-            this.Location = "Default Locatie";
-            this.StartDate = DateTime.Now;
-            this.English = false;
-        }
-        public Research(string title, string? description, string? location, string? reward, string? status, Company company , Boolean english)
+        public Research()
         {
-            this.Title = title;
-            this.Description = description;
-            this.Location = location;
-            this.Reward = Reward;
-            this.Status = status;
-            this.English = english;
             this.StartDate = DateTime.Now;
-            this.Company = company;
-            
-
         }
         public void AddNewSpecialist(Specialist specialist){
             Specialists.Add(specialist);

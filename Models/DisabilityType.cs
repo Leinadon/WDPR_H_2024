@@ -1,18 +1,21 @@
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
 namespace WPR
 {
+    [Table("DisabilityTypes")]
     public class DisabilityType
     {  
+        [Key]
         public int ID{get; private set;}
         public string Type{get; set;}
         public string Details{get; set;}
 
-        public DisabilityType(string type, string details)
+        public DisabilityType()
         {   
-            this.Type = type;
-            this.Details = details;
+
         }
     }
 }
