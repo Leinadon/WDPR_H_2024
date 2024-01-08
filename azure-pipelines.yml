@@ -27,6 +27,6 @@ steps:
 
 - script: |
     cd "$(Build.SourcesDirectory/client)"
-    ls -al "$(Build.SourcesDirectory)"
+    ls -al "$(Build.SourcesDirectory\client)"
     npm run build
   displayName: 'npm build'
