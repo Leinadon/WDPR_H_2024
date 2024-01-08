@@ -20,6 +20,8 @@ namespace WPR
         public string TrackingID { get; set; }
         public Guardian Guardian { get; set; }
         public int GuardianID{get; set;}
+
+        public Specialist(){}
     }
 
     public enum MessagePrefence

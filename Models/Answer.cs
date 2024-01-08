@@ -23,7 +23,7 @@ namespace WPR
     public Specialist Specialist{get; private set;}
     public int SpecialistID{get; set;}
 
-    public Answer(string text, Question question, Specialist specialist){
+    public Answer(){
        
         }
     }

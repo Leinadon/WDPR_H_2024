@@ -16,11 +16,8 @@ namespace WPR
     public int OnlineAssignmentID{get; set;}
 
 
-    public OnlineAssignmentResult(string comment, Specialist specialist, OnlineAssignment onlineAssignment){
-        this.Completed = false;
-        this.Comment = comment;
-        this.Specialist = specialist;
-        this.OnlineAssignment = onlineAssignment;
+    public OnlineAssignmentResult(){
+        
     }
 }
 }

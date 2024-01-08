@@ -14,8 +14,7 @@ namespace WPR
         public string InformationTrackingScript{get; set;}
         public Boolean Completed{get; set;}
 
-        public DoesResearch(Research research){
-            this.Research = research;
+        public DoesResearch(){
             Completed = false;
         }
     }

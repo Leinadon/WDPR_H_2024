@@ -11,18 +11,12 @@ namespace WPR
         public string Explanation{get; set;}
         [InverseProperty("OnlineAssignmentResults")]
         public List<OnlineAssignmentResult> OnlineAssignmentResults = new List<OnlineAssignmentResult>();
-        public OnlineAssignment(string titel, string description, string location, string reward, string status,string link, string explanation){ 
-            this.Link = link;
-            this.Explanation = explanation;
-            this.Title = titel;
-            this.Description = description;
-            this.Location = location;
-            this.Reward = reward;
-            this.Status = status;
+        public OnlineAssignment(){ 
+            
         }
 
         private void NewResult(string comment, Specialist specialist){
-            OnlineAssignmentResult result = new OnlineAssignmentResult(comment, specialist, this);
+            OnlineAssignmentResult result = new OnlineAssignmentResult();
             OnlineAssignmentResults.Add(result);
 
         }

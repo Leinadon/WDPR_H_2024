@@ -19,7 +19,7 @@ namespace WPR
 
         public void VoegNieuweAntwoordToe(string Answer, Specialist specialist)
         {
-            Answer AnswerObject = new Answer(Text,this,specialist);
+            Answer AnswerObject = new Answer();
             Answers.Add(AnswerObject);
         }
     }
