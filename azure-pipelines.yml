@@ -21,16 +21,16 @@ steps:
 
 
 - script: |
-    ls -al "$(Build.SourcesDirectory/client)"
+    ls -al "$(Build.SourcesDirectory)/client"
   displayName: 'Check hierarchy'
 
 - script: |
-    cd "$(Build.SourcesDirectory/client)"
+    cd "$(Build.SourcesDirectory)/client"
     npm install
   displayName: 'npm install'
   
 
 - script: |
-    cd "$(Build.SourcesDirectory/client)"
+    cd "$(Build.SourcesDirectory)/client"
     npm run build
   displayName: 'npm build'
