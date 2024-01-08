@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
-
-public class DisabilityType
-{  
-    public int ID{get; private set;}
-    public string Type{get; set;}
-    public string Details{get; set;}
+namespace WPR
+{
+    [Table("DisabilityTypes")]
+    public class DisabilityType
+    {  
+        [Key]
+        public int ID{get; private set;}
+        public string Type{get; set;}
+        public string Details{get; set;}
 
     public DisabilityType(string type, string details)
     {   

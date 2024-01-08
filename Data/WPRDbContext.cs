@@ -16,21 +16,8 @@ public class WPRDbContext : IdentityDbContext<User>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Company>().OwnsOne(c => c.Location, l =>
-        {
-            l.Property(loc => loc.StreetName).IsRequired();
-            l.Property(loc => loc.PostalCode).IsRequired();
-            l.Property(loc => loc.HouseNumber);
-            l.Property(loc => loc.Place).IsRequired();
-        });
-
-        modelBuilder.Entity<Specialist>().OwnsOne(c => c.Location, l =>
-        {
-            l.Property(loc => loc.StreetName).IsRequired();
-            l.Property(loc => loc.PostalCode).IsRequired();
-            l.Property(loc => loc.HouseNumber);
-            l.Property(loc => loc.Place).IsRequired();
-        });
+        modelBuilder.Entity<DisabilityType>()
+            .HasMany(d => d.)
 
         modelBuilder.Entity<Chat>()
             .HasMany(c => c.Messages)
