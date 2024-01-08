@@ -23,4 +23,3 @@ steps:
 - script: |
     npm run build
   displayName: 'npm build'
-  workingDirectory: '/home/vsts/work/1/s/package.json'
