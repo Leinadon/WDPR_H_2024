@@ -1,4 +1,6 @@
 using System.Collections;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using Microsoft.VisualBasic;
 namespace WPR
@@ -11,9 +13,9 @@ namespace WPR
         public string Type{get; set;}
         public string Details{get; set;}
 
-    public DisabilityType(string type, string details)
-    {   
-        this.Type = type;
-        this.Details = details;
+        public DisabilityType()
+        {   
+
+        }
     }
 }

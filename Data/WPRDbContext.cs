@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WPR;
-using WPR.Models;
 
 public class WPRDbContext : IdentityDbContext<User>
 {
