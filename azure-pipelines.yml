@@ -24,4 +24,4 @@ steps:
 - script: |
     npm run build
   displayName: 'npm build'
-  workingDirectory: '$(build.sourcesdirectory)/client'
+  workingDirectory: '$(build.sourcesdirectory)'
