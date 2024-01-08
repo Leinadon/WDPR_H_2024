@@ -23,12 +23,11 @@ steps:
 - script: |
     ls -al "$(Build.SourcesDirectory)"
   displayName: 'Check hierarchy'
-
-
   
 
 - script: |
     cd "$(Build.SourcesDirectory)/client"
     npm install
+    npm update
     npm run build
   displayName: 'npm build'
