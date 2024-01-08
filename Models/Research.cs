@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 public abstract class Research
 {
 
@@ -18,9 +16,14 @@ public abstract class Research
 public class Questionnaire : Research
 {
     public List<Question> Questions = new List<Question>();
+
+    public Questionnaire() { }
 }
 
 public class Interview : Research
 {
+    
     public List<Question> Questions = new List<Question>();
+
+    public Interview() { }
 }
