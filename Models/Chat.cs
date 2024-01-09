@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace WPR
 {
@@ -15,13 +16,23 @@ namespace WPR
         public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
         [Required]
         public ChatStatus Status { get; set; }
-        public DoesResearch doesResearch {get;}
+        public DoesResearch? doesResearch {get;}
 
 
-        public Chat()
+        public Chat(User user1, User user2)
         {
+            this.user1 = user1;
+            this.user2 = user2;
             this.Status = ChatStatus.OPEN;
         }
+        public Chat(User user1, User user2, DoesResearch doesResearch)
+        {
+            this.user1 = user1;
+            this.user2 = user2;
+            this.doesResearch = doesResearch;
+            this.Status = ChatStatus.OPEN;
+        }
+        
     }
     [Table("ChatMessages")]
     public class ChatMessage
@@ -41,7 +52,14 @@ namespace WPR
 
         public virtual User Sender { get; set; }
 
-        public ChatMessage() { }
+        public ChatMessage(Chat chat, String text, User user) {
+            this.Chat = chat;
+            this.ChatId = chat.ChatId;
+            this.Text = text;
+            this.Sender = user;
+            this.SenderUserId = user.Id;
+        
+        }
 
     }
 

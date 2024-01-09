@@ -6,7 +6,10 @@ namespace WPR
     {
         Task<List<Chat>> Get(User user);
         Task<Chat?> GetById(int id, User user);
-        Task<Chat> Create(List<User> users);
+        //Onderstaande methode is voor een chat die geopend wordt door 2 users
+        Task<Chat> Create(User user1, User user2);
+        //Onderstaande methode is voor een chat die geopend wordt bij een onderzoek dat gedaan wordt
+        Task<Chat> Create(User user1, User user2, DoesResearch doesResearch);
         Task AddMessage(int id, string text, User sender);
     }
 
@@ -34,14 +37,18 @@ namespace WPR
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Chat> Create(List<User> users)
+        public async Task<Chat> Create(User user1, User user2, DoesResearch doesResearch)
         {
-            Chat chat = new Chat(users);
-
+            Chat chat = new Chat(user1, user2, doesResearch);
             _dbContext.Chats.Add(chat);
-
             await _dbContext.SaveChangesAsync();
-
+            return chat;
+        }
+        public async Task<Chat> Create(User user1, User user2)
+        {
+            Chat chat = new Chat(user1, user2);
+            _dbContext.Chats.Add(chat);
+            await _dbContext.SaveChangesAsync();
             return chat;
         }
 
@@ -55,7 +62,7 @@ namespace WPR
                 return;
             }
 
-            ChatMessage chatMessage = new ChatMessage(chat.ChatId, text, sender);
+            ChatMessage chatMessage = new ChatMessage(chat, text, sender);
 
             chat.Messages.Add(chatMessage);
 

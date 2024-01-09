@@ -42,6 +42,8 @@ namespace WPR
             return chat;
         }
 
+
+        //TODO Create maken voor een chat die aangemaakt wordt met een onderzoek
         // POST api/chats
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] string userId)
@@ -54,8 +56,8 @@ namespace WPR
             {
                 // TODO: throw error -> User not found
             }
-
-            Chat createdChat = await _chatService.Create(new() { loggedInUser, userToChat });
+            
+            Chat createdChat = await _chatService.Create(loggedInUser, userToChat);
 
             return Ok(createdChat.ChatId);
         }

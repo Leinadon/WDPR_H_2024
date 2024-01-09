@@ -4,7 +4,8 @@ public interface IChatService
 {
     Task<List<Chat>> Get(User user);
     Task<Chat?> GetById(int id, User user);
-    Task<Chat> Create(List<User> users);
+    Task<Chat> Create(User user1, User user2);
+    Task<Chat> Create(User user1, User user2, DoesResearch doesResearch);
     Task AddMessage(int id, string text, User sender);
 }
 
@@ -28,9 +29,13 @@ public class ChatService : IChatService
         return await _chatRepository.GetById(id, user);
     }
 
-    public async Task<Chat> Create(List<User> users)
+    public async Task<Chat> Create(User user1, User user2)
     {
-        return await _chatRepository.Create(users);
+        return await _chatRepository.Create(user1, user2);
+    }
+    public async Task<Chat> Create(User user1, User user2, DoesResearch doesResearch)
+    {
+        return await _chatRepository.Create(user1, user2, doesResearch);
     }
 
     public async Task AddMessage(int id, string text, User sender)
