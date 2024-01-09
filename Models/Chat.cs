@@ -15,7 +15,8 @@ namespace WPR
 
         public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
         [Required]
-        public ChatStatus Status { get; set; }
+        public ChatStatus Status { get; set; } = ChatStatus.OPEN;
+        
         public DoesResearch? doesResearch {get;}
 
 

@@ -10,21 +10,15 @@ using Microsoft.VisualBasic;
 
 //class Antwoord is voor de antwoorden die we kunnen krijgen van vragen die gesteld worden in onderzoeken.
 //Antwoord kan op dit moment van een vraag van een interview of van een vraag van een vragenlijst zijn. 
-namespace WPR
-{
-    [Table("Answers")]
-    public class Answer{
-    [Key]
+public class Answer{
     public int ID {get; private set;}
-    [Required] [StringLength(1024, MinimumLength = 5)]
     public string Text{get; set;}
     public Question Question{get; set;}
-    public int QuestionID{get; set;}
     public Specialist Specialist{get; private set;}
-    public int SpecialistID{get; set;}
-    public DoesResearch DoesResearch{ get; set;}
-    public Answer(){
-       
-        }
+
+    public Answer(string text, Question question, Specialist specialist){
+        this.Text = text;
+        this.Question = question;
+        this.Specialist = specialist;
     }
 }
