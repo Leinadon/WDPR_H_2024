@@ -97,8 +97,17 @@ namespace WPR
         /// <returns></returns>
         public async Task Update(int id, Answer answer)
         {
-            _dbContext.Update(answer);
-            await _dbContext.SaveChangesAsync();
+            Answer? oldAnswer = await _dbContext.Answers.FindAsync(id);
+            if(oldAnswer != null)
+            {
+                _dbContext.Update(answer);
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException($"Answer with ID {id} not found for update.");
+            }
+            
         }
         /// <summary>
         /// Verwijderd een Answer uit de db

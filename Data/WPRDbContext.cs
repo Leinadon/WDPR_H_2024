@@ -135,5 +135,9 @@ public class WPRDbContext : DbContext
             .HasMany(c => c.Messages)
             .WithOne(m => m.Chat)
             .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Specialist>()
+            .HasOne(s => s.Location)
+            .WithOne(l => l.specialist)
+            .OnDelete(DeleteBehavior.SetNull);
     }
 }

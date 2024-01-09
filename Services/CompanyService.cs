@@ -1,5 +1,5 @@
 ﻿using System;
-namespace WPR.Services
+namespace WPR
 {
 	public class CompanyService
 	{

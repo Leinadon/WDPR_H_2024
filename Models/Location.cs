@@ -18,6 +18,8 @@ namespace WPR
         public string HouseNumber { get; set; }
         [Required][StringLength(64, MinimumLength = 2)]
         public string Place { get; set; }
+        public Specialist? specialist{get; set;}
+        public Company? company{get; set;}
         public Location(){}
     }
 }

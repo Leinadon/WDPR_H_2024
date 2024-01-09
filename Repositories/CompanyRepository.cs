@@ -35,6 +35,8 @@ namespace WPR
         public async Task<Company> GetById(int id)
         {
             return await _dbContext.Companies.FirstAsync(c => c.CompanyId == id);
+            
+            
         }
 
         public async Task<Company> Create(Company company)
