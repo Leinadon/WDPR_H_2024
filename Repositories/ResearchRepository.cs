@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Expressions;
 
-namespace WPR;
-
-public interface IResearchRepository
+namespace WPR
+{
+    public interface IResearchRepository
 {
     // Global
     Task<List<Research>> Get();
@@ -41,13 +41,13 @@ public class ResearchRepository: IResearchRepository
     public async Task<Research?> GetById(int id)
     {
         return await _dbContext.Researches
-            .Where(r => r.ResearchId == id)
+            .Where(r => r.ResearchID == id)
             .FirstOrDefaultAsync();
     }
 
     public async Task Delete(int id)
     {
-        Research? research = await _dbContext.Researches.FirstAsync(r => r.ResearchId == id);
+        Research? research = await _dbContext.Researches.FirstAsync(r => r.ResearchID == id);
 
         // TODO: if research not found: return error
 
@@ -81,7 +81,7 @@ public class ResearchRepository: IResearchRepository
 
     public async Task Create(OnlineAssignment onlineAssignment)
     {
-        _dbContext.OnlineAssignment.Add(onlineAssignment);
+        _dbContext.OnlineAssignments.Add(onlineAssignment);
         await _dbContext.SaveChangesAsync();
     }
 
@@ -91,3 +91,5 @@ public class ResearchRepository: IResearchRepository
         await _dbContext.SaveChangesAsync();
     }
 }
+}
+

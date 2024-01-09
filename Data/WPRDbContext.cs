@@ -9,12 +9,13 @@ public class WPRDbContext : DbContext
     public DbSet<ChatMessage> ChatMessages { get; set; }
     public DbSet<DisabilityType> DisabilityTypes {get; set; }
     public DbSet<Disability> Disabilities{get; set;}
-    public DbSet<Admin> Admins{get;set;}
     public DbSet<Employee> Employees{get;set;}
     public DbSet<Specialist> Specialists{get;set;}
     public DbSet<DoesResearch> DoesResearches{get; set;}
     public DbSet<Guardian> Guardians{get; set;}
     public DbSet<Interview> Interviews{get; set;}
+    public DbSet<User> Users{get; set;}
+    public DbSet<Questionnaire> Questionnaires{get; set;}
     public DbSet<Location> Locations{get; set;}
     public DbSet<OnlineAssignment> OnlineAssignments{get; set;}
     public DbSet<OnlineAssignmentResult> OnlineAssignmentResults{get;set;}
@@ -51,8 +52,8 @@ public class WPRDbContext : DbContext
             .OnDelete(DeleteBehavior.Cascade);
         //DoesResearch relatie naar Answer
         modelBuilder.Entity<DoesResearch>()
-            .HasMany(a => a.Answers)
-            .WithOne(dr => dr.DoesResearch)
+            .HasMany(dr => dr.Answers)
+            .WithOne(a => a.DoesResearch)
             .OnDelete(DeleteBehavior.Cascade);
         //Specialist relatie naar Disability
         modelBuilder.Entity<Specialist>()

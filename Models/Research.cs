@@ -5,6 +5,7 @@ namespace WPR
 {
     [Table("Researches")]
     public class Research{
+        [Key]
         public int ResearchID {get; protected set;}
         [Required] [StringLength(64, MinimumLength = 2)]
         public string Title{get; set;}
