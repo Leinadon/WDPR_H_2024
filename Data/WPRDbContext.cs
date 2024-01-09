@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WPR;
 
-public class WPRDbContext : IdentityDbContext<User>
+public class WPRDbContext : DbContext
 {
     public DbSet<Company> Companies { get; set; }
     public DbSet<Questionnaire> Questionnaires { get; set; }
@@ -10,11 +10,30 @@ public class WPRDbContext : IdentityDbContext<User>
     public DbSet<ChatMessage> ChatMessages { get; set; }
     public DbSet<DisabilityType> DisabilityTypes {get; set; }
     public DbSet<Disability> Disabilities{get; set;}
+    public DbSet<Admin> Admins{get;set;}
+    public DbSet<Employee> Employees{get;set;}
+    public DbSet<Specialist> Specialists{get;set;}
+    public DbSet<DoesResearch> DoesResearches{get; set;}
+    public DbSet<Guardian> Guardians{get; set;}
+    public DbSet<Interview> Interviews{get; set;}
+    public DbSet<Location> Locations{get; set;}
+    public DbSet<OnlineAssignment> OnlineAssignments{get; set;}
+    public DbSet<OnlineAssignmentResult> OnlineAssignmentResults{get;set;}
+    public DbSet<Question> Questions{get;set;}
+    public DbSet<Research> Researches{get; set;}
+    public DbSet<Answer> Answers{get; set;}
+    public static void Main()
+    {
+        
+    }
+    
     public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) { }
-
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlite("Filename=mydatabase.db");
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
         
         //DisabilityType relatie naar Disability
         modelBuilder.Entity<DisabilityType>()
