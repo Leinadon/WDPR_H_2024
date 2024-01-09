@@ -67,7 +67,7 @@ namespace WPR
 
                 await _researchService.Create(questionnaire);
 
-                return Ok(questionnaire.ResearchId);
+                return Ok(questionnaire.ResearchID);
             } catch {
                 return Problem();
             }
@@ -102,7 +102,7 @@ namespace WPR
 
                 await _researchService.Create(interview);
 
-                return Ok(interview.ResearchId);
+                return Ok(interview.ResearchID);
             } catch {
                 return Problem();
             }
@@ -137,7 +137,7 @@ namespace WPR
 
                 await _researchService.Create(onlineAssignment);
 
-                return Ok(onlineAssignment.ResearchId);
+                return Ok(onlineAssignment.ResearchID);
             } catch {
                 return Problem();
             }

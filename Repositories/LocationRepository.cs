@@ -4,9 +4,8 @@ namespace WPR
 {
     public interface ILocationRepository
     {
+        Task<List<Location>> Get();
         Task<Location?> GetByID(int id);
-        Task<Location?> GetBySpecialist(Specialist specialist);
-        Task<Location?> GetByCompany(Company company);
         Task<Location> Create(Location location);
         Task Update(int id, Location location);
         Task Delete(int id);
@@ -19,6 +18,9 @@ namespace WPR
         public LocationRepository(WPRDbContext dbContext)
         {
             this._dbContext = dbContext;
+        }
+        public async Task<List<Location>> Get(){
+            return await _dbContext.Locations.ToListAsync();
         }
         /// <summary>
         /// Voegt een Location toe aan de db
@@ -47,16 +49,6 @@ namespace WPR
             }
         }
         /// <summary>
-        /// Haal de Locatie op van een Company
-        /// </summary>
-        /// <param name="company"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public async Task<Location?> GetByCompany(Company company)
-        {
-            return await _dbContext.Locations.FirstOrDefaultAsync(l => l.Id == company.CompanyId);
-        }
-        /// <summary>
         /// Haal de locatie op met een id
         /// </summary>
         /// <param name="id"></param>
@@ -66,15 +58,6 @@ namespace WPR
         {
             return await _dbContext.Locations.FirstOrDefaultAsync(l => l.Id == id);
             
-        }
-        /// <summary>
-        /// Haalt de locatie op van een specialist
-        /// </summary>
-        /// <param name="specialist"></param>
-        /// <returns></returns>
-        public async Task<Location?> GetBySpecialist(Specialist specialist)
-        {
-            return await _dbContext.Locations.FirstOrDefaultAsync(l => l.Id == specialist.LocationId);
         }
         /// <summary>
         /// Past een locatie aan
