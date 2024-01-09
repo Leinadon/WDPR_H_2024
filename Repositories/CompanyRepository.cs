@@ -19,12 +19,19 @@ namespace WPR
         {
             this._dbContext = dbContext;
         }
-
+        /// <summary>
+        /// Haalt een lijst op met alle Company's
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Company>> Get()
         {
             return await _dbContext.Companies.ToListAsync();
         }
-
+        /// <summary>
+        /// Haalt 1 specifieke company op
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Company> GetById(int id)
         {
             return await _dbContext.Companies.FirstAsync(c => c.CompanyId == id);

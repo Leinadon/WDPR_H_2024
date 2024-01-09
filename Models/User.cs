@@ -7,6 +7,7 @@ namespace WPR
     [Table("User")]
     public class User : IdentityUser
     {
+        
 
         [Required][StringLength(64, MinimumLength = 2)]
         public string FirstName { get; set; }

@@ -11,6 +11,7 @@ public class WPRDbContext : IdentityDbContext<User>
     public DbSet<DisabilityType> DisabilityTypes {get; set; }
     public DbSet<Disability> Disabilities{get; set;}
     public DbSet<Answer> Answers{get; set;}
+    public DbSet<Research> researches{get; set;}
     public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

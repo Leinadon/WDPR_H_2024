@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WPR.Models;
 
 namespace WPR
 {
@@ -35,7 +34,7 @@ namespace WPR
         {
             _dbContext.Questionnaires.Add(questionnaire);
             await _dbContext.SaveChangesAsync();
-            return questionnaire.QuestionnaireId;
+            return questionnaire.ResearchID;
         }
 
         public async Task Update(int id, Questionnaire questionnaire)
@@ -46,7 +45,7 @@ namespace WPR
 
         public async Task Delete(int id)
         {
-            Questionnaire questionnaire = await _dbContext.Questionnaires.FirstAsync(q => q.QuestionnaireId == id);
+            Questionnaire questionnaire = await _dbContext.Questionnaires.FirstAsync(q => q.ResearchID == id);
             _dbContext.Questionnaires.Remove(questionnaire);
             await _dbContext.SaveChangesAsync();
         }

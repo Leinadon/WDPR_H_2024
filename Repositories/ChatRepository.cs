@@ -5,10 +5,8 @@ namespace WPR
     public interface IChatRepository
     {
         Task<List<Chat>> Get(User user);
-        Task<Chat?> GetById(int id, User user);
-        //Onderstaande methode is voor een chat die geopend wordt door 2 users
+        Task<Chat?> GetById(int id);
         Task<Chat> Create(User user1, User user2);
-        //Onderstaande methode is voor een chat die geopend wordt bij een onderzoek dat gedaan wordt
         Task<Chat> Create(User user1, User user2, DoesResearch doesResearch);
         Task AddMessage(int id, string text, User sender);
     }
@@ -22,21 +20,36 @@ namespace WPR
             this._dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Haalt een lijst met alle chats van een gebruiker op uit de db
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<List<Chat>> Get(User user)
         {
             return await _dbContext.Chats
-                //.Where(c => c.Users.Any(u => u.UserId == user.UserId))
+                .Where(c => c.user1.Id == user.Id || c.user2.Id == user.Id)
                 .ToListAsync();
         }
-
-        public async Task<Chat?> GetById(int id, User user)
+        /// <summary>
+        /// Haalt een Chat op met de ID 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<Chat?> GetById(int id)
         {
             return await _dbContext.Chats
                 .Where(c => c.ChatId == id)
-                // .Where(c => c.Users.Any(u => u.UserId == user.UserId))
                 .FirstOrDefaultAsync();
         }
-
+        /// <summary>
+        /// Create Chat met 2 users verbonden aan een onderzoek
+        /// </summary>
+        /// <param name="user1"></param>
+        /// <param name="user2"></param>
+        /// <param name="doesResearch"></param>
+        /// <returns></returns>
         public async Task<Chat> Create(User user1, User user2, DoesResearch doesResearch)
         {
             Chat chat = new Chat(user1, user2, doesResearch);
@@ -44,6 +57,12 @@ namespace WPR
             await _dbContext.SaveChangesAsync();
             return chat;
         }
+        /// <summary>
+        /// Create Chat met 2 users
+        /// </summary>
+        /// <param name="user1"></param>
+        /// <param name="user2"></param>
+        /// <returns></returns>
         public async Task<Chat> Create(User user1, User user2)
         {
             Chat chat = new Chat(user1, user2);
@@ -51,7 +70,13 @@ namespace WPR
             await _dbContext.SaveChangesAsync();
             return chat;
         }
-
+        /// <summary>
+        /// Voegt een chatmessage toe aan de database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="text"></param>
+        /// <param name="sender"></param>
+        /// <returns></returns>
         public async Task AddMessage(int id, string text, User sender)
         {
             Chat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.ChatId == id);
