@@ -21,7 +21,9 @@ namespace WPR
         public Guardian Guardian { get; set; }
         public int GuardianID{get; set;}
 
-        public Specialist(){}
+        public Specialist(){
+            this.Role = "Specialist";
+        }
     }
 
     public enum MessagePrefence

@@ -16,6 +16,7 @@ namespace WPR
         public DateOnly BirthDate { get; set; }
         [Required][StringLength(15, MinimumLength = 2)]
         public string Phone { get; set; }
+        public string Role {get; set;}
         public ICollection<Chat> chats {get;} = new List<Chat>();
         public ICollection<ChatMessage> chatMessages {get;} = new List<ChatMessage>();
     }

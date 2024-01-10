@@ -13,7 +13,9 @@ namespace WPR
         public Company Company {get; set;}
         public int CompanyId{get; set;}
 
-        public Employee(){}
+        public Employee(){
+            this.Role = "Employee";
+        }
 
     }
 }

@@ -11,6 +11,7 @@ public class WPRDbContext : DbContext
     public DbSet<Disability> Disabilities{get; set;}
     public DbSet<Employee> Employees{get;set;}
     public DbSet<Specialist> Specialists{get;set;}
+    public DbSet<Administrator> Administrators{get; set;}
     public DbSet<DoesResearch> DoesResearches{get; set;}
     public DbSet<Guardian> Guardians{get; set;}
     public DbSet<Interview> Interviews{get; set;}
