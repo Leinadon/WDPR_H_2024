@@ -27,8 +27,5 @@ namespace WPR
         {
             this.StartDate = DateTime.Now;
         }
-        public void AddNewSpecialist(Specialist specialist){
-            Specialists.Add(specialist);
-        }
     }
 }

@@ -1,75 +1,115 @@
-﻿using WPR;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-public interface IResearchService
+namespace WPR
 {
-    Task<List<Research>> Get();
-    Task<Research?> GetById(int id);
-    Task Delete(int id);
-
-    // Questionnaire
-    Task Create(Questionnaire questionnaire);
-    Task Update(int id, Questionnaire questionnaire);
-    
-    // Interview
-    Task Create(Interview interview);
-    Task Update(int id, Interview interview);
-
-    // Online
-    Task Create(OnlineAssignment online);
-    Task Update(int id, OnlineAssignment online);    
-}
-
-public class ResearchService : IResearchService
-{
-    private readonly IResearchRepository _researchRepository;
-
-    public ResearchService(IResearchRepository researchRepository)
+    public interface IResearchService
     {
-        _researchRepository = researchRepository;
+        Task<List<Research>> GetResearches();
+        Task<Research?> GetById(int id);
+        Task DeleteResearch(int id);
+
+        Task<Questionnaire> GetQuestionnaireById(int id);
+        Task<Interview> GetInterviewById(int id);
+        Task<OnlineAssignment> GetOnlineAssignmentById(int id);
+
+        Task<Questionnaire> CreateQuestionnaire(Questionnaire questionnaire);
+        Task<Interview> CreateInterview(Interview interview);
+        Task<OnlineAssignment> CreateOnlineAssignment(OnlineAssignment onlineAssignment);
+
+        Task UpdateQuestionnaire(int id, Questionnaire questionnaire);
+        Task UpdateInterview(int id, Interview interview);
+        Task UpdateOnlineAssignment(int id, OnlineAssignment onlineAssignment);
+
+        Task DeleteQuestionnaire(int id);
+        Task DeleteInterview(int id);
+        Task DeleteOnlineAssignment(int id);
     }
 
-    public async Task<List<Research>> Get()
+    public class ResearchService : IResearchService
     {
-        return await _researchRepository.Get();
-    }
+        private readonly IResearchRepository _researchRepository;
 
-    public async Task<Research?> GetById(int id)
-    {
-        return await _researchRepository.GetById(id);
-    }
+        public ResearchService(IResearchRepository researchRepository)
+        {
+            _researchRepository = researchRepository;
+        }
 
-    public async Task Delete(int id)
-    {
-        await _researchRepository.Delete(id);
-    }
+        public async Task<List<Research>> GetResearches()
+        {
+            return await _researchRepository.Get();
+        }
 
-    public async Task Create(Questionnaire questionnaire)
-    {
-        await _researchRepository.Create(questionnaire);
-    }
+        public async Task<Research?> GetById(int id)
+        {
+            return await _researchRepository.GetById(id);
+        }
 
-    public async Task Update(int id, Questionnaire questionnaire)
-    {
-        await _researchRepository.Update(id, questionnaire);
-    }
+        public async Task DeleteResearch(int id)
+        {
+            await _researchRepository.Delete(id);
+        }
 
-    public async Task Create(Interview interview)
-    {
-        await _researchRepository.Create(interview);
-    }
+        public async Task<Questionnaire> CreateQuestionnaire(Questionnaire questionnaire)
+        {
+            return await _researchRepository.CreateQuestionnaire(questionnaire);
+        }
 
-    public async Task Update(int id, Interview interview)
-    {
-        await _researchRepository.Update(id, interview);
-    }
+        public async Task<Interview> CreateInterview(Interview interview)
+        {
+            return await _researchRepository.CreateInterview(interview);
+        }
 
-    public async Task Create(OnlineAssignment onlineAssignment)
-    {
-        await _researchRepository.Create(onlineAssignment);
-    }
+        public async Task<OnlineAssignment> CreateOnlineAssignment(OnlineAssignment onlineAssignment)
+        {
+            return await _researchRepository.CreateOnlineAssignment(onlineAssignment);
+        }
 
-    public async Task Update(int id, OnlineAssignment onlineAssignment)
-    {
-        await _researchRepository.Update(id, onlineAssignment);
+        public async Task UpdateQuestionnaire(int id, Questionnaire questionnaire)
+        {
+            await _researchRepository.UpdateQuestionnaire(id, questionnaire);
+        }
+
+        public async Task UpdateInterview(int id, Interview interview)
+        {
+            await _researchRepository.UpdateInterview(id, interview);
+        }
+
+        public async Task UpdateOnlineAssignment(int id, OnlineAssignment onlineAssignment)
+        {
+            await _researchRepository.UpdateOnlineAssignment(id, onlineAssignment);
+        }
+
+        public async Task DeleteQuestionnaire(int id)
+        {
+            await _researchRepository.DeleteQuestionnaire(id);
+        }
+
+        public async Task DeleteInterview(int id)
+        {
+            await _researchRepository.DeleteInterview(id);
+        }
+
+        public async Task DeleteOnlineAssignment(int id)
+        {
+            await _researchRepository.DeleteOnlineAssignment(id);
+        }
+
+        public async Task<Questionnaire> GetQuestionnaireById(int id)
+        {
+            return await _researchRepository.GetQuestionnaireById(id);
+        }
+
+        public async Task<Interview> GetInterviewById(int id)
+        {
+            return await _researchRepository.GetInterviewById(id);
+        }
+
+        public async Task<OnlineAssignment> GetOnlineAssignmentById(int id)
+        {
+            return await _researchRepository.GetOnlineAssignmentById(id);
+        }
     }
 }

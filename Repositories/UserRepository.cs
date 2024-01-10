@@ -44,7 +44,12 @@ namespace WPR
 
         public async Task<User?> GetByID(int id)
         {
-            return await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            User? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            if(user != null){
+                return user;
+            }else{
+                throw new InvalidOperationException($"User with ID {id} not found");
+            }
         }
 
         public async Task<User> Create(User user)
@@ -56,11 +61,13 @@ namespace WPR
 
         public async Task Delete(int id)
         {
-            User? user = await _dbContext.Users.FindAsync(id);
+            User? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if (user != null)
             {
                 _dbContext.Users.Remove(user);
                 await _dbContext.SaveChangesAsync();
+            }else{
+                throw new InvalidOperationException($"Researh with ID {id} not found for Delete");
             }
         }
 
