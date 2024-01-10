@@ -8,9 +8,6 @@ namespace WPR
     public interface IAnswerRepository
     {
         Task<List<Answer>> Get();
-        Task<List<Answer>> Get(User user);
-        Task<List<Answer>> Get(DoesResearch doesResearch);
-        Task<List<Answer>> Get(Question question);
         Task<Answer?> GetById(int id);
         Task<Answer> Create(Answer answer);
         Task Update(int id, Answer answer);
@@ -33,41 +30,6 @@ namespace WPR
         {
             //alle antwoorden
             return await _dbContext.Answers.ToListAsync();
-        }
-        /// <summary>
-        /// Roept alle answers op van een gebruiker
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        public async Task<List<Answer>> Get(User user)
-        {
-            return await _dbContext.Answers
-                    .Where(a => a.SpecialistID.Equals(user.Id.ToString()))
-                    .ToListAsync();
-        }
-        /// <summary>
-        /// Roept alle Answers op die verbonden zitten aan een DoesResearch
-        /// </summary>
-        /// <param name="doesResearch"></param>
-        /// <returns></returns>
-        public async Task<List<Answer>> Get(DoesResearch doesResearch)
-        {
-            return await _dbContext.Answers
-                    .Where(a => a.DoesResearch.ID == doesResearch.ID)
-                    .ToListAsync();
-        }
-
-        /// <summary>
-        /// Roept alle answers op die verbonden zitten aan een Question
-        /// </summary>
-        /// <param name="question"></param>
-        /// <returns></returns>
-        public async Task<List<Answer>> Get(Question question)
-        {
-            //Gets the List of Answers of a Question
-            return await _dbContext.Answers
-                    .Where(a => a.QuestionID == question.ID)
-                    .ToListAsync();
         }
         /// <summary>
         /// Roept een Answer op met een ID

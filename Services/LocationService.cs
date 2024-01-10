@@ -6,7 +6,7 @@ namespace WPR
     {
         Task<List<Location>> Get();
         Task<Location?> GetById(int Id);
-        Task Create(Location location);
+        Task<Location?> Create(Location location);
         Task Update(int id, Location location);
         Task Delete(int Id);
     }
@@ -26,9 +26,9 @@ namespace WPR
             return await _locationRepository.GetByID(Id);
 
         }
-        public async Task Create(Location location)
+        public async Task<Location?> Create(Location location)
         {
-            await _locationRepository.Create(location);
+            return await _locationRepository.Create(location);
         }
 
         public async Task Delete(int Id)
