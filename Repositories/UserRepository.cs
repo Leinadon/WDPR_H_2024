@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace WPR
     {
         Task<List<User>> Get();
         Task<User?> GetByID(int id);
+        Task<User?> GetByIDString(string id);
         Task<User> Create(User user);
         Task Update(int id, User user);
         Task Delete(int id);
@@ -17,6 +19,7 @@ namespace WPR
         Task<Employee?> GetEmployeeByID(int id);
         Task<Administrator?> GetAdminByID(int id);
         Task<Specialist?> GetSpecialistByID(int id);
+        Task<User> GetByEmail(string email);
         Task<Employee> CreateEmployee(Employee employee);
         Task<Administrator> CreateAdmin(Administrator admin);
         Task<Specialist> CreateSpecialist(Specialist specialist);
@@ -31,6 +34,7 @@ namespace WPR
     public class UserRepository : IUserRepository
     {
         private readonly WPRDbContext _dbContext;
+        private readonly UserManager<User> _userManager;
 
         public UserRepository(WPRDbContext dbContext)
         {
@@ -51,6 +55,16 @@ namespace WPR
                 throw new InvalidOperationException($"User with ID {id} not found");
             }
         }
+        public async Task<User?> GetByIDString(string id)
+        {
+            User? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            if(user != null){
+                return user;
+            }else{
+                throw new InvalidOperationException($"User with ID {id} not found");
+            }
+        }
+
 
         public async Task<User> Create(User user)
         {
@@ -184,6 +198,16 @@ namespace WPR
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Specialist with id {id} not found for update.");
+            }
+        }
+
+        public async Task<User> GetByEmail(string email)
+        {
+            User? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+            if(user != null){
+                return user;
+            }else{
+                throw new InvalidOperationException($"User not found with email");
             }
         }
     }

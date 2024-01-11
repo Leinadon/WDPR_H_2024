@@ -41,8 +41,9 @@ namespace WPR
                 if (disability == null)
                 {
                     return NotFound(); // Return 404 
+                }else{
+                    return Ok(disability);
                 }
-                return Ok(disability);
             }
             catch (Exception ex)
             {

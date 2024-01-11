@@ -19,27 +19,39 @@ namespace WPR
 
         // GET: api/chats
         [HttpGet]
-        public async Task<List<Chat>> Get()
+        public async Task<ActionResult<List<Chat>>> Get(User user)
         {
-
-            // TODO: get user from cookie
-
-            User loggedInUser = null;
-
-            List<Chat> chats = await _chatService.Get(loggedInUser);
-
-            return chats;
+            try{
+                List<Chat> chats = await _chatService.Get(user);
+                if(chats.Count == 0){
+                    return NoContent();
+                }
+                if(chats != null){
+                    return Ok(chats);
+                }else{
+                    return NotFound();
+                }
+            }catch(Exception ex){
+                return Problem("Probleem bij het opvragen van alle chats van een User");
+            }
+            
         }
+        [HttpGet()]
 
         // GET api/chats/3
         [HttpGet("{id}")]
-        public async Task<Chat?> Get(int id)
+        public async Task<ActionResult<Chat>> Get(int id)
         {
-            User loggedInUser = null;
-
-            Chat? chat = await _chatService.GetById(id, loggedInUser);
-
-            return chat;
+            try{
+                Chat? chat = await _chatService.GetById(id);
+                if(chat != null){
+                    return Ok(chat);
+                }else{
+                    return NotFound();
+                }
+            }catch(Exception ex){
+                return Problem("Probleem bij het opvragen van een chat");
+            }
         }
 
 
@@ -50,7 +62,7 @@ namespace WPR
         {
             User loggedInUser = null;
 
-            User? userToChat = await _userService.GetById(userId);
+            User? userToChat = await _userService.GetByIDString(userId);
 
             if (userToChat == null)
             {

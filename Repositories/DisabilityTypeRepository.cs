@@ -46,6 +46,8 @@ namespace WPR
             {
                 _dbContext.DisabilityTypes.Remove(disabilityType);
                 await _dbContext.SaveChangesAsync();
+            }else{
+                throw new InvalidOperationException($"DisablilityType wiht ID {id} not found for Delete");
             }
         }
 

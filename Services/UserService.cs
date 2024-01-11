@@ -6,6 +6,7 @@ namespace WPR
     public interface IUserService
     {
         Task<List<User>> Get();
+        Task<User?> GetByIDString(string id);
         Task<User?> GetByID(int id);
         Task<User> Create(User user);
         Task Update(int id, User user);
@@ -15,6 +16,7 @@ namespace WPR
         Task<Employee?> GetEmployeeByID(int id);
         Task<Administrator?> GetAdminByID(int id);
         Task<Specialist?> GetSpecialistByID(int id);
+        Task<User> GetByEmail(string email);
         Task<Employee> CreateEmployee(Employee employee);
         Task<Administrator> CreateAdmin(Administrator admin);
         Task<Specialist> CreateSpecialist(Specialist specialist);
@@ -45,7 +47,10 @@ namespace WPR
         {
             return await _userRepository.GetByID(id);
         }
-
+        public async Task<User?> GetByIDString(string id)
+        {
+            return await _userRepository.GetByIDString(id);
+        }
         public async Task<User> Create(User user)
         {
             return await _userRepository.Create(user);
@@ -119,6 +124,11 @@ namespace WPR
         public async Task DeleteSpecialist(int id)
         {
             await _userRepository.DeleteSpecialist(id);
+        }
+
+        public async Task<User> GetByEmail(string email)
+        {
+            return await _userRepository.GetByEmail(email);
         }
     }
 }

@@ -6,6 +6,7 @@ namespace WPR
     {
         Task<List<Chat>> Get(User user);
         Task<Chat?> GetById(int id);
+        Task<Chat?> GetByUserId(int id);
         Task<Chat> Create(User user1, User user2);
         Task<Chat> Create(User user1, User user2, DoesResearch doesResearch);
         Task AddMessage(int id, string text, User sender);
@@ -80,18 +81,31 @@ namespace WPR
         public async Task AddMessage(int id, string text, User sender)
         {
             Chat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.ChatId == id);
-
-            if (chat == null)
+            if (chat != null)
             {
-                // TODO: handle error -> chat not found
-                return;
+                ChatMessage chatMessage = new ChatMessage(chat, text, sender);
+                chat.Messages.Add(chatMessage);
+                await _dbContext.SaveChangesAsync();
+            }else{
+                throw new InvalidOperationException($"Chat with ID {id} can not be found");
+            }
+        }
+        /// <summary>
+        /// Pakt een chat uit de db met de id van een user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task<Chat?> GetByUserId(int id)
+        {
+            Chat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.user1.Id.Equals(id)  || c.user2.Equals(id));
+            if(chat != null){
+                return chat;
+            }else{
+                throw new InvalidOperationException($"Chat with UserID {id} not found.");
+
             }
 
-            ChatMessage chatMessage = new ChatMessage(chat, text, sender);
-
-            chat.Messages.Add(chatMessage);
-
-            await _dbContext.SaveChangesAsync();
         }
     }
 }
