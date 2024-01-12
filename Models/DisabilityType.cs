@@ -9,10 +9,10 @@ namespace WPR
     public class DisabilityType
     {  
         [Key]
-        public int ID{get; private set;}
+        public int ID{get; set;}
         public string Type{get; set;}
         public string Details{get; set;}
-        public ICollection<Disability> disabilities{get;} = new List<Disability>();
+        public ICollection<Disability> disabilities{get;}
         public DisabilityType()
         {   
 

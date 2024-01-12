@@ -1,41 +1,85 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using WPR;
 
 public class WPRDbContext : DbContext
 {
     public DbSet<Company> Companies { get; set; }
-    public DbSet<Chat> Chats { get; set; }
-    public DbSet<ChatMessage> ChatMessages { get; set; }
+    public DbSet<OurChat> Chats { get; set; }
+    public DbSet<OurChatMessage> ChatMessages { get; set; }
     public DbSet<DisabilityType> DisabilityTypes {get; set; }
     public DbSet<Disability> Disabilities{get; set;}
-    public DbSet<Employee> Employees{get;set;}
-    public DbSet<Specialist> Specialists{get;set;}
-    public DbSet<Administrator> Administrators{get; set;}
     public DbSet<DoesResearch> DoesResearches{get; set;}
     public DbSet<Guardian> Guardians{get; set;}
-    public DbSet<Interview> Interviews{get; set;}
-    public DbSet<User> Users{get; set;}
-    public DbSet<Questionnaire> Questionnaires{get; set;}
+    public DbSet<OurUser> Users{get; set;}
     public DbSet<Location> Locations{get; set;}
-    public DbSet<OnlineAssignment> OnlineAssignments{get; set;}
     public DbSet<OnlineAssignmentResult> OnlineAssignmentResults{get;set;}
     public DbSet<Question> Questions{get;set;}
     public DbSet<Research> Researches{get; set;}
     public DbSet<Answer> Answers{get; set;}
-    public static void Main()
-    {
-        
-    }
     
-    public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) { }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlite("Filename=mydatabase.db");
+    public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) {
+
     }
+    public class BloggingContextFactory : IDesignTimeDbContextFactory<WPRDbContext>
+{
+    public WPRDbContext CreateDbContext(string[] args)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<WPRDbContext>();
+        optionsBuilder.UseSqlite("Data Source=blog.db");
+
+        return new WPRDbContext(optionsBuilder.Options);
+    }
+}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+        modelBuilder.Entity<OurUser>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
+        modelBuilder.Entity<OurChat>(entity =>
+        {
+            entity.HasKey(e => e.ID);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
+        modelBuilder.Entity<OurChatMessage>(entity =>
+        {
+            entity.HasKey(e => e.OurChatMessageId);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
+
+        modelBuilder.Entity<Research>(entity =>
+        {
+            entity.HasKey(e => e.ID);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
+        /**
          //DisabilityType relatie naar Disability
         modelBuilder.Entity<DisabilityType>()
             .HasMany(dt => dt.disabilities)
@@ -64,12 +108,14 @@ public class WPRDbContext : DbContext
         //chat relatie naar User
         //deze 2 keer omdat een chat altijd uit 2 users bestaat.
         modelBuilder.Entity<User>()
-            .HasMany(c => c.chats)
-            .WithOne(u => u.user1)
+            .HasMany(u => u.chats)
+            .WithOne(c => c.user1)
+            .HasForeignKey(c => c.user2)
             .OnDelete(DeleteBehavior.SetNull);
         modelBuilder.Entity<User>()
             .HasMany(c => c.chats)
             .WithOne(u => u.user2)
+            .HasForeignKey(c => c.user1)
             .OnDelete(DeleteBehavior.SetNull);
         //user relatie naar bericht
         modelBuilder.Entity<User>()
@@ -139,6 +185,8 @@ public class WPRDbContext : DbContext
         modelBuilder.Entity<Specialist>()
             .HasOne(s => s.Location)
             .WithOne(l => l.specialist)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.SetNull);**/
+        base.OnModelCreating(modelBuilder);
+        
     }
 }

@@ -8,10 +8,14 @@ namespace WPR
     public class Disability
     {
         [Key]
-        public int DisabilityId { get; private set; }
+        public int DisabilityId { get; set; }
+        public int DisabilityTypeId {get ;set;}
+        [ForeignKey(nameof(DisabilityTypeId))]
         public DisabilityType DisabilityType {get; set;}
+        public int SpecialistId {get; set;}
+        [ForeignKey(nameof(SpecialistId))]
         public Specialist Specialist { get; private set; }
-        public int SpecialistID{get; set;}
+        
         [Required] [StringLength(1024, MinimumLength =5)]
         public string Details { get; set; }
 

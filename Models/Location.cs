@@ -18,8 +18,12 @@ namespace WPR
         public string HouseNumber { get; set; }
         [Required][StringLength(64, MinimumLength = 2)]
         public string Place { get; set; }
+        public int? SpecialistID{get; set;}
+        [ForeignKey(nameof(SpecialistID))]
         public Specialist? specialist{get; set;}
-        public Company? company{get; set;}
+        public int? CompanyID{get; set;}
+        [ForeignKey(nameof(CompanyID))]
+        public Company? Company{get; set;}
         public Location(){}
     }
 }

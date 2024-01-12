@@ -10,7 +10,7 @@ namespace WPR
     public class Company
     {
         [Key]
-        public int CompanyId { get; private set; }
+        public int CompanyId { get; set; }
 
         [Required] [StringLength(64, MinimumLength =2)]
         public string Name { get; set; }
@@ -25,10 +25,10 @@ namespace WPR
         public string ContactEmail { get; set; }
         
         public string TrackingID { get; set; }
-
-        public ICollection<Employee> Employees { get; } = new List<Employee>();
-
-        public ICollection<Research> Researches { get; } = new List<Research>();
+        
+        public List<Employee> Employees { get; }
+        
+        public List<Research> Researches { get; }
         public Company(){}
     }
 }

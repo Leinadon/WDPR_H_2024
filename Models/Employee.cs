@@ -5,13 +5,15 @@ using System.Data;
 namespace WPR
 {
     [Table("Employees")]
-    public class Employee : User
+    public class Employee :OurUser
+
     {
         [Required] [StringLength(64, MinimumLength =2)]
         public string Function {get; set;}
-
-        public Company Company {get; set;}
         public int CompanyId{get; set;}
+        [ForeignKey(nameof(CompanyId))]
+        public Company Company {get; set;}
+        
 
         public Employee(){
             this.Role = "Employee";

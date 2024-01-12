@@ -9,8 +9,7 @@ namespace WPR
         public string Link{get; set;}
         [Required][StringLength(1024, MinimumLength = 5)]
         public string Explanation{get; set;}
-        [InverseProperty("OnlineAssignmentResults")]
-        public List<OnlineAssignmentResult> OnlineAssignmentResults = new List<OnlineAssignmentResult>();
+        public List<OnlineAssignmentResult> OnlineAssignmentResults {get;}
         public OnlineAssignment(){ 
             
         }

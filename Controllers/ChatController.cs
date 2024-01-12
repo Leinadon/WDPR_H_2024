@@ -19,10 +19,10 @@ namespace WPR
 
         // GET: api/chats
         [HttpGet]
-        public async Task<ActionResult<List<Chat>>> Get(User user)
+        public async Task<ActionResult<List<OurChat>>> Get(OurUser user)
         {
             try{
-                List<Chat> chats = await _chatService.Get(user);
+                List<OurChat> chats = await _chatService.Get(user);
                 if(chats.Count == 0){
                     return NoContent();
                 }
@@ -40,10 +40,10 @@ namespace WPR
 
         // GET api/chats/3
         [HttpGet("{id}")]
-        public async Task<ActionResult<Chat>> Get(int id)
+        public async Task<ActionResult<OurChat>> Get(int id)
         {
             try{
-                Chat? chat = await _chatService.GetById(id);
+                OurChat? chat = await _chatService.GetById(id);
                 if(chat != null){
                     return Ok(chat);
                 }else{
@@ -58,29 +58,29 @@ namespace WPR
         //TODO Create maken voor een chat die aangemaakt wordt met een onderzoek
         // POST api/chats
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] string userId)
+        public async Task<IActionResult> Create([FromBody] OurChat OurChat)
         {
-            User loggedInUser = null;
-
-            User? userToChat = await _userService.GetByIDString(userId);
-
-            if (userToChat == null)
+            try
             {
-                // TODO: throw error -> User not found
-            }
-            
-            Chat createdChat = await _chatService.Create(loggedInUser, userToChat);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                return CreatedAtRoute("Get", new { id = OurChat.ID }, await _chatService.Create(OurChat));
 
-            return Ok(createdChat.ChatId);
+            }
+            catch (Exception ex)
+            {
+                return Problem("Problem posting a Company object"); // Logging
+            }
         }
 
         // POST api/chats/3
         [HttpPost("{id}")]
-        public async Task SendMessage(int id, [FromBody] string text)
+        public async Task SendMessage([FromBody] OurChatMessage ourChatMessage, [FromBody] int ChatID)
         {
-            User loggedInUser = null;
 
-            await _chatService.AddMessage(id, text, loggedInUser);
+            await _chatService.AddMessage(ourChatMessage, ChatID);
         }
     }
 }

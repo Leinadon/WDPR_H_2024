@@ -11,17 +11,23 @@ using Microsoft.VisualBasic;
 
 namespace WPR
 {
+    [Table("Answers")]
     public class Answer
-    {
-        public int ID {get; private set;}
+    {  
+        [Key]
+        public int ID {get; set;}
         public string Text{get; set;}
+        public int QuestionID{get; set;}
+
+        [ForeignKey(nameof(QuestionID))]
         
         public Question Question{get; set;}
-        public int QuestionID{get; set;}
         
+        [ForeignKey(nameof(SpecialistID))]
         public Specialist Specialist{get; private set;}
         public int SpecialistID{get; set;}
 
+        [ForeignKey(nameof(DoesResearchID))]
         public DoesResearch DoesResearch{ get; set;}
         public int DoesResearchID{get;set;}
         public Answer()
