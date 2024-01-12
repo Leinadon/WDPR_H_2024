@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Graph.Models;
 using SQLitePCL;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,27 +9,21 @@ namespace WPR
 {
     public interface IUserRepository
     {
-        Task<List<User>> Get();
-        Task<User?> GetByID(int id);
-        Task<User?> GetByIDString(string id);
-        Task<User> Create(User user);
-        Task Update(int id, User user);
+        Task<List<OurUser>> Get();
+        Task<OurUser?> GetByID(int id);
+        Task<OurUser?> GetByIDString(string id);
+        Task<OurUser> Create(OurUser user);
+        Task Update(int id, OurUser user);
         Task Delete(int id);
 
         //aanvullende methodes voor de childs
-        Task<Employee?> GetEmployeeByID(int id);
-        Task<Administrator?> GetAdminByID(int id);
-        Task<Specialist?> GetSpecialistByID(int id);
-        Task<User> GetByEmail(string email);
-        Task<Employee> CreateEmployee(Employee employee);
-        Task<Administrator> CreateAdmin(Administrator admin);
-        Task<Specialist> CreateSpecialist(Specialist specialist);
-        Task UpdateEmployee(int id, Employee employee);
-        Task UpdateAdmin(int id, Administrator admin);
-        Task UpdateSpecialist(int id, Specialist specialist);
-        Task DeleteEmployee(int id);
-        Task DeleteAdmin(int id);
-        Task DeleteSpecialist(int id);
+        Task<OurUser> GetByEmail(string email);
+        Task<OurUser> CreateEmployee(OurUser employee);
+        Task<OurUser> CreateAdmin(OurUser admin);
+        Task<OurUser> CreateSpecialist(OurUser specialist);
+        Task UpdateEmployee(int id, OurUser employee);
+        Task UpdateAdmin(int id, OurUser admin);
+        Task UpdateSpecialist(int id, OurUser specialist);
     }
 
     public class UserRepository : IUserRepository
@@ -40,23 +35,23 @@ namespace WPR
             this._dbContext = dbContext;
         }
 
-        public async Task<List<User>> Get()
+        public async Task<List<OurUser>> Get()
         {
             return await _dbContext.Users.ToListAsync();
         }
 
-        public async Task<User?> GetByID(int id)
+        public async Task<OurUser?> GetByID(int id)
         {
-            User? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            OurUser? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if(user != null){
                 return user;
             }else{
                 throw new InvalidOperationException($"User with ID {id} not found");
             }
         }
-        public async Task<User?> GetByIDString(string id)
+        public async Task<OurUser?> GetByIDString(string id)
         {
-            User? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            OurUser? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if(user != null){
                 return user;
             }else{
@@ -65,7 +60,7 @@ namespace WPR
         }
 
 
-        public async Task<User> Create(User user)
+        public async Task<OurUser> Create(OurUser user)
         {
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
@@ -74,7 +69,7 @@ namespace WPR
 
         public async Task Delete(int id)
         {
-            User? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            OurUser? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if (user != null)
             {
                 _dbContext.Users.Remove(user);
@@ -84,12 +79,12 @@ namespace WPR
             }
         }
 
-        public async Task Update(int id, User user)
+        public async Task Update(int id, OurUser user)
         {
-            User? oldUser = await _dbContext.Users.FindAsync(id);
+            OurUser? oldUser = await _dbContext.Users.FindAsync(id);
             if (oldUser != null)
             {
-                _dbContext.Update(oldUser);
+                _dbContext.Update(user);
                 await _dbContext.SaveChangesAsync();
             }
             else
@@ -97,46 +92,32 @@ namespace WPR
                 throw new InvalidOperationException($"User with ID {id} not found for update.");
             }
         }
+        
 
-        public async Task<Employee?> GetEmployeeByID(int id)
+        public async Task<OurUser> CreateEmployee(OurUser employee)
         {
-            return await _dbContext.Employees.FirstOrDefaultAsync(e => e.Id.Equals(id.ToString()));
-        }
-
-        public async Task<Administrator?> GetAdminByID(int id)
-        {
-            return await _dbContext.Administrators.FirstOrDefaultAsync(e => e.Id.Equals(id.ToString()));
-        }
-
-        public async Task<Specialist?> GetSpecialistByID(int id)
-        {
-            return await _dbContext.Specialists.FirstOrDefaultAsync(e => e.Id.Equals(id.ToString()));
-        }
-
-        public async Task<Employee> CreateEmployee(Employee employee)
-        {
-            _dbContext.Employees.Add(employee);
+            _dbContext.Users.Add(employee);
             await _dbContext.SaveChangesAsync();
             return employee;
         }
 
-        public async Task<Administrator> CreateAdmin(Administrator admin)
+        public async Task<OurUser> CreateAdmin(OurUser admin)
         {
-            _dbContext.Administrators.Add(admin);
+            _dbContext.Users.Add(admin);
             await _dbContext.SaveChangesAsync();
             return admin;
         }
 
-        public async Task<Specialist> CreateSpecialist(Specialist specialist)
+        public async Task<OurUser> CreateSpecialist(OurUser specialist)
         {
-            _dbContext.Specialists.Add(specialist);
+            _dbContext.Users.Add(specialist);
             await _dbContext.SaveChangesAsync();
             return specialist;
         }
 
-        public async Task UpdateEmployee(int id, Employee employee)
+        public async Task UpdateEmployee(int id, OurUser employee)
         {
-            Employee? odlEmployee = await _dbContext.Employees.FindAsync(id);
+            OurUser? odlEmployee = await _dbContext.Users.FindAsync(id);
             if(odlEmployee != null){
                 _dbContext.Update(employee);
                 await _dbContext.SaveChangesAsync();
@@ -145,22 +126,22 @@ namespace WPR
             } 
         }
 
-        public async Task UpdateAdmin(int id, Administrator admin)
+        public async Task UpdateAdmin(int id, OurUser admin)
         {
-            Administrator? oldAdmin = await _dbContext.Administrators.FindAsync(id);
+            OurUser? oldAdmin = await _dbContext.Users.FindAsync(id);
             if(oldAdmin != null){
-                _dbContext.Update(oldAdmin);
+                _dbContext.Update(admin);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Admin with id {id} not found for update.");
             }
         }
 
-        public async Task UpdateSpecialist(int id, Specialist specialist)
+        public async Task UpdateSpecialist(int id, OurUser specialist)
         {
-            Specialist? oldSpecialist = await _dbContext.Specialists.FindAsync(id);
+            OurUser? oldSpecialist = await _dbContext.Users.FindAsync(id);
             if(oldSpecialist != null){
-                _dbContext.Update(oldSpecialist);
+                _dbContext.Update(specialist);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Specialist with id {id} not found for update.");
@@ -169,9 +150,9 @@ namespace WPR
 
         public async Task DeleteEmployee(int id)
         {
-            Employee? employee = await _dbContext.Employees.FirstOrDefaultAsync(e => e.Id.Equals(id.ToString()));
+            OurUser? employee = await _dbContext.Users.FirstOrDefaultAsync(e => e.Id.Equals(id.ToString()));
             if (employee != null){
-                _dbContext.Employees.Remove(employee);
+                _dbContext.Users.Remove(employee);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Employee with id {id} not found for update.");
@@ -180,9 +161,9 @@ namespace WPR
 
         public async Task DeleteAdmin(int id)
         {
-            Administrator? administrator = await _dbContext.Administrators.FirstOrDefaultAsync(a => a.Id.Equals(id.ToString()));
+            OurUser? administrator = await _dbContext.Users.FirstOrDefaultAsync(a => a.Id.Equals(id.ToString()));
             if (administrator != null){
-                _dbContext.Administrators.Remove(administrator);
+                _dbContext.Users.Remove(administrator);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Admin with id {id} not found for update.");
@@ -191,18 +172,18 @@ namespace WPR
 
         public async Task DeleteSpecialist(int id)
         {
-            Specialist? specialist = await _dbContext.Specialists.FirstOrDefaultAsync(s => s.Id.Equals(id.ToString()));
+            OurUser? specialist = await _dbContext.Users.FirstOrDefaultAsync(s => s.Id.Equals(id.ToString()));
             if(specialist != null){
-                _dbContext.Specialists.Remove(specialist);
+                _dbContext.Users.Remove(specialist);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Specialist with id {id} not found for update.");
             }
         }
 
-        public async Task<User> GetByEmail(string email)
+        public async Task<OurUser> GetByEmail(string email)
         {
-            User? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+            OurUser? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
             if(user != null){
                 return user;
             }else{

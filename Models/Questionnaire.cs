@@ -4,8 +4,7 @@ namespace WPR
 {
     [Table("Questionnaires")]
     public class Questionnaire : Research{
-        [InverseProperty("Questionnaire")]
-        public List<Question> Questions = new List<Question>();
+        public ICollection<Question> Questions {get; set;}
         
         public Questionnaire()
         {

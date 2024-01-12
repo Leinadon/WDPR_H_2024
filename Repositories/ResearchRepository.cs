@@ -11,22 +11,17 @@ namespace WPR
         Task Delete(int id);
 
         // Questionnaire
-        Task<Questionnaire> GetQuestionnaireById(int id);
-        Task<Questionnaire> CreateQuestionnaire(Questionnaire questionnaire);
-        Task UpdateQuestionnaire(int id, Questionnaire questionnaire);
-        Task DeleteQuestionnaire(int id);
-        
+        Task UpdateQuestionnaire(int id, Research questionnaire);
+        Task<Research> CreateQuestionnaire(int id, Research OnlineAssignment);
+
         // Interview
-        Task<Interview> GetInterviewById(int id);
-        Task<Interview> CreateInterview(Interview interview);
-        Task UpdateInterview(int id, Interview interview);
-        Task DeleteInterview(int id);
+        Task UpdateInterview(int id, Research interview);
+        Task<Research> CreateInterview(int id, Research OnlineAssignment);
+
 
         // Online
-        Task<OnlineAssignment> GetOnlineAssignmentById(int id);
-        Task<OnlineAssignment> CreateOnlineAssignment(OnlineAssignment online);
-        Task UpdateOnlineAssignment(int id, OnlineAssignment online);
-        Task DeleteOnlineAssignment(int id);    
+        Task UpdateOnlineAssignment(int id, Research online);
+        Task<Research> CreateOnlineAssignment(int id, Research OnlineAssignment);
     }
 
     public class ResearchRepository: IResearchRepository
@@ -68,25 +63,25 @@ namespace WPR
         public async Task<Questionnaire> CreateQuestionnaire(Questionnaire questionnaire)
         {
 
-            _dbContext.Questionnaires.Add(questionnaire);
+            _dbContext.Researches.Add(questionnaire);
             await _dbContext.SaveChangesAsync();
             return questionnaire;
         }
         public async Task<Interview> CreateInterview(Interview interview)
         {
-            _dbContext.Interviews.Add(interview);
+            _dbContext.Researches.Add(interview);
             await _dbContext.SaveChangesAsync();
             return interview;
         }
         public async Task<OnlineAssignment> CreateOnlineAssignment(OnlineAssignment onlineAssignment)
         {
-            _dbContext.OnlineAssignments.Add(onlineAssignment);
+            _dbContext.Researches.Add(onlineAssignment);
             await _dbContext.SaveChangesAsync();
             return onlineAssignment;
         }
-        public async Task UpdateQuestionnaire(int id, Questionnaire questionnaire)
+        public async Task UpdateQuestionnaire(int id, Research questionnaire)
         {
-            Questionnaire? oldQuestionnaire = await _dbContext.Questionnaires.FindAsync(id);
+            Research? oldQuestionnaire = await _dbContext.Researches.FindAsync(id);
             if(oldQuestionnaire != null){
                 _dbContext.Update(questionnaire);
                 await _dbContext.SaveChangesAsync();
@@ -94,9 +89,9 @@ namespace WPR
                 throw new InvalidOperationException($"Questionnaire with ID {id} not found for updatre");
             }
         }
-        public async Task UpdateInterview(int id, Interview interview)
+        public async Task UpdateInterview(int id, Research interview)
         {
-            Interview? oldInterview = await _dbContext.Interviews.FindAsync(id);
+            Research? oldInterview = await _dbContext.Researches.FindAsync(id);
             if(oldInterview != null){
                 _dbContext.Update(interview);
                 await _dbContext.SaveChangesAsync();
@@ -104,8 +99,8 @@ namespace WPR
                 throw new InvalidOperationException($"Interview with ID {id} not found for update");
             }
         }
-        public async Task UpdateOnlineAssignment(int id, OnlineAssignment onlineAssignment){
-            OnlineAssignment? oldOnlineAssignment = await _dbContext.OnlineAssignments.FindAsync(id);
+        public async Task UpdateOnlineAssignment(int id, Research onlineAssignment){
+            Research? oldOnlineAssignment = await _dbContext.Researches.FindAsync(id);
             if(oldOnlineAssignment != null){
                 _dbContext.Update(onlineAssignment);
                 await _dbContext.SaveChangesAsync();
@@ -116,10 +111,10 @@ namespace WPR
 
         public async Task DeleteQuestionnaire(int id)
         {
-            Questionnaire? questionnaire = await _dbContext.Questionnaires.FirstOrDefaultAsync(q => q.ID == id);
+            Research? questionnaire = await _dbContext.Researches.FirstOrDefaultAsync(q => q.ID == id);
             if(questionnaire != null)
             {
-                _dbContext.Questionnaires.Remove(questionnaire);
+                _dbContext.Researches.Remove(questionnaire);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Questionnaire with ID {id} not found for Delete");
@@ -128,9 +123,9 @@ namespace WPR
 
         public async Task DeleteInterview(int id)
         {
-            Interview? interview = await _dbContext.Interviews.FirstOrDefaultAsync(i => i.ID == id);
+            Research? interview = await _dbContext.Researches.FirstOrDefaultAsync(i => i.ID == id);
             if(interview != null){
-                _dbContext.Interviews.Remove(interview);
+                _dbContext.Researches.Remove(interview);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Interview with ID {id} not found for Delete");
@@ -139,18 +134,18 @@ namespace WPR
 
         public async Task DeleteOnlineAssignment(int id)
         {
-            OnlineAssignment? onlineAssignment = await _dbContext.OnlineAssignments.FirstOrDefaultAsync(o => o.ID == id);
+            Research? onlineAssignment = await _dbContext.Researches.FirstOrDefaultAsync(o => o.ID == id);
             if(onlineAssignment != null){
-                _dbContext.OnlineAssignments.Remove(onlineAssignment);
+                _dbContext.Researches.Remove(onlineAssignment);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"OnlineAssignment with ID {id} not found for Delete");
             }
         }
 
-        public async Task<Questionnaire> GetQuestionnaireById(int id)
+        public async Task<Research> GetQuestionnaireById(int id)
         {
-            Questionnaire? questionnaire = await _dbContext.Questionnaires.FirstOrDefaultAsync(q => q.ID == id);
+            Research? questionnaire = await _dbContext.Researches.FirstOrDefaultAsync(q => q.ID == id);
             if(questionnaire != null){
                 return questionnaire;
             }else{
@@ -158,9 +153,9 @@ namespace WPR
             }
         }
 
-        public async Task<Interview> GetInterviewById(int id)
+        public async Task<Research> GetInterviewById(int id)
         {
-            Interview? interview = await _dbContext.Interviews.FirstOrDefaultAsync(i => i.ID == id);
+            Research? interview = await _dbContext.Researches.FirstOrDefaultAsync(i => i.ID == id);
             if(interview != null){
                 return interview;
             }else{
@@ -168,14 +163,35 @@ namespace WPR
             }
         }
 
-        public async Task<OnlineAssignment> GetOnlineAssignmentById(int id)
+        public async Task<Research> GetOnlineAssignmentById(int id)
         {
-            OnlineAssignment? onlineAssignment = await _dbContext.OnlineAssignments.FirstOrDefaultAsync(o => o.ID == id);
+            Research? onlineAssignment = await _dbContext.Researches.FirstOrDefaultAsync(o => o.ID == id);
             if(onlineAssignment != null){
                 return onlineAssignment;
             }else{
                 throw new InvalidOperationException($"OnlineAssignment with Id {id} not found");
             }
+        }
+
+        public async Task<Research> CreateQuestionnaire(int id, Research Questionnaire)
+        {
+            _dbContext.Researches.Add(Questionnaire);
+            await _dbContext.SaveChangesAsync();
+            return Questionnaire;
+        }
+
+        public async Task<Research> CreateInterview(int id, Research interview)
+        {
+            _dbContext.Researches.Add(interview);
+            await _dbContext.SaveChangesAsync();
+            return interview;
+        }
+
+        public async Task<Research> CreateOnlineAssignment(int id, Research OnlineAssignment)
+        {
+            _dbContext.Researches.Add(OnlineAssignment);
+            await _dbContext.SaveChangesAsync();
+            return OnlineAssignment;
         }
     }
 }

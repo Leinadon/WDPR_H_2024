@@ -5,27 +5,19 @@ namespace WPR
 {
     public interface IUserService
     {
-        Task<List<User>> Get();
-        Task<User?> GetByIDString(string id);
-        Task<User?> GetByID(int id);
-        Task<User> Create(User user);
-        Task Update(int id, User user);
+        Task<List<OurUser>> Get();
+        Task<OurUser?> GetByIDString(string id);
+        Task<OurUser?> GetByID(int id);
+        Task<OurUser> Create(OurUser user);
+        Task Update(int id, OurUser user);
         Task Delete(int id);
-
-        // Aanvullende methoden voor Employee, Admin, Specialist
-        Task<Employee?> GetEmployeeByID(int id);
-        Task<Administrator?> GetAdminByID(int id);
-        Task<Specialist?> GetSpecialistByID(int id);
-        Task<User> GetByEmail(string email);
-        Task<Employee> CreateEmployee(Employee employee);
-        Task<Administrator> CreateAdmin(Administrator admin);
-        Task<Specialist> CreateSpecialist(Specialist specialist);
+        Task<OurUser> GetByEmail(string email);
+        Task<OurUser> CreateEmployee(Employee employee);
+        Task<OurUser> CreateAdmin(Administrator admin);
+        Task<OurUser> CreateSpecialist(Specialist specialist);
         Task UpdateEmployee(int id, Employee employee);
         Task UpdateAdmin(int id, Administrator admin);
         Task UpdateSpecialist(int id, Specialist specialist);
-        Task DeleteEmployee(int id);
-        Task DeleteAdmin(int id);
-        Task DeleteSpecialist(int id);
     }
 
 
@@ -38,20 +30,20 @@ namespace WPR
             this._userRepository = userRepository;
         }
 
-        public async Task<List<User>> Get()
+        public async Task<List<OurUser>> Get()
         {
             return await _userRepository.Get();
         }
 
-        public async Task<User?> GetByID(int id)
+        public async Task<OurUser?> GetByID(int id)
         {
             return await _userRepository.GetByID(id);
         }
-        public async Task<User?> GetByIDString(string id)
+        public async Task<OurUser?> GetByIDString(string id)
         {
             return await _userRepository.GetByIDString(id);
         }
-        public async Task<User> Create(User user)
+        public async Task<OurUser> Create(OurUser user)
         {
             return await _userRepository.Create(user);
         }
@@ -61,37 +53,31 @@ namespace WPR
             await _userRepository.Delete(id);
         }
 
-        public async Task Update(int id, User user)
+        public async Task Update(int id, OurUser user)
         {
             await _userRepository.Update(id, user);
         }
 
-        public async Task<Employee?> GetEmployeeByID(int id)
+        public async Task<OurUser?> GetEmployeeByID(int id)
         {
-            return await _userRepository.GetEmployeeByID(id);
+            return await _userRepository.GetByID(id);
         }
 
-        public async Task<Administrator?> GetAdminByID(int id)
-        {
-            return await _userRepository.GetAdminByID(id);
-        }
+        
 
-        public async Task<Specialist?> GetSpecialistByID(int id)
-        {
-            return await _userRepository.GetSpecialistByID(id);
-        }
+        
 
-        public async Task<Employee> CreateEmployee(Employee employee)
+        public async Task<OurUser> CreateEmployee(Employee employee)
         {
             return await _userRepository.CreateEmployee(employee);
         }
 
-        public async Task<Administrator> CreateAdmin(Administrator admin)
+        public async Task<OurUser> CreateAdmin(Administrator admin)
         {
             return await _userRepository.CreateAdmin(admin);
         }
 
-        public async Task<Specialist> CreateSpecialist(Specialist specialist)
+        public async Task<OurUser> CreateSpecialist(Specialist specialist)
         {
             return await _userRepository.CreateSpecialist(specialist);
         }
@@ -111,22 +97,8 @@ namespace WPR
             await _userRepository.UpdateSpecialist(id, specialist);
         }
 
-        public async Task DeleteEmployee(int id)
-        {
-            await _userRepository.DeleteEmployee(id);
-        }
 
-        public async Task DeleteAdmin(int id)
-        {
-            await _userRepository.DeleteAdmin(id);
-        }
-
-        public async Task DeleteSpecialist(int id)
-        {
-            await _userRepository.DeleteSpecialist(id);
-        }
-
-        public async Task<User> GetByEmail(string email)
+        public async Task<OurUser> GetByEmail(string email)
         {
             return await _userRepository.GetByEmail(email);
         }

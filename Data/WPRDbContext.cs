@@ -6,20 +6,14 @@ using WPR;
 public class WPRDbContext : DbContext
 {
     public DbSet<Company> Companies { get; set; }
-    public DbSet<Chat> Chats { get; set; }
-    public DbSet<ChatMessage> ChatMessages { get; set; }
+    public DbSet<OurChat> Chats { get; set; }
+    public DbSet<OurChatMessage> ChatMessages { get; set; }
     public DbSet<DisabilityType> DisabilityTypes {get; set; }
     public DbSet<Disability> Disabilities{get; set;}
-    public DbSet<Employee> Employees{get;set;}
-    public DbSet<Specialist> Specialists{get;set;}
-    public DbSet<Administrator> Administrators{get; set;}
     public DbSet<DoesResearch> DoesResearches{get; set;}
     public DbSet<Guardian> Guardians{get; set;}
-    public DbSet<Interview> Interviews{get; set;}
-    public DbSet<User> Users{get; set;}
-    public DbSet<Questionnaire> Questionnaires{get; set;}
+    public DbSet<OurUser> Users{get; set;}
     public DbSet<Location> Locations{get; set;}
-    public DbSet<OnlineAssignment> OnlineAssignments{get; set;}
     public DbSet<OnlineAssignmentResult> OnlineAssignmentResults{get;set;}
     public DbSet<Question> Questions{get;set;}
     public DbSet<Research> Researches{get; set;}
@@ -40,6 +34,51 @@ public class WPRDbContext : DbContext
 }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<OurUser>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
+        modelBuilder.Entity<OurChat>(entity =>
+        {
+            entity.HasKey(e => e.ID);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
+        modelBuilder.Entity<OurChatMessage>(entity =>
+        {
+            entity.HasKey(e => e.OurChatMessageId);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
+
+        modelBuilder.Entity<Research>(entity =>
+        {
+            entity.HasKey(e => e.ID);
+            
+            foreach(var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                foreach(var Property in entityType.GetProperties()){
+                    modelBuilder.Entity(entityType.Name).Property(Property.Name);
+                }
+            }
+        });
         /**
          //DisabilityType relatie naar Disability
         modelBuilder.Entity<DisabilityType>()

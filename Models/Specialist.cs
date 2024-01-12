@@ -5,17 +5,17 @@ using WPR;
 namespace WPR
 {
     [Table("Specialists")]
-    public class Specialist : User
+    public class Specialist : OurUser
+
     {
         public int LocationId {get; set;}
         [ForeignKey(nameof(LocationId))]
         public Location Location { get; set; }
+
         
         public string ToolsUsing { get; set; }
         public MessagePrefence MessagePreference { get; set; }
-        [InverseProperty("Specialist")]
-        public ICollection<DoesResearch> doesResearches {get;} = new List<DoesResearch>();
-        [InverseProperty("Specialist")]
+        public ICollection<DoesResearch> doesResearches {get;}
         public IEnumerable<Disability> Disabilities { get; set; }
         [StringLength(1024, MinimumLength = 2)]
         public string DisabilityNote {  get; set; }

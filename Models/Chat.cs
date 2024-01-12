@@ -4,71 +4,58 @@ using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace WPR
 {
-    [Table("Chats")]
-    public class Chat
+    [Table("OurChats")]
+    public class OurChat
     {
+        
         [Key]
-        public int ChatId { get; private set; }
-        public int user1ID {get; set;}
-        [ForeignKey(nameof(user1ID))]
-        public User user1 {get; set;}
-        public int user2ID {get; set;}
-        [ForeignKey(nameof(user2ID))]
-        public User user2 {get; set;}
+        public string ID { get; private set; }
+        public int User1ID {get; set;}
+        [ForeignKey(nameof(User1ID))]
+        public OurUser User1 {get; set;}
+        public int User2ID {get; set;}
+        [ForeignKey(nameof(User2ID))]
+        [InverseProperty(nameof(User2.Chats2))]
+        public OurUser User2 {get; set;}   
         
-        [InverseProperty("Chat")]
-        public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
-        public ChatStatus Status { get; set; } = ChatStatus.OPEN;
-        public int DoesResearchInt {get; set;}
+        public IList<OurChatMessage> Messages { get; }  = new List<OurChatMessage>();
+        public OurChatStatus Status { get; set; }
+        public string DoesResearchInt {get; set;}
         [ForeignKey(nameof(DoesResearchInt))]
-        public DoesResearch? doesResearch {get; set;}
+        public DoesResearch? DoesResearch {get; set;}
         
 
 
-        public Chat(User user1, User user2)
+        public OurChat()
         {
-            this.user1 = user1;
-            this.user2 = user2;
-            this.Status = ChatStatus.OPEN;
-        }
-        public Chat(User user1, User user2, DoesResearch doesResearch)
-        {
-            this.user1 = user1;
-            this.user2 = user2;
-            this.doesResearch = doesResearch;
-            this.Status = ChatStatus.OPEN;
+            
+            this.Status = OurChatStatus.OPEN;
         }
         
     }
-    [Table("ChatMessages")]
-    public class ChatMessage
+    [Table("OurChatMessages")]
+    public class OurChatMessage
     {
         [Key]
-        public int ChatMessageId { get; private set; }
+        public int OurChatMessageId { get; set; }
         [Required] [StringLength(1024, MinimumLength =2)]
         public string Text { get; set; }
 
         public DateTime Date { get; } = DateTime.Now;
 
-        public int ChatId { get; set; }
+        public int OurChatID { get; set; }
         
-        [ForeignKey(nameof(ChatId))]
-        public virtual Chat Chat { get; set; }
+        [ForeignKey(nameof (OurChatID))]
+        public OurChat ourChat { get; set; }
 
         public string SenderUserId { get; set; }
-        [ForeignKey(nameof(SenderUserId))]
+        [ForeignKey(nameof(OurUser.Id))]
 
-        public virtual User Sender { get; set; }
-
-        public ChatMessage(Chat chat, string text, User sender) {
-            this.Chat = chat;
-            this.Text = text;
-            this.Sender = sender;
-        }
+        public OurUser Sender { get; set; }
 
     }
 
-    public enum ChatStatus
+    public enum OurChatStatus
     {
         OPEN,
         CLOSED

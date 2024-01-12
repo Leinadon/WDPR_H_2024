@@ -15,11 +15,12 @@ namespace WPR
     public class Answer
     {  
         [Key]
-        public int ID {get; private set;}
+        public int ID {get; set;}
         public string Text{get; set;}
         public int QuestionID{get; set;}
 
         [ForeignKey(nameof(QuestionID))]
+        
         public Question Question{get; set;}
         
         [ForeignKey(nameof(SpecialistID))]

@@ -4,12 +4,11 @@ namespace WPR
 {
     public interface IChatRepository
     {
-        Task<List<Chat>> Get(User user);
-        Task<Chat?> GetById(int id);
-        Task<Chat?> GetByUserId(int id);
-        Task<Chat> Create(User user1, User user2);
-        Task<Chat> Create(User user1, User user2, DoesResearch doesResearch);
-        Task AddMessage(int id, string text, User sender);
+        Task<List<OurChat>> Get(OurUser user);
+        Task<OurChat?> GetById(int id);
+        Task<OurChat?> GetByUserId(int id);
+        Task<OurChat> Create(OurChat ourChat);
+        Task AddMessage(OurChatMessage ourChatMessage, int ChatId);
     }
 
     public class ChatRepository : IChatRepository
@@ -26,10 +25,10 @@ namespace WPR
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<List<Chat>> Get(User user)
+        public async Task<List<OurChat>> Get(OurUser user)
         {
             return await _dbContext.Chats
-                .Where(c => c.user1.Id == user.Id || c.user2.Id == user.Id)
+                .Where(c => c.User1.Id == user.Id || c.User2.Id == user.Id)
                 .ToListAsync();
         }
         /// <summary>
@@ -38,10 +37,10 @@ namespace WPR
         /// <param name="id"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<Chat?> GetById(int id)
+        public async Task<OurChat?> GetById(int id)
         {
             return await _dbContext.Chats
-                .Where(c => c.ChatId == id)
+                .Where(c => c.ID.Equals(id.ToString()))
                 .FirstOrDefaultAsync();
         }
         /// <summary>
@@ -51,25 +50,11 @@ namespace WPR
         /// <param name="user2"></param>
         /// <param name="doesResearch"></param>
         /// <returns></returns>
-        public async Task<Chat> Create(User user1, User user2, DoesResearch doesResearch)
+        public async Task<OurChat> Create(OurChat ourChat)
         {
-            Chat chat = new Chat(user1, user2, doesResearch);
-            _dbContext.Chats.Add(chat);
+            _dbContext.Chats.Add(ourChat);
             await _dbContext.SaveChangesAsync();
-            return chat;
-        }
-        /// <summary>
-        /// Create Chat met 2 users
-        /// </summary>
-        /// <param name="user1"></param>
-        /// <param name="user2"></param>
-        /// <returns></returns>
-        public async Task<Chat> Create(User user1, User user2)
-        {
-            Chat chat = new Chat(user1, user2);
-            _dbContext.Chats.Add(chat);
-            await _dbContext.SaveChangesAsync();
-            return chat;
+            return ourChat;
         }
         /// <summary>
         /// Voegt een chatmessage toe aan de database
@@ -78,16 +63,16 @@ namespace WPR
         /// <param name="text"></param>
         /// <param name="sender"></param>
         /// <returns></returns>
-        public async Task AddMessage(int id, string text, User sender)
+        public async Task AddMessage(OurChatMessage ourChatMessage, int ChatID)
         {
-            Chat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.ChatId == id);
+            OurChat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.ID.Equals(ChatID.ToString()));
             if (chat != null)
             {
-                ChatMessage chatMessage = new ChatMessage(chat, text, sender);
-                chat.Messages.Add(chatMessage);
+                
+                chat.Messages.Add(ourChatMessage);
                 await _dbContext.SaveChangesAsync();
             }else{
-                throw new InvalidOperationException($"Chat with ID {id} can not be found");
+                throw new InvalidOperationException($"Chat with ID {ChatID} can not be found");
             }
         }
         /// <summary>
@@ -96,9 +81,9 @@ namespace WPR
         /// <param name="id"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public async Task<Chat?> GetByUserId(int id)
+        public async Task<OurChat?> GetByUserId(int id)
         {
-            Chat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.user1.Id.Equals(id)  || c.user2.Equals(id));
+            OurChat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.User1.Id.Equals(id)  || c.User2.Equals(id));
             if(chat != null){
                 return chat;
             }else{

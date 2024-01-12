@@ -7,7 +7,7 @@ namespace WPR
     public class Guardian
     {
         [Key]
-        public int Id { get; private set; }
+        public int Id { get; set; }
         [Required] [StringLength(64, MinimumLength =2)]
 
         public string FirstName { get; set; }

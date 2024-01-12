@@ -6,7 +6,7 @@ namespace WPR
     [Table("Researches")]
     public class Research{
         [Key]
-        public int ID {get; private set;}
+        public int ID {get; set;}
         [Required] [StringLength(64, MinimumLength = 2)]
         public string Title{get; set;}
         [Required] [StringLength(1024, MinimumLength = 2)]
@@ -17,8 +17,7 @@ namespace WPR
         public string Reward{get; set;}
         [Required]
         public string Status{get; set;}
-        [InverseProperty("Research")]
-        public ICollection<DoesResearch> doesResearches {get;} = new List<DoesResearch>();
+        public ICollection<DoesResearch> doesResearches {get;}
         public int CompanyId{get; set;}
         [ForeignKey(nameof(CompanyId))]
         public Company Company{get; set;}

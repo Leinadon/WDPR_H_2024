@@ -18,11 +18,11 @@ namespace WPR
 
         // GET: api/users
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetUsers()
+        public async Task<ActionResult<List<OurUser>>> GetUsers()
         {
             try
             {
-                List<User> users = await _userService.Get();
+                List<OurUser> users = await _userService.Get();
                 return Ok(users);
             }
             catch (Exception ex)
@@ -33,11 +33,11 @@ namespace WPR
 
         // GET: api/users/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<OurUser>> GetUser(int id)
         {
             try
             {
-                User? user = await _userService.GetByID(id);
+                OurUser? user = await _userService.GetByID(id);
 
                 if (user == null)
                 {
@@ -54,7 +54,7 @@ namespace WPR
 
         // POST: api/users
         [HttpPost]
-        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
+        public async Task<ActionResult<OurUser>> CreateUser([FromBody] OurUser user)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace WPR
 
         // PUT: api/users/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] User user)
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] OurUser user)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace WPR
                     return BadRequest(ModelState);
                 }
 
-                User? oldUser = await _userService.GetByID(id);
+                OurUser? oldUser = await _userService.GetByID(id);
                 if (oldUser == null)
                 {
                     return NotFound(); // Return 404 als de gebruiker niet is gevonden
@@ -104,7 +104,7 @@ namespace WPR
         {
             try
             {
-                User? user = await _userService.GetByID(id);
+                OurUser? user = await _userService.GetByID(id);
                 if (user == null)
                 {
                     return NotFound(); // Return 404 als de gebruiker niet is gevonden
@@ -125,7 +125,7 @@ namespace WPR
         {
             try
             {
-                Administrator? admin = await _userService.GetAdminByID(id);
+                OurUser? admin = await _userService.GetByID(id);
                 if (admin == null)
                 {
                     return NotFound(); // Return 404 als de administrator niet is gevonden
@@ -167,7 +167,7 @@ namespace WPR
                 {
                     return BadRequest(ModelState);
                 }
-                Administrator? oldAdmin = await _userService.GetAdminByID(id);
+                OurUser? oldAdmin = await _userService.GetByID(id);
                 if (oldAdmin == null)
                 {
                     return NotFound(); // Return 404 als de administrator niet is gevonden
@@ -187,12 +187,12 @@ namespace WPR
         {
             try
             {
-                Administrator? admin = await _userService.GetAdminByID(id);
+                OurUser? admin = await _userService.GetByID(id);
                 if (admin == null)
                 {
                     return NotFound(); // Return 404 als de administrator niet is gevonden
                 }
-                await _userService.DeleteAdmin(id);
+                await _userService.Delete(id);
                 return NoContent(); // Return 204
             }
             catch (Exception ex)
@@ -210,7 +210,7 @@ namespace WPR
         {
             try
             {
-                Specialist? specialist = await _userService.GetSpecialistByID(id);
+                OurUser? specialist = await _userService.GetByID(id);
                 if (specialist == null)
                 {
                     return NotFound(); // Return 404 als de specialist niet is gevonden
@@ -252,7 +252,7 @@ namespace WPR
                 {
                     return BadRequest(ModelState);
                 }
-                Specialist? oldSpecialist = await _userService.GetSpecialistByID(id);
+                OurUser? oldSpecialist = await _userService.GetByID(id);
                 if (oldSpecialist == null)
                 {
                     return NotFound(); // Return 404 als de specialist niet is gevonden
@@ -272,12 +272,12 @@ namespace WPR
         {
             try
             {
-                Specialist? specialist = await _userService.GetSpecialistByID(id);
+                OurUser? specialist = await _userService.GetByID(id);
                 if (specialist == null)
                 {
                     return NotFound(); // Return 404 als de specialist niet is gevonden
                 }
-                await _userService.DeleteSpecialist(id);
+                await _userService.Delete(id);
                 return NoContent(); // Return 204
             }
             catch (Exception ex)
@@ -291,7 +291,7 @@ namespace WPR
         {
             try
             {
-                Employee? employee = await _userService.GetEmployeeByID(id);
+                OurUser? employee = await _userService.GetByID(id);
                 if (employee == null)
                 {
                     return NotFound(); // Return 404 als de employee niet is gevonden
@@ -333,7 +333,7 @@ namespace WPR
                 {
                     return BadRequest(ModelState);
                 }
-                Employee? oldEmployee = await _userService.GetEmployeeByID(id);
+                OurUser? oldEmployee = await _userService.GetByID(id);
                 if (oldEmployee == null)
                 {
                     return NotFound(); // Return 404 als de employee niet is gevonden
@@ -353,12 +353,12 @@ namespace WPR
         {
             try
             {
-                Employee? employee = await _userService.GetEmployeeByID(id);
+                OurUser? employee = await _userService.GetByID(id);
                 if (employee == null)
                 {
                     return NotFound(); // Return 404 als de employee niet is gevonden
                 }
-                await _userService.DeleteEmployee(id);
+                await _userService.Delete(id);
                 return NoContent(); // Return 204
             }
             catch (Exception ex)

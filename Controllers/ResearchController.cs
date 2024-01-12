@@ -63,7 +63,7 @@ namespace WPR
         }
 
         [HttpPost("questionnaire")]
-        public async Task<ActionResult<Questionnaire>> CreateQuestionnaire([FromBody] Questionnaire questionnaire)
+        public async Task<ActionResult<Questionnaire>> CreateQuestionnaire(int id,[FromBody] Questionnaire questionnaire)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace WPR
                     return BadRequest(ModelState);
                 }
 
-                var createdQuestionnaire = await _researchService.CreateQuestionnaire(questionnaire);
+                var createdQuestionnaire = await _researchService.CreateQuestionnaire(id, questionnaire);
                 return CreatedAtAction(nameof(GetResearchById), new { id = createdQuestionnaire.ID }, createdQuestionnaire);
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace WPR
         {
             try
             {
-                Questionnaire? questionnaire = await _researchService.GetQuestionnaireById(id);
+                Research? questionnaire = await _researchService.GetById(id);
                 if (questionnaire == null)
                 {
                     return NotFound(); // Return 404 
@@ -123,7 +123,7 @@ namespace WPR
         {
             try
             {
-                await _researchService.DeleteQuestionnaire(id);
+                await _researchService.DeleteResearch(id);
                 return NoContent(); // Return 204
             }
             catch (Exception ex)
@@ -132,7 +132,7 @@ namespace WPR
             }
         }
         [HttpPost("onlineassignment")]
-        public async Task<ActionResult<OnlineAssignment>> CreateOnlineAssignment([FromBody] OnlineAssignment onlineAssignment)
+        public async Task<ActionResult<OnlineAssignment>> CreateOnlineAssignment(int id, [FromBody] OnlineAssignment onlineAssignment)
         {
             try
             {
@@ -141,7 +141,7 @@ namespace WPR
                     return BadRequest(ModelState);
                 }
 
-                var createdOnlineAssignment = await _researchService.CreateOnlineAssignment(onlineAssignment);
+                var createdOnlineAssignment = await _researchService.CreateOnlineAssignment(id, onlineAssignment);
                 return CreatedAtAction(nameof(GetResearchById), new { id = createdOnlineAssignment.ID }, createdOnlineAssignment);
             }
             catch (Exception ex)
@@ -155,7 +155,7 @@ namespace WPR
         {
             try
             {
-                OnlineAssignment? onlineAssignment = await _researchService.GetOnlineAssignmentById(id);
+                Research? onlineAssignment = await _researchService.GetById(id);
                 if (onlineAssignment == null)
                 {
                     return NotFound(); // Return 404 
@@ -192,7 +192,7 @@ namespace WPR
         {
             try
             {
-                await _researchService.DeleteOnlineAssignment(id);
+                await _researchService.DeleteResearch(id);
                 return NoContent(); // Return 204
             }
             catch (Exception ex)
@@ -202,7 +202,7 @@ namespace WPR
         }
 
         [HttpPost("interview")]
-        public async Task<ActionResult<Interview>> CreateInterview([FromBody] Interview interview)
+        public async Task<ActionResult<Interview>> CreateInterview(int id, [FromBody] Interview interview)
         {
             try
             {
@@ -211,7 +211,7 @@ namespace WPR
                     return BadRequest(ModelState);
                 }
 
-                var createdInterview = await _researchService.CreateInterview(interview);
+                var createdInterview = await _researchService.CreateInterview(id, interview);
                 return CreatedAtAction(nameof(GetResearchById), new { id = createdInterview.ID }, createdInterview);
             }
             catch (Exception ex)
@@ -225,7 +225,7 @@ namespace WPR
         {
             try
             {
-                Interview? interview = await _researchService.GetInterviewById(id);
+                Research? interview = await _researchService.GetById(id);
                 if (interview == null)
                 {
                     return NotFound(); // Return 404 
@@ -262,7 +262,7 @@ namespace WPR
         {
             try
             {
-                await _researchService.DeleteInterview(id);
+                await _researchService.DeleteResearch(id);
                 return NoContent(); // Return 204
             }
             catch (Exception ex)

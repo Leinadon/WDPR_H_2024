@@ -6,7 +6,7 @@ namespace WPR
     [Table("Questions")]
     public class Question{
         [Key]
-        public int ID {get; private set;}
+        public int ID {get; set;}
         [Required][StringLength(1024, MinimumLength = 5)]
         public string Text{get; set;}
         public int QuestionnaireId{get; set;}
@@ -15,8 +15,7 @@ namespace WPR
         public int InterviewId{get; set;}
         [ForeignKey(nameof(InterviewId))]
         public Interview? Interview{get;set;}
-        [InverseProperty("Question")]
-        public List<Answer> Answers = new List<Answer>();
+        public List<Answer> Answers {get;}
         public Question()
         {
             
