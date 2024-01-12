@@ -46,7 +46,7 @@ namespace WPR
 
         public async Task<Research?> GetById(int id)
         {
-            Research? research =  await _dbContext.Researches.FirstOrDefaultAsync(r => r.ResearchID == id);
+            Research? research =  await _dbContext.Researches.FirstOrDefaultAsync(r => r.ID == id);
             if(research != null){
                 return research;
             }else{
@@ -56,7 +56,7 @@ namespace WPR
 
         public async Task Delete(int id)
         {
-            Research? research = await _dbContext.Researches.FirstAsync(r => r.ResearchID == id);
+            Research? research = await _dbContext.Researches.FirstAsync(r => r.ID == id);
             if(research != null){
                 _dbContext.Researches.Remove(research);
                 await _dbContext.SaveChangesAsync();
@@ -116,7 +116,7 @@ namespace WPR
 
         public async Task DeleteQuestionnaire(int id)
         {
-            Questionnaire? questionnaire = await _dbContext.Questionnaires.FirstOrDefaultAsync(q => q.ResearchID == id);
+            Questionnaire? questionnaire = await _dbContext.Questionnaires.FirstOrDefaultAsync(q => q.ID == id);
             if(questionnaire != null)
             {
                 _dbContext.Questionnaires.Remove(questionnaire);
@@ -128,7 +128,7 @@ namespace WPR
 
         public async Task DeleteInterview(int id)
         {
-            Interview? interview = await _dbContext.Interviews.FirstOrDefaultAsync(i => i.ResearchID == id);
+            Interview? interview = await _dbContext.Interviews.FirstOrDefaultAsync(i => i.ID == id);
             if(interview != null){
                 _dbContext.Interviews.Remove(interview);
                 await _dbContext.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WPR
 
         public async Task DeleteOnlineAssignment(int id)
         {
-            OnlineAssignment? onlineAssignment = await _dbContext.OnlineAssignments.FirstOrDefaultAsync(o => o.ResearchID == id);
+            OnlineAssignment? onlineAssignment = await _dbContext.OnlineAssignments.FirstOrDefaultAsync(o => o.ID == id);
             if(onlineAssignment != null){
                 _dbContext.OnlineAssignments.Remove(onlineAssignment);
                 await _dbContext.SaveChangesAsync();
@@ -150,7 +150,7 @@ namespace WPR
 
         public async Task<Questionnaire> GetQuestionnaireById(int id)
         {
-            Questionnaire? questionnaire = await _dbContext.Questionnaires.FirstOrDefaultAsync(q => q.ResearchID == id);
+            Questionnaire? questionnaire = await _dbContext.Questionnaires.FirstOrDefaultAsync(q => q.ID == id);
             if(questionnaire != null){
                 return questionnaire;
             }else{
@@ -160,7 +160,7 @@ namespace WPR
 
         public async Task<Interview> GetInterviewById(int id)
         {
-            Interview? interview = await _dbContext.Interviews.FirstOrDefaultAsync(i => i.ResearchID == id);
+            Interview? interview = await _dbContext.Interviews.FirstOrDefaultAsync(i => i.ID == id);
             if(interview != null){
                 return interview;
             }else{
@@ -170,7 +170,7 @@ namespace WPR
 
         public async Task<OnlineAssignment> GetOnlineAssignmentById(int id)
         {
-            OnlineAssignment? onlineAssignment = await _dbContext.OnlineAssignments.FirstOrDefaultAsync(o => o.ResearchID == id);
+            OnlineAssignment? onlineAssignment = await _dbContext.OnlineAssignments.FirstOrDefaultAsync(o => o.ID == id);
             if(onlineAssignment != null){
                 return onlineAssignment;
             }else{

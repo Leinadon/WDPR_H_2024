@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using WPR;
 
 public class WPRDbContext : DbContext
@@ -23,19 +24,23 @@ public class WPRDbContext : DbContext
     public DbSet<Question> Questions{get;set;}
     public DbSet<Research> Researches{get; set;}
     public DbSet<Answer> Answers{get; set;}
-    public static void Main()
-    {
-        
-    }
     
-    public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) { }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlite("Filename=mydatabase.db");
+    public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) {
+
     }
+    public class BloggingContextFactory : IDesignTimeDbContextFactory<WPRDbContext>
+{
+    public WPRDbContext CreateDbContext(string[] args)
+    {
+        var optionsBuilder = new DbContextOptionsBuilder<WPRDbContext>();
+        optionsBuilder.UseSqlite("Data Source=blog.db");
+
+        return new WPRDbContext(optionsBuilder.Options);
+    }
+}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+        /**
          //DisabilityType relatie naar Disability
         modelBuilder.Entity<DisabilityType>()
             .HasMany(dt => dt.disabilities)
@@ -64,12 +69,14 @@ public class WPRDbContext : DbContext
         //chat relatie naar User
         //deze 2 keer omdat een chat altijd uit 2 users bestaat.
         modelBuilder.Entity<User>()
-            .HasMany(c => c.chats)
-            .WithOne(u => u.user1)
+            .HasMany(u => u.chats)
+            .WithOne(c => c.user1)
+            .HasForeignKey(c => c.user2)
             .OnDelete(DeleteBehavior.SetNull);
         modelBuilder.Entity<User>()
             .HasMany(c => c.chats)
             .WithOne(u => u.user2)
+            .HasForeignKey(c => c.user1)
             .OnDelete(DeleteBehavior.SetNull);
         //user relatie naar bericht
         modelBuilder.Entity<User>()
@@ -139,6 +146,8 @@ public class WPRDbContext : DbContext
         modelBuilder.Entity<Specialist>()
             .HasOne(s => s.Location)
             .WithOne(l => l.specialist)
-            .OnDelete(DeleteBehavior.SetNull);
+            .OnDelete(DeleteBehavior.SetNull);**/
+        base.OnModelCreating(modelBuilder);
+        
     }
 }

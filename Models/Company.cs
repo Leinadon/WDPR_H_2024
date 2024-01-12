@@ -25,9 +25,9 @@ namespace WPR
         public string ContactEmail { get; set; }
         
         public string TrackingID { get; set; }
-
+        [InverseProperty("Company")]
         public ICollection<Employee> Employees { get; } = new List<Employee>();
-
+        [InverseProperty("Company")]
         public ICollection<Research> Researches { get; } = new List<Research>();
         public Company(){}
     }

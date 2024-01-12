@@ -73,7 +73,7 @@ namespace WPR
                 }
 
                 var createdQuestionnaire = await _researchService.CreateQuestionnaire(questionnaire);
-                return CreatedAtAction(nameof(GetResearchById), new { id = createdQuestionnaire.ResearchID }, createdQuestionnaire);
+                return CreatedAtAction(nameof(GetResearchById), new { id = createdQuestionnaire.ID }, createdQuestionnaire);
             }
             catch (Exception ex)
             {
@@ -142,7 +142,7 @@ namespace WPR
                 }
 
                 var createdOnlineAssignment = await _researchService.CreateOnlineAssignment(onlineAssignment);
-                return CreatedAtAction(nameof(GetResearchById), new { id = createdOnlineAssignment.ResearchID }, createdOnlineAssignment);
+                return CreatedAtAction(nameof(GetResearchById), new { id = createdOnlineAssignment.ID }, createdOnlineAssignment);
             }
             catch (Exception ex)
             {
@@ -212,7 +212,7 @@ namespace WPR
                 }
 
                 var createdInterview = await _researchService.CreateInterview(interview);
-                return CreatedAtAction(nameof(GetResearchById), new { id = createdInterview.ResearchID }, createdInterview);
+                return CreatedAtAction(nameof(GetResearchById), new { id = createdInterview.ID }, createdInterview);
             }
             catch (Exception ex)
             {

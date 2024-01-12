@@ -34,7 +34,6 @@ namespace WPR
     public class UserRepository : IUserRepository
     {
         private readonly WPRDbContext _dbContext;
-        private readonly UserManager<User> _userManager;
 
         public UserRepository(WPRDbContext dbContext)
         {

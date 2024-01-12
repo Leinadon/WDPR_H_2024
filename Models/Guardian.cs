@@ -14,12 +14,14 @@ namespace WPR
         [Required] [StringLength(64, MinimumLength =2)]
 
         public string LastName { get; set; }
-        [Required] [StringLength(64, MinimumLength =2)]
-
+        [Required] [StringLength(15, MinimumLength =5)]
         public string Phone { get; set; }
-        [Required] [StringLength(64, MinimumLength =2)]
-        public Specialist specialist {get; set;}
+        [Required] [StringLength(320, MinimumLength =5)]
         public string Email { get; set; } 
+        public int SpecialistID {get; set;}
+        [ForeignKey(nameof(SpecialistID))]
+        public Specialist specialist {get; set;}
+        
 
         public Guardian(){}
     }

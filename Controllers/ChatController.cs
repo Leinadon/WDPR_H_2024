@@ -62,7 +62,7 @@ namespace WPR
         {
             User loggedInUser = null;
 
-            User? userToChat = await _userService.GetByIDString(userId);
+            User? userToChat = await _userService.GetByIDString (userId);
 
             if (userToChat == null)
             {

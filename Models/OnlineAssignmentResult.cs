@@ -10,11 +10,14 @@ namespace WPR
     public Boolean Completed{get; set;}
     [StringLength(1024, MinimumLength = 5)]
     public string Comment{get; set;}
-    public Specialist Specialist{get; set;}
     public int SpecialistID{get; set;}
-    public OnlineAssignment OnlineAssignment{get; set;}
+    [ForeignKey(nameof(SpecialistID))]
+    public Specialist Specialist{get; set;}
     public int OnlineAssignmentID{get; set;}
 
+    [ForeignKey(nameof(OnlineAssignmentID))]
+    public OnlineAssignment OnlineAssignment{get; set;}
+    
 
     public OnlineAssignmentResult(){
         

@@ -17,7 +17,11 @@ namespace WPR
         [Required][StringLength(15, MinimumLength = 2)]
         public string Phone { get; set; }
         public string Role {get; set;}
+        [InverseProperty("User2")]
+        public ICollection<Chat> chats2 {get;} = new List<Chat>();
+        [InverseProperty("User1")]
         public ICollection<Chat> chats {get;} = new List<Chat>();
+        [InverseProperty("Sender")]
         public ICollection<ChatMessage> chatMessages {get;} = new List<ChatMessage>();
     }
 }
