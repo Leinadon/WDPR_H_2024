@@ -4,7 +4,7 @@ namespace WPR
 {
     public interface IChatRepository
     {
-        Task<List<OurChat>> Get(OurUser user);
+        Task<List<OurChat>> Get(User user);
         Task<List<OurChat>> GetAll();
         Task<OurChat?> GetById(int id);
         Task<OurChat?> GetByUserId(int id);
@@ -33,7 +33,7 @@ namespace WPR
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<List<OurChat>> Get(OurUser user)
+        public async Task<List<OurChat>> Get(User user)
         {
             return await _dbContext.OurChats
                 .Where(c => c.User1.Id == user.Id || c.User2.Id == user.Id)

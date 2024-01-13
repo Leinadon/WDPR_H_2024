@@ -5,12 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Graph.Models;
 namespace WPR
 {
-    [Table("OurUsers")]
-    public class OurUser : IdentityUser
+    [Table("Users")]
+    public class User : IdentityUser
     {
-        [Key]
-        public int Id {get; set;}
-
+        
         [Required][StringLength(64, MinimumLength = 2)]
         public string FirstName { get; set; }
         [Required][StringLength(64, MinimumLength = 2)]

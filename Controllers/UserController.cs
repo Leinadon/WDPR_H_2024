@@ -18,11 +18,11 @@ namespace WPR
 
         // GET: api/users
         [HttpGet]
-        public async Task<ActionResult<List<OurUser>>> GetUsers()
+        public async Task<ActionResult<List<User>>> GetUsers()
         {
             try
             {
-                List<OurUser> users = await _userService.Get();
+                List<User> users = await _userService.Get();
                 return Ok(users);
             }
             catch (Exception ex)
@@ -33,11 +33,11 @@ namespace WPR
 
         // GET: api/users/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<OurUser>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             try
             {
-                OurUser? user = await _userService.GetByID(id);
+                User? user = await _userService.GetByID(id);
 
                 if (user == null)
                 {
@@ -54,7 +54,7 @@ namespace WPR
 
         // POST: api/users
         [HttpPost]
-        public async Task<ActionResult<OurUser>> CreateUser([FromBody] OurUser user)
+        public async Task<ActionResult<User>> CreateUser([FromBody] User user)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace WPR
 
         // PUT: api/users/{id}
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] OurUser user)
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] User user)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace WPR
                     return BadRequest(ModelState);
                 }
 
-                OurUser? oldUser = await _userService.GetByID(id);
+                User? oldUser = await _userService.GetByID(id);
                 if (oldUser == null)
                 {
                     return NotFound(); // Return 404 als de gebruiker niet is gevonden
@@ -104,7 +104,7 @@ namespace WPR
         {
             try
             {
-                OurUser? user = await _userService.GetByID(id);
+                User? user = await _userService.GetByID(id);
                 if (user == null)
                 {
                     return NotFound(); // Return 404 als de gebruiker niet is gevonden
@@ -125,7 +125,7 @@ namespace WPR
         {
             try
             {
-                OurUser? admin = await _userService.GetByID(id);
+                User? admin = await _userService.GetByID(id);
                 if (admin == null)
                 {
                     return NotFound(); // Return 404 als de administrator niet is gevonden
@@ -167,7 +167,7 @@ namespace WPR
                 {
                     return BadRequest(ModelState);
                 }
-                OurUser? oldAdmin = await _userService.GetByID(id);
+                User? oldAdmin = await _userService.GetByID(id);
                 if (oldAdmin == null)
                 {
                     return NotFound(); // Return 404 als de administrator niet is gevonden
@@ -187,7 +187,7 @@ namespace WPR
         {
             try
             {
-                OurUser? admin = await _userService.GetByID(id);
+                User? admin = await _userService.GetByID(id);
                 if (admin == null)
                 {
                     return NotFound(); // Return 404 als de administrator niet is gevonden
@@ -210,7 +210,7 @@ namespace WPR
         {
             try
             {
-                OurUser? specialist = await _userService.GetByID(id);
+                User? specialist = await _userService.GetByID(id);
                 if (specialist == null)
                 {
                     return NotFound(); // Return 404 als de specialist niet is gevonden
@@ -252,7 +252,7 @@ namespace WPR
                 {
                     return BadRequest(ModelState);
                 }
-                OurUser? oldSpecialist = await _userService.GetByID(id);
+                User? oldSpecialist = await _userService.GetByID(id);
                 if (oldSpecialist == null)
                 {
                     return NotFound(); // Return 404 als de specialist niet is gevonden
@@ -272,7 +272,7 @@ namespace WPR
         {
             try
             {
-                OurUser? specialist = await _userService.GetByID(id);
+                User? specialist = await _userService.GetByID(id);
                 if (specialist == null)
                 {
                     return NotFound(); // Return 404 als de specialist niet is gevonden
@@ -291,7 +291,7 @@ namespace WPR
         {
             try
             {
-                OurUser? employee = await _userService.GetByID(id);
+                User? employee = await _userService.GetByID(id);
                 if (employee == null)
                 {
                     return NotFound(); // Return 404 als de employee niet is gevonden
@@ -333,7 +333,7 @@ namespace WPR
                 {
                     return BadRequest(ModelState);
                 }
-                OurUser? oldEmployee = await _userService.GetByID(id);
+                User? oldEmployee = await _userService.GetByID(id);
                 if (oldEmployee == null)
                 {
                     return NotFound(); // Return 404 als de employee niet is gevonden
@@ -353,7 +353,7 @@ namespace WPR
         {
             try
             {
-                OurUser? employee = await _userService.GetByID(id);
+                User? employee = await _userService.GetByID(id);
                 if (employee == null)
                 {
                     return NotFound(); // Return 404 als de employee niet is gevonden

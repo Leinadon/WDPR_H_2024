@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Dynamic;
+using Microsoft.EntityFrameworkCore;
 namespace WPR
 {
     [Table("Questions")]
@@ -10,6 +11,7 @@ namespace WPR
         [Required][StringLength(1024, MinimumLength = 5)]
         public string Text{get; set;}
         public int QuestionnaireId{get; set;}
+        [DeleteBehavior(DeleteBehavior.NoAction)]
         [ForeignKey(nameof(QuestionnaireId))]
         public Questionnaire? Questionnaire{get; set;}
         public int InterviewId{get; set;}

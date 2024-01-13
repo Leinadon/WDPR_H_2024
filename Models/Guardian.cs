@@ -18,7 +18,7 @@ namespace WPR
         public string Phone { get; set; }
         [Required] [StringLength(320, MinimumLength =5)]
         public string Email { get; set; } 
-        public int SpecialistID {get; set;}
+        public string SpecialistID {get; set;}
         public Specialist specialist {get; set;}
         
 

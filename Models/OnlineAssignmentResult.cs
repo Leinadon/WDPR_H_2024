@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace WPR
 {
@@ -14,7 +15,7 @@ namespace WPR
     [ForeignKey(nameof(DoesResearchID))]
     public DoesResearch doesResearch{get; set;}
     public int OnlineAssignmentID{get; set;}
-
+    [DeleteBehavior(DeleteBehavior.NoAction)]
     [ForeignKey(nameof(OnlineAssignmentID))]
     public OnlineAssignment OnlineAssignment{get; set;}
     

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WPR
 {
-    [Table("Disabilitys")]
+    [Table("Disabilities")]
     public class Disability
     {
         [Key]
@@ -12,7 +12,7 @@ namespace WPR
         public int DisabilityTypeId {get ;set;}
         [ForeignKey(nameof(DisabilityTypeId))]
         public DisabilityType DisabilityType {get; set;}
-        public int SpecialistId {get; set;}
+        public string SpecialistId {get; set;}
         [ForeignKey(nameof(SpecialistId))]
         public Specialist Specialist { get; private set; }
         

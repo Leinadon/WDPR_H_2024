@@ -38,7 +38,7 @@ namespace WPR
 
         // GET: api/chats/user
         [HttpGet("{OurUser.id}")]
-        public async Task<ActionResult<List<OurChat>>> Get(OurUser user)
+        public async Task<ActionResult<List<OurChat>>> Get(User user)
         {
             try{
                 List<OurChat> chats = await _chatService.Get(user);
