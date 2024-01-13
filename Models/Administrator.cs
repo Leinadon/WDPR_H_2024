@@ -3,9 +3,8 @@ using System.Data;
 
 namespace WPR
 {
-    public class Administrator : OurUser {
+    public class Administrator : User {
         public Administrator(){
-            this.Role = "Administrator";
         }
     }
 

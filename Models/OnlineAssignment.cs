@@ -13,11 +13,5 @@ namespace WPR
         public OnlineAssignment(){ 
             
         }
-
-        private void NewResult(string comment, Specialist specialist){
-            OnlineAssignmentResult result = new OnlineAssignmentResult();
-            OnlineAssignmentResults.Add(result);
-
-        }
     }
 }

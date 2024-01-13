@@ -5,7 +5,7 @@ using System.Data;
 namespace WPR
 {
     [Table("Employees")]
-    public class Employee :OurUser
+    public class Employee : User
 
     {
         [Required] [StringLength(64, MinimumLength =2)]
@@ -16,7 +16,6 @@ namespace WPR
         
 
         public Employee(){
-            this.Role = "Employee";
         }
 
     }

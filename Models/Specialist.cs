@@ -5,7 +5,7 @@ using WPR;
 namespace WPR
 {
     [Table("Specialists")]
-    public class Specialist : OurUser
+    public class Specialist : User
 
     {
         public int LocationId {get; set;}
