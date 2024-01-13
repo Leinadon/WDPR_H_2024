@@ -1,9 +1,11 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Graph.Models;
 
 namespace WPR
 {
@@ -47,6 +49,18 @@ namespace WPR
             services.AddScoped<IResearchRepository, ResearchRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<WPRDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 8;
+            });
             serviceCollection.AddAuthorization();
             serviceCollection.AddControllers();
         }
@@ -63,7 +77,7 @@ namespace WPR
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
+        
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

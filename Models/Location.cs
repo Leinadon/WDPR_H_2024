@@ -19,7 +19,7 @@ namespace WPR
         [Required][StringLength(64, MinimumLength = 2)]
         public string Place { get; set; }
         public int? SpecialistID{get; set;}
-        [ForeignKey(nameof(SpecialistID))]
+        
         public Specialist? specialist{get; set;}
         public int? CompanyID{get; set;}
         [ForeignKey(nameof(CompanyID))]

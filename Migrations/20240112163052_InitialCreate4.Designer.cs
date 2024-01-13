@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WPR.Migrations
 {
     [DbContext(typeof(WPRDbContext))]
-    partial class WPRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240112163052_InitialCreate4")]
+    partial class InitialCreate4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -153,7 +156,13 @@ namespace WPR.Migrations
                     b.Property<int>("SpecialistId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("TempId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("ChatId")
+                        .IsUnique();
 
                     b.HasIndex("ResearchID");
 
@@ -271,8 +280,9 @@ namespace WPR.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("DoesResearchID")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("DoesResearchInt")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
@@ -284,8 +294,6 @@ namespace WPR.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("DoesResearchID");
 
                     b.HasIndex("User1ID");
 
@@ -599,13 +607,13 @@ namespace WPR.Migrations
                     b.HasOne("WPR.DisabilityType", "DisabilityType")
                         .WithMany("disabilities")
                         .HasForeignKey("DisabilityTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("WPR.Specialist", "Specialist")
                         .WithMany("Disabilities")
                         .HasForeignKey("SpecialistId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("DisabilityType");
@@ -615,17 +623,29 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.DoesResearch", b =>
                 {
-                    b.HasOne("WPR.Research", null)
+                    b.HasOne("WPR.OurChat", "chat")
+                        .WithOne("DoesResearch")
+                        .HasForeignKey("WPR.DoesResearch", "ChatId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.Research", "research")
                         .WithMany("doesResearches")
                         .HasForeignKey("ResearchID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WPR.Specialist", null)
+                    b.HasOne("WPR.Specialist", "specialist")
                         .WithMany("doesResearches")
                         .HasForeignKey("SpecialistId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
+
+                    b.Navigation("chat");
+
+                    b.Navigation("research");
+
+                    b.Navigation("specialist");
                 });
 
             modelBuilder.Entity("WPR.Location", b =>
@@ -658,23 +678,17 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.OurChat", b =>
                 {
-                    b.HasOne("WPR.DoesResearch", "DoesResearch")
-                        .WithMany()
-                        .HasForeignKey("DoesResearchID");
-
                     b.HasOne("WPR.OurUser", "User1")
                         .WithMany("Chats")
                         .HasForeignKey("User1ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("WPR.OurUser", "User2")
                         .WithMany("Chats2")
                         .HasForeignKey("User2ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
-
-                    b.Navigation("DoesResearch");
 
                     b.Navigation("User1");
 
@@ -686,7 +700,7 @@ namespace WPR.Migrations
                     b.HasOne("WPR.OurUser", "Sender")
                         .WithMany("ChatMessages")
                         .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("WPR.OurChat", "ourChat")
@@ -724,7 +738,7 @@ namespace WPR.Migrations
                     b.HasOne("WPR.Company", "Company")
                         .WithMany("Researches")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Company");
@@ -735,7 +749,7 @@ namespace WPR.Migrations
                     b.HasOne("WPR.Company", "Company")
                         .WithMany("Employees")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("WPR.OurUser", null)
@@ -752,7 +766,7 @@ namespace WPR.Migrations
                     b.HasOne("WPR.Guardian", "Guardian")
                         .WithOne("specialist")
                         .HasForeignKey("WPR.Specialist", "GuardianID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("WPR.OurUser", null)
@@ -764,7 +778,7 @@ namespace WPR.Migrations
                     b.HasOne("WPR.Location", "Location")
                         .WithOne("specialist")
                         .HasForeignKey("WPR.Specialist", "LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Guardian");
@@ -834,6 +848,8 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.OurChat", b =>
                 {
+                    b.Navigation("DoesResearch");
+
                     b.Navigation("Messages");
                 });
 

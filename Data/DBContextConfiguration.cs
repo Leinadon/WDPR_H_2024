@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace WPR{
     public static class DbContextConfiguration
@@ -10,6 +11,7 @@ namespace WPR{
         {
             services.AddDbContext<WPRDbContext>(options =>
                 ConfigureDbContext(options, configuration));
+            
 
             return services;
         }

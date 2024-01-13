@@ -8,6 +8,7 @@ namespace WPR{
         public IActionResult Index()
         {
             return View();
+            //TODO View() moet weg
         }
     }
 }

@@ -8,8 +8,8 @@ namespace WPR
     public class DoesResearch{
         [Key] 
         public int ID {get; set;}
-        [ForeignKey(nameof(specialist))]
         public int SpecialistId{get; set;}
+        [ForeignKey(nameof(SpecialistId))]
         public Specialist specialist {get;}
         public int ChatId{get; set;}
         [ForeignKey(nameof(ChatId))]

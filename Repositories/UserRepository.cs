@@ -37,12 +37,12 @@ namespace WPR
 
         public async Task<List<OurUser>> Get()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _dbContext.OurUsers.ToListAsync();
         }
 
         public async Task<OurUser?> GetByID(int id)
         {
-            OurUser? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            OurUser? user =await _dbContext.OurUsers.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if(user != null){
                 return user;
             }else{
@@ -51,7 +51,7 @@ namespace WPR
         }
         public async Task<OurUser?> GetByIDString(string id)
         {
-            OurUser? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            OurUser? user =await _dbContext.OurUsers.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if(user != null){
                 return user;
             }else{
@@ -62,17 +62,17 @@ namespace WPR
 
         public async Task<OurUser> Create(OurUser user)
         {
-            _dbContext.Users.Add(user);
+            _dbContext.OurUsers.Add(user);
             await _dbContext.SaveChangesAsync();
             return user;
         }
 
         public async Task Delete(int id)
         {
-            OurUser? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            OurUser? user = await _dbContext.OurUsers.FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if (user != null)
             {
-                _dbContext.Users.Remove(user);
+                _dbContext.OurUsers.Remove(user);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Researh with ID {id} not found for Delete");
@@ -81,7 +81,7 @@ namespace WPR
 
         public async Task Update(int id, OurUser user)
         {
-            OurUser? oldUser = await _dbContext.Users.FindAsync(id);
+            OurUser? oldUser = await _dbContext.OurUsers.FindAsync(id);
             if (oldUser != null)
             {
                 _dbContext.Update(user);
@@ -96,28 +96,28 @@ namespace WPR
 
         public async Task<OurUser> CreateEmployee(OurUser employee)
         {
-            _dbContext.Users.Add(employee);
+            _dbContext.OurUsers.Add(employee);
             await _dbContext.SaveChangesAsync();
             return employee;
         }
 
         public async Task<OurUser> CreateAdmin(OurUser admin)
         {
-            _dbContext.Users.Add(admin);
+            _dbContext.OurUsers.Add(admin);
             await _dbContext.SaveChangesAsync();
             return admin;
         }
 
         public async Task<OurUser> CreateSpecialist(OurUser specialist)
         {
-            _dbContext.Users.Add(specialist);
+            _dbContext.OurUsers.Add(specialist);
             await _dbContext.SaveChangesAsync();
             return specialist;
         }
 
         public async Task UpdateEmployee(int id, OurUser employee)
         {
-            OurUser? odlEmployee = await _dbContext.Users.FindAsync(id);
+            OurUser? odlEmployee = await _dbContext.OurUsers.FindAsync(id);
             if(odlEmployee != null){
                 _dbContext.Update(employee);
                 await _dbContext.SaveChangesAsync();
@@ -128,7 +128,7 @@ namespace WPR
 
         public async Task UpdateAdmin(int id, OurUser admin)
         {
-            OurUser? oldAdmin = await _dbContext.Users.FindAsync(id);
+            OurUser? oldAdmin = await _dbContext.OurUsers.FindAsync(id);
             if(oldAdmin != null){
                 _dbContext.Update(admin);
                 await _dbContext.SaveChangesAsync();
@@ -139,7 +139,7 @@ namespace WPR
 
         public async Task UpdateSpecialist(int id, OurUser specialist)
         {
-            OurUser? oldSpecialist = await _dbContext.Users.FindAsync(id);
+            OurUser? oldSpecialist = await _dbContext.OurUsers.FindAsync(id);
             if(oldSpecialist != null){
                 _dbContext.Update(specialist);
                 await _dbContext.SaveChangesAsync();
@@ -150,9 +150,9 @@ namespace WPR
 
         public async Task DeleteEmployee(int id)
         {
-            OurUser? employee = await _dbContext.Users.FirstOrDefaultAsync(e => e.Id.Equals(id.ToString()));
+            OurUser? employee = await _dbContext.OurUsers.FirstOrDefaultAsync(e => e.Id.Equals(id.ToString()));
             if (employee != null){
-                _dbContext.Users.Remove(employee);
+                _dbContext.OurUsers.Remove(employee);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Employee with id {id} not found for update.");
@@ -161,9 +161,9 @@ namespace WPR
 
         public async Task DeleteAdmin(int id)
         {
-            OurUser? administrator = await _dbContext.Users.FirstOrDefaultAsync(a => a.Id.Equals(id.ToString()));
+            OurUser? administrator = await _dbContext.OurUsers.FirstOrDefaultAsync(a => a.Id.Equals(id.ToString()));
             if (administrator != null){
-                _dbContext.Users.Remove(administrator);
+                _dbContext.OurUsers.Remove(administrator);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Admin with id {id} not found for update.");
@@ -172,9 +172,9 @@ namespace WPR
 
         public async Task DeleteSpecialist(int id)
         {
-            OurUser? specialist = await _dbContext.Users.FirstOrDefaultAsync(s => s.Id.Equals(id.ToString()));
+            OurUser? specialist = await _dbContext.OurUsers.FirstOrDefaultAsync(s => s.Id.Equals(id.ToString()));
             if(specialist != null){
-                _dbContext.Users.Remove(specialist);
+                _dbContext.OurUsers.Remove(specialist);
                 await _dbContext.SaveChangesAsync();
             }else{
                 throw new InvalidOperationException($"Specialist with id {id} not found for update.");
@@ -183,7 +183,7 @@ namespace WPR
 
         public async Task<OurUser> GetByEmail(string email)
         {
-            OurUser? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+            OurUser? user = await _dbContext.OurUsers.FirstOrDefaultAsync(u => u.Email.Equals(email));
             if(user != null){
                 return user;
             }else{

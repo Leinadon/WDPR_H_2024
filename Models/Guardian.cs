@@ -19,7 +19,6 @@ namespace WPR
         [Required] [StringLength(320, MinimumLength =5)]
         public string Email { get; set; } 
         public int SpecialistID {get; set;}
-        [ForeignKey(nameof(SpecialistID))]
         public Specialist specialist {get; set;}
         
 

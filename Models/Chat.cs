@@ -9,7 +9,7 @@ namespace WPR
     {
         
         [Key]
-        public string ID { get; private set; }
+        public int ID { get; private set; }
         public int User1ID {get; set;}
         [ForeignKey(nameof(User1ID))]
         public OurUser User1 {get; set;}
@@ -20,8 +20,6 @@ namespace WPR
         
         public IList<OurChatMessage> Messages { get; }  = new List<OurChatMessage>();
         public OurChatStatus Status { get; set; }
-        public string DoesResearchInt {get; set;}
-        [ForeignKey(nameof(DoesResearchInt))]
         public DoesResearch? DoesResearch {get; set;}
         
 

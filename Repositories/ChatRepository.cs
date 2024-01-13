@@ -5,6 +5,7 @@ namespace WPR
     public interface IChatRepository
     {
         Task<List<OurChat>> Get(OurUser user);
+        Task<List<OurChat>> GetAll();
         Task<OurChat?> GetById(int id);
         Task<OurChat?> GetByUserId(int id);
         Task<OurChat> Create(OurChat ourChat);
@@ -18,6 +19,13 @@ namespace WPR
         public ChatRepository(WPRDbContext dbContext)
         {
             this._dbContext = dbContext;
+            
+        }
+        
+        public async Task<List<OurChat>> GetAll()
+        {
+            return await _dbContext.OurChats
+                .ToListAsync();
         }
 
         /// <summary>
@@ -27,7 +35,7 @@ namespace WPR
         /// <returns></returns>
         public async Task<List<OurChat>> Get(OurUser user)
         {
-            return await _dbContext.Chats
+            return await _dbContext.OurChats
                 .Where(c => c.User1.Id == user.Id || c.User2.Id == user.Id)
                 .ToListAsync();
         }
@@ -39,7 +47,7 @@ namespace WPR
         /// <returns></returns>
         public async Task<OurChat?> GetById(int id)
         {
-            return await _dbContext.Chats
+            return await _dbContext.OurChats
                 .Where(c => c.ID.Equals(id.ToString()))
                 .FirstOrDefaultAsync();
         }
@@ -52,7 +60,7 @@ namespace WPR
         /// <returns></returns>
         public async Task<OurChat> Create(OurChat ourChat)
         {
-            _dbContext.Chats.Add(ourChat);
+            _dbContext.OurChats.Add(ourChat);
             await _dbContext.SaveChangesAsync();
             return ourChat;
         }
@@ -65,7 +73,7 @@ namespace WPR
         /// <returns></returns>
         public async Task AddMessage(OurChatMessage ourChatMessage, int ChatID)
         {
-            OurChat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.ID.Equals(ChatID.ToString()));
+            OurChat? chat = await _dbContext.OurChats.FirstOrDefaultAsync(c => c.ID.Equals(ChatID.ToString()));
             if (chat != null)
             {
                 
@@ -83,7 +91,7 @@ namespace WPR
         /// <exception cref="InvalidOperationException"></exception>
         public async Task<OurChat?> GetByUserId(int id)
         {
-            OurChat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.User1.Id.Equals(id)  || c.User2.Equals(id));
+            OurChat? chat = await _dbContext.OurChats.FirstOrDefaultAsync(c => c.User1.Id.Equals(id)  || c.User2.Equals(id));
             if(chat != null){
                 return chat;
             }else{

@@ -16,9 +16,28 @@ namespace WPR
             _chatService = chatService;
             _userService = userService;
         }
-
         // GET: api/chats
         [HttpGet]
+        public async Task<ActionResult<List<OurChat>>> GetAll()
+        {
+            try{
+                List<OurChat> chats = await _chatService.GetAll();
+                if(chats.Count == 0){
+                    return NoContent();
+                }
+                if(chats != null){
+                    return Ok(chats);
+                }else{
+                    return NotFound();
+                }
+            }catch(Exception ex){
+                return Problem("Probleem bij het opvragen van alle chats");
+            }
+            
+        }
+
+        // GET: api/chats/user
+        [HttpGet("{OurUser.id}")]
         public async Task<ActionResult<List<OurChat>>> Get(OurUser user)
         {
             try{
@@ -36,9 +55,8 @@ namespace WPR
             }
             
         }
-        [HttpGet()]
 
-        // GET api/chats/3
+        // GET api/chats/chat/3
         [HttpGet("{id}")]
         public async Task<ActionResult<OurChat>> Get(int id)
         {
@@ -56,7 +74,7 @@ namespace WPR
 
 
         //TODO Create maken voor een chat die aangemaakt wordt met een onderzoek
-        // POST api/chats
+        // POST api/chats/create
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] OurChat OurChat)
         {
@@ -77,10 +95,10 @@ namespace WPR
 
         // POST api/chats/3
         [HttpPost("{id}")]
-        public async Task SendMessage([FromBody] OurChatMessage ourChatMessage, [FromBody] int ChatID)
+        public async Task SendMessage([FromBody] OurChatMessage ourChatMessage, int ChatId)
         {
 
-            await _chatService.AddMessage(ourChatMessage, ChatID);
+            await _chatService.AddMessage(ourChatMessage, ChatId);
         }
     }
 }

@@ -8,6 +8,8 @@ namespace WPR
     [Table("OurUsers")]
     public class OurUser : IdentityUser
     {
+        [Key]
+        public int Id {get; set;}
 
         [Required][StringLength(64, MinimumLength = 2)]
         public string FirstName { get; set; }
@@ -17,6 +19,7 @@ namespace WPR
         [Required][StringLength(15, MinimumLength = 2)]
         public string Phone { get; set; }
         public string Role {get; set;}
+        [InverseProperty(nameof(OurChat.User2))]
         public ICollection<OurChat> Chats2 {get;}
         public ICollection<OurChat> Chats {get;}
         public ICollection<OurChatMessage> ChatMessages {get;}
