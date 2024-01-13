@@ -1,0 +1,569 @@
+.index {
+    background-color: #102c57;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  
+.index .signup-pagina {
+    background-color: #102c57;
+    position: relative;
+  }
+  
+ 
+  
+
+ 
+ 
+  
+  .index .frame-9 {
+    height: 54px !important;
+    left: 492px !important;
+    position: absolute !important;
+    top: 1434px !important;
+    width: 466px !important;
+  }
+  
+  
+  
+  .index .rectangle {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    position: absolute;
+  }
+  
+  
+  .index .text-wrapper {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 540px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1145px;
+    white-space: nowrap;
+    width: 62px;
+  }
+  
+  .index .rectangle-12 {
+    height: 20px !important;
+    left: 492px !important;
+    position: absolute !important;
+    top: 1148px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-8-1 {
+    height: 20px !important;
+    left: 492px !important;
+    position: absolute !important;
+    top: 1341px !important;
+    width: 20px !important;
+  }
+  
+  .index .property-1-default {
+    height: 21px !important;
+    left: 492px !important;
+    position: absolute !important;
+    top: 1291px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-12-instance {
+    height: 20px !important;
+    left: 492px !important;
+    position: absolute !important;
+    top: 1243px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-8-1-instance {
+    height: 19px !important;
+    left: 492px !important;
+    position: absolute !important;
+    top: 1196px !important;
+    width: 20px !important;
+  }
+  
+  
+  .index .frame-2 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 44px;
+    left: 482px;
+    padding: 10px;
+    position: absolute;
+    top: 283px;
+    width: 466px;
+  }
+  
+
+  
+  .index .rectangle-2 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    position: absolute;
+  }
+  
+  .index .frame-3 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 44px;
+    left: 482px;
+    padding: 10px;
+    position: absolute;
+    top: 392px;
+    width: 466px;
+  }
+  
+  .index .rectangle-3 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    position: absolute;
+  }
+  
+  .index .frame-4 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 44px;
+    left: 484px;
+    padding: 10px;
+    position: absolute;
+    top: 500px;
+    width: 464px;
+  }
+  
+  .index .rectangle-4 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 492px;
+    position: absolute;
+    top: 548px;
+    width: 466px;
+  }
+  
+  .index .frame-5 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 44px;
+    left: 484px;
+    padding: 10px;
+    position: absolute;
+    top: 616px;
+    width: 464px;
+  }
+  
+  .index .rectangle-5 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 494px;
+    position: absolute;
+    top: 660px;
+    width: 466px;
+  }
+  
+  .index .frame-6 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 44px;
+    left: 484px;
+    padding: 10px;
+    position: absolute;
+    top: 724px;
+    width: 464px;
+  }
+  
+  .index .rectangle-6 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 494px;
+    position: absolute;
+    top: 772px;
+    width: 466px;
+  }
+  
+  .index .frame-7 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 44px;
+    left: 484px;
+    padding: 10px;
+    position: absolute;
+    top: 836px;
+    width: 454px;
+  }
+  
+  .index .rectangle-7 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 492px;
+    position: absolute;
+    top: 882px;
+    width: 466px;
+  }
+  
+  .index .al-een-account-log-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 39px;
+    justify-content: center;
+    left: 494px;
+    padding: 10px;
+    position: absolute;
+    top: 1832px;
+    width: 454px;
+  }
+  
+  .index .al-een-account-log {
+    color: transparent;
+    font-family: "Inter", Helvetica;
+    font-size: 30px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-bottom: -7.5px;
+    margin-top: -9.5px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+  }
+  
+  .index .span {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  
+  .index .text-wrapper-13 {
+    color: #dac0a3;
+    font-weight: 900;
+    text-decoration: underline;
+  }
+  
+  .index .frame-8 {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 44px;
+    left: 484px;
+    padding: 10px;
+    position: absolute;
+    top: 952px;
+    width: 454px;
+  }
+  
+  .index .rectangle-8 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 492px;
+    position: absolute;
+    top: 998px;
+    width: 466px;
+  }
+  
+  .index .frame-instance {
+    display: flex !important;
+    height: 56px !important;
+    left: 492px !important;
+    position: absolute !important;
+    top: 1729px !important;
+    width: 466.19px !important;
+  }
+  
+  .index .frame-2-instance {
+    height: 24px !important;
+    margin-top: unset !important;
+    width: 77px !important;
+  }
+  
+ 
+  
+  .index .rectangle-9 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 54px;
+    position: absolute;
+    top: 738px;
+    width: 330px;
+  }
+  
+  .index .text-wrapper-16 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 900;
+    left: 54px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 701px;
+    white-space: nowrap;
+  }
+  
+  .index .rectangle-10 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 54px;
+    position: absolute;
+    top: 396px;
+    width: 330px;
+  }
+  
+
+  
+  .index .rectangle-11 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 50px;
+    position: absolute;
+    top: 966px;
+    width: 330px;
+  }
+  
+  .index .text-wrapper-19 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 900;
+    left: 54px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 815px;
+    white-space: nowrap;
+  }
+  
+  .index .p {
+    color: transparent;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    left: 127px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1756px;
+    white-space: nowrap;
+  }
+  
+  .index .instance-node {
+    display: flex !important;
+    height: 56px !important;
+    left: 52px !important;
+    position: absolute !important;
+    top: 1651px !important;
+    width: 326px !important;
+  }
+  
+  .index .frame-10 {
+    margin-top: unset !important;
+  }
+  
+  .index .img {
+    height: 79px;
+    left: 314px;
+    position: absolute;
+    top: 33px;
+    width: 96px;
+  }
+  
+
+  
+  .index .frame-9-instance {
+    left: 54px !important;
+    position: absolute !important;
+    top: 1383px !important;
+    width: 330px !important;
+  }
+  
+  .index .rectangle-13 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 54px;
+    position: absolute;
+    top: 510px;
+    width: 330px;
+  }
+  
+  .index .text-wrapper-22 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 900;
+    left: 54px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 473px;
+    white-space: nowrap;
+  }
+  
+  .index .text-wrapper-23 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 900;
+    left: 54px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1473px;
+    white-space: nowrap;
+  }
+  
+  .index .rectangle-14 {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 54px;
+    left: 50px;
+    position: absolute;
+    top: 1517px;
+    width: 330px;
+  }
+  
+  .index .text-wrapper-25 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 102px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1099px;
+    white-space: nowrap;
+  }
+  
+  .index .text-wrapper-26 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 102px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1147px;
+    white-space: nowrap;
+  }
+  
+  .index .text-wrapper-27 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 102px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1195px;
+    white-space: nowrap;
+  }
+  
+  .index .text-wrapper-28 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 102px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1243px;
+    white-space: nowrap;
+  }
+  
+  .index .text-wrapper-29 {
+    color: #ffffff;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 102px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 1291px;
+    white-space: nowrap;
+  }
+  
+  .index .property-1-default-instance {
+    height: 20px !important;
+    left: 54px !important;
+    position: absolute !important;
+    top: 1102px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-15 {
+    height: 20px !important;
+    left: 54px !important;
+    position: absolute !important;
+    top: 1294px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-16 {
+    height: 20px !important;
+    left: 54px !important;
+    position: absolute !important;
+    top: 1246px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-17 {
+    height: 20px !important;
+    left: 54px !important;
+    position: absolute !important;
+    top: 1198px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-18 {
+    height: 20px !important;
+    left: 54px !important;
+    position: absolute !important;
+    top: 1150px !important;
+    width: 20px !important;
+  }
+  
+  .index .rectangle-19 {
+    height: 20px !important;
+    left: 54px !important;
+    position: absolute !important;
+    top: 1105px !important;
+    width: 20px !important;
+  }
+  
