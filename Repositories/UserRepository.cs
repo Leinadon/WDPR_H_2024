@@ -183,7 +183,7 @@ namespace WPR
 
         public async Task<User> GetByEmail(string email)
         {
-            User? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email.Equals(email));
+            User? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email != null  && u.Email.Equals(email));
             if(user != null){
                 return user;
             }else{

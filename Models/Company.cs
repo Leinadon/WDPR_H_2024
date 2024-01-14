@@ -18,7 +18,7 @@ namespace WPR
         [Required] [StringLength(64, MinimumLength =2)]
         public string Sector { get; set; }
 
-        public Location Location { get; set; }
+        public Location? Location { get; set; }
         [StringLength(1024, MinimumLength =5)]
         public string WebsiteURL { get; set; }
         [Required] [StringLength(320, MinimumLength =5)]
@@ -26,10 +26,12 @@ namespace WPR
         
         public string TrackingID { get; set; }
         
-        public List<Employee> Employees { get; }
+        public List<Employee>? Employees { get; }
         
-        public List<Research> Researches { get; }
+        public List<Research>? Researches { get; }
         public Company(){
+            Name = string.Empty;
+            WebsiteURL = string.Empty;
             ContactEmail = string.Empty;
             TrackingID = string.Empty;
             Sector = string.Empty;
