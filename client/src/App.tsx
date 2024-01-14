@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
-import Home from "./Pages/Home";
+
 import SignUpOld from "./Pages/SignUp";
 import Contact from "./Pages/Contact";
 
@@ -15,6 +15,7 @@ import HomePage from "./Pages/HomePagina";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUpPagina";
 import DeskunidgeProfiel from "./Pages/PortalDeskundige/Profiel_Deskundige";
+import HomePaginaPage from './Pages/HomePagina';
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
           <Route path="menu" element={<Menu />} />
           <Route path="*" element={<PageNonExist />} />
 
-          <Route path="homepage" element={<Home />} />
+          <Route path="homepage" element={<HomePaginaPage />} />
           <Route path="signup_old" element={<SignUpOld />} />
         
       </Routes>
