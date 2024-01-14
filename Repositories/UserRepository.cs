@@ -42,7 +42,7 @@ namespace WPR
 
         public async Task<User?> GetByID(int id)
         {
-            User? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            User? user =await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if(user != null){
                 return user;
             }else{
@@ -51,7 +51,7 @@ namespace WPR
         }
         public async Task<User?> GetByIDString(string id)
         {
-            User? user =await _dbContext.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
+            User? user =await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(id.ToString()));
             if(user != null){
                 return user;
             }else{

@@ -33,11 +33,11 @@ namespace WPR
 
         // GET: api/users/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<User>> GetUser(string id)
         {
             try
             {
-                User? user = await _userService.GetByID(id);
+                User? user = await _userService.GetByIDString(id);
 
                 if (user == null)
                 {

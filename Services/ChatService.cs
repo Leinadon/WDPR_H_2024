@@ -2,7 +2,7 @@
 
 public interface IChatService
 {
-    Task<List<OurChat>> Get(User user);
+    Task<List<OurChat>> GetAllFromUser(string user);
     Task<List<OurChat>> GetAll();
     Task<OurChat?> GetById(int id);
     Task<OurChat> Create(OurChat ourChat);
@@ -21,10 +21,10 @@ public class ChatService : IChatService
         return await _chatRepository.GetAll();
     }
 
-    public async Task<List<OurChat>> Get(User user)
+    public async Task<List<OurChat>> GetAllFromUser(string user)
     {
 
-        return await _chatRepository.Get(user);
+        return await _chatRepository.GetAllFromUser(user);
     }
 
     public async Task<OurChat?> GetById(int id)

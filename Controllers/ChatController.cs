@@ -40,12 +40,12 @@ namespace WPR
             
         }
 
-        // GET: api/chats/users/id
-        [HttpGet("users/{id}")]
-        public async Task<ActionResult<List<OurChat>>> Get(User user)
+        // GET: api/chats/users/userid
+        [HttpGet("users/{userid}")]
+        public async Task<ActionResult<List<OurChat>>> GetChatsOfUser(string userId)
         {
             try{
-                List<OurChat> chats = await _chatService.Get(user);
+                List<OurChat> chats = await _chatService.GetAllFromUser(userId);
                 if(chats.Count == 0){
                     return NoContent();
                 }
