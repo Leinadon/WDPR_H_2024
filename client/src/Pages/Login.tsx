@@ -28,7 +28,7 @@ const LogInPaginaPage = () => {
               <Img
                 className="h-[79px] md:h-auto object-cover w-24 sm:w-full"
                 src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                alt="Logo van Stichting Accessibility"
               />
             </div>
           </div>
