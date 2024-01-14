@@ -11,6 +11,7 @@ import Menu from "./Pages/Menu";
 import PageNonExist from "./Pages/PageNonExist"
 
 // Figma pages
+import ChatsOfUser from "./Pages/ChatsOfUser";
 import HomePage from "./Pages/HomePagina";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUpPagina";
@@ -22,6 +23,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route index element={<HomePage />} />
+          <Route path="ChatsOfUser" element={<ChatsOfUser />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="profiel" element={<DeskunidgeProfiel />} />
