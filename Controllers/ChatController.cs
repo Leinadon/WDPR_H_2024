@@ -36,8 +36,8 @@ namespace WPR
             
         }
 
-        // GET: api/chats/user
-        [HttpGet("{OurUser.id}")]
+        // GET: api/chats/users/id
+        [HttpGet("users/{id}")]
         public async Task<ActionResult<List<OurChat>>> Get(User user)
         {
             try{
@@ -56,7 +56,7 @@ namespace WPR
             
         }
 
-        // GET api/chats/chat/3
+        // GET api/chats/id
         [HttpGet("{id}")]
         public async Task<ActionResult<OurChat>> Get(int id)
         {

@@ -18,8 +18,15 @@ namespace WPR
         public string Phone { get; set; }
         public string Role {get; set;}
         [InverseProperty(nameof(OurChat.User2))]
-        public ICollection<OurChat> Chats2 {get;}
-        public ICollection<OurChat> Chats {get;}
-        public ICollection<OurChatMessage> ChatMessages {get;}
+        public ICollection<OurChat>? Chats2 {get;}
+        public ICollection<OurChat>? Chats {get;}
+        public ICollection<OurChatMessage>? ChatMessages {get;}
+
+        public User(){
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Phone = string.Empty;
+            Role = string.Empty;
+        }
     }
 }

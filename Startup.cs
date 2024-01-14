@@ -101,7 +101,10 @@ namespace WPR
             services.AddAuthorization();
             services.AddControllers();
 
-
+            services.AddLogging(builder =>
+            {
+                builder.AddConsole();
+            });
             
 
         }

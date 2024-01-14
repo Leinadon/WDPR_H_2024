@@ -9,10 +9,12 @@ namespace WPR
     public class AnswerController : ControllerBase
     {
         private readonly IAnswerService _answerService;
+        private readonly ILogger<AnswerController> _logger;
 
-        public AnswerController(IAnswerService answerService)
+        public AnswerController(IAnswerService answerService, ILogger<AnswerController> logger)
         {
             _answerService = answerService;
+            _logger = logger;
         }
 
         // GET: api/answers
@@ -23,6 +25,7 @@ namespace WPR
                 List<Answer> answers = await _answerService.Get();
                 return Ok(answers);
             }catch(Exception ex){
+                _logger.LogError(ex, "Fout opgetreden in in answers Get() api/asnwers");
                 return Problem("Probleem bij het opvragen van alle instantie van een object");
             }
         }
@@ -37,6 +40,7 @@ namespace WPR
                 }
                 return Ok(answer);
             }catch(Exception ex){
+                _logger.LogError(ex, "An error occurred in Get(id) api/answers");            
                 return Problem("Probleem bij het opvrgagen van een object");
             }
         }
@@ -51,6 +55,7 @@ namespace WPR
                 }
                 return CreatedAtRoute("Get", new {id = answer.ID}, await _answerService.Create(answer));
             }catch(Exception ex){
+                _logger.LogError(ex, "An error occurred in Create() api/answers");
                 return Problem("Probleem bij het aanmaken van een object");
             }
         }
@@ -69,6 +74,7 @@ namespace WPR
                 await _answerService.Update(id, answer);
                 return NoContent();
             }catch(Exception ex){
+                _logger.LogError(ex, "An error occurred in Update() api/answers");
                 return Problem("Probleem bij het updaten van een object");
             }
         }
@@ -83,7 +89,8 @@ namespace WPR
                 }
                 await _answerService.Delete(id);
                 return NoContent();
-            }catch{
+            }catch(Exception ex){
+                _logger.LogError(ex, "An error occurred in Delete() api/answers");
                 return Problem("Probleem bij het detelen van een object");
             }
         }
