@@ -29,6 +29,10 @@ namespace WPR
         public List<Employee> Employees { get; }
         
         public List<Research> Researches { get; }
-        public Company(){}
+        public Company(){
+            ContactEmail = string.Empty;
+            TrackingID = string.Empty;
+            Sector = string.Empty;
+        }
     }
 }

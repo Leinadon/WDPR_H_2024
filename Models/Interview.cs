@@ -5,6 +5,6 @@ namespace WPR
     [Table("Interviews")]
     public class Interview : Research{
         
-        public List<Question> Questions {get;}
+        public List<Question>? Questions {get;}
     }
 }

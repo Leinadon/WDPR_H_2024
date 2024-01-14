@@ -11,14 +11,15 @@ namespace WPR
         
         [Key]
         public int ID { get; private set; }
+        
         public string User1ID {get; set;}
         [ForeignKey(nameof(User1ID))]
-        public User User1 {get; set;}
+        public User? User1 {get; set;}
         public string User2ID {get; set;}
         [ForeignKey(nameof(User2ID))]
         [InverseProperty(nameof(User2.Chats2))]
         [DeleteBehavior(DeleteBehavior.NoAction)]
-        public User User2 {get; set;}   
+        public User? User2 {get; set;}   
         
         public IList<OurChatMessage> Messages { get; }  = new List<OurChatMessage>();
         public OurChatStatus Status { get; set; }
@@ -28,7 +29,9 @@ namespace WPR
 
         public OurChat()
         {
-            
+            User1ID = string.Empty;
+            User2ID = string.Empty;
+
         }
         
     }
@@ -45,13 +48,19 @@ namespace WPR
         public int OurChatID { get; set; }
         
         [ForeignKey(nameof (OurChatID))]
-        public OurChat ourChat { get; set; }
+        public OurChat? ourChat { get; set; }
 
         public string SenderUserId { get; set; }
         [DeleteBehavior(DeleteBehavior.NoAction)]
         [ForeignKey(nameof(SenderUserId))]
 
-        public User Sender { get; set; }
+        public User? Sender { get; set; }
+
+        public OurChatMessage(){
+            Text = string.Empty;
+            SenderUserId = string.Empty;
+
+        }
 
     }
 

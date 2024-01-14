@@ -17,10 +17,11 @@ namespace WPR
         public int InterviewId{get; set;}
         [ForeignKey(nameof(InterviewId))]
         public Interview? Interview{get;set;}
-        public List<Answer> Answers {get;}
+        public List<Answer>? Answers {get;}
         public Question()
         {
-            
+            Text = string.Empty;
+
         }
     }
 }

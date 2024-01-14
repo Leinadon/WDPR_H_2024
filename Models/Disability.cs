@@ -11,14 +11,18 @@ namespace WPR
         public int DisabilityId { get; set; }
         public int DisabilityTypeId {get ;set;}
         [ForeignKey(nameof(DisabilityTypeId))]
-        public DisabilityType DisabilityType {get; set;}
+        public DisabilityType? DisabilityType {get; set;}
         public string SpecialistId {get; set;}
         [ForeignKey(nameof(SpecialistId))]
-        public Specialist Specialist { get; private set; }
+        public Specialist? Specialist { get; private set; }
         
         [Required] [StringLength(1024, MinimumLength =5)]
         public string Details { get; set; }
 
-        public Disability() { }
+        public Disability() {
+            Details = string.Empty;
+            SpecialistId = string.Empty;
+
+        }
     }
 }

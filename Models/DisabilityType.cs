@@ -12,9 +12,11 @@ namespace WPR
         public int ID{get; set;}
         public string Type{get; set;}
         public string Details{get; set;}
-        public ICollection<Disability> disabilities{get;}
+        public ICollection<Disability>? disabilities{get;}
         public DisabilityType()
         {   
+            Type = string.Empty;
+            Details = string.Empty;
 
         }
     }

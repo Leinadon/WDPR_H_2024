@@ -9,9 +9,11 @@ namespace WPR
         public string Link{get; set;}
         [Required][StringLength(1024, MinimumLength = 5)]
         public string Explanation{get; set;}
-        public List<OnlineAssignmentResult> OnlineAssignmentResults {get;}
+        public List<OnlineAssignmentResult>? OnlineAssignmentResults {get;}
         public OnlineAssignment(){ 
-            
+            Link = string.Empty;
+            Explanation = string.Empty;
+
         }
     }
 }
