@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Graph.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,11 +11,13 @@ namespace WPR
     {
         private readonly IChatService _chatService;
         private readonly IUserService _userService;
+        private readonly ILogger<ChatController> _logger;
 
-        public ChatController(IChatService chatService, IUserService userService)
+        public ChatController(IChatService chatService, IUserService userService, ILogger<ChatController> logger)
         {
             _chatService = chatService;
             _userService = userService;
+            _logger = logger;
         }
         // GET: api/chats
         [HttpGet]
@@ -31,6 +34,7 @@ namespace WPR
                     return NotFound();
                 }
             }catch(Exception ex){
+                _logger.LogError(ex, "Fout bij het ophalen van chats, GET: api/chats");
                 return Problem("Probleem bij het opvragen van alle chats");
             }
             

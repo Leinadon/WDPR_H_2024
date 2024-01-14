@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Formats.Asn1;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Graph.Models;
 
 namespace WPR
 {
@@ -23,9 +24,12 @@ namespace WPR
         {
             try{
                 List<Answer> answers = await _answerService.Get();
-                return Ok(answers);
+                if(answers != null){
+                    return Ok(answers);
+                }
+                return NoContent();
             }catch(Exception ex){
-                _logger.LogError(ex, "Fout opgetreden in in answers Get() api/asnwers");
+                _logger.LogError(ex, "Fout opgetreden in answers Get() api/answers");
                 return Problem("Probleem bij het opvragen van alle instantie van een object");
             }
         }
