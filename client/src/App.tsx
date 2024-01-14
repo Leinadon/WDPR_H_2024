@@ -3,10 +3,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 
-import Home from "./Pages/Home";
-import SignUpOld from "./Pages/SignUp";
 import Contact from "./Pages/Contact";
-
 import Menu from "./Pages/Menu";
 import PageNonExist from "./Pages/PageNonExist"
 
@@ -27,9 +24,6 @@ function App() {
           <Route path="profiel" element={<DeskunidgeProfiel />} />
           <Route path="menu" element={<Menu />} />
           <Route path="*" element={<PageNonExist />} />
-
-          <Route path="homepage" element={<Home />} />
-          <Route path="signup_old" element={<SignUpOld />} />
         
       </Routes>
     </BrowserRouter>
