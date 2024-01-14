@@ -12,10 +12,11 @@ namespace WPR
         public string Function {get; set;}
         public int CompanyId{get; set;}
         [ForeignKey(nameof(CompanyId))]
-        public Company Company {get; set;}
+        public Company? Company {get; set;}
         
 
         public Employee(){
+            Function = string.Empty;
         }
 
     }

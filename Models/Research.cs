@@ -17,15 +17,19 @@ namespace WPR
         public string Reward{get; set;}
         [Required]
         public string Status{get; set;}
-        public ICollection<DoesResearch> doesResearches {get;}
+        public ICollection<DoesResearch>? doesResearches {get;}
         public int CompanyId{get; set;}
         [ForeignKey(nameof(CompanyId))]
-        public Company Company{get; set;}
+        public Company? Company{get; set;}
         [Required]
         public Boolean English{get;set;}
         public Research()
         {
-            this.StartDate = DateTime.Now;
+            Title = string.Empty;
+            Reward = string.Empty;
+            Status = string.Empty;
+
+            
         }
     }
 }

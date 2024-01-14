@@ -18,13 +18,19 @@ namespace WPR
         public string HouseNumber { get; set; }
         [Required][StringLength(64, MinimumLength = 2)]
         public string Place { get; set; }
-        public string? SpecialistID{get; set;}
+        public string SpecialistID{get; set;}
         
         public Specialist? specialist{get; set;}
         public int? CompanyID{get; set;}
         [ForeignKey(nameof(CompanyID))]
         public Company? Company{get; set;}
-        public Location(){}
+        public Location(){
+            StreetName = string.Empty;
+            PostalCode = string.Empty;
+            HouseNumber = string.Empty;
+            Place = string.Empty;
+            SpecialistID = string.Empty;
+        }
     }
 }
 

@@ -4,7 +4,7 @@ namespace WPR
 {
     [Table("Questionnaires")]
     public class Questionnaire : Research{
-        public ICollection<Question> Questions {get; set;}
+        public ICollection<Question>? Questions {get; set;}
         
         public Questionnaire()
         {

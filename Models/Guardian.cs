@@ -19,9 +19,15 @@ namespace WPR
         [Required] [StringLength(320, MinimumLength =5)]
         public string Email { get; set; } 
         public string SpecialistID {get; set;}
-        public Specialist specialist {get; set;}
+        public Specialist? specialist {get; set;}
         
 
-        public Guardian(){}
+        public Guardian(){
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Phone = string.Empty;
+            Email = string.Empty;
+            SpecialistID = string.Empty;
+        }
     }
 }
