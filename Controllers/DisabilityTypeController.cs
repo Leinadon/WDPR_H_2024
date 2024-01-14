@@ -10,10 +10,14 @@ namespace WPR
     public class DisabilityTypeController : ControllerBase
     {
         private readonly IDisabilityTypeService _disabilityTypeService;
+        private readonly IUserService _userService;
+        private readonly ILogger<DisabilityController> _logger;        
 
-        public DisabilityTypeController(IDisabilityTypeService disabilityTypeService)
+        public DisabilityTypeController(IDisabilityTypeService disabilityTypeService, IUserService userService, ILogger<DisabilityController> logger)
         {
             _disabilityTypeService = disabilityTypeService;
+            _userService = userService;
+            _logger = logger;
         }
 
         // GET: api/disabilitytypes
@@ -27,6 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities_types, GET: api/chats");                
                 return Problem("Problem retrieving all instances of a DisabilityType object"); // Logging
             }
         }
@@ -46,6 +51,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities_types, GET: api/chats");   
                 return Problem("Problem retrieving a DisabilityType object"); // Logging  
             }
         }
@@ -65,6 +71,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities_types, GET: api/chats");   
                 return Problem("Problem posting a DisabilityType object"); // Logging
             }
         }
@@ -89,6 +96,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities_types, GET: api/chats");   
                 return Problem("Problem updating a DisabilityType object"); // Logging
             }
         }

@@ -10,10 +10,14 @@ namespace WPR
     public class DoesResearchController : ControllerBase
     {
         private readonly IDoesResearchService _doesResearchService;
+        private readonly IUserService _userService;
+        private readonly ILogger<DoesResearchController> _logger;
 
-        public DoesResearchController(IDoesResearchService doesResearchService)
+        public DoesResearchController(IDoesResearchService doesResearchService, IUserService userService, ILogger<DoesResearchController> logger)
         {
             _doesResearchService = doesResearchService;
+            _userService = userService;
+            _logger = logger;            
         }
 
         // GET: api/doesresearch
@@ -27,6 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van does_reasearch, GET: api/chats");
                 return Problem("Problem retrieving all instances of a DoesResearch object"); // Logging
             }
         }
@@ -46,6 +51,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van does_reasearch, GET: api/chats");
                 return Problem("Problem retrieving a DoesResearch object"); // Logging  
             }
         }
@@ -65,6 +71,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van does_reasearch, GET: api/chats");
                 return Problem("Problem posting a DoesResearch object"); // Logging
             }
         }
@@ -89,6 +96,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van does_reasearch, GET: api/chats");
                 return Problem("Problem updating a DoesResearch object"); // Logging
             }
         }

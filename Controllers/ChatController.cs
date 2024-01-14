@@ -55,6 +55,7 @@ namespace WPR
                     return NotFound();
                 }
             }catch(Exception ex){
+                _logger.LogError(ex,"Fout bij het ophalen van chats, GET: api/chats");
                 return Problem("Probleem bij het opvragen van alle chats van een User");
             }
             
@@ -72,6 +73,7 @@ namespace WPR
                     return NotFound();
                 }
             }catch(Exception ex){
+                _logger.LogError(ex,"Fout bij het ophalen van chats, GET: api/chats");
                 return Problem("Probleem bij het opvragen van een chat");
             }
         }
@@ -93,6 +95,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex,"Fout bij het ophalen van chats, GET: api/chats");
                 return Problem("Problem posting a Company object"); // Logging
             }
         }

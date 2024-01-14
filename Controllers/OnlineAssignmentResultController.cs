@@ -10,10 +10,14 @@ namespace WPR
     public class OnlineAssignmentResultController : ControllerBase
     {
         private readonly IOnlineAssignmentResultService _onlineAssignmentResultService;
+        private readonly IUserService _userService;
+        private readonly ILogger<OnlineAssignmentResultController> _logger;        
 
-        public OnlineAssignmentResultController(IOnlineAssignmentResultService onlineAssignmentResultService)
+        public OnlineAssignmentResultController(IOnlineAssignmentResultService onlineAssignmentResultService, IUserService userService, ILogger<OnlineAssignmentResultController> logger)
         {
             _onlineAssignmentResultService = onlineAssignmentResultService;
+            _userService = userService;
+            _logger = logger;
         }
 
         // GET: api/onlineassignmentresults
@@ -27,6 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van online_assingnment_results, GET: api/chats");
                 return Problem("Problem retrieving all instances of an OnlineAssignmentResult object"); // Logging
             }
         }
@@ -46,6 +51,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van online_assingnment_results, GET: api/chats");
                 return Problem("Problem retrieving an OnlineAssignmentResult object"); // Logging  
             }
         }
@@ -65,6 +71,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van online_assingnment_results, GET: api/chats");
                 return Problem("Problem posting an OnlineAssignmentResult object"); // Logging
             }
         }
@@ -89,6 +96,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van online_assingnment_results, GET: api/chats");
                 return Problem("Problem updating an OnlineAssignmentResult object"); // Logging
             }
         }

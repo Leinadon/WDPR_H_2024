@@ -11,11 +11,17 @@ namespace WPR
     {
         private readonly ICompanyService _companyService;
 
-        public CompanyController(ICompanyService companyService)
+        private readonly IUserService _userService;
+
+        private readonly ILogger<CompanyController> _logger;
+
+        public CompanyController(ICompanyService companyService, IUserService userService, ILogger<CompanyController> logger)
         {
             _companyService = companyService;
+            _userService = userService;
+            _logger = logger;
         }
-
+ 
         // GET: api/companies
         [HttpGet]
         public async Task<ActionResult<List<Company>>> Get()
@@ -27,6 +33,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van companies, Get: api/chats");
                 return Problem("Problem retrieving all instances of a Company object"); // Logging
             }
         }
@@ -46,6 +53,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van companies, Get: api/chats");
                 return Problem("Problem retrieving a Company object"); // Logging  
             }
         }
@@ -65,6 +73,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van companies, Get: api/chats");
                 return Problem("Problem posting a Company object"); // Logging
             }
         }
@@ -89,6 +98,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van companies, Get: api/chats");
                 return Problem("Problem updating a Company object"); // Logging
             }
         }

@@ -10,10 +10,14 @@ namespace WPR
     public class GuardianController : ControllerBase
     {
         private readonly IGuardianService _guardianService;
+        private readonly IUserService _userService;
+        private readonly ILogger<GuardianController> _logger;        
 
-        public GuardianController(IGuardianService guardianService)
+        public GuardianController(IGuardianService guardianService, IUserService userService, ILogger<GuardianController> logger)
         {
             _guardianService = guardianService;
+            _userService = userService;
+            _logger = logger;            
         }
 
         // GET: api/guardians
@@ -27,6 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van guardians, GET: api/chats");
                 return Problem("Probleem bij het opvragen van alle instanties van een Guardian object"); //Loggen
             }
         }
@@ -46,6 +51,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van chats, GET: api/chats");
                 return Problem("Probleem bij het opvragen van een Guardian object"); //Dit moeten we loggen  
             }
         }
@@ -65,6 +71,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van chats, GET: api/chats");
                 return Problem("Probleem bij het posten van een Guardian object"); //loggen
             }
         }
@@ -89,6 +96,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van chats, GET: api/chats");
                 return Problem("Probleem bij het updaten van een Guardian object"); //loggen
             }
         }

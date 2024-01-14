@@ -11,9 +11,14 @@ namespace WPR
     {
         private readonly IDisabilityService _disabilityService;
 
-        public DisabilityController(IDisabilityService disabilityService)
+        private readonly IUserService _userService;
+        private readonly ILogger<DisabilityController> _logger;
+
+        public DisabilityController(IDisabilityService disabilityService, IUserService userService, ILogger<DisabilityController> logger)
         {
             _disabilityService = disabilityService;
+            _userService = userService;
+            _logger = logger;
         }
 
         // GET: api/disabilities
@@ -27,6 +32,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities, GET: api/chats");                
                 return Problem("Probleem bij het opvragen van alle instanties van een Disability object"); // Loggen
             }
         }
@@ -47,6 +53,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities, GET: api/chats");                     
                 return Problem("Probleem bij het opvragen van een Disability object"); // Dit moeten we loggen  
             }
         }
@@ -66,6 +73,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities, GET: api/chats");                     
                 return Problem("Probleem bij het posten van een Disability object"); // Loggen
             }
         }
@@ -90,6 +98,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van disabillities, GET: api/chats");                     
                 return Problem("Probleem bij het updaten van een Disability object"); // Loggen
             }
         }

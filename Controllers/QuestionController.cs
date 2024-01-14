@@ -10,10 +10,14 @@ namespace WPR
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionService _questionService;
+        private readonly IUserService _userService;
+        private readonly ILogger<QuestionController> _logger;
 
-        public QuestionController(IQuestionService questionService)
+        public QuestionController(IQuestionService questionService, IUserService userService, ILogger<QuestionController> logger)
         {
             _questionService = questionService;
+            _userService = userService;
+            _logger = logger;
         }
 
         // GET: api/questions
@@ -27,6 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van action_results, GET: api/chats");                
                 return Problem("Problem retrieving all instances of a Question object"); // Logging
             }
         }
@@ -46,6 +51,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van action_results, GET: api/chats");
                 return Problem("Problem retrieving a Question object"); // Logging  
             }
         }
@@ -65,6 +71,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van action_results, GET: api/chats");
                 return Problem("Problem posting a Question object"); // Logging
             }
         }
@@ -89,6 +96,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van action_results, GET: api/chats");
                 return Problem("Problem updating a Question object"); // Logging
             }
         }

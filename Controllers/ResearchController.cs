@@ -10,10 +10,15 @@ namespace WPR
     public class ResearchController : ControllerBase
     {
         private readonly IResearchService _researchService;
+        
+        private readonly IUserService _userService;
+        private readonly ILogger<ResearchController> _logger;
 
-        public ResearchController(IResearchService researchService)
+        public ResearchController(IResearchService researchService, IUserService userService, ILogger<ResearchController> logger)
         {
             _researchService = researchService;
+            _userService = userService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -26,6 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het opvragen van alle onderzoeken");
             }
         }
@@ -44,6 +50,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het opvragen van een onderzoek");
             }
         }
@@ -58,6 +65,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het verwijderen van een onderzoek");
             }
         }
@@ -77,6 +85,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het toevoegen van een vragenlijst");
             }
         }
@@ -95,6 +104,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het opvragen van een vragenlijst");
             }
         }
@@ -114,6 +124,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het bijwerken van een vragenlijst");
             }
         }
@@ -128,6 +139,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het verwijderen van een vragenlijst");
             }
         }
@@ -146,6 +158,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het toevoegen van een online opdracht");
             }
         }
@@ -164,6 +177,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het opvragen van een online opdracht");
             }
         }
@@ -183,6 +197,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het bijwerken van een online opdracht");
             }
         }
@@ -197,6 +212,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het verwijderen van een online opdracht");
             }
         }
@@ -216,6 +232,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het toevoegen van een interview");
             }
         }
@@ -234,6 +251,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het opvragen van een interview");
             }
         }
@@ -253,6 +271,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het bijwerken van een interview");
             }
         }
@@ -267,6 +286,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het verwijderen van een interview");
             }
         }

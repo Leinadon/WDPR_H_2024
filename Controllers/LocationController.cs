@@ -11,8 +11,13 @@ namespace WPR
     public class LocationController : ControllerBase
     {
         private readonly ILocationService _locationService;
-        public LocationController(ILocationService locationService){
+        private readonly IUserService _userService;
+        private readonly ILogger<LocationController> _logger;
+        public LocationController(ILocationService locationService, IUserService userService, ILogger<LocationController> logger)
+        {
             _locationService = locationService;
+            _userService = userService;
+            _logger = logger;
         }
         // GET: api/locations
         [HttpGet]
@@ -22,6 +27,7 @@ namespace WPR
                 List<Location> locations = await _locationService.Get();
                 return Ok(locations);
             }catch (Exception ex){
+                _logger.LogError(ex, "Fout bij het ophalen van locations, GET: api/chats");
                 return Problem("Probleem bij het opvragen van alle intanties van een object"); //Loggen
             }
         }
@@ -36,6 +42,7 @@ namespace WPR
                 }
                 return Ok(location);
             }catch(Exception ex){
+                _logger.LogError(ex, "Fout bij het ophalen van locations, GET: api/chats");
                 return Problem("Probleem bij het opvragen van een object"); //Dit moeten we loggen  
             }
         }
@@ -51,6 +58,7 @@ namespace WPR
                 return CreatedAtRoute("Get", new {id = location.Id}, await _locationService.Create(location));
 
             }catch(Exception ex){
+                _logger.LogError(ex, "Fout bij het ophalen van locations, GET: api/chats");
                 return Problem("Probleem bij het posten van een object"); //loggen
             }
         }
@@ -68,6 +76,7 @@ namespace WPR
                 await _locationService.Update(id, location);
                 return NoContent(); //return 204
             }catch(Exception ex){
+                _logger.LogError(ex, "Fout bij het ophalen van locations, GET: api/chats");
                 return Problem("Probleem bij het updaten van een object"); //loggen
             }
         }
