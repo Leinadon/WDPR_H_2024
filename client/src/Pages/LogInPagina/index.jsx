@@ -10,7 +10,7 @@ const LogInPaginaPage = () => {
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-inter items-center justify-start mx-auto p-9 sm:px-5 w-full">
-        <div className="flex flex-col gap-[41px] items-center justify-start max-w-[1368px] mb-[79px] mt-2 mx-auto md:px-5 w-full">
+        <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
           <div className="flex flex-col items-center justify-start w-full">
             <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
               <Text
@@ -95,7 +95,7 @@ const LogInPaginaPage = () => {
             </div>
             <Button
               className="common-pointer cursor-pointer font-black font-inter h-14 leading-[normal] mt-[57px] text-center text-xl w-[456px]"
-              onClick={() => navigate("/loginpagina")}
+              onClick={() => navigate("/menupagina  ")}
               shape="round"
               color="teal_400"
               size="lg"
