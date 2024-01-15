@@ -10,6 +10,7 @@ namespace WPR
         Task<OurChat?> GetByUserId(int id);
         Task<OurChat> Create(OurChat ourChat);
         Task AddMessage(OurChatMessage ourChatMessage, int ChatId);
+        Task<List<OurChatMessage>> GetChatMessagesByChat(int id);
     }
 
     public class ChatRepository : IChatRepository
@@ -99,6 +100,11 @@ namespace WPR
 
             }
 
+        }
+        public async Task<List<OurChatMessage>> GetChatMessagesByChat(int id){
+            return await _dbContext.OurChatMessages
+                .Where(c => c.OurChatID == id)
+                .ToListAsync();
         }
     }
 }

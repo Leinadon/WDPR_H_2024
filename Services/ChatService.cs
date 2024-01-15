@@ -7,6 +7,7 @@ public interface IChatService
     Task<OurChat?> GetById(int id);
     Task<OurChat> Create(OurChat ourChat);
     Task AddMessage(OurChatMessage ourChatMessage, int ChatId);
+    Task<List<OurChatMessage>> GetMessagesByChat(int id);
 }
 
 public class ChatService : IChatService
@@ -39,5 +40,8 @@ public class ChatService : IChatService
     public async Task AddMessage(OurChatMessage ourChatMessage, int ChatID)
     {
         await _chatRepository.AddMessage(ourChatMessage, ChatID);
+    }
+    public async Task<List<OurChatMessage>> GetMessagesByChat(int id){
+        return await _chatRepository.GetChatMessagesByChat(id);
     }
 }
