@@ -62,7 +62,7 @@ jobs:
         with:
           app-name: 'wdp2'
           slot-name: 'Production'
-          package: .
+          package: ./WDPR_H_2024/build
 
       - name: Run npm build for React app
         run: |
