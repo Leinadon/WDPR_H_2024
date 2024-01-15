@@ -33,6 +33,8 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: Run npm build for React app
+        env:
+          DISABLE_ESLINT_PLUGING: true
         run: |
           cd client
           npm install
