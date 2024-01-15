@@ -6,7 +6,7 @@ function Menu() {
   return (
     <div className="index">
       <div className="MenuPagina" style={{ width: 1920, height: 1080, position: 'relative', background: '#102C57'}}>
-        <div className="Frame43" style={{ width: 154.67, height: 110.09, padding: 10, left: 1701.33, top: 49.54, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex' }}>
+        <div className="Frame43" style={{ width: 154.67, height: 110.09, padding: 10, left: 1101.33, top: 49.54, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex' }}>
           <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png" />
         </div>
         <div className="Frame4" style={{ width: 486.19, height: 61.65, padding: 10, left: 717, top: 303.85, position: 'absolute', background: '#1CA883', borderRadius: 27, justifyContent: 'center', alignItems: 'center', gap: 10, display: 'inline-flex' }}>

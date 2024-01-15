@@ -14,18 +14,14 @@ const SignUpPaginaPage = () => {
           <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-start w-full">
             <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-left justify-start p-2.5 w-[460px] sm:w-full">
               <Text
-                className="md:text-5xl text-6xl text-teal-400"
+                className="md:text-5xl text-6xl text-teal-400 items-left"
                 size="txtJockeyOneRegular60"
               >
                 Sign Up
               </Text>
             </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
-              <Img
-                className="md:h-auto h-full object-cover w-full"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
-              />
+            <div className="Frame43" style={{ width: 100.67, height: 110.09, padding: 10, left: 960.33, top: 24, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex' }}>
+                <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png" />
             </div>
           </div>
           <Text
@@ -120,12 +116,12 @@ const SignUpPaginaPage = () => {
               shape="round"
             ></Input>
             <Text
-              className="ml-2.5 md:ml-[] mt-7 text-left text-white-A700 text-xl"
+              className="ml-2.5 md:ml-[] mt-6 text-left text-white-A700 text-xl"
               size="txtInterBlack20"
             >
               Type Beperking
             </Text>
-            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[41px] w-[24%] md:w-full">
+            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[16px] w-[24%] md:w-full">
               <CheckBox
                 className="my-0.5"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
@@ -202,7 +198,7 @@ const SignUpPaginaPage = () => {
               Voogd
             </Text>
             <Button
-              className="cursor-pointer font-black h-[54px] leading-[normal] ml-2.5 md:ml-[0] mr-0.5 mt-[13px] text-center text-xl underline w-[600px]"
+              className="cursor-pointer font-black h-[54px] leading-[normal] ml-2.5 md:ml-[0] mr-0.5 mt-[0] text-center text-xl underline w-[600px]"
               shape="round"
               color="teal_400"
               variant="fill"
@@ -219,7 +215,7 @@ const SignUpPaginaPage = () => {
               name="rectangleEleven"
               placeholder=""
               className="p-0 w-full"
-              wrapClassName="flex h-[54px] ml-3 md:ml-[0] mt-[17px] w-[100%]"
+              wrapClassName="flex h-[54px] ml-6 md:ml-[0] mt-[0] w-[100%]"
               shape="round"
             ></Input>
             <Button

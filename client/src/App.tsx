@@ -11,7 +11,7 @@ import PageNonExist from "./Pages/PageNonExist"
 import HomePage from "./Pages/HomePagina";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUpPagina";
-import DeskunidgeProfiel from "./Pages/PortalDeskundige/Profiel_Deskundige";
+import DeskundigeProfiel from "./Pages/PortalDeskundige/Profiel_Deskundige";
 import HomePaginaPage from './Pages/HomePagina';
 
 
@@ -22,7 +22,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="profiel" element={<DeskunidgeProfiel />} />
+          <Route path="profiel" element={<DeskundigeProfiel />} />
           <Route path="menu" element={<Menu />} />
           <Route path="*" element={<PageNonExist />} />
         

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, RefAttributes } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -24,12 +24,8 @@ const LogInPaginaPage = () => {
                 Log In
               </Text> 
             </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-start justify-start p-2.5 w-[116px]">
-              <Img
-                className="h-[79px] md:h-auto object-cover w-24 sm:w-full"
-                src="images/img_reshotillustra.png"
-                alt="Logo van Stichting Accessibility"
-              />
+            <div className="Frame43" style={{ width: 100.67, height: 110.09, padding: 10, left: 960.33, top: 24, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex' }}>
+                <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png" />
             </div>
           </div>
           <div className="flex flex-col gap-[17px] h-[119px] md:h-auto item-left justify-center md:ml-[0] ml-[441.8px] mt-[42px] w-[425px] sm:w-full">
@@ -64,13 +60,7 @@ const LogInPaginaPage = () => {
                   </Text>
                 </div>
               </div>
-            <Input
-              name="rectangleSix_One"
-              placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 w-full"
-              wrapClassName="h-[54px] ml-3 md:ml-[0] mr-0.5 mt-[17px] rounded-[27px] w-[100%]"
-              shape="round"
-               ></Input>
+           
               <div className="h-[117px] my-0 relative w-full">
                 <div className="flex flex-col h-11 md:h-auto items-left justify-start mb-[-0.36px] ml-[0] mr-[26.2px] p-2.5 w-[434px] sm:w-full z-[1]">
                   <Text
