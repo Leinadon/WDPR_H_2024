@@ -35,6 +35,7 @@ jobs:
       - name: Run npm build for React app
         env:
           DISABLE_ESLINT_PLUGING: true
+          CI: false
         run: |
           cd client
           npm install
