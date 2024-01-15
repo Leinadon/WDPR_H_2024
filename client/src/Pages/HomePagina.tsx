@@ -20,11 +20,11 @@ const HomePaginaPage = () => {
             Accessibility
           </Text>
         </div>
-        <div className="flex flex-col h-[269px] md:h-auto items-center justify-center max-w-[836px] mt-7 p-2.5 w-full">
+        <div className="flex flex-col h-[269px] md:h-auto items-center justify-center max-w-[250px] mt-7 p-2.5 w-full">
           <Img
             className="md:h-auto h-full object-cover w-full"
-            src="images/logo_accessibility.png"
-            alt="Het logo van stichting Accessibility"
+            src="images\img_logo.png"
+            alt="Accesibility logo"
           />
         </div>
         <div className="flex flex-col font-jockeyone h-[70px] md:h-auto items-center justify-center max-w-[1336px] mt-7 mx-auto py-2.5 w-full">

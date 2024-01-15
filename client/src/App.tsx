@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // import './App.css';
 
 import Contact from "./Pages/Contact";
-
 import Menu from "./Pages/Menu";
 import PageNonExist from "./Pages/PageNonExist"
 
