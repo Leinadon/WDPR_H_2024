@@ -1,0 +1,150 @@
+:root {
+    --black: rgba(10, 41, 66, 1);
+    --body-font-family: "Inter-Regular", Helvetica;
+    --body-font-size: 16px;
+    --body-font-style: normal;
+    --body-font-weight: 400;
+    --body-letter-spacing: 0px;
+    --body-line-height: 24px;
+    --display-font-family: "Inter-Black", Helvetica;
+    --display-font-size: 48px;
+    --display-font-style: normal;
+    --display-font-weight: 900;
+    --display-letter-spacing: 0px;
+    --display-line-height: 72px;
+    --graydefault: rgba(99, 107, 120, 1);
+    --graylight: rgba(161, 166, 173, 1);
+    --graylighter: rgba(209, 212, 214, 1);
+    --headline-font-family: "Inter-ExtraBold", Helvetica;
+    --headline-font-size: 32px;
+    --headline-font-style: normal;
+    --headline-font-weight: 800;
+    --headline-letter-spacing: 0px;
+    --headline-line-height: 48px;
+    --primary: rgba(23, 161, 250, 1);
+    --secondary: rgba(122, 97, 255, 1);
+    --small-font-family: "Inter-Regular", Helvetica;
+    --small-font-size: 14px;
+    --small-font-style: normal;
+    --small-font-weight: 400;
+    --small-letter-spacing: 0px;
+    --small-line-height: 24px;
+    --tertiary: rgba(255, 0, 255, 1);
+    --title-font-family: "Inter-Bold", Helvetica;
+    --title-font-size: 24px;
+    --title-font-style: normal;
+    --title-font-weight: 700;
+    --title-letter-spacing: 0px;
+    --title-line-height: 36px;
+  }
+  .chat-pagina {
+    background-color: #102c57;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .chat-pagina .div {
+    background-color: #102c57;
+    height: 932px;
+    position: relative;
+    width: 1440px;
+  }
+  
+  .chat-pagina .frame {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 104px;
+    left: 60px;
+    padding: 10px;
+    position: absolute;
+    top: 45px;
+    width: 460px;
+  }
+  
+  .chat-pagina .text-wrapper {
+    color: #1ca883;
+    font-family: "Jockey One-Regular", Helvetica;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: static;
+    width: fit-content;
+  }
+  
+  .chat-pagina .reshot-illustration-wrapper {
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    height: 100px;
+    left: 1276px;
+    padding: 10px;
+    position: absolute;
+    top: 45px;
+    width: 116px;
+  }
+  
+  .chat-pagina .reshot-illustration {
+    align-self: stretch;
+    flex: 1;
+    flex-grow: 1;
+    position: relative;
+  }
+  
+  .chat-pagina .overlap-group {
+    background-color: #f8f0e5;
+    border-radius: 27px;
+    height: 600px;
+    left: 477px;
+    position: absolute;
+    top: 166px;
+    width: 486px;
+  }
+  
+  .chat-pagina .line {
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 133px;
+    width: 486px;
+  }
+  
+  .chat-pagina .overlap {
+    background-color: #f8f0e5;
+    border: 3px solid;
+    border-color: #000000;
+    border-radius: 27px;
+    height: 54px;
+    left: 21px;
+    position: absolute;
+    top: 21px;
+    width: 446px;
+  }
+  
+  .chat-pagina .text-wrapper-2 {
+    color: #979898;
+    font-family: "Jockey One-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    left: 14px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 9px;
+    width: 243px;
+  }
+  
+  .chat-pagina .image {
+    height: 30px;
+    left: 394px;
+    object-fit: cover;
+    position: absolute;
+    top: 9px;
+    width: 30px;
+  }
+  
+  

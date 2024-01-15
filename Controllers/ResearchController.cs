@@ -21,7 +21,7 @@ namespace WPR
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("researches")]
         public async Task<IActionResult> GetResearches()
         {
             try
@@ -31,7 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/research/researches");
                 return Problem("Probleem bij het opvragen van alle onderzoeken");
             }
         }
@@ -50,12 +50,12 @@ namespace WPR
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/research/id");
                 return Problem("Probleem bij het opvragen van een onderzoek");
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteResearch(int id)
         {
             try
@@ -65,7 +65,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
+                _logger.LogError(ex, "Fout bij het ophalen van research_controller, Delete: api/research/delete/id");
                 return Problem("Probleem bij het verwijderen van een onderzoek");
             }
         }
@@ -90,7 +90,7 @@ namespace WPR
             }
         }
 
-        [HttpGet("{id}/questionnaire")]
+        [HttpGet("questionnaire/{id}")]
         public async Task<ActionResult<Questionnaire>> GetQuestionnaire(int id)
         {
             try
