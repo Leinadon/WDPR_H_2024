@@ -69,13 +69,13 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E38FDB7A3803481FBA2E3C1354B94A93 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3249F67A12FA4A319183C45FFDD72775 }}
 
-      # - name: Deploy to Azure Web App
-      #   id: deploy-to-webapp
-      #   uses: azure/webapps-deploy@v2
-      #   with:
-      #     app-name: 'wdp2'
-      #     slot-name: 'Production'
-      #     package: ./web-app
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'wdp2'
+          slot-name: 'Production'
+          package: ./web-app
 
       - name: Run npm build for React app
         run: |
