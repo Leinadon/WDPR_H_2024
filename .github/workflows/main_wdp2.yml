@@ -64,8 +64,8 @@ jobs:
           slot-name: 'Production'
           package: .
 
-      - name: Run npm start for React app
+      - name: Run npm build for React app
         run: |
           cd client
           npm install
-          npm run start
+          npm run build
