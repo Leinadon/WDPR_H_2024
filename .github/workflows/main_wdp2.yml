@@ -19,6 +19,10 @@ jobs:
       - name: Ensure That Output Directory Exists
         run: mkdir -p ./web-app
   
+      - name: List Contents of Deployment Path
+        run: ls -R ./web-app
+
+        
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -37,10 +41,12 @@ jobs:
         with:
           name: .net-app
           # path: ${{env.DOTNET_ROOT}}/myapp
-          path: ./web-app
+          path: web-app
+
       
       - name: List Contents of Deployment Path
-        run: ls -R ./
+        run: ls -R ./web-app
+        
 
   deploy:
     runs-on: ubuntu-latest
@@ -56,7 +62,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      
+        
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -70,10 +76,10 @@ jobs:
         with:
           app-name: 'wdp2'
           slot-name: 'Production'
-          package: ./WDPR_H_2024
+          package: .
 
-      # - name: Run npm build for React app
-      #   run: |
-      #     cd client
-      #     npm install
-      #     npm run build
+      - name: Run npm build for React app
+        run: |
+          cd client
+          npm install
+          npm run build
