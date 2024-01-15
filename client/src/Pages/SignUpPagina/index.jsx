@@ -10,7 +10,7 @@ const SignUpPaginaPage = () => {
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
-        <div className="flex flex-col justify-start max-w-[600px] mb-[108px] mx-auto w-full">
+        <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
           <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-start w-full">
             <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-left justify-start p-2.5 w-[460px] sm:w-full">
               <Text
