@@ -1,53 +1,53 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NotFound from "Pages/NotFound";
+import NotFound from "pages/NotFound";
 const ProfielBeheerderPagina = React.lazy(
-  () => import("Pages/ProfielBeheerderPagina"),
+  () => import("pages/ProfielBeheerderPagina"),
 );
 const ProfielPaginaBeheerder = React.lazy(
-  () => import("Pages/ProfielPaginaBeheerder"),
+  () => import("pages/ProfielPaginaBeheerder"),
 );
 const MenuBeheerderPagina = React.lazy(
-  () => import("Pages/MenuBeheerderPagina"),
+  () => import("pages/MenuBeheerderPagina"),
 );
 const ChatBedrijfErvaringsdeskundigePagina = React.lazy(
-  () => import("Pages/ChatBedrijfErvaringsdeskundigePagina"),
+  () => import("pages/ChatBedrijfErvaringsdeskundigePagina"),
 );
 const ChatsBedrijfErvaringsdeskundigePagina = React.lazy(
-  () => import("Pages/ChatsBedrijfErvaringsdeskundigePagina"),
+  () => import("pages/ChatsBedrijfErvaringsdeskundigePagina"),
 );
 const OnderzoekResultatenBedrijfPagina = React.lazy(
-  () => import("Pages/OnderzoekResultatenBedrijfPagina"),
+  () => import("pages/OnderzoekResultatenBedrijfPagina"),
 );
 const ProfielBedrijfPagina = React.lazy(
-  () => import("Pages/ProfielBedrijfPagina"),
+  () => import("pages/ProfielBedrijfPagina"),
 );
 const OnderzoekPlaatsenBedrijfPagina = React.lazy(
-  () => import("Pages/OnderzoekPlaatsenBedrijfPagina"),
+  () => import("pages/OnderzoekPlaatsenBedrijfPagina"),
 );
 const ProfielPaginaBedrijven = React.lazy(
-  () => import("Pages/ProfielPaginaBedrijven"),
+  () => import("pages/ProfielPaginaBedrijven"),
 );
-const BedrijfMenuPagina = React.lazy(() => import("Pages/BedrijfMenuPagina"));
+const BedrijfMenuPagina = React.lazy(() => import("pages/BedrijfMenuPagina"));
 const ChatErvaringsdeskundigeBedrijfPagina = React.lazy(
-  () => import("Pages/ChatErvaringsdeskundigeBedrijfPagina"),
+  () => import("pages/ChatErvaringsdeskundigeBedrijfPagina"),
 );
-const ChatPagina = React.lazy(() => import("Pages/ChatPagina"));
+const ChatPagina = React.lazy(() => import("pages/ChatPagina"));
 const OndersteuningPagina = React.lazy(
-  () => import("Pages/OndersteuningPagina"),
+  () => import("pages/OndersteuningPagina"),
 );
-const OnderzoekPagina = React.lazy(() => import("Pages/OnderzoekPagina"));
+const OnderzoekPagina = React.lazy(() => import("pages/OnderzoekPagina"));
 const OnderzoekDoenErvaringsdeskundigePagina = React.lazy(
-  () => import("Pages/OnderzoekDoenErvaringsdeskundigePagina"),
+  () => import("pages/OnderzoekDoenErvaringsdeskundigePagina"),
 );
 const ProfielErvaringsdeskundigePagina = React.lazy(
-  () => import("Pages/ProfielErvaringsdeskundigePagina"),
+  () => import("pages/ProfielErvaringsdeskundigePagina"),
 );
-const ProfielPagina = React.lazy(() => import("Pages/ProfielPagina"));
-const MenuPagina = React.lazy(() => import("Pages/MenuPagina"));
-const SignUpPagina = React.lazy(() => import("Pages/SignUpPagina"));
-const LogInPagina = React.lazy(() => import("Pages/LogInPagina"));
-const HomePagina = React.lazy(() => import("Pages/HomePagina"));
+const ProfielPagina = React.lazy(() => import("pages/ProfielPagina"));
+const MenuPagina = React.lazy(() => import("pages/MenuPagina"));
+const SignUpPagina = React.lazy(() => import("pages/SignUpPagina"));
+const LogInPagina = React.lazy(() => import("pages/LogInPagina"));
+const HomePagina = React.lazy(() => import("pages/HomePagina"));
 const ProjectRoutes = () => {
   return (
     <React.Suspense fallback={<>Loading...</>}>
