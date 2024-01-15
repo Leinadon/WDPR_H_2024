@@ -11,31 +11,27 @@ const SignUpPaginaPage = () => {
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
         <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
-          <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-between w-full">
-            <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-center justify-start p-2.5 w-[460px] sm:w-full">
+          <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-start w-full">
+            <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-left justify-start p-2.5 w-[460px] sm:w-full">
               <Text
-                className="md:text-5xl text-6xl text-teal-400"
+                className="md:text-5xl text-6xl text-teal-400 items-left"
                 size="txtJockeyOneRegular60"
               >
                 Sign Up
               </Text>
             </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
-              <Img
-                className="md:h-auto h-full object-cover w-full"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
-              />
+            <div className="Frame43" style={{ width: 100.67, height: 110.09, padding: 10, left: 960.33, top: 24, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex' }}>
+                <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png"  onClick={() => navigate("/")}/>
             </div>
           </div>
           <Text
-            className="md:ml-[0] ml-[437px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
+            className="md:ml-[8px] ml-[437px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
             size="txtJockeyOneRegular36"
           >
             Maak een Account!
           </Text>
           <div className="flex flex-col font-inter justify-start md:ml-[0] ml-[427px] mt-[35px] w-[36%] md:w-full">
-            <div className="flex flex-col h-11 md:h-auto items-center justify-start mr-3 p-2.5 w-[466px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 w-[466px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Voornaam
               </Text>
@@ -49,7 +45,7 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
             ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-center justify-start mr-3 mt-2.5 p-2.5 w-[466px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 mt-2.5 p-2.5 w-[466px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Achternaam
               </Text>
@@ -63,7 +59,7 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
             ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-center justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[464px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[464px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Geboortedatum
               </Text>
@@ -77,7 +73,7 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
             ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-center justify-start ml-0.5 md:ml-[0] mt-3.5 p-2.5 w-[464px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start ml-0.5 md:ml-[0] mt-3.5 p-2.5 w-[464px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Email
               </Text>
@@ -91,7 +87,7 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
             ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-center justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[464px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[464px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Telefoonnummer
               </Text>
@@ -99,13 +95,13 @@ const SignUpPaginaPage = () => {
             <Input
               name="rectanglefive"
               placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 w-full"
-              wrapClassName="h-[54px] ml-3 md:ml-[0] mt-1 rounded-[27px]"
+              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]" //wrapClassName="flex h-[54px] ml-6 md:ml-[0] mt-[0] w-[100%]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
             ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-center justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[454px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[454px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Postcode
               </Text>
@@ -113,13 +109,13 @@ const SignUpPaginaPage = () => {
             <Input
               name="rectanglesix"
               placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 w-full"
-              wrapClassName="h-[54px] ml-2.5 md:ml-[0] mr-0.5 mt-0.5 rounded-[27px]"
+              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+              wrapClassName="flex h-[54px] ml-2.5 md:ml-[0] mr-0.5 mt-0.5 rounded-[27px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
             ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-center justify-start ml-0.5 md:ml-[0] mt-4 p-2.5 w-[454px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[464px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Wachtwoord
               </Text>
@@ -128,18 +124,18 @@ const SignUpPaginaPage = () => {
               name="rectanglesixone"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 w-full"
-              wrapClassName="h-[54px] ml-3 md:ml-[0] mr-0.5 mt-[17px] rounded-[27px] w-[98%]"
+              wrapClassName="h-[54px] ml-3 md:ml-[0] mr-0.5 mt-[17px] rounded-[27px] w-[100%]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
             ></Input>
             <Text
-              className="ml-2.5 md:ml-[0] mt-7 text-center text-white-A700 text-xl"
+              className="ml-2.5 md:ml-[] mt-6 text-left text-white-A700 text-xl"
               size="txtInterBlack20"
             >
               Type Beperking
             </Text>
-            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[0] mt-[41px] w-[24%] md:w-full">
+            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[16px] w-[24%] md:w-full">
               <CheckBox
                 className="my-0.5"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
@@ -156,8 +152,13 @@ const SignUpPaginaPage = () => {
                 Fysiek
               </Text>
             </div>
-            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[0] mt-[23px] w-[33%] md:w-full">
-              <div className="bg-blue_gray-100 h-[19px] mb-[5px] rounded-[3px] w-5"></div>
+            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
+              <CheckBox
+                className="mb-1"
+                inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
+                name="rectangleFive_Three"
+                id="rectangleFive_Three"
+              ></CheckBox>
               <Text
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
@@ -165,7 +166,7 @@ const SignUpPaginaPage = () => {
                 Zintuigelijk
               </Text>
             </div>
-            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[0] mt-[22px] w-[29%] md:w-full">
+            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
               <CheckBox
                 className="mb-1"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
@@ -182,8 +183,13 @@ const SignUpPaginaPage = () => {
                 Cognitief
               </Text>
             </div>
-            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[0] mt-[23px] w-[38%] md:w-full">
-              <div className="bg-blue_gray-100 h-[21px] mb-[3px] rounded-[3px] w-5"></div>
+            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
+              <CheckBox
+                className="mb-1"
+                inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
+                name="rectangleFive_Three"
+                id="rectangleFive_Three"
+              ></CheckBox>
               <Text
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
@@ -191,7 +197,7 @@ const SignUpPaginaPage = () => {
                 Neurologisch
               </Text>
             </div>
-            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[0] mt-[25px] w-[37%] md:w-full">
+            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[25px] w-[37%] md:w-full">
               <CheckBox
                 className="mb-1"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
@@ -209,13 +215,13 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Text
-              className="ml-3 md:ml-[0] mt-[30px] text-center text-white-A700 text-xl"
+              className="ml-3 md:ml-[] mt-[30px] text-left text-white-A700 text-xl"
               size="txtInterBlack20"
             >
               Voogd
             </Text>
             <Button
-              className="cursor-pointer font-black h-[54px] leading-[normal] ml-2.5 md:ml-[0] mr-0.5 mt-[13px] text-center text-xl underline w-[466px]"
+              className="cursor-pointer font-black h-[54px] leading-[normal] ml-2.5 md:ml-[0] mr-0.5 mt-[0] text-center text-xl underline w-[600px]"
               shape="round"
               color="teal_400"
               size="lg"
@@ -224,7 +230,7 @@ const SignUpPaginaPage = () => {
               Ik heb geen Voogd
             </Button>
             <Text
-              className="ml-2.5 md:ml-[0] mt-[31px] text-center text-white-A700 text-xl"
+              className="ml-2.5 md:ml-[] mt-[31px] text-left text-white-A700 text-xl"
               size="txtInterBlack20"
             >
               Hulpmiddelen
@@ -233,13 +239,14 @@ const SignUpPaginaPage = () => {
               name="rectangleeleven"
               placeholder=""
               className="p-0 w-full"
-              wrapClassName="flex h-[54px] ml-3 md:ml-[0] mt-[17px] w-[98%]"
+              wrapClassName="flex h-[54px] ml-6 md:ml-[0] mt-[0] w-[100%]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
             ></Input>
             <Button
-              className="cursor-pointer font-black h-14 leading-[normal] ml-2.5 md:ml-[0] mr-0.5 mt-[113px] text-center text-xl w-[466px]"
+              className="cursor-pointer font-black h-14 leading-[normal] ml-2.5 md:ml-[0] mr-0.5 mt-[113px] text-center text-xl w-[600px]"
+              onClick={() => navigate("/menu")}
               shape="round"
               color="teal_400"
               size="lg"
@@ -248,8 +255,8 @@ const SignUpPaginaPage = () => {
               Sign Up
             </Button>
             <Button
-              className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] leading-[normal] ml-3 md:ml-[0] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] text-center text-white-A700 w-[454px]"
-              onClick={() => navigate("/loginpagina")}
+              className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] leading-[normal] ml-3 md:ml-[0] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] items-center text-center text-white-A700 w-[600px]"
+              onClick={() => navigate("/login")}
               size="xs"
             >
               Al een account? Log In
