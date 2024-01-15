@@ -72,8 +72,8 @@ jobs:
           slot-name: 'Production'
           package: ./web-app
 
-      - name: Run npm build for React app
-        run: |
-          cd client
-          npm install
-          npm run build
+      # - name: Run npm build for React app
+      #   run: |
+      #     cd client
+      #     npm install
+      #     npm run build
