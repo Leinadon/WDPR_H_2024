@@ -31,6 +31,12 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+
+      - name: Run npm build for React app
+        run: |
+          cd client
+          npm install
+          npm run build
   
       - name: dotnet publish
         run: dotnet publish -c Release -o ./web-app
@@ -77,9 +83,3 @@ jobs:
           app-name: 'wdp2'
           slot-name: 'Production'
           package: .
-
-      - name: Run npm build for React app
-        run: |
-          cd client
-          npm install
-          npm run build
