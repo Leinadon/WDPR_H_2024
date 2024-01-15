@@ -22,16 +22,14 @@ const Button = ({
   leftIcon,
   rightIcon,
   shape = "",
-  size = "lg",
+  size = "",
   variant = "",
   color = "",
   ...restProps
 }) => {
   return (
     <button
-      className={`${className} ${(shape && shapes[shape]) || ""} ${
-        (size && sizes[size]) || ""
-      } ${(variant && variants[variant]?.[color]) || ""}`}
+      className={`${className} ${(shape && shapes[shape]) || ""} ${(size && sizes[size]) || ""} ${(variant && variants[variant]?.[color]) || ""}`}
       {...restProps}
     >
       {!!leftIcon && leftIcon}
