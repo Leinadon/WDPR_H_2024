@@ -24,9 +24,13 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
-
+      
+      # - name: Print DOTNET_ROOT
+      #   run: echo "DOTNET_ROOT: ${{env.DOTNET_ROOT}}"
+  
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ./published-app
+        # run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
