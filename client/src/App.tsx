@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css';
+// import './App.css';
 
-import Home from "./Pages/Home";
-import SignUpOld from "./Pages/SignUp";
 import Contact from "./Pages/Contact";
 
 import Menu from "./Pages/Menu";
@@ -15,6 +13,7 @@ import HomePage from "./Pages/HomePagina";
 import Login from "./Pages/Login";
 import SignUp from "./Pages/SignUpPagina";
 import DeskunidgeProfiel from "./Pages/PortalDeskundige/Profiel_Deskundige";
+import OnderzoekPlaatsen from "./Pages/PortalBedrijf/OnderzoekPlaatsen";
 
 
 function App() {
@@ -27,10 +26,8 @@ function App() {
           <Route path="profiel" element={<DeskunidgeProfiel />} />
           <Route path="menu" element={<Menu />} />
           <Route path="*" element={<PageNonExist />} />
-
-          <Route path="homepage" element={<Home />} />
-          <Route path="signup_old" element={<SignUpOld />} />
-        
+          
+          <Route path="onderzoek_plaatsen" element={<OnderzoekPlaatsen />} />
       </Routes>
     </BrowserRouter>
   );
