@@ -10,7 +10,7 @@ namespace WPR
     public class Company
     {
         [Key]
-        public int CompanyId { get; private set; }
+        public int CompanyId { get; set; }
 
         [Required] [StringLength(64, MinimumLength =2)]
         public string Name { get; set; }
@@ -18,17 +18,23 @@ namespace WPR
         [Required] [StringLength(64, MinimumLength =2)]
         public string Sector { get; set; }
 
-        public Location Location { get; set; }
+        public Location? Location { get; set; }
         [StringLength(1024, MinimumLength =5)]
         public string WebsiteURL { get; set; }
         [Required] [StringLength(320, MinimumLength =5)]
         public string ContactEmail { get; set; }
         
         public string TrackingID { get; set; }
-
-        public ICollection<Employee> Employees { get; } = new List<Employee>();
-
-        public ICollection<Research> Researches { get; } = new List<Research>();
-        public Company(){}
+        
+        public List<Employee>? Employees { get; }
+        
+        public List<Research>? Researches { get; }
+        public Company(){
+            Name = string.Empty;
+            WebsiteURL = string.Empty;
+            ContactEmail = string.Empty;
+            TrackingID = string.Empty;
+            Sector = string.Empty;
+        }
     }
 }

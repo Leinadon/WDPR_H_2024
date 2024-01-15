@@ -1,17 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace WPR
 {
     public interface ICompanyRepository
     {
         Task<List<Company>> Get();
-        Task<Company> GetById(int id);
+        Task<Company?> GetByID(int id);
         Task<Company> Create(Company company);
         Task Update(int id, Company company);
         Task Delete(int id);
     }
 
-    public class CompanyRepository: ICompanyRepository
+    public class CompanyRepository : ICompanyRepository
     {
         private readonly WPRDbContext _dbContext;
 
@@ -25,9 +27,9 @@ namespace WPR
             return await _dbContext.Companies.ToListAsync();
         }
 
-        public async Task<Company> GetById(int id)
+        public async Task<Company?> GetByID(int id)
         {
-            return await _dbContext.Companies.FirstAsync(c => c.CompanyId == id);
+            return await _dbContext.Companies.FirstOrDefaultAsync(c => c.CompanyId == id);
         }
 
         public async Task<Company> Create(Company company)
@@ -37,20 +39,28 @@ namespace WPR
             return company;
         }
 
-        public async Task Update(int id, Company company)
-        {
-            _dbContext.Update(company);
-            await _dbContext.SaveChangesAsync();
-        }
-
         public async Task Delete(int id)
         {
-            Company company = await _dbContext.Companies.FirstAsync(c => c.CompanyId == id);
+            Company? company = await _dbContext.Companies.FirstOrDefaultAsync(c => c.CompanyId == id);
+            if (company != null)
+            {
+                _dbContext.Companies.Remove(company);
+                await _dbContext.SaveChangesAsync();
+            }
+        }
 
-            // TODO
-
-            _dbContext.Companies.Remove(company);
-            await _dbContext.SaveChangesAsync();
+        public async Task Update(int id, Company company)
+        {
+            Company? oldCompany = await _dbContext.Companies.FindAsync(id);
+            if (oldCompany != null)
+            {
+                oldCompany.Name = company.Name; // Update other properties as needed
+                await _dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException($"Company with ID {id} not found for update.");
+            }
         }
     }
 }

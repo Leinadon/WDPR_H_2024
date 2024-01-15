@@ -8,6 +8,7 @@ import Menu from "./Pages/Menu";
 import PageNonExist from "./Pages/PageNonExist"
 
 // Figma pages
+import ChatsOfUserContainer from "./Pages/ChatsOfUserContainer";
 import HomePage from "./Pages/HomePagina";
 import Login from "./Pages/Login.jsx";
 import SignUp from "./Pages/SignUpPagina.jsx";
@@ -15,7 +16,6 @@ import DeskundigeProfiel from "./Pages/PortalDeskundige/Profiel_Deskundige";
 import HomePaginaPage from './Pages/HomePagina';
 
 import DeskunidgeProfiel from "./Pages/PortalDeskundige/Profiel_Deskundige";
-import OnderzoekPlaatsen from "./Pages/PortalBedrijf/OnderzoekPlaatsen";
 
 
 
@@ -24,13 +24,13 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route index element={<HomePage />} />
+          <Route path="ChatsOfUser/:id" element={<ChatsOfUserContainer />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="profiel" element={<DeskundigeProfiel />} />
           <Route path="menu" element={<Menu />} />
           <Route path="*" element={<PageNonExist />} />
-          
-          <Route path="onderzoek_plaatsen" element={<OnderzoekPlaatsen />} />
+        
       </Routes>
     </BrowserRouter>
   );

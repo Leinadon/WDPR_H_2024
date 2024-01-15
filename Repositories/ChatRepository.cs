@@ -4,10 +4,13 @@ namespace WPR
 {
     public interface IChatRepository
     {
-        Task<List<Chat>> Get(User user);
-        Task<Chat?> GetById(int id, User user);
-        Task<Chat> Create(List<User> users);
-        Task AddMessage(int id, string text, User sender);
+        Task<List<OurChat>> GetAllFromUser(string user);
+        Task<List<OurChat>> GetAll();
+        Task<OurChat?> GetById(int id);
+        Task<OurChat?> GetByUserId(int id);
+        Task<OurChat> Create(OurChat ourChat);
+        Task AddMessage(OurChatMessage ourChatMessage, int ChatId);
+        Task<List<OurChatMessage>> GetChatMessagesByChat(int id);
     }
 
     public class ChatRepository : IChatRepository
@@ -17,49 +20,91 @@ namespace WPR
         public ChatRepository(WPRDbContext dbContext)
         {
             this._dbContext = dbContext;
+            
         }
-
-        public async Task<List<Chat>> Get(User user)
+        
+        public async Task<List<OurChat>> GetAll()
         {
-            return await _dbContext.Chats
-                //.Where(c => c.Users.Any(u => u.UserId == user.UserId))
+            return await _dbContext.OurChats
                 .ToListAsync();
         }
 
-        public async Task<Chat?> GetById(int id, User user)
+        /// <summary>
+        /// Haalt een lijst met alle chats van een gebruiker op uit de db
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<List<OurChat>> GetAllFromUser(string userId)
         {
-            return await _dbContext.Chats
-                .Where(c => c.ChatId == id)
-                // .Where(c => c.Users.Any(u => u.UserId == user.UserId))
+            return await _dbContext.OurChats
+                .Where(c =>  (c.User1 != null  && c.User1.Id.Equals(userId)) || (c.User2 != null && c.User2.Id.Equals(userId)))
+                .ToListAsync();
+        }
+        /// <summary>
+        /// Haalt een Chat op met de ID 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<OurChat?> GetById(int id)
+        {
+            return await _dbContext.OurChats
+                .Where(c => c.ID.Equals(id.ToString()))
                 .FirstOrDefaultAsync();
         }
-
-        public async Task<Chat> Create(List<User> users)
+        /// <summary>
+        /// Create Chat met 2 users verbonden aan een onderzoek
+        /// </summary>
+        /// <param name="user1"></param>
+        /// <param name="user2"></param>
+        /// <param name="doesResearch"></param>
+        /// <returns></returns>
+        public async Task<OurChat> Create(OurChat ourChat)
         {
-            Chat chat = new Chat(users);
-
-            _dbContext.Chats.Add(chat);
-
+            _dbContext.OurChats.Add(ourChat);
             await _dbContext.SaveChangesAsync();
-
-            return chat;
+            return ourChat;
         }
-
-        public async Task AddMessage(int id, string text, User sender)
+        /// <summary>
+        /// Voegt een chatmessage toe aan de database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="text"></param>
+        /// <param name="sender"></param>
+        /// <returns></returns>
+        public async Task AddMessage(OurChatMessage ourChatMessage, int ChatID)
         {
-            Chat? chat = await _dbContext.Chats.FirstOrDefaultAsync(c => c.ChatId == id);
-
-            if (chat == null)
+            OurChat? chat = await _dbContext.OurChats.FirstOrDefaultAsync(c => c.ID.Equals(ChatID.ToString()));
+            if (chat != null)
             {
-                // TODO: handle error -> chat not found
-                return;
+                
+                chat.Messages.Add(ourChatMessage);
+                await _dbContext.SaveChangesAsync();
+            }else{
+                throw new InvalidOperationException($"Chat with ID {ChatID} can not be found");
+            }
+        }
+        /// <summary>
+        /// Pakt een chat uit de db met de id van een user
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        public async Task<OurChat?> GetByUserId(int id)
+        {
+            OurChat? chat = await _dbContext.OurChats.FirstOrDefaultAsync(c => (c.User1 != null && c.User1.Id.Equals(id))  || (c.User2 != null && c.User2.Equals(id)));
+            if(chat != null){
+                return chat;
+            }else{
+                throw new InvalidOperationException($"Chat with UserID {id} not found.");
+
             }
 
-            ChatMessage chatMessage = new ChatMessage(chat.ChatId, text, sender);
-
-            chat.Messages.Add(chatMessage);
-
-            await _dbContext.SaveChangesAsync();
+        }
+        public async Task<List<OurChatMessage>> GetChatMessagesByChat(int id){
+            return await _dbContext.OurChatMessages
+                .Where(c => c.OurChatID == id)
+                .ToListAsync();
         }
     }
 }

@@ -34,7 +34,7 @@ const ProfielPaginaBeheerderPage = () => {
               Voornaam
             </Text>
             <Input
-              name="rectangleNine"
+              name="rectanglenine"
               placeholder=""
               className="p-0 w-full"
               wrapClassName="flex h-[49px] mt-[7px] rounded-[24px] w-full"
@@ -48,7 +48,7 @@ const ProfielPaginaBeheerderPage = () => {
               Achternaam
             </Text>
             <Input
-              name="rectangleThirteen"
+              name="rectanglethirte"
               placeholder=""
               className="p-0 w-full"
               wrapClassName="flex h-[54px] mt-[7px] w-full"
@@ -63,7 +63,7 @@ const ProfielPaginaBeheerderPage = () => {
               Email
             </Text>
             <Input
-              name="rectangleTen"
+              name="rectangleten"
               placeholder=""
               className="p-0 w-full"
               wrapClassName="flex h-[54px] mt-2 w-full"
@@ -78,7 +78,7 @@ const ProfielPaginaBeheerderPage = () => {
               Postcode
             </Text>
             <Input
-              name="rectangleTwelve"
+              name="rectangletwelve"
               placeholder=""
               className="p-0 w-full"
               wrapClassName="flex h-[54px] mt-[7px] w-full"
@@ -93,7 +93,7 @@ const ProfielPaginaBeheerderPage = () => {
               Wachtwoord
             </Text>
             <Input
-              name="rectangleEleven"
+              name="rectangleeleven"
               placeholder=""
               className="p-0 w-full"
               wrapClassName="flex h-[54px] mt-[7px] w-full"
@@ -108,7 +108,7 @@ const ProfielPaginaBeheerderPage = () => {
               Telefoonnummer
             </Text>
             <Input
-              name="rectangleFourteen"
+              name="rectanglefourte"
               placeholder=""
               className="p-0 w-full"
               wrapClassName="flex h-[54px] mt-2 w-full"

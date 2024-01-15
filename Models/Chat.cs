@@ -1,51 +1,70 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace WPR
 {
-    [Table("Chats")]
-    public class Chat
+    [Table("OurChats")]
+    public class OurChat
     {
-        [Key]
-        public int ChatId { get; private set; }
         
-        public User user1 {get; set;}
-        public User user2 {get; set;}
+        [Key]
+        public int ID { get; private set; }
+        
+        public string User1ID {get; set;}
+        [ForeignKey(nameof(User1ID))]
+        public User? User1 {get; set;}
+        public string User2ID {get; set;}
+        [ForeignKey(nameof(User2ID))]
+        [InverseProperty(nameof(User2.Chats2))]
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        public User? User2 {get; set;}   
+        
+        public IList<OurChatMessage> Messages { get; }  = new List<OurChatMessage>();
+        public OurChatStatus Status { get; set; }
+        public DoesResearch? DoesResearch {get; set;}
+        
 
-        public ICollection<ChatMessage> Messages { get; } = new List<ChatMessage>();
-        [Required]
-        public ChatStatus Status { get; set; }
-        public DoesResearch doesResearch {get;}
 
-
-        public Chat()
+        public OurChat()
         {
-            this.Status = ChatStatus.OPEN;
+            User1ID = string.Empty;
+            User2ID = string.Empty;
+
         }
+        
     }
-    [Table("ChatMessages")]
-    public class ChatMessage
+    [Table("OurChatMessages")]
+    public class OurChatMessage
     {
         [Key]
-        public int ChatMessageId { get; private set; }
+        public int OurChatMessageId { get; set; }
         [Required] [StringLength(1024, MinimumLength =2)]
         public string Text { get; set; }
 
         public DateTime Date { get; } = DateTime.Now;
 
-        public int ChatId { get; set; }
-
-        public virtual Chat Chat { get; set; }
+        public int OurChatID { get; set; }
+        
+        [ForeignKey(nameof (OurChatID))]
+        public OurChat? ourChat { get; set; }
 
         public string SenderUserId { get; set; }
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        [ForeignKey(nameof(SenderUserId))]
 
-        public virtual User Sender { get; set; }
+        public User? Sender { get; set; }
 
-        public ChatMessage() { }
+        public OurChatMessage(){
+            Text = string.Empty;
+            SenderUserId = string.Empty;
+
+        }
 
     }
 
-    public enum ChatStatus
+    public enum OurChatStatus
     {
         OPEN,
         CLOSED

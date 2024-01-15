@@ -8,23 +8,36 @@ using System.Text.Json.Serialization.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
-//class Antwoord is voor de antwoorden die we kunnen krijgen van vragen die gesteld worden in onderzoeken.
-//Antwoord kan op dit moment van een vraag van een interview of van een vraag van een vragenlijst zijn. 
+
 namespace WPR
 {
     [Table("Answers")]
-    public class Answer{
-    [Key]
-    public int ID {get; private set;}
-    [Required] [StringLength(1024, MinimumLength = 5)]
-    public string Text{get; set;}
-    public Question Question{get; set;}
-    public int QuestionID{get; set;}
-    public Specialist Specialist{get; private set;}
-    public int SpecialistID{get; set;}
-    public DoesResearch DoesResearch{ get; set;}
-    public Answer(){
-       
+    public class Answer
+    {  
+        [Key]
+        public int ID {get; set;}
+        public string Text{get; set;}
+        public int QuestionID{get; set;}
+
+        [ForeignKey(nameof(QuestionID))]
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        
+        public Question? Question{get; set;}
+        
+        [ForeignKey(nameof(SpecialistID))]
+        public Specialist? Specialist{get; private set;}
+        public string SpecialistID{get; set;}
+
+        [ForeignKey(nameof(DoesResearchID))]
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        public DoesResearch? DoesResearch{ get; set;}
+        public int DoesResearchID{get;set;}
+        public Answer()
+        {
+            Text = string.Empty;
+            SpecialistID = string.Empty;
+
         }
     }
 }
+

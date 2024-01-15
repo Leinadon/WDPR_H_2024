@@ -5,7 +5,8 @@ namespace WPR
 {
     [Table("Researches")]
     public class Research{
-        public int ResearchID {get; protected set;}
+        [Key]
+        public int ID {get; set;}
         [Required] [StringLength(64, MinimumLength = 2)]
         public string Title{get; set;}
         [Required] [StringLength(1024, MinimumLength = 2)]
@@ -16,18 +17,19 @@ namespace WPR
         public string Reward{get; set;}
         [Required]
         public string Status{get; set;}
-        public ICollection<DoesResearch> doesResearches {get;} = new List<DoesResearch>();
-        public List<Specialist> Specialists = new List<Specialist>();
-        public Company Company{get; set;}
+        public ICollection<DoesResearch>? doesResearches {get;}
         public int CompanyId{get; set;}
+        [ForeignKey(nameof(CompanyId))]
+        public Company? Company{get; set;}
         [Required]
         public Boolean English{get;set;}
         public Research()
         {
-            this.StartDate = DateTime.Now;
-        }
-        public void AddNewSpecialist(Specialist specialist){
-            Specialists.Add(specialist);
+            Title = string.Empty;
+            Reward = string.Empty;
+            Status = string.Empty;
+
+            
         }
     }
 }

@@ -2,10 +2,12 @@
 
 public interface IChatService
 {
-    Task<List<Chat>> Get(User user);
-    Task<Chat?> GetById(int id, User user);
-    Task<Chat> Create(List<User> users);
-    Task AddMessage(int id, string text, User sender);
+    Task<List<OurChat>> GetAllFromUser(string user);
+    Task<List<OurChat>> GetAll();
+    Task<OurChat?> GetById(int id);
+    Task<OurChat> Create(OurChat ourChat);
+    Task AddMessage(OurChatMessage ourChatMessage, int ChatId);
+    Task<List<OurChatMessage>> GetMessagesByChat(int id);
 }
 
 public class ChatService : IChatService
@@ -16,25 +18,30 @@ public class ChatService : IChatService
     {
         _chatRepository = chatRepository;
     }
-
-    public async Task<List<Chat>> Get(User user)
-    {
-
-        return await _chatRepository.Get(user);
+    public async Task<List<OurChat>> GetAll(){
+        return await _chatRepository.GetAll();
     }
 
-    public async Task<Chat?> GetById(int id, User user)
+    public async Task<List<OurChat>> GetAllFromUser(string user)
     {
-        return await _chatRepository.GetById(id, user);
+
+        return await _chatRepository.GetAllFromUser(user);
     }
 
-    public async Task<Chat> Create(List<User> users)
+    public async Task<OurChat?> GetById(int id)
     {
-        return await _chatRepository.Create(users);
+        return await _chatRepository.GetById(id);
+    }
+    public async Task<OurChat> Create(OurChat ourChat)
+    {
+        return await _chatRepository.Create(ourChat);
     }
 
-    public async Task AddMessage(int id, string text, User sender)
+    public async Task AddMessage(OurChatMessage ourChatMessage, int ChatID)
     {
-        await _chatRepository.AddMessage(id, text, sender);
+        await _chatRepository.AddMessage(ourChatMessage, ChatID);
+    }
+    public async Task<List<OurChatMessage>> GetMessagesByChat(int id){
+        return await _chatRepository.GetChatMessagesByChat(id);
     }
 }

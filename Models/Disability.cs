@@ -4,17 +4,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WPR
 {
-    [Table("Disabilitys")]
+    [Table("Disabilities")]
     public class Disability
     {
         [Key]
-        public int DisabilityId { get; private set; }
-        public DisabilityType DisabilityType {get; set;}
-        public Specialist Specialist { get; private set; }
-        public int SpecialistID{get; set;}
+        public int DisabilityId { get; set; }
+        public int DisabilityTypeId {get ;set;}
+        [ForeignKey(nameof(DisabilityTypeId))]
+        public DisabilityType? DisabilityType {get; set;}
+        public string SpecialistId {get; set;}
+        [ForeignKey(nameof(SpecialistId))]
+        public Specialist? Specialist { get; private set; }
+        
         [Required] [StringLength(1024, MinimumLength =5)]
         public string Details { get; set; }
 
-        public Disability() { }
+        public Disability() {
+            Details = string.Empty;
+            SpecialistId = string.Empty;
+
+        }
     }
 }

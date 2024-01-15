@@ -1,49 +1,39 @@
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.Graph;
+using Microsoft.Graph.Authentication;
+using Microsoft.Graph.Models.ExternalConnectors;
 using Microsoft.Identity.Web;
+using Microsoft.Identity.Client;
 using WPR;
+using Azure.Identity;
+using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.Graph.Drives.Item.Items.Item.Workbook.Functions.Var_P;
+using System.ComponentModel;
+namespace WPR{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+            
+            Console.WriteLine("Succesvol gestart");
+        }
 
-var builder = WebApplication.CreateBuilder(args);
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    
+                    webBuilder.UseStartup<Startup>();
+                }
 
-builder.Logging.AddConsole();
-builder.Logging.AddDebug();
-
-// Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddDbContext<WPRDbContext>(options =>
-{
-    options.UseSqlite("Data Source=WPRDatabase.db");
-}, ServiceLifetime.Scoped);
-
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-
-builder.Services.AddScoped<IChatService, ChatService>();
-builder.Services.AddScoped<IChatRepository, ChatRepository>();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+                
+        );
+        
+    }
+    
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthentication();
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

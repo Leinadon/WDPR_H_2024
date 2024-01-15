@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -14,518 +15,786 @@ namespace WPR.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.25");
+            modelBuilder
+                .HasDefaultSchema("MyCustomSchema")
+                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("WPR.Answer", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("DoesResearchID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("RoleId")
+                    b.Property<int>("QuestionID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SpecialistID")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("LoginProvider", "ProviderKey");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("UserId", "LoginProvider", "Name");
-
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("User", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("BirthDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("ChatId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChatId");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
-                });
-
-            modelBuilder.Entity("WPR.Chat", b =>
-                {
-                    b.Property<int>("ChatId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ChatId");
-
-                    b.ToTable("Chats");
-                });
-
-            modelBuilder.Entity("WPR.ChatMessage", b =>
-                {
-                    b.Property<int>("ChatMessageId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ChatId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SenderUserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Text")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ChatMessageId");
+                    b.HasKey("ID");
 
-                    b.HasIndex("ChatId");
+                    b.HasIndex("DoesResearchID");
 
-                    b.HasIndex("SenderUserId");
+                    b.HasIndex("QuestionID");
 
-                    b.ToTable("ChatMessages");
+                    b.HasIndex("SpecialistID");
+
+                    b.ToTable("Answers", "MyCustomSchema");
                 });
 
             modelBuilder.Entity("WPR.Company", b =>
                 {
                     b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"));
 
                     b.Property<string>("ContactEmail")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(320)
+                        .HasColumnType("nvarchar(320)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("Sector")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("TrackingID")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WebsiteURL")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companys", "MyCustomSchema");
                 });
 
             modelBuilder.Entity("WPR.Disability", b =>
                 {
                     b.Property<int>("DisabilityId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DisabilityId"));
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<int>("DisabilityTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("SpecialistId")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("DisabilityId");
 
+                    b.HasIndex("DisabilityTypeId");
+
                     b.HasIndex("SpecialistId");
 
-                    b.ToTable("Disability");
+                    b.ToTable("Disabilities", "MyCustomSchema");
                 });
 
-            modelBuilder.Entity("WPR.Models.Guardian", b =>
+            modelBuilder.Entity("WPR.DisabilityType", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("DisabilityTypes", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.DoesResearch", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("InformationTrackingScript")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ResearchID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<string>("SpecialistId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ResearchID");
+
+                    b.HasIndex("SpecialistId");
+
+                    b.ToTable("DoesResearches", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.Guardian", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(320)
+                        .HasColumnType("nvarchar(320)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("SpecialistID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Guardian");
+                    b.ToTable("Guardians", "MyCustomSchema");
                 });
 
-            modelBuilder.Entity("WPR.Models.Questionnaire", b =>
+            modelBuilder.Entity("WPR.Location", b =>
                 {
-                    b.Property<int>("QuestionnaireId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("HouseNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<string>("SpecialistID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StreetName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyID")
+                        .IsUnique()
+                        .HasFilter("[CompanyID] IS NOT NULL");
+
+                    b.ToTable("Locations", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.OnlineAssignmentResult", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Comment")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<bool>("Completed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("DoesResearchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OnlineAssignmentID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("DoesResearchID");
+
+                    b.HasIndex("OnlineAssignmentID");
+
+                    b.ToTable("OnlineAssignmentResults", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.OurChat", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int?>("DoesResearchID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("User1ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("User2ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("DoesResearchID");
+
+                    b.HasIndex("User1ID");
+
+                    b.HasIndex("User2ID");
+
+                    b.ToTable("OurChats", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.OurChatMessage", b =>
+                {
+                    b.Property<int>("OurChatMessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OurChatMessageId"));
+
+                    b.Property<int>("OurChatID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.HasKey("OurChatMessageId");
+
+                    b.HasIndex("OurChatID");
+
+                    b.HasIndex("SenderUserId");
+
+                    b.ToTable("OurChatMessages", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.Question", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<int>("InterviewId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuestionnaireId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("InterviewId");
+
+                    b.HasIndex("QuestionnaireId");
+
+                    b.ToTable("Questions", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.Research", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<int>("CompanyId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CreationDate")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<bool>("English")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reward")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
-                    b.HasKey("QuestionnaireId");
+                    b.HasKey("ID");
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Questionnaires");
+                    b.ToTable("Researches", "MyCustomSchema");
+
+                    b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("WPR.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("BirthDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", "MyCustomSchema");
+
+                    b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("WPR.Interview", b =>
+                {
+                    b.HasBaseType("WPR.Research");
+
+                    b.ToTable("Interviews", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.OnlineAssignment", b =>
+                {
+                    b.HasBaseType("WPR.Research");
+
+                    b.Property<string>("Explanation")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.ToTable("OnlineAssignments", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.Questionnaire", b =>
+                {
+                    b.HasBaseType("WPR.Research");
+
+                    b.ToTable("Questionnaires", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("WPR.Employee", b =>
+                {
+                    b.HasBaseType("WPR.User");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Function")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Employees", "MyCustomSchema");
                 });
 
             modelBuilder.Entity("WPR.Specialist", b =>
                 {
-                    b.HasBaseType("User");
+                    b.HasBaseType("WPR.User");
 
                     b.Property<bool>("ApproachCommercialParties")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("bit");
 
                     b.Property<string>("DisabilityNote")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
-                    b.Property<int>("GuardianId")
-                        .HasColumnType("INTEGER");
+                    b.Property<int>("GuardianID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
 
                     b.Property<int>("MessagePreference")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<string>("ToolsUsing")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TrackingID")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("GuardianId");
+                    b.HasIndex("GuardianID")
+                        .IsUnique()
+                        .HasFilter("[GuardianID] IS NOT NULL");
 
-                    b.HasDiscriminator().HasValue("Specialist");
+                    b.HasIndex("LocationId")
+                        .IsUnique()
+                        .HasFilter("[LocationId] IS NOT NULL");
+
+                    b.ToTable("Specialists", "MyCustomSchema");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("WPR.Answer", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("WPR.DoesResearch", "DoesResearch")
+                        .WithMany("Answers")
+                        .HasForeignKey("DoesResearchID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("WPR.Question", "Question")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("WPR.Specialist", "Specialist")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("SpecialistID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.Navigation("DoesResearch");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.Navigation("Question");
 
-            modelBuilder.Entity("User", b =>
-                {
-                    b.HasOne("WPR.Chat", null)
-                        .WithMany("Users")
-                        .HasForeignKey("ChatId");
-                });
-
-            modelBuilder.Entity("WPR.ChatMessage", b =>
-                {
-                    b.HasOne("WPR.Chat", "Chat")
-                        .WithMany("Messages")
-                        .HasForeignKey("ChatId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Chat");
-
-                    b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("WPR.Company", b =>
-                {
-                    b.OwnsOne("WPR.Models.Location", "Location", b1 =>
-                        {
-                            b1.Property<int>("CompanyId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<string>("HouseNumber")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Place")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("StreetName")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("CompanyId");
-
-                            b1.ToTable("Companies");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CompanyId");
-                        });
-
-                    b.Navigation("Location")
-                        .IsRequired();
+                    b.Navigation("Specialist");
                 });
 
             modelBuilder.Entity("WPR.Disability", b =>
                 {
-                    b.HasOne("WPR.Specialist", null)
+                    b.HasOne("WPR.DisabilityType", "DisabilityType")
+                        .WithMany("disabilities")
+                        .HasForeignKey("DisabilityTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.Specialist", "Specialist")
                         .WithMany("Disabilities")
-                        .HasForeignKey("SpecialistId");
+                        .HasForeignKey("SpecialistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DisabilityType");
+
+                    b.Navigation("Specialist");
                 });
 
-            modelBuilder.Entity("WPR.Models.Questionnaire", b =>
+            modelBuilder.Entity("WPR.DoesResearch", b =>
+                {
+                    b.HasOne("WPR.Research", null)
+                        .WithMany("doesResearches")
+                        .HasForeignKey("ResearchID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.Specialist", null)
+                        .WithMany("doesResearches")
+                        .HasForeignKey("SpecialistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WPR.Location", b =>
                 {
                     b.HasOne("WPR.Company", "Company")
+                        .WithOne("Location")
+                        .HasForeignKey("WPR.Location", "CompanyID");
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("WPR.OnlineAssignmentResult", b =>
+                {
+                    b.HasOne("WPR.DoesResearch", "doesResearch")
+                        .WithMany("OnlineAssignmentResults")
+                        .HasForeignKey("DoesResearchID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.OnlineAssignment", "OnlineAssignment")
+                        .WithMany("OnlineAssignmentResults")
+                        .HasForeignKey("OnlineAssignmentID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("OnlineAssignment");
+
+                    b.Navigation("doesResearch");
+                });
+
+            modelBuilder.Entity("WPR.OurChat", b =>
+                {
+                    b.HasOne("WPR.DoesResearch", "DoesResearch")
                         .WithMany()
+                        .HasForeignKey("DoesResearchID");
+
+                    b.HasOne("WPR.User", "User1")
+                        .WithMany("Chats")
+                        .HasForeignKey("User1ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.User", "User2")
+                        .WithMany("Chats2")
+                        .HasForeignKey("User2ID")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("DoesResearch");
+
+                    b.Navigation("User1");
+
+                    b.Navigation("User2");
+                });
+
+            modelBuilder.Entity("WPR.OurChatMessage", b =>
+                {
+                    b.HasOne("WPR.OurChat", "ourChat")
+                        .WithMany("Messages")
+                        .HasForeignKey("OurChatID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.User", "Sender")
+                        .WithMany("ChatMessages")
+                        .HasForeignKey("SenderUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Sender");
+
+                    b.Navigation("ourChat");
+                });
+
+            modelBuilder.Entity("WPR.Question", b =>
+                {
+                    b.HasOne("WPR.Interview", "Interview")
+                        .WithMany("Questions")
+                        .HasForeignKey("InterviewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.Questionnaire", "Questionnaire")
+                        .WithMany("Questions")
+                        .HasForeignKey("QuestionnaireId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Interview");
+
+                    b.Navigation("Questionnaire");
+                });
+
+            modelBuilder.Entity("WPR.Research", b =>
+                {
+                    b.HasOne("WPR.Company", "Company")
+                        .WithMany("Researches")
                         .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("WPR.Interview", b =>
+                {
+                    b.HasOne("WPR.Research", null)
+                        .WithOne()
+                        .HasForeignKey("WPR.Interview", "ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WPR.OnlineAssignment", b =>
+                {
+                    b.HasOne("WPR.Research", null)
+                        .WithOne()
+                        .HasForeignKey("WPR.OnlineAssignment", "ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WPR.Questionnaire", b =>
+                {
+                    b.HasOne("WPR.Research", null)
+                        .WithOne()
+                        .HasForeignKey("WPR.Questionnaire", "ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WPR.Employee", b =>
+                {
+                    b.HasOne("WPR.Company", "Company")
+                        .WithMany("Employees")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WPR.User", null)
+                        .WithOne()
+                        .HasForeignKey("WPR.Employee", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -534,57 +803,106 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.Specialist", b =>
                 {
-                    b.HasOne("WPR.Models.Guardian", "Guardian")
-                        .WithMany()
-                        .HasForeignKey("GuardianId")
+                    b.HasOne("WPR.Guardian", "Guardian")
+                        .WithOne("specialist")
+                        .HasForeignKey("WPR.Specialist", "GuardianID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("WPR.Models.Location", "Location", b1 =>
-                        {
-                            b1.Property<string>("SpecialistId")
-                                .HasColumnType("TEXT");
+                    b.HasOne("WPR.User", null)
+                        .WithOne()
+                        .HasForeignKey("WPR.Specialist", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<string>("HouseNumber")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("Place")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("PostalCode")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.Property<string>("StreetName")
-                                .IsRequired()
-                                .HasColumnType("TEXT");
-
-                            b1.HasKey("SpecialistId");
-
-                            b1.ToTable("AspNetUsers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SpecialistId");
-                        });
+                    b.HasOne("WPR.Location", "Location")
+                        .WithOne("specialist")
+                        .HasForeignKey("WPR.Specialist", "LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Guardian");
 
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("WPR.Company", b =>
+                {
+                    b.Navigation("Employees");
+
                     b.Navigation("Location")
+                        .IsRequired();
+
+                    b.Navigation("Researches");
+                });
+
+            modelBuilder.Entity("WPR.DisabilityType", b =>
+                {
+                    b.Navigation("disabilities");
+                });
+
+            modelBuilder.Entity("WPR.DoesResearch", b =>
+                {
+                    b.Navigation("Answers");
+
+                    b.Navigation("OnlineAssignmentResults");
+                });
+
+            modelBuilder.Entity("WPR.Guardian", b =>
+                {
+                    b.Navigation("specialist")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WPR.Chat", b =>
+            modelBuilder.Entity("WPR.Location", b =>
+                {
+                    b.Navigation("specialist");
+                });
+
+            modelBuilder.Entity("WPR.OurChat", b =>
                 {
                     b.Navigation("Messages");
+                });
 
-                    b.Navigation("Users");
+            modelBuilder.Entity("WPR.Question", b =>
+                {
+                    b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("WPR.Research", b =>
+                {
+                    b.Navigation("doesResearches");
+                });
+
+            modelBuilder.Entity("WPR.User", b =>
+                {
+                    b.Navigation("ChatMessages");
+
+                    b.Navigation("Chats");
+
+                    b.Navigation("Chats2");
+                });
+
+            modelBuilder.Entity("WPR.Interview", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
+            modelBuilder.Entity("WPR.OnlineAssignment", b =>
+                {
+                    b.Navigation("OnlineAssignmentResults");
+                });
+
+            modelBuilder.Entity("WPR.Questionnaire", b =>
+                {
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("WPR.Specialist", b =>
                 {
                     b.Navigation("Disabilities");
+
+                    b.Navigation("doesResearches");
                 });
 #pragma warning restore 612, 618
         }
