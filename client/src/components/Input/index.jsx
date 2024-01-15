@@ -9,7 +9,7 @@ const variants = {
   },
 };
 const shapes = { round: "rounded-[27px]" };
-const sizes = { xs: "p-3" };
+const sizes = { xs: "p-[11px]" };
 
 const Input = React.forwardRef(
   (
@@ -27,8 +27,8 @@ const Input = React.forwardRef(
       onChange,
       shape = "",
       size = "",
-      variant = "fill",
-      color = "deep_orange_50",
+      variant = "",
+      color = "",
       ...restProps
     },
     ref,

@@ -14,10 +14,10 @@ const CheckBox = React.forwardRef(
       children,
       label = "",
       errors = [],
-      shape = "round",
+      shape = "",
       size = "",
-      variant = "fill",
-      color = "blue_gray_100",
+      variant = "",
+      color = "",
       id = "checkbox_id",
       onChange,
       ...restProps
@@ -32,9 +32,7 @@ const CheckBox = React.forwardRef(
       <>
         <div className={className}>
           <input
-            className={`${inputClassName} ${(shape && shapes[shape]) || ""} ${
-              (variant && variants[variant]?.[color]) || ""
-            }`}
+            className={`${inputClassName} ${(shape && shapes[shape]) || ""} ${(variant && variants[variant]?.[color]) || ""}`}
             ref={ref}
             type="checkbox"
             name={name}
