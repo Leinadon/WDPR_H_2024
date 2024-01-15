@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "pages/Home";
 import NotFound from "pages/NotFound";
 const ProfielBeheerderPagina = React.lazy(
   () => import("pages/ProfielBeheerderPagina"),
@@ -54,9 +53,8 @@ const ProjectRoutes = () => {
     <React.Suspense fallback={<>Loading...</>}>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePagina />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/homepagina" element={<HomePagina />} />
           <Route path="/loginpagina" element={<LogInPagina />} />
           <Route path="/signuppagina" element={<SignUpPagina />} />
           <Route path="/menupagina" element={<MenuPagina />} />
