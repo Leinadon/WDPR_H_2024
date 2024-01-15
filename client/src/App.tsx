@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import './App.css';
+import './App.css';
 
 import Contact from "./Pages/Contact";
 import Menu from "./Pages/Menu";
@@ -9,9 +9,8 @@ import PageNonExist from "./Pages/PageNonExist"
 
 // Figma pages
 import HomePage from "./Pages/HomePagina";
-import Login from "./Pages/Login";
-import SignUp from "./Pages/SignUpPagina";
-
+import Login from "./Pages/Login.jsx";
+import SignUp from "./Pages/SignUpPagina.jsx";
 import DeskundigeProfiel from "./Pages/PortalDeskundige/Profiel_Deskundige";
 import HomePaginaPage from './Pages/HomePagina';
 

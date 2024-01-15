@@ -2,7 +2,7 @@ import React, { useRef, RefAttributes } from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { Button, Img, List, Slider, Text, Input } from "../components";
+import { Button, Img, List, Slider, Text, Input, CheckBox } from "../components";
 
 const LogInPaginaPage = () => {
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const LogInPaginaPage = () => {
               </Text> 
             </div>
             <div className="Frame43" style={{ width: 100.67, height: 110.09, padding: 10, left: 960.33, top: 24, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex' }}>
-                <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png" />
+                <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png" onClick={() => navigate("/")} />
             </div>
           </div>
           <div className="flex flex-col gap-[17px] h-[119px] md:h-auto item-left justify-center md:ml-[0] ml-[441.8px] mt-[42px] w-[425px] sm:w-full">
@@ -81,7 +81,12 @@ const LogInPaginaPage = () => {
             </List>
             <div className="h-7 md:h-[66px] md:ml-[0] ml-[18.8px] mt-7 relative w-[94%] sm:w-full">
               <div className="absolute bottom-[0] flex flex-row gap-[9px] h-[25px] md:h-auto items-center justify-start left-[0] p-2.5 right-[0] top-[0] w-[197px]">
-                <div className="bg-blue_gray-100 h-5 rounded-[3px] w-[21px]"></div>
+                 <CheckBox
+                    className="mb-1"
+                    inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
+                    name="rectangleFive_Three"
+                    id="rectangleFive_Three"
+                  ></CheckBox> 
                 <Text
                   className="flex-1 text-white-A700 text-xl text-left"
                   size="txtInterSemiBold20"

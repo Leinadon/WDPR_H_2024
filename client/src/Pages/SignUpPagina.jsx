@@ -21,7 +21,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <div className="Frame43" style={{ width: 100.67, height: 110.09, padding: 10, left: 960.33, top: 24, position: 'absolute', justifyContent: 'flex-start', alignItems: 'center', gap: 10, display: 'inline-flex' }}>
-                <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png" />
+                <img className="ReshotIllustrationWebsiteDevelopment5qs97cjh2a9f9a12" style={{ flex: '1 1 0', alignSelf: 'stretch' }} src="images\img_logo.png"  onClick={() => navigate("/")}/>
             </div>
           </div>
           <Text
@@ -87,8 +87,8 @@ const SignUpPaginaPage = () => {
             <Input
               name="rectangleFive"
               placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 w-full"
-              wrapClassName="h-[54px] ml-3 md:ml-[0] mt-1 rounded-[27px]"
+              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]" //wrapClassName="flex h-[54px] ml-6 md:ml-[0] mt-[0] w-[100%]"
               shape="round"
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[454px] sm:w-full">
@@ -99,8 +99,8 @@ const SignUpPaginaPage = () => {
             <Input
               name="rectangleSix"
               placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 w-full"
-              wrapClassName="h-[54px] ml-2.5 md:ml-[0] mr-0.5 mt-0.5 rounded-[27px]"
+              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+              wrapClassName="flex h-[54px] ml-2.5 md:ml-[0] mr-0.5 mt-0.5 rounded-[27px]"
               shape="round"
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start ml-0.5 md:ml-[0] mt-2.5 p-2.5 w-[464px] sm:w-full">
