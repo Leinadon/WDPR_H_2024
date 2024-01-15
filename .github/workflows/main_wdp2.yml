@@ -15,21 +15,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      
+      - name: Ensure That Output Directory Exists
+        run: mkdir -p ./web-app
+  
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '8.x'
           include-prerelease: true
-      
-      - name: List Contents of Deployment Path
-        run: ls -R ./
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
   
       - name: dotnet publish
-        run: dotnet publish -c Release -o ./published-app
+        run: dotnet publish -c Release -o ./web-app
         # run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
@@ -37,7 +37,10 @@ jobs:
         with:
           name: .net-app
           # path: ${{env.DOTNET_ROOT}}/myapp
-          path: ./published-app
+          path: ./web-app
+      
+      - name: List Contents of Deployment Path
+        run: ls -R ./
 
   deploy:
     runs-on: ubuntu-latest
@@ -67,7 +70,7 @@ jobs:
         with:
           app-name: 'wdp2'
           slot-name: 'Production'
-          package: ./published-app
+          package: ./web-app
 
       - name: Run npm build for React app
         run: |
