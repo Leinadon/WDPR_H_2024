@@ -36,7 +36,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          # path: ${{env.DOTNET_ROOT}}/myapp
+          path: ./published-app
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,7 +67,7 @@ jobs:
         with:
           app-name: 'wdp2'
           slot-name: 'Production'
-          package: ./WDPR_H_2024/build
+          package: ./published-app
 
       - name: Run npm build for React app
         run: |
