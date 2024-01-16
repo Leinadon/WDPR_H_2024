@@ -10,7 +10,7 @@ const MenuPaginaPage = () => {
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone sm:gap-10 md:gap-10 gap-[123px] items-center justify-start mx-auto p-[31px] sm:px-5 w-full">
-        <div className="flex flex-row md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] mt-[18px] mx-auto sm:pl-5 md:px-5 py-2.5 w-full">
+        <div className="flex flex-row md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1440px] mt-[18px] mx-auto sm:pl-5 md:px-5 py-2.5 w-full">
           <Text
             className="md:text-5xl text-6xl text-teal-400 w-auto"
             size="txtJockeyOneRegular60"

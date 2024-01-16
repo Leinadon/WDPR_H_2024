@@ -78,7 +78,7 @@ const LogInPaginaPage = () => {
                 color="teal_400"
                 size="lg"
                 variant="fill"
-                > Sign Up
+                > Log in
                 </Button>
               </div>
             <Button
@@ -101,7 +101,7 @@ const LogInPaginaPage = () => {
                 href="javascript:"
                 className="text-gray-400 font-inter font-black underline"
               >
-                Sign Up
+                Sign up
               </a>
             </Text>
             </div>
