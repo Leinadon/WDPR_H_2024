@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "Pages/NotFound";
+
 const ProfielBeheerderPagina = React.lazy(
   () => import("Pages/ProfielBeheerderPagina"),
 );
