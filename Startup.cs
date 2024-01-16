@@ -122,7 +122,7 @@ namespace WPR
                 app.UseHsts();
             }
             
-        
+            app.UsePathBase("https://wdp2.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

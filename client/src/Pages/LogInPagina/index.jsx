@@ -115,12 +115,12 @@ const LogInPaginaPage = () => {
               <span className="text-white-A700 font-inter font-semibold">
                 Nog geen account?{" "}
               </span>
-              <a
+              {/* <a
                 href="javascript:"
                 className="text-gray-400 font-inter font-black underline"
               >
                 Sign Up
-              </a>
+              </a> */}
             </Text>
           </div>
         </div>
