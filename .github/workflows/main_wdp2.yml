@@ -27,14 +27,16 @@ jobs:
         run: ls -R ./web-app
 
         
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
         with:
-          dotnet-version: '8.x'
-          include-prerelease: true
+          node-version: '16.x'
 
-      - name: Build with dotnet
-        run: dotnet build --configuration Release
+      # - name: Build with dotnet
+      #   run: dotnet build --configuration Release
+  
+      # - name: dotnet publish
+      #   run: dotnet publish -c Release -o ./web-app
 
       - name: Run npm build for React app
         env:
@@ -45,9 +47,6 @@ jobs:
           npm install
           npm run build
           # npm run test
-  
-      - name: dotnet publish
-        run: dotnet publish -c Release -o ./web-app
 
       - name: Zip Release
         uses: TheDoctor0/zip-release@0.6.1
@@ -59,7 +58,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ./web-app
+          path: release.zip
+          # path: ./web-app
 
       
       - name: List Contents of Deployment Path
@@ -95,4 +95,4 @@ jobs:
           app-name: 'wdp2'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+          package: release.zip
