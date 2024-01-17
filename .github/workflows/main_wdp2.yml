@@ -8,10 +8,10 @@ on:
     branches:
       - main
   workflow_dispatch:
-env:
-  AZURE_WEBAPP_NAME: wdp2    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: './web-app'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '14.x'                # set this to the node version to use'
+# env:
+#   AZURE_WEBAPP_NAME: wdp2    # set this to your application's name
+#   AZURE_WEBAPP_PACKAGE_PATH: './web-app'      # set this to the path to your web app project, defaults to the repository root
+#   NODE_VERSION: '14.x'                # set this to the node version to use'
   
 jobs:
   build:
@@ -45,7 +45,8 @@ jobs:
           CI: false
         run: |
           cd client
-          npm install
+          npm ci
+          # npm install
           npm run build
           # npm run test
           
@@ -53,8 +54,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: net-app
-          path: ./build
-
+          path: .
       
       - name: List Contents of Deployment Path
         run: ls -R ./web-app
@@ -84,7 +84,7 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3249F67A12FA4A319183C45FFDD72775 }}
 
       - name: List Contents of Deployment Path
-        run: ls -R ./build
+        run: ls -R ./web-app
         
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -94,7 +94,6 @@ jobs:
           slot-name: 'Production'
           # publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
-
 
 
 
