@@ -82,9 +82,11 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_567D8799A4794213BF48660DA66A24CB }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E38FDB7A3803481FBA2E3C1354B94A93 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3249F67A12FA4A319183C45FFDD72775 }}
-
-      - name: List Contents of Deployment Path
-        run: ls -R .
+  
+      - name: Debugging Info
+        run: |
+          ls -R
+          ls -R ./net-app
         
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -93,4 +95,4 @@ jobs:
           app-name: 'wdp2'
           slot-name: 'Production'
           # publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ./net-app
+          package: .
