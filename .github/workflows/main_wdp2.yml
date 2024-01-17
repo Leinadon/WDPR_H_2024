@@ -85,4 +85,4 @@ jobs:
         with:
           app-name: 'wdp2'
           slot-name: 'Production'
-          package: .
+          package: ./web-app
