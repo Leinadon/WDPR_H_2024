@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
-import { loginRequest } from "../msalConfig";
+import { loginRequest } from "../../msalConfig";
 import {useMsal} from '@azure/msal-react';
 
 import { Button, CheckBox, Img, Input, Text } from "components";

@@ -47,7 +47,7 @@ const ProfielErvaringsdeskundigePagina = React.lazy(
 const ProfielPagina = React.lazy(() => import("Pages/ProfielPagina"));
 const MenuPagina = React.lazy(() => import("Pages/MenuPagina"));
 const SignUpPagina = React.lazy(() => import("Pages/SignUpPagina"));
-const LogInPagina = React.lazy(() => import("LogInPagina"));
+const LogInPagina = React.lazy(() => import("Pages/LogInPagina"));
 const HomePagina = React.lazy(() => import("Pages/HomePagina"));
 const ProjectRoutes = () => {
   return (
