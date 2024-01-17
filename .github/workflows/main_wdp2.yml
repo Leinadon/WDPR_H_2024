@@ -44,7 +44,7 @@ jobs:
           cd client
           npm install
           npm run build
-          noom run test
+          npm run test
   
       - name: dotnet publish
         run: dotnet publish -c Release -o ./web-app
