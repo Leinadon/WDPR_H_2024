@@ -27,12 +27,12 @@ const SignUpPaginaPage = () => {
             </div>
           </div>
           <Text
-            className="flex flex-col items-left justify-left ml-[410px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
+            className="flex flex-col items-left justify-left ml-[430px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
             size="txtJockeyOneRegular36"
           >
             Maak een Account!
           </Text>
-          <div className="flex flex-col justify-center font-inter w-[600px] ml-[400px] mt-[35px] ">
+          <div className="flex flex-col justify-center font-inter w-[600px] ml-[420px] mt-[35px] ">
             <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Voornaam
@@ -256,7 +256,7 @@ const SignUpPaginaPage = () => {
             </div>
               <div>
                 <Button
-                className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px]"
+                className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px] "
                 onClick={() => navigate("/menupagina")}
                 shape="round"
                 color="teal_400"
@@ -266,12 +266,12 @@ const SignUpPaginaPage = () => {
                 </Button>
               </div>
             <Button
-              className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] leading-[normal] ml-3 md:ml-[0] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] items-center text-center text-white-A700 w-[600px]"
+              className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] ml-[20px] leading-[normal] ml-3 md:ml-[] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] items-center text-center text-white-A700 w-[600px]"
               onClick={() => navigate("/loginpagina")}
               size="xs"
             ></Button>
             <div
-            className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-4 justify-center p-2.5 w-[446px] sm:w-full"
+            className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] justify-center p-2.5 w-[446px] sm:w-full"
             onClick={() => navigate("/loginpagina")}
           >
             <Text
