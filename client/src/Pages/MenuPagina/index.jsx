@@ -25,6 +25,7 @@ const MenuPaginaPage = () => {
             alt="reshotillustra"
           />
         </div>
+        </div>
         <div className="flex flex-col font-inter md:gap-10 gap-[74px] items-center justify-start mb-[228px] md:px-5 w-[100%] md:w-full">
           <Button
             className="common-pointer cursor-pointer flex h-14 items-center justify-center mt-[100px] w-[600px]"
@@ -103,7 +104,6 @@ const MenuPaginaPage = () => {
             </div>
           </Button>
         </div>
-      </div>
       </div>
       </div>
     </>
