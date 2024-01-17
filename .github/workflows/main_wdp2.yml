@@ -49,10 +49,16 @@ jobs:
       - name: dotnet publish
         run: dotnet publish -c Release -o ./web-app
 
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.6.1
+        with:
+          filename: release.zip
+          path: ./web-app
+          
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: .net-app
+          name: net-app
           path: ./web-app
 
       
