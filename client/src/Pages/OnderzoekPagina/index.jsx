@@ -33,9 +33,9 @@ const OnderzoekPaginaPage = () => {
                 Soort onderzoek
               </Text>
             </div>  
-            <div className="flex sm:flex-col flex-row sm:gap-[46px] items-center justify-between w-[97%] md:w-full">
+            <div className="flex sm:flex-col flex-row sm:gap-[46px] items-center justify-between w-[100%] md:w-full">
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[220px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -44,7 +44,7 @@ const OnderzoekPaginaPage = () => {
                 Vragenlijst
               </Button>
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[220px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -54,7 +54,7 @@ const OnderzoekPaginaPage = () => {
               </Button>
             </div>
             <Button
-              className="cursor-pointer font-black h-14 leading-[normal] mr-[276px] mt-[21px] text-base text-center w-[220px]"
+              className="cursor-pointer font-black h-14 leading-[normal] mr-[276px] mt-[21px] text-base text-center w-[270px]"
               shape="round"
               color="teal_400"
               size="xl"
@@ -67,9 +67,9 @@ const OnderzoekPaginaPage = () => {
                 Taal
               </Text>
             </div>
-            <div className="flex sm:flex-col flex-row sm:gap-[46px] items-center justify-between w-[97%] md:w-full">
+            <div className="flex sm:flex-col flex-row sm:gap-[46px] items-center justify-between w-[100%] md:w-full">
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[220px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -78,7 +78,7 @@ const OnderzoekPaginaPage = () => {
                 Nederlands
               </Button>
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[220px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -87,13 +87,15 @@ const OnderzoekPaginaPage = () => {
                 English
               </Button>
             </div>
-            <Img
-              className="h-[638px] mt-[34px] w-[506px]"
-              src="images/img_frame21.svg"
-              alt="framefiftyfour"
-            />
-            <Button
-              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mr-2.5 mt-[39px] text-center text-xl w-[486px]"
+              <Button
+              className="common-pointer cursor-pointer font-black h-[800px] leading-[normal] mr-2.5 mt-[39px] text-center text-xl w-[600px]"
+              shape="round"
+              color="blue_gray_100_01"
+              size="lg"
+              variant="fill"
+              ></Button>
+              <Button
+              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mr-2.5 mt-[39px] text-center text-xl w-[600px]"
               onClick={() => navigate("/menupagina")}
               shape="round"
               color="blue_gray_100_01"

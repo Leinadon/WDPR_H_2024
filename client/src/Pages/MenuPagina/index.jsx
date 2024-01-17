@@ -29,7 +29,7 @@ const MenuPaginaPage = () => {
         <div className="flex flex-col font-inter md:gap-10 gap-[74px] items-center justify-start mb-[228px] md:px-5 w-[100%] md:w-full">
           <Button
             className="common-pointer cursor-pointer flex h-14 items-center justify-center mt-[100px] w-[600px]"
-            onClick={() => navigate("/profielpagina")}
+            onClick={() => navigate("/profielervaringsdeskundigepagina")}
             rightIcon={
               <Img
                 className="md:h-auto h-full object-cover w-[50px]"
