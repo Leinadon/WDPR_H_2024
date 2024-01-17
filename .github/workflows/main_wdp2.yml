@@ -90,4 +90,4 @@ jobs:
           app-name: 'wdp2'
           slot-name: 'Production'
           # publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: release.zip
+          package: .net-app
