@@ -14,13 +14,13 @@ const SignUpPaginaPage = () => {
           <div className="flex flex-col items-center justify-start w-full">
             <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
               <Text
-                className="md:text-5xl text-6xl text-teal-400 items-left"
+                className="md:text-5xl text-6xl text-teal-400 items-left ml-[-60px]"
                 size="txtJockeyOneRegular60"
               >
                 Sign Up
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover w-[104px]"
+                className="md:h-auto h-full items-right object-cover ml-[-20px] w-[104px]"
                 src="images/img_reshotillustra.png"
                 alt="reshotillustra"
               />
@@ -33,7 +33,7 @@ const SignUpPaginaPage = () => {
             Maak een Account!
           </Text>
           <div className="flex flex-col justify-center font-inter w-[600px] ml-[400px] mt-[35px] ">
-            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Voornaam
               </Text>

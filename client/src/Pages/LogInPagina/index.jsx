@@ -14,7 +14,7 @@ const LogInPaginaPage = () => {
           <div className="flex flex-col items-center justify-start w-full">
             <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
               <Text
-                className="md:text-5xl text-6xl text-teal-400 items-left"
+                className="md:text-5xl text-6xl text-teal-400 items-left ml-[-50px]"
                 size="txtJockeyOneRegular60"
               >
                 Log In 
