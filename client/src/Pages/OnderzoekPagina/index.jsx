@@ -104,7 +104,7 @@ const OnderzoekPaginaPage = () => {
             </Button>
           </div>
         </div>
-        </div>
+      </div>
     </>
   );
 };

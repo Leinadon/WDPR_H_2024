@@ -72,7 +72,7 @@ const LogInPaginaPage = () => {
             ></Input>
               <div>
                 <Button
-                className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px]"
+                className="cursor-pointer font-black h-14 leading-[normal] mt-[100px] mr-3 text-center text-xl w-[600px]"
                 onClick={() => navigate("/menupagina")}
                 shape="round"
                 color="teal_400"
@@ -86,12 +86,31 @@ const LogInPaginaPage = () => {
               onClick={() => navigate("/loginpagina")}
               size="xs"
             ></Button>
+              <div>
+                <Text
+                className="flex flex-col items-center justify-center mt-[-60px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
+                size="text-white-A700 font-inter font-semibold"
+                style={{ fontSize: '28px' }}
+                >
+                Of
+                </Text>
+              </div>
+            <div>
+                <Button
+                className="cursor-pointer font-black h-14 leading-[normal] mt-[10px] mr-3 text-center text-xl w-[600px]"
+                shape="round"
+                color="teal_400"
+                size="lg"
+                variant="fill"
+                > Log in met Microsoft
+                </Button>
+              </div>
             <div
             className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[50px] justify-center p-2.5 w-[446px] sm:w-full"
             onClick={() => navigate("/signuppagina")}
           >
             <Text
-              className="text-3xl text-right justify-right text-white-A700 w-full"
+              className="text-3xl text-right justify-right text-white-A700 mt-[100px] w-full"
               size="txtInterSemiBold30"
             >
               <span className="text-white-A700 font-inter font-semibold">
