@@ -8,7 +8,11 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+env:
+  AZURE_WEBAPP_NAME: wdp2    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '14.x'                # set this to the node version to use'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,17 +44,22 @@ jobs:
           cd client
           npm install
           npm run build
+          # npm run test
   
       - name: dotnet publish
         run: dotnet publish -c Release -o ./web-app
-        # run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@0.6.1
+        with:
+          filename: release.zip
+          path: ./web-app
+          
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          # path: ${{env.DOTNET_ROOT}}/myapp
-          path: web-app
+          path: ./web-app
 
       
       - name: List Contents of Deployment Path
