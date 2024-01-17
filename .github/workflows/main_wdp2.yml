@@ -41,7 +41,7 @@ jobs:
           DISABLE_ESLINT_PLUGING: true
           CI: false
         run: |
-          # cd client
+          cd client
           npm install
           npm run build
           noom run test
