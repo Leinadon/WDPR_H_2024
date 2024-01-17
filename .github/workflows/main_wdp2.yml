@@ -84,7 +84,7 @@ jobs:
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3249F67A12FA4A319183C45FFDD72775 }}
 
       - name: List Contents of Deployment Path
-        run: ls -R ./web-app
+        run: ls -R .
         
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
