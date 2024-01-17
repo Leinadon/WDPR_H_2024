@@ -10,33 +10,29 @@ const OnderzoekPaginaPage = () => {
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
-        <div className="flex flex-col items-center justify-start max-w-[1332px] mb-[30px] mx-auto w-full">
-          <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-between w-full">
-            <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-center justify-start p-2.5 w-[460px] sm:w-full">
-              <div className="flex flex-col h-[97px] md:h-auto items-center justify-start p-2.5 w-[450px] sm:w-full">
+        <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
+          <div className="flex flex-col items-center justify-start w-full">
+            <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px]  md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
                 <Text
-                  className="md:text-5xl text-6xl text-teal-400 w-auto"
+                  className="md:text-5xl text-6xl text-teal-400 items-left ml-[-60px]"
                   size="txtJockeyOneRegular60"
                 >
                   Onderzoek
                 </Text>
-              </div>
-            </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
               <Img
-                className="common-pointer md:h-auto h-full object-cover w-full"
+                className="md:h-auto h-full object-cover w-[104px] ml-[-100px]"
                 src="images/img_reshotillustra.png"
                 alt="reshotillustra"
                 onClick={() => navigate("/menupagina")}
               />
             </div>
           </div>
-          <div className="flex flex-col font-inter items-end justify-start w-[38%] md:w-full">
-            <div className="flex flex-col h-11 md:h-auto items-center justify-center p-2.5 w-[496px] sm:w-full">
+          <div className="flex flex-col justify-center font-inter w-[600px] ml-[420px] mt-[35px] ">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Soort onderzoek
               </Text>
-            </div>
+            </div>  
             <div className="flex sm:flex-col flex-row sm:gap-[46px] items-center justify-between w-[97%] md:w-full">
               <Button
                 className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[220px]"
@@ -66,7 +62,7 @@ const OnderzoekPaginaPage = () => {
             >
               Online Opdracht
             </Button>
-            <div className="flex flex-col h-11 md:h-auto items-center justify-center mt-[17px] p-2.5 w-[496px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-center mt-[17px] p-2.5 w-[496px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Taal
               </Text>
