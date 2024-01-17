@@ -19,22 +19,23 @@ const MenuPaginaPage = () => {
           >
             Menu
           </Text>
-          <Img
-            className="md:h-auto h-full object-cover w-[104px] ml-[20px] mb-[]"
-            src="images/img_reshotillustra.png"
-            alt="reshotillustra"
-          />
+            <Img
+              className="md:h-auto h-full object-cover w-full"
+              src="images/img_Logo.png"
+              alt="Logo Accessobility"
+            />
         </div>
         </div>
         <div className="flex flex-col font-inter md:gap-10 gap-[74px] items-center justify-start mb-[228px] md:px-5 w-[100%] md:w-full">
           <Button
             className="common-pointer cursor-pointer flex h-14 items-center justify-center mt-[100px] w-[600px]"
-            onClick={() => navigate("/profielpagina")}
+            onClick={() => navigate("/profielervaringsdeskundigepagina")}
             rightIcon={
               <Img
                 className="md:h-auto h-full object-cover w-[50px]"
                 src="images/img_image1.png"
                 alt="imageOne"
+                style={{ filter: 'brightness()'}}
               />
             }
             shape="round"

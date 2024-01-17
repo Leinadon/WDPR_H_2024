@@ -23,8 +23,8 @@ const BedrijfMenuPaginaPage = () => {
             <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
               <Img
                 className="md:h-auto h-full object-cover w-full"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                src="images/img_Logo.png"
+                alt="Logo Accessobility"
               />
             </div>
           </div>
