@@ -8,7 +8,11 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+# env:
+#   AZURE_WEBAPP_NAME: wdp2    # set this to your application's name
+#   AZURE_WEBAPP_PACKAGE_PATH: './web-app'      # set this to the path to your web app project, defaults to the repository root
+#   NODE_VERSION: '14.x'                # set this to the node version to use'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,6 +35,9 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
+  
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ./web-app
 
       - name: Run npm build for React app
         env:
@@ -38,20 +45,16 @@ jobs:
           CI: false
         run: |
           cd client
-          npm install
+          npm ci
+          # npm install
           npm run build
-  
-      - name: dotnet publish
-        run: dotnet publish -c Release -o ./web-app
-        # run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
-
+          # npm run test
+          
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: .net-app
-          # path: ${{env.DOTNET_ROOT}}/myapp
-          path: web-app
-
+          name: net-app
+          path: ./web-app
       
       - name: List Contents of Deployment Path
         run: ls -R ./web-app
@@ -62,7 +65,8 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      # url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: wdp2.azurewebsites.net
     permissions:
       id-token: write #This is required for requesting the JWT
 
@@ -70,7 +74,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: .net-app
+          name: net-app
         
       - name: Login to Azure
         uses: azure/login@v1
@@ -78,11 +82,12 @@ jobs:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_567D8799A4794213BF48660DA66A24CB }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_E38FDB7A3803481FBA2E3C1354B94A93 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3249F67A12FA4A319183C45FFDD72775 }}
-
+        
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wdp2'
           slot-name: 'Production'
+          # publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Identity.UI;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
@@ -96,11 +98,11 @@ namespace WPR
             .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
         
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
             services.AddAuthorization();
             services.AddControllers();
-
+            services.AddRazorPages();
             services.AddLogging(builder =>
             {
                 builder.AddConsole();
@@ -122,7 +124,7 @@ namespace WPR
                 app.UseHsts();
             }
             
-            app.UsePathBase("https://wdp2.azurewebsites.net/");
+            //app.UsePathBase("https://wdp2.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

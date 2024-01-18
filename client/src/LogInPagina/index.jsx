@@ -1,11 +1,44 @@
 import React from "react";
 
 import { useNavigate } from "react-router-dom";
+import { loginRequest } from "../msalConfig";
+import { useMsal, MsalProvider } from '@azure/msal-react';
 
 import { Button, CheckBox, Img, Input, Text } from "components";
 
 const LogInPaginaPage = () => {
   const navigate = useNavigate();
+  const { instance } = useMsal();
+
+    let activeAccount;
+
+    if (instance) {
+        activeAccount = instance.getActiveAccount();
+    }
+    const handleLoginPopup = () => {
+        /**
+         * When using popup and silent APIs, we recommend setting the redirectUri to a blank page or a page
+         * that does not implement MSAL. Keep in mind that all redirect routes must be registered with the application
+         * For more information, please follow this link: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/login-user.md#redirecturi-considerations
+         */
+        instance
+            .loginPopup({
+                ...loginRequest,
+                redirectUri: '/MenuPagina',
+            })
+            .catch((error) => console.log(error));
+    };
+
+
+
+    const handleLogoutPopup = () => {
+        instance
+            .logoutPopup({
+                mainWindowRedirectUri: '/', // redirects the top level app after logout
+                account: instance.getActiveAccount(),
+            })
+            .catch((error) => console.log(error));
+    };
 
   return (
     <>
@@ -102,6 +135,7 @@ const LogInPaginaPage = () => {
                 color="teal_400"
                 size="lg"
                 variant="fill"
+                onClick={handleLoginPopup}
                 > Log in met Microsoft
                 </Button>
               </div>
