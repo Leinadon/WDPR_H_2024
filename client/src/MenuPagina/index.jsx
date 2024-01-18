@@ -32,10 +32,9 @@ const MenuPaginaPage = () => {
             onClick={() => navigate("/profielervaringsdeskundigepagina")}
             rightIcon={
               <Img
-                className="md:h-auto h-full object-cover w-[50px]"
+                className="md:h-full h-full object-cover max-w-[50px] max-h-[50px]"
                 src="images/img_image1.png"
                 alt="imageOne"
-                style={{ filter: 'brightness()'}}
               />
             }
             shape="round"
@@ -52,7 +51,7 @@ const MenuPaginaPage = () => {
             onClick={() => navigate("/onderzoekpagina")}
             rightIcon={
               <Img
-                className="md:h-auto h-full object-cover w-[50px]"
+                className="md:h-auto h-full object-cover w-[50px] h-[50px]"
                 src="images/img_reading.png"
                 alt="reading"
               />
@@ -71,7 +70,7 @@ const MenuPaginaPage = () => {
             onClick={() => navigate("/ondersteuningpagina")}
             rightIcon={
               <Img
-                className="md:h-auto h-full object-cover w-[50px]"
+                className="md:h-auto h-full object-cover max-w-[50px] max-h-[50px]"
                 src="images/img_image2.png"
                 alt="imageTwo"
               />
@@ -90,7 +89,7 @@ const MenuPaginaPage = () => {
             onClick={() => navigate("/chatpagina")}
             rightIcon={
               <Img
-                className="md:h-auto h-full object-cover w-[50px]"
+                className="md:h-auto h-full object-cover max-w-[50px] max-h-[50px]"
                 src="images/img_image2_44x46.png"
                 alt="imageTwo_One"
               />
