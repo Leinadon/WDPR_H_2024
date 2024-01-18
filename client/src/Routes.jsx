@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "NotFound";
+import InformatieLijstenBeheerderPaginaPage from "InformatieLijstenBeheerderPagina";
 
 const ProfielBeheerderPagina = React.lazy(
   () => import("ProfielBeheerderPagina"),
@@ -114,6 +115,10 @@ const ProjectRoutes = () => {
           <Route
             path="/profielbeheerderpagina"
             element={<ProfielBeheerderPagina />}
+          />
+          <Route
+            path="/informatielijstenbeheerder"
+            element={<InformatieLijstenBeheerderPaginaPage />}
           />
         </Routes>
       </Router>
