@@ -1,11 +1,37 @@
-import React from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import { Button, CheckBox, Img, Input, Text } from "components";
 
+import React, { useState, useEffect } from 'react';
+
 const ProfielPaginaPage = () => {
+  const [data, setData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Function to fetch data
+    const fetchData = async () => {
+      try {
+        // Make a GET request to the API endpoint
+        const response = await fetch('https://localhost:7258/api/users');
+
+        // Check if the request was successful (status code 200)
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        // Parse the JSON response
+        const result = await response.json();
+
+        // Update React state with the fetched data
+        setData(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -36,9 +62,21 @@ const ProfielPaginaPage = () => {
           <div className="flex flex-col justify-center font-inter w-[600px] ml-[400px] mt-[35px] ">
             <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Voornaam
+              <div>
+      <h1>Voornaam</h1>
+      <ul>
+        {data.map((item, index) => (
+          <li key={index}>
+            {/* Render the first name and last name */}
+            <strong>First Name:</strong> {item.firstName}, <strong>Last Name:</strong> {item.lastName}
+          </li>
+        ))}
+      </ul>
+    </div>
+  
+
               </Text>
-            </div>
+            </div>  
             <Input
               name="rectanglethree"
               placeholder=""
@@ -276,7 +314,6 @@ const ProfielPaginaPage = () => {
                 > Annuleren
                 </Button>
               </div>
-              
           </div>
         </div>
       </div>
