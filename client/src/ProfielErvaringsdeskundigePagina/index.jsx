@@ -16,9 +16,9 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
             </Text>
             <div className="flex flex-col h-[100px] md:h-auto items-start justify-start p-2.5 w-[116px]">
               <Img
-                className="md:h-auto h-full object-cover w-full"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full object-cover max-w-full"
+                src="images/img_Logo.png"
+                alt="Accessibilty Logo"
               />
             </div>
           </div>
@@ -49,8 +49,8 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               </div>
               <Img
                 className="absolute h-[150px] left-[2%] object-cover top-[0] w-[150px]"
-                src="images/img_images2modified.png"
-                alt="images2modified"
+                src="images/img_Stock_Image.png"
+                alt="Stock Image"
               />
             </div>
             <div className="flex flex-col h-[117px] md:h-auto items-center justify-center mt-[15px] p-2.5 w-[486px] sm:w-full">
@@ -73,8 +73,8 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               className="cursor-pointer flex h-[60px] items-center justify-center mt-[15px] w-[486px]"
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[95px]"
-                  src="images/img_image12.png"
+                  className="ml-2.5 mr-[95px] max-w-[50px]"
+                  src="images/img_Profile_Change.png"
                   alt="imageTwelve"
                 />
               }

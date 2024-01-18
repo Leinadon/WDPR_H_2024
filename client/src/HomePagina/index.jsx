@@ -20,9 +20,9 @@ const HomePaginaPage = () => {
         </div>
         <div className="flex flex-col h-[269px] md:h-auto items-center justify-center max-w-[836px] mt-7 p-2.5 w-full">
           <Img
-            className="md:h-auto h-full object-cover w-full"
-            src="images/img_reshotillustra.png"
-            alt="reshotillustra"
+            className="md:h-auto h-full object-cover max-w-full"
+            src="images/img_Logo.png"
+            alt="Accessibility Logo"
           />
         </div>
         <div className="flex flex-col font-jockeyone h-[70px] md:h-auto items-center justify-center max-w-[1336px] mt-7 mx-auto py-2.5 w-full">

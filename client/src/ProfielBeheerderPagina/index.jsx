@@ -1,8 +1,10 @@
 import React from "react";
 
 import { Button, Img, Text } from "components";
+import { useNavigate } from "react-router-dom";
 
 const ProfielBeheerderPaginaPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -16,11 +18,11 @@ const ProfielBeheerderPaginaPage = () => {
                 Profiel
               </Text>
             </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
+            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 max-w-[116px]">
               <Img
-                className="h-[79px] md:h-auto object-cover w-24"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full object-cover w-full"
+                src="images/img_Logo.png"
+                alt="Logo Accessibility"
               />
             </div>
           </div>
@@ -49,11 +51,12 @@ const ProfielBeheerderPaginaPage = () => {
             </Text>
             <Button
               className="cursor-pointer flex h-14 items-center justify-center mt-[159px] w-[486px]"
+              onClick={() => navigate("/ProfielPaginaBeheerderPage")}
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[97px]"
+                  className= "md:h-full h-full object-cover max-w-[150px] max-h-[150px]"
                   src="images/img_image12.png"
-                  alt="imageTwelve"
+                  alt="Afbeelding profiel aanpassen"
                 />
               }
               shape="round"
@@ -67,6 +70,7 @@ const ProfielBeheerderPaginaPage = () => {
             </Button>
             <Button
               className="cursor-pointer font-black h-14 leading-[normal] mt-[74px] text-center text-xl w-[486px]"
+              onClick={() => navigate("/menubeheerderpagina")}
               shape="round"
               color="blue_gray_100_01"
               size="lg"

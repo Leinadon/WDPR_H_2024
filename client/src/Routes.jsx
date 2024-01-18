@@ -108,10 +108,6 @@ const ProjectRoutes = () => {
             element={<MenuBeheerderPagina />}
           />
           <Route
-            path="/profielpaginabeheerder"
-            element={<ProfielPaginaBeheerder />}
-          />
-          <Route
             path="/profielbeheerderpagina"
             element={<ProfielBeheerderPagina />}
           />

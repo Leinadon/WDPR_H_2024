@@ -20,7 +20,7 @@ const MenuPaginaPage = () => {
             Menu
           </Text>
             <Img
-              className="md:h-auto h-full object-cover w-full"
+              className="md:h-auto h-full object-cover max-w-full"
               src="images/img_Logo.png"
               alt="Logo Accessobility"
             />
@@ -33,12 +33,12 @@ const MenuPaginaPage = () => {
             rightIcon={
               <Img
                 className="md:h-full h-full object-cover max-w-[50px] max-h-[50px]"
-                src="images/img_image1.png"
-                alt="imageOne"
+                src="images/img_Profile.png"
+                alt="Profiel afbeelding"
               />
             }
             shape="round"
-            color="teal_400" 
+            color="teal_400"
             size="sm"
             variant="fill"
           >
@@ -71,8 +71,8 @@ const MenuPaginaPage = () => {
             rightIcon={
               <Img
                 className="md:h-auto h-full object-cover max-w-[50px] max-h-[50px]"
-                src="images/img_image2.png"
-                alt="imageTwo"
+                src="images/img_Contact.png"
+                alt="Contact afbeelding"
               />
             }
             shape="round"
@@ -90,8 +90,8 @@ const MenuPaginaPage = () => {
             rightIcon={
               <Img
                 className="md:h-auto h-full object-cover max-w-[50px] max-h-[50px]"
-                src="images/img_image2_44x46.png"
-                alt="imageTwo_One"
+                src="images/img_Chats.png"
+                alt="Chats afbeelding"
               />
             }
             shape="round"

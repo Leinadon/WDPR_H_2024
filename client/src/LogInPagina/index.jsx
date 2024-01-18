@@ -53,9 +53,9 @@ const LogInPaginaPage = () => {
                 Log In 
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Accessibility Logo"
               />
             </div>
           </div>
@@ -144,7 +144,7 @@ const LogInPaginaPage = () => {
             onClick={() => navigate("/signuppagina")}
           >
             <Text
-              className="text-3xl text-right justify-right text-white-A700 mt-[100px] w-full"
+              className="text-3xl text-right justify-right text-white-A700 mt-[50px] w-full"
               size="txtInterSemiBold30"
             >
               <span className="text-white-A700 font-inter font-semibold">
