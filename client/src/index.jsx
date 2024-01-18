@@ -4,6 +4,7 @@ import App from './App';
 import { PublicClientApplication, EventType } from '@azure/msal-browser';
 import { msalConfig } from './msalConfig';
 
+import "./styles/App.css";
 import './styles/index.css';
 
 /**
