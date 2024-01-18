@@ -272,8 +272,8 @@ const ProfielPaginaPage = () => {
                 color="blue_gray_100_01"
                 size="lg"
                 variant="fill"
-                onClick={() => navigate("/menupagina")}
-                > Terug naar Menu
+                onClick={() => navigate("/profielervaringsdeskundigepagina")}
+                > Annuleren
                 </Button>
               </div>
               
