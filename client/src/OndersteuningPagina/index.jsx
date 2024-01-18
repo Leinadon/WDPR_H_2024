@@ -108,7 +108,7 @@ const OndersteuningPaginaPage = () => {
           </div>
           <div className="flex flex-col font-jockeyone h-[90px] md:h-auto items-left justify-center mt-[45px] p-2.5 w-[600px] ml-[-20px] sm:w-full">
             <Text
-              className="text-4xl sm:text-[32px] md:text-[34px] text-white-A700 w-72"
+              className="text-4xl sm:text-[32px] md:text-[34px] text-white-A700 w-[600px]"
               size="txtJockeyOneRegular36"
             >
               Stuur ons een bericht!
@@ -168,8 +168,8 @@ const OndersteuningPaginaPage = () => {
             <TextArea
               name="rectangleseven"
               placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 mt-2.5 mb-2.5 w-full"
-              wrapClassName="flex h-[500px] ml-1 md:ml-[0] h-[500px] mt-1 rounded-[54px]"
+              className="p-0 placeholder:bg-deep_orange-50 items-center justify-center ml-[4px] max-w-[592px] mb-2.5 w-full rounded-[10px]"
+              wrapClassName="flex h-[500px] ml-1 md:ml-[0] h-[500px] mt-1"
               shape="round"
               backgroundcolor="deep_orange_50"
               variant="fill"
