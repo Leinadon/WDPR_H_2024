@@ -11,6 +11,7 @@ using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.OpenApi.Models;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
@@ -22,11 +23,12 @@ using Microsoft.EntityFrameworkCore;
 
 
 
+
 namespace WPR
 {
     public class Startup
     {
-        
+
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -35,7 +37,8 @@ namespace WPR
         }
 
 
-        public void ConfigureServices(IServiceCollection services){
+        public void ConfigureServices(IServiceCollection services)
+        {
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<ICompanyService, CompanyService>();
@@ -61,7 +64,7 @@ namespace WPR
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IResearchRepository, ResearchRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            
+
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("AZURE_REDIS_CONNECTIONSTRING");
@@ -85,7 +88,7 @@ namespace WPR
                 options.SignIn.RequireConfirmedEmail = true;
                 options.SignIn.RequireConfirmedAccount = true;
             });
-            services.ConfigureApplicationCookie(options => 
+            services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
@@ -97,7 +100,7 @@ namespace WPR
             .AddDefaultTokenProviders()
             .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
-        
+
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
             services.AddAuthorization();
@@ -106,11 +109,28 @@ namespace WPR
             services.AddLogging(builder =>
             {
                 builder.AddConsole();
-            });
-            
 
+            });
+
+            services.AddSwaggerGen(
+                // c =>
+            //    {
+            //        c.SwaggerDoc("v1", new OpenApiInfo { Title = "WPR", Version = "v1" });
+            //    }
+            );
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowLocalhost",
+                builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
+                });
+            });
         }
-            
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -123,10 +143,12 @@ namespace WPR
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            
-            //app.UsePathBase("https://wdp2.azurewebsites.net/");
+
+            //app.UsePathBase("https://accessibilityh.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseCors("AllowLocalhost");
 
             app.UseRouting();
 
@@ -137,6 +159,14 @@ namespace WPR
             {
                 endpoints.MapControllers();
             });
+
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            // c => {
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "WPR");
+            // }
+            // );
         }
     }
 }

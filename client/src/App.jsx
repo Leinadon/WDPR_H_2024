@@ -6,8 +6,8 @@ import "./styles/App.css";
 
 function App() {
 
-        const { instance } = useMsal();
-        const activeAccount = instance.getActiveAccount();
+        // const { instance } = useMsal();
+        // const activeAccount = instance.getActiveAccount();
 
         return <Routes />;
 }
