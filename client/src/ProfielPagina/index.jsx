@@ -14,7 +14,7 @@ const ProfielPaginaPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://localhost:7258/api/users');
-        const data = await response.json();
+        const data = await response.data;
         setJsonData(data);
       } catch (error) {
         console.error('Error fetching JSON data:', error);
@@ -60,8 +60,20 @@ const ProfielPaginaPage = () => {
               </Text>
             <div>
             
+            {Array.isArray(jsonData) ? (
+        jsonData.map((jsonData, index) => (
+          <div key={index}>
+            <p>Name: {jsonData.firstName}</p>
+            {/* Add more properties as needed */}
+          </div>
+        ))
+      ) : (
+        <p>Loading or no data available</p>
+      )}
+    </div>
+    
 
-            </div>
+            
             </div>
             <div>
             <Input
