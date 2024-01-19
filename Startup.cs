@@ -26,7 +26,7 @@ namespace WPR
 {
     public class Startup
     {
-        
+
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -35,7 +35,8 @@ namespace WPR
         }
 
 
-        public void ConfigureServices(IServiceCollection services){
+        public void ConfigureServices(IServiceCollection services)
+        {
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<ICompanyService, CompanyService>();
@@ -61,7 +62,7 @@ namespace WPR
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IResearchRepository, ResearchRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            
+
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("AZURE_REDIS_CONNECTIONSTRING");
@@ -85,7 +86,7 @@ namespace WPR
                 options.SignIn.RequireConfirmedEmail = true;
                 options.SignIn.RequireConfirmedAccount = true;
             });
-            services.ConfigureApplicationCookie(options => 
+            services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
@@ -97,7 +98,7 @@ namespace WPR
             .AddDefaultTokenProviders()
             .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
-        
+
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
             services.AddAuthorization();
@@ -107,10 +108,18 @@ namespace WPR
             {
                 builder.AddConsole();
             });
-            
+
+            services.AddCors(options =>
+                   {
+                       options.AddPolicy("ReactPolicy",
+                           builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's URL
+                                             .AllowAnyMethod()
+                                             .AllowAnyHeader()
+                                             .AllowCredentials());
+                   });
 
         }
-            
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -123,7 +132,7 @@ namespace WPR
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            
+
             //app.UsePathBase("https://wdp2.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -133,11 +142,16 @@ namespace WPR
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+            app.UseCors("ReactPolicy");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
+
+
     }
 }
 
