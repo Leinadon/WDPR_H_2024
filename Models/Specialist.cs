@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WPR;
 
 namespace WPR
 {
@@ -9,6 +8,7 @@ namespace WPR
 
     {
         public int LocationId {get; set;}
+        [NotMapped]
         [ForeignKey(nameof(LocationId))]
         public Location? Location { get; set; }
 
@@ -23,10 +23,9 @@ namespace WPR
         public bool ApproachCommercialParties { get; set; }
         public string TrackingID { get; set; }
         public int GuardianID{get; set;}
-        [ForeignKey(nameof(GuardianID))]
+        [NotMapped][ForeignKey(nameof(GuardianID))]
         public Guardian? Guardian { get; set; }
         
-
         public Specialist(){
             ToolsUsing = string.Empty;
             DisabilityNote = string.Empty;

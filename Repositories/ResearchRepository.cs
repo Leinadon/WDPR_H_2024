@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Expressions;
 
 namespace WPR
 {
@@ -65,7 +64,7 @@ namespace WPR
 
             _dbContext.Researches.Add(questionnaire);
             await _dbContext.SaveChangesAsync();
-            return questionnaire;
+            return questionnaire;   
         }
         public async Task<Interview> CreateInterview(Interview interview)
         {

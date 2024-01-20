@@ -33,7 +33,7 @@ const SignUpPaginaPage = () => {
             Maak een Account!
           </Text>
           <div className="flex flex-col justify-center font-inter w-[600px] ml-[420px] mt-[35px] ">
-            <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Voornaam
               </Text>

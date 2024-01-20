@@ -6,7 +6,7 @@ import { Button, Img, Text } from "components";
 
 const HomePaginaPage = () => {
   const navigate = useNavigate();
-
+  
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col items-center justify-start mx-auto p-[47px] md:px-10 sm:px-5 w-full">

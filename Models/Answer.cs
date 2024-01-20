@@ -1,12 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Dynamic;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
+
 
 
 namespace WPR
@@ -21,14 +16,16 @@ namespace WPR
 
         [ForeignKey(nameof(QuestionID))]
         [DeleteBehavior(DeleteBehavior.NoAction)]
-        
+        [NotMapped]
         public Question? Question{get; set;}
         
         [ForeignKey(nameof(SpecialistID))]
+        [NotMapped]
         public Specialist? Specialist{get; private set;}
         public string SpecialistID{get; set;}
 
         [ForeignKey(nameof(DoesResearchID))]
+        [NotMapped]
         [DeleteBehavior(DeleteBehavior.NoAction)]
         public DoesResearch? DoesResearch{ get; set;}
         public int DoesResearchID{get;set;}

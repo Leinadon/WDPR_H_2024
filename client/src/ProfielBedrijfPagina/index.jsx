@@ -1,8 +1,13 @@
-import React from "react";
+
+
+import { useNavigate } from "react-router-dom";
 
 import { Button, Img, Text } from "components";
 
+import React, { useState, useEffect } from 'react';
+
 const ProfielBedrijfPaginaPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -88,6 +93,7 @@ const ProfielBedrijfPaginaPage = () => {
             </Button>
             <Button
               className="cursor-pointer font-black h-14 leading-[normal] mt-[47px] text-center text-xl w-[486px]"
+              onClick={() => navigate("/bedrijfmenupagina")}
               shape="round"
               color="blue_gray_100_01"
               size="lg"

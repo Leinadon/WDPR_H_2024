@@ -2,7 +2,7 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { Button, Img, Text } from "components";
+import { Button, Img, Text, Input } from "components";
 
 const OnderzoekPaginaPage = () => {
   const navigate = useNavigate();
@@ -87,13 +87,13 @@ const OnderzoekPaginaPage = () => {
                 English
               </Button>
             </div>
-              <Button
-              className="common-pointer cursor-pointer font-black h-[800px] leading-[normal] mr-2.5 mt-[39px] text-center text-xl w-[600px]"
-              shape="round"
-              color="blue_gray_100_01"
-              size="lg"
-              variant="fill"
-              ></Button>
+            <div className="flex flex-col h-11 md:h-auto items-left justify-center mt-[17px] p-2.5 w-[496px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+                Resultaten:
+              </Text>
+            </div>
+            <div className="bg-deep_orange-50 flex flex-col gap-[58px] mt-[6px] items-center justify-center h-[600px] py-[21px] rounded-[27px] w-[600px] md:w-full">
+            </div>
               <Button
               className="common-pointer cursor-pointer font-black h-14 leading-[normal] mr-2.5 mt-[39px] text-center text-xl w-[600px]"
               onClick={() => navigate("/menupagina")}
@@ -107,6 +107,7 @@ const OnderzoekPaginaPage = () => {
           </div>
         </div>
       </div>
+      
     </>
   );
 };

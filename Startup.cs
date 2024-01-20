@@ -1,14 +1,5 @@
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Graph.Models;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.OpenApi.Models;
@@ -19,10 +10,6 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-
-
-
-
 
 namespace WPR
 {
@@ -109,26 +96,18 @@ namespace WPR
             services.AddLogging(builder =>
             {
                 builder.AddConsole();
-
             });
-
-            services.AddSwaggerGen(
-                // c =>
-            //    {
-            //        c.SwaggerDoc("v1", new OpenApiInfo { Title = "WPR", Version = "v1" });
-            //    }
-            );
 
             services.AddCors(options =>
-            {
-                options.AddPolicy("AllowLocalhost",
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:3000")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
-                });
-            });
+                   {
+                       options.AddPolicy("ReactPolicy",
+                           builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's URL
+                                             .AllowAnyMethod()
+                                             .AllowAnyHeader()
+                                             .AllowCredentials());
+                   });
+            services.AddSwaggerGen();
+
         }
 
 
@@ -154,13 +133,16 @@ namespace WPR
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            app.UseCors("ReactPolicy");
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-
+            
             app.UseSwagger();
             app.UseSwaggerUI();
             // c => {

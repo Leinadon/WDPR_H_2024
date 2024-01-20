@@ -2,25 +2,23 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
-import { Img, Line, Text } from "components";
+import { Img, Line, Text, Button, Input } from "components";
 
 const ChatPaginaPage = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[45px] md:px-10 sm:px-5 w-full">
-        <div className="flex flex-col gap-[17px] items-center justify-start max-w-[1332px] mb-[121px] mx-auto w-full">
-          <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-between w-full">
-            <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-center justify-start p-2.5 w-[460px] sm:w-full">
+      <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-center mx-auto p-[43px] md:px-10 sm:px-5 w-full">
+        <div className="flex flex-col justify-center items-center max-w-[1440px] mb-[108px] mx-auto w-full">
+          <div className="flex flex-col items-center justify-center w-full">
+            <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
               <Text
-                className="md:text-5xl text-6xl text-teal-400 w-auto"
+                className="md:text-5xl text-6xl text-teal-400 items-left ml-[-60px]"
                 size="txtJockeyOneRegular60"
               >
                 Chats
               </Text>
-            </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
               <Img
                 className="common-pointer md:h-auto h-full object-cover w-full"
                 src="images/img_reshotillustra.png"
@@ -29,22 +27,46 @@ const ChatPaginaPage = () => {
               />
             </div>
           </div>
-          <div className="bg-deep_orange-50 flex flex-col gap-[58px] items-center justify-start py-[21px] rounded-[27px] w-[37%] md:w-full">
-            <div className="bg-deep_orange-50 border-[3px] border-black-900 border-solid flex flex-row items-center justify-between p-3 rounded-[27px] w-[92%] md:w-full">
-              <Text
-                className="text-gray-500 text-xl w-[1000px]"
-                size="txtJockeyOneRegular20"
-              >
-                Zoek hier...
-              </Text>
+          <div className="bg-deep_orange-50 flex flex-col gap-[58px] mt-[50px] items-center justify-center py-[21px] rounded-[27px] w-[600px] md:w-full">
+            <div className="bg-deep_orange-50 border-[3px] h-[60px] mb-[-30px] border-black-900 border-solid flex flex-row items-center justify-between p-3 rounded-[27px] w-[560px] md:w-full">
+            <Input
+              name="rectanglethree"
+              placeholder="Zoek hier..."
+              className="p-0 placeholder:bg-deep_orange-50 w-full"
+              wrapClassName="flex w-[450px] h-[30px] ml-1 md:ml-[0] rounded-[54px]"
+              shape="round"
+              color="deep_orange_50"
+              variant="fill"
+              style={{ fontSize: '20px' }}
+            ></Input>
+            <Button
+              className=""
+              wrapClassName=""
+              shape=""
+              color=""
+              size="lg"
+              variant="fill"
+            >
               <Img
                 className="h-[30px] md:h-auto mr-[7px] object-cover w-[30px]"
                 src="images/img_image5.png"
                 alt="imagefive"
               />
+            </Button>
+                
             </div>
-            <Line className="bg-blue_gray-100_02 h-0.5 mb-[444px] rotate-[180deg] w-full" />
+            <Line className="bg-blue_gray-100_02 h-0.5 mb-[480px] rotate-[180deg] w-full" />
           </div>
+          <Button
+              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mr-2.5 mt-[60px] text-center text-xl w-[600px]"
+              onClick={() => navigate("/menupagina")}
+              shape="round"
+              color="blue_gray_100_01"
+              size="lg"
+              variant="fill"
+            >
+              Terug naar Menu
+            </Button>
         </div>
       </div>
     </>
