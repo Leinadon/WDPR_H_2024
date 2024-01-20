@@ -2,36 +2,28 @@ import { useNavigate } from "react-router-dom";
 
 import { Button, CheckBox, Img, Input, Text } from "components";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
 
 const ProfielPaginaPage = () => {
-  const [data, setData] = useState([]);
+  const [jsonData, setJsonData] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Function to fetch data
     const fetchData = async () => {
       try {
-        // Make a GET request to the API endpoint
-        const response = await fetch('https://localhost:7258/api/users');
-
-        // Check if the request was successful (status code 200)
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        // Parse the JSON response
-        const result = await response.json();
-
-        // Update React state with the fetched data
-        setData(result);
+        const response = await axios.get('https://localhost:7258/api/users');
+        const data = await response.data;
+        setJsonData(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching JSON data:', error);
+        console.log('Server Response:', error.response); // Log the response for more details
       }
     };
 
     fetchData();
-  }, []);
+  }, []); // Run once on component mount
 
   return (
     <>
@@ -62,21 +54,28 @@ const ProfielPaginaPage = () => {
           <div className="flex flex-col justify-center font-inter w-[600px] ml-[400px] mt-[35px] ">
             <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-              <div>
-      <h1>Voornaam</h1>
-      <ul>
-        {data.map((item, index) => (
-          <li key={index}>
-            {/* Render the first name and last name */}
-            <strong>First Name:</strong> {item.firstName}, <strong>Last Name:</strong> {item.lastName}
-          </li>
-        ))}
-      </ul>
-    </div>
-  
-
+                <div>
+                  <h1>Voornaam</h1>
+                </div>
               </Text>
-            </div>  
+            <div>
+            
+            {Array.isArray(jsonData) ? (
+        jsonData.map((jsonData, index) => (
+          <div key={index}>
+            <p>Name: {jsonData.firstName}</p>
+            {/* Add more properties as needed */}
+          </div>
+        ))
+      ) : (
+        <p>Loading or no data available</p>
+      )}
+    </div>
+    
+
+            
+            </div>
+            <div>
             <Input
               name="rectanglethree"
               placeholder=""
@@ -85,8 +84,11 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              value={jsonData.firstName}
+              type="text"
+              style={{ fontSize: "20px", color: 'black'}}
             ></Input>
+            </div>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Achternaam
@@ -100,7 +102,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -115,7 +117,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -130,7 +132,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -145,9 +147,9 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
             ></Input>
-           <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Postcode
               </Text>
@@ -160,7 +162,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -175,13 +177,13 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Type Beperking
-                </Text>
-              </div>  
+              </Text>
+            </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[16px] w-[24%] md:w-full">
               <CheckBox
                 className="my-0.5"
@@ -283,37 +285,41 @@ const ProfielPaginaPage = () => {
             </div>
             <div>
               <Input
-              name="rectanglesix"
-              placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-              shape="round"
-              color="deep_orange_50"
-              variant="fill"
-              style={{ fontSize: '20px' }}
+                name="rectanglesix"
+                placeholder=""
+                className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+                wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
+                shape="round"
+                color="deep_orange_50"
+                variant="fill"
+                style={{ fontSize: "20px" }}
               ></Input>
             </div>
-              <div>
-                <Button
+            <div>
+              <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px]"
                 shape="round"
                 color="teal_400"
                 size="lg"
                 variant="fill"
-                > Opslaan
-                </Button>
-              </div>
-              <div>
-                <Button
+              >
+                {" "}
+                Opslaan
+              </Button>
+            </div>
+            <div>
+              <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[80px] text-center text-xl w-[600px]"
                 shape="round"
                 color="blue_gray_100_01"
                 size="lg"
                 variant="fill"
                 onClick={() => navigate("/profielervaringsdeskundigepagina")}
-                > Annuleren
-                </Button>
-              </div>
+              >
+                {" "}
+                Annuleren
+              </Button>
+            </div>
           </div>
         </div>
       </div>

@@ -2,46 +2,35 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../msalConfig";
-import { useMsal, MsalProvider } from '@azure/msal-react';
+import { UnauthenticatedTemplate, useMsal, MsalProvider} from '@azure/msal-react';
 
 import { Button, CheckBox, Img, Input, Text } from "components";
+import { msalInstance } from "index";
 
 const LogInPaginaPage = () => {
   const navigate = useNavigate();
-  const { instance } = useMsal();
-
-    let activeAccount;
-
-    if (instance) {
-        activeAccount = instance.getActiveAccount();
+    
+    function signInClickHandler(instance) {
+      instance.loginPopup()
+      .then(response =>{
+        navigate("/menupagina");
+        console.log('Login successful', response);
+        
+      });
     }
-    const handleLoginPopup = () => {
-        /**
-         * When using popup and silent APIs, we recommend setting the redirectUri to a blank page or a page
-         * that does not implement MSAL. Keep in mind that all redirect routes must be registered with the application
-         * For more information, please follow this link: https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/login-user.md#redirecturi-considerations
-         */
-        instance
-            .loginPopup({
-                ...loginRequest,
-                redirectUri: '/MenuPagina',
-            })
-            .catch((error) => console.log(error));
-    };
+    
 
 
-
-    const handleLogoutPopup = () => {
-        instance
-            .logoutPopup({
-                mainWindowRedirectUri: '/', // redirects the top level app after logout
-                account: instance.getActiveAccount(),
-            })
-            .catch((error) => console.log(error));
-    };
+    // const handleLogoutPopup = () => {
+    //   msalInstance
+    //         .logoutPopup({
+    //             mainWindowRedirectUri: '/', // redirects the top level app after logout
+    //             account: msalInstance.getActiveAccount(),
+    //         })
+    //         .catch((error) => console.log(error));
+    // };
 
   return (
-    <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
         <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
           <div className="flex flex-col items-center justify-start w-full">
@@ -127,18 +116,18 @@ const LogInPaginaPage = () => {
                 >
                 Of
                 </Text>
-              </div>
-            <div>
-                <Button
-                className="cursor-pointer font-black h-14 leading-[normal] mt-[10px] mr-3 text-center text-xl w-[600px]"
-                shape="round"
-                color="teal_400"
-                size="lg"
-                variant="fill"
-                onClick={handleLoginPopup}
-                > Log in met Microsoft
-                </Button>
-              </div>
+              </div>        
+                <div>
+                  <Button
+                    className="cursor-pointer font-black h-14 leading-[normal] mt-[10px] mr-3 text-center text-xl w-[600px]"
+                    shape="round"
+                    color="teal_400"
+                    size="lg"
+                    variant="fill"
+                    onClick={ ()=> signInClickHandler(msalInstance)}
+                    > Log in met Microsoft
+                    </Button>
+                </div>
             <div
             className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[50px] justify-center p-2.5 w-[446px] sm:w-full"
             onClick={() => navigate("/signuppagina")}
@@ -161,7 +150,7 @@ const LogInPaginaPage = () => {
           </div>
         </div>
       </div>
-    </>
+    
   );
 };  
 
