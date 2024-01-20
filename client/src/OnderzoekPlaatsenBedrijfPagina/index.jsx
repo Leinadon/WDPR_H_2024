@@ -10,6 +10,8 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
   const [startdate, setStartdate] = useState();
   const [location, setLocation] = useState();
   const [reward, setReward] = useState("60 euro");
+
+  const [disabilityType, setDisability] = useState();
   const [categories, setCategories] = useState({
     FysiekBox: false,
     ZintuigelijkBox: false,
@@ -17,9 +19,8 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
     NeurologischBox: false,
     OntwikkelingBox: false,
   });
-  
-  console.log(startdate)
-  
+
+
   const CheckboxChange = (category) => {
     setCategories((prevCategories) => ({
       ...prevCategories,
@@ -29,6 +30,9 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
 
 
   function CreateResearch() {
+    console.log(startdate)
+    console.log(disabilityType)
+
     fetch("https://localhost:7258/api/research/interview/", {
 
       method: "POST",
@@ -40,12 +44,22 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
       body: JSON.stringify({
         "title": title,
         "description": description,
-        "Location": location,
+        "startDate": startdate,
+        "reward": reward,
+        "status": "Open",
+
+        // "Location": location,
         "categories": categories,
-        "Reward": reward,
-        "English": english,
-        "Status": "open",
-        "companyId": 1
+        "companyId": 2,
+
+        "english": english,
+        "disabilityTypeId": disabilityType,
+        
+        "disabilityType": {
+          "id": disabilityType,
+          "type": "disability",
+          "details": "details"
+        }
       })
     }
     ).then(response => response.json())
@@ -82,10 +96,10 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
 
             <Text className="mt-[22px] text-white-A700 text-xl" size="txtInterBlack20">Datum</Text>
             <Input name="datepicker" type="datetime-local" placeholder="" className="p-0 w-full" wrapClassName="flex h-[54px] mt-3.5 w-full" shape="round" color="deep_orange_50" variant="fill"
-            value={startdate}
-            onChange={
-              (e) => setStartdate(e.target.value)
-            }
+              value={startdate}
+              onChange={
+                (e) => setStartdate(e.target.value)
+              }
             ></Input>
 
 
@@ -110,44 +124,49 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             <Text className="mt-5 text-white-A700 text-xl" size="txtInterBlack20">Type Beperking</Text>
             <div className="flex flex-row gap-[63px] items-start justify-start mt-4 w-[30%] md:w-full">
               {/* <CheckBox name="rectanglefive" placeholder="" className="p-0 w-full" wrapClassName="flex h-5 my-0.5 rounded-[3px] w-5" color="blue_gray_100" variant="fill" id=""></CheckBox> */}
-              <CheckBox className="my-0.5" inputClassName="h-5 mr-[5px] rounded-[3px] w-5" name="FysiekBox" id="FysiekBox" shape="round" color="blue_gray_100" variant="fill"
-                checked={categories.FysiekBox}
-                onChange={() => CheckboxChange('Fysiek')}>
-              </CheckBox>
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5"  name="disabilities" id="FysiekBox" shape="round" color="blue_gray_100" variant="fill"
+                // checked={categories.FysiekBox}
+                onChange={() => setDisability(1)}>
+                {/* onChange={() => CheckboxChange('Fysiek')}> */}
+              </input>
 
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Fysiek</Text>
             </div>
 
             <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-2/5 md:w-full">
-              <CheckBox className="my-0.5" inputClassName="h-5 mr-[5px] rounded-[3px] w-5" name="ZintuigelijkBox" id="ZintuigelijkBox" shape="round" color="blue_gray_100" variant="fill"
-                checked={categories.ZintuigelijkBox}
-                onChange={() => CheckboxChange('Zintuigelijk')}>
-              </CheckBox>
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="ZintuigelijkBox" shape="round" color="blue_gray_100" variant="fill"
+                // checked={categories.ZintuigelijkBox}
+                onChange={() => setDisability(2)}>
+                {/* onChange={() => CheckboxChange('Zintuigelijk')}> */}
+              </input>
 
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Zintuigelijk</Text>
             </div>
 
             <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-[36%] md:w-full">
-              <CheckBox className="my-0.5" inputClassName="h-5 mr-[5px] rounded-[3px] w-5" name="CognitiefBox" id="CognitiefBox" shape="round" color="blue_gray_100" variant="fill"
-                checked={categories.CognitiefBox}
-                onChange={() => CheckboxChange('Cognitief')}>
-              </CheckBox>
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="CognitiefBox" shape="round" color="blue_gray_100" variant="fill"
+                // checked={categories.CognitiefBox}
+                onChange={() => setDisability(3)}>
+                {/* onChange={() => CheckboxChange('Cognitief')}> */}
+              </input>
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Cognitief</Text>
             </div>
 
             <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-[44%] md:w-full">
-              <CheckBox className="my-0.5" inputClassName="h-5 mr-[5px] rounded-[3px] w-5" name="NeurologischBox" id="NeurologischBox" shape="round" color="blue_gray_100" variant="fill"
-                checked={categories.NeurologischBox}
-                onChange={() => CheckboxChange('Neurologisch')}>
-              </CheckBox>
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="NeurologischBox" shape="round" color="blue_gray_100" variant="fill"
+                // checked={categories.NeurologischBox}
+                onChange={() => setDisability(4)}>
+                {/*  onChange={() => CheckboxChange('Neurologisch')}> */}
+              </input>
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Neurologisch</Text>
             </div>
 
             <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-[43%] md:w-full">
-              <CheckBox className="my-0.5" inputClassName="h-5 mr-[5px] rounded-[3px] w-5" name="OntwikkelingBox" id="OntwikkelingBox" shape="round" color="blue_gray_100" variant="fill"
-                checked={categories.OntwikkelingBox}
-                onChange={() => CheckboxChange('Ontwikkeling')}>
-              </CheckBox>
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="OntwikkelingBox" shape="round" color="blue_gray_100" variant="fill"
+                // checked={categories.OntwikkelingBox}
+                onChange={() => setDisability(5)}>
+                {/* onChange={() => CheckboxChange('Ontwikkeling')}> */}
+              </input>
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Ontwikkeling</Text>
             </div>
 
@@ -186,7 +205,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
               }
             ></TextArea>
 
-            <Text className="mt-9 text-center text-white-A700 text-xl" size="txtInterBlack20">Postcode</Text>
+            {/* <Text className="mt-9 text-center text-white-A700 text-xl" size="txtInterBlack20">Postcode</Text>
             <Input name="rectangleten" placeholder="" className="p-0 w-full" wrapClassName="flex h-[54px] mt-[19px] w-full" shape="round" color="deep_orange_50" variant="fill"
               id="title"
               value={location}
@@ -195,7 +214,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
               onChange={
                 (e) => setLocation(e.target.value)
               }
-            ></Input>
+            ></Input> */}
 
             <Text className="mt-10 text-white-A700 text-xl" size="txtInterBlack20">Upload Bestand</Text>
             <Input name="rectanglefiftee" placeholder="" className="p-0 w-full" wrapClassName="flex h-[54px] mt-3.5 w-full" shape="round" color="deep_orange_50" variant="fill"></Input>

@@ -98,6 +98,7 @@ namespace WPR
                 builder.AddConsole();
             });
 
+            services.AddSwaggerGen();
             services.AddCors(options =>
                    {
                        options.AddPolicy("ReactPolicy",
@@ -106,7 +107,6 @@ namespace WPR
                                              .AllowAnyHeader()
                                              .AllowCredentials());
                    });
-            services.AddSwaggerGen();
 
         }
 
@@ -142,7 +142,7 @@ namespace WPR
             {
                 endpoints.MapControllers();
             });
-            
+
             app.UseSwagger();
             app.UseSwaggerUI();
             // c => {

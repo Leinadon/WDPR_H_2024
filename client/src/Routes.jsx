@@ -45,6 +45,7 @@ const OnderzoekDoenErvaringsdeskundigePagina = React.lazy(
 const ProfielErvaringsdeskundigePagina = React.lazy(
   () => import("ProfielErvaringsdeskundigePagina"),
 );
+const OnderzoekOverzicht = React.lazy(() => import("OnderzoekOverzicht"));
 const ProfielPagina = React.lazy(() => import("ProfielPagina"));
 const MenuPagina = React.lazy(() => import("MenuPagina"));
 const SignUpPagina = React.lazy(() => import("SignUpPagina"));
@@ -61,6 +62,7 @@ const ProjectRoutes = () => {
           <Route path="/signuppagina" element={<SignUpPagina />} />
           <Route path="/menupagina" element={<MenuPagina />} />
           <Route path="/profielpagina" element={<ProfielPagina />} />
+          <Route path="/OnderzoekOVerzicht" element={<OnderzoekOverzicht />} />
           <Route
             path="/profielervaringsdeskundigepagina"
             element={<ProfielErvaringsdeskundigePagina />}
