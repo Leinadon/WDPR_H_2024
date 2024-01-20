@@ -5,7 +5,7 @@ import { Button, CheckBox, Img, Input, Text, TextArea } from "components";
 
 const OnderzoekPlaatsenBedrijfPaginaPage = () => {
   const [title, setTitle] = useState();
-  const [english, setLanguage] = useState();
+  const [english, setLanguage] = useState(false);
   const [description, setDescription] = useState();
   const [startdate, setStartdate] = useState();
   const [location, setLocation] = useState();
@@ -17,7 +17,9 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
     NeurologischBox: false,
     OntwikkelingBox: false,
   });
-
+  
+  console.log(startdate)
+  
   const CheckboxChange = (category) => {
     setCategories((prevCategories) => ({
       ...prevCategories,
@@ -27,9 +29,6 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
 
 
   function CreateResearch() {
-
-    console.log("Title is "+title)
-    console.log("English? "+english)
     fetch("https://localhost:7258/api/research/interview/", {
 
       method: "POST",
@@ -39,17 +38,18 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "Title": title,
-        "Description": description,
+        "title": title,
+        "description": description,
         "Location": location,
         "categories": categories,
         "Reward": reward,
         "English": english,
-        "Status": "open"
+        "Status": "open",
+        "companyId": 1
       })
     }
     ).then(response => response.json())
-    .then(data => console.log(data));
+      .then(data => console.log(data));
   }
 
 
@@ -66,7 +66,30 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             </div>
           </div>
 
+
           <div className="flex flex-col font-inter items-start justify-start w-[37%] md:w-full">
+            <Text className="mt-[22px] text-white-A700 text-xl" size="txtInterBlack20">Titel</Text>
+            <Input name="researchTitle" placeholder="Titel van het onderzoek" className="p-0 w-full" wrapClassName="flex h-[54px] mt-[17px] w-full" shape="round" color="deep_orange_50" variant="fill"
+              id="title"
+              value={title}
+              // value=""
+              // onChange={handleChange}
+              onChange={
+                (e) => setTitle(e.target.value)
+              }
+            ></Input>
+
+
+            <Text className="mt-[22px] text-white-A700 text-xl" size="txtInterBlack20">Datum</Text>
+            <Input name="datepicker" type="datetime-local" placeholder="" className="p-0 w-full" wrapClassName="flex h-[54px] mt-3.5 w-full" shape="round" color="deep_orange_50" variant="fill"
+            value={startdate}
+            onChange={
+              (e) => setStartdate(e.target.value)
+            }
+            ></Input>
+
+
+
             <Text className="text-white-A700 text-xl" size="txtInterBlack20">Soort onderzoek</Text>
             <div className="flex sm:flex-col flex-row gap-[33px] items-center justify-between mt-4 w-full">
               <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[226px]" shape="round" color="teal_400" size="xl" variant="fill">Vragenlijst</Button>
@@ -78,10 +101,10 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             <Text className="mt-[33px] text-white-A700 text-xl" size="txtInterBlack20">Taal (language)</Text>
             <div className="flex sm:flex-col flex-row gap-[33px] items-center justify-between mt-3.5 w-full">
               <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[226px]" shape="round" color="teal_400" size="xl" variant="fill"
-              onClick={() => setLanguage(false)}
+                onClick={() => setLanguage(false)}
               >Nederlands</Button>
               <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[226px]" shape="round" color="teal_400" size="xl" variant="fill"
-              onClick={() => setLanguage(true)}>English</Button>
+                onClick={() => setLanguage(true)}>English</Button>
             </div>
 
             <Text className="mt-5 text-white-A700 text-xl" size="txtInterBlack20">Type Beperking</Text>
@@ -128,35 +151,16 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Ontwikkeling</Text>
             </div>
 
-            <Text className="mt-9 text-center text-white-A700 text-xl" size="txtInterBlack20">Postcode</Text>
-            <Input name="rectangleten" placeholder="" className="p-0 w-full" wrapClassName="flex h-[54px] mt-[19px] w-full" shape="round" color="deep_orange_50" variant="fill"
-              id="title"
-              value={location}
-              // value=""
-              // onChange={handleChange}
-              onChange={
-                (e) => setLocation(e.target.value)
-              }
-            ></Input>
 
             {/* <div className="flex flex-row items-center justify-between mt-[31px] w-[83%] md:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">Min. Leeftijd</Text>
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">Max. Leeftijd</Text>
-            </div>
+              </div>
             <div className="flex sm:flex-col flex-row sm:gap-[51px] items-center justify-between mt-[18px] w-full">
               <Input name="rectangleeleven" placeholder="" className="p-0 w-full" wrapClassName="flex sm:flex-1 h-[54px] sm:w-full" shape="round" color="deep_orange_50" variant="fill"></Input>
               <Input name="rectangletwelve" placeholder="" className="p-0 w-full" wrapClassName="flex sm:flex-1 h-[54px] sm:w-full" shape="round" color="deep_orange_50" variant="fill"></Input>
             </div> */}
-            <Text className="mt-[22px] text-white-A700 text-xl" size="txtInterBlack20">Titel</Text>
-            <Input name="researchTitle" placeholder="Naam van het bedrijf" className="p-0 w-full" wrapClassName="flex h-[54px] mt-[17px] w-full" shape="round" color="deep_orange_50" variant="fill"
-              id="title"
-              value={title}
-              // value=""
-              // onChange={handleChange}
-              onChange={
-                (e) => setTitle(e.target.value)
-              }
-            ></Input>
+
 
             <Text className="mt-[31px] text-white-A700 text-xl" size="txtInterBlack20">Beschrijving Opdracht</Text>
             <TextArea className="bg-deep_orange-50 h-[188px] mt-[15px] rounded-[27px] w-full"
@@ -168,6 +172,31 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
                 (e) => setDescription(e.target.value)
               }
             ></TextArea>
+
+
+            <Text className="mt-[31px] text-white-A700 text-xl" size="txtInterBlack20">Beloning</Text>
+            <TextArea className="bg-deep_orange-50 h-[188px] mt-[15px] rounded-[27px] w-full"
+              id="description"
+              rows={2}
+              value={reward}
+              // value=""
+              // onChange={handleChange}
+              onChange={
+                (e) => setReward(e.target.value)
+              }
+            ></TextArea>
+
+            <Text className="mt-9 text-center text-white-A700 text-xl" size="txtInterBlack20">Postcode</Text>
+            <Input name="rectangleten" placeholder="" className="p-0 w-full" wrapClassName="flex h-[54px] mt-[19px] w-full" shape="round" color="deep_orange_50" variant="fill"
+              id="title"
+              value={location}
+              // value=""
+              // onChange={handleChange}
+              onChange={
+                (e) => setLocation(e.target.value)
+              }
+            ></Input>
+
             <Text className="mt-10 text-white-A700 text-xl" size="txtInterBlack20">Upload Bestand</Text>
             <Input name="rectanglefiftee" placeholder="" className="p-0 w-full" wrapClassName="flex h-[54px] mt-3.5 w-full" shape="round" color="deep_orange_50" variant="fill"></Input>
 
