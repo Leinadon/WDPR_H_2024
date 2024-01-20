@@ -47,14 +47,14 @@ const OnderzoekOverzicht = () => {
             <div className="bg-deep_orange-50 flex flex-col font-jockeyone gap-11 items-center justify-start py-[35px] rounded-[27px] w-full">
               <Input
                 name="rowzoekhier"
-                placeholder="Zoek naar een onderzoek"
+                placeholder="Typ hier om een onderzoek te zoeken"
                 className="!placeholder:text-gray-500 !text-gray-500 leading-[normal] p-0 text-left text-xl w-full"
                 wrapClassName="flex outline outline-[3px] outline-black-900 w-[92%]"
                 suffix={
                   <Img
                     className="h-[30px] mr-2 my-px"
                     src="images/img_image5.png"
-                    alt="imageFour"
+                    alt="Zoek icoon"
                   />
                 }
                 shape="round"
@@ -62,7 +62,6 @@ const OnderzoekOverzicht = () => {
                 size="xs"
                 variant="fill"
               ></Input>
-              {/* <div className="bg-blue_gray-100_02 h-0.5 mb-[430px]  w-full"> */}
               <div className="bg-blue_gray-100_02 w-full  h-96 mb-8 overflow-y-auto">
                 <ul className="">
                   {listWithResearches.map(research => (
@@ -88,7 +87,7 @@ const OnderzoekOverzicht = () => {
               size="lg"
               variant="fill"
             >
-              Terug naar Menu
+              Terug naar het menu
             </Button>
           </div>
         </div>
