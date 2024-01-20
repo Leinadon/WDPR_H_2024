@@ -1,14 +1,38 @@
-import React from "react";
+
+import { useNavigate } from "react-router-dom";
 
 import { Button, Img, Input, Text, TextArea } from "components";
 
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
+
+
 const ProfielPaginaBedrijvenPage = () => {
+  const [jsonData, setJsonData] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7258/api/companies/1');
+        const data = await response.data;
+        setJsonData(data);
+      } catch (error) {
+        console.error('Error fetching JSON data:', error);
+        console.log('Server Response:', error.response); // Log the response for more details
+      }
+    };
+
+    fetchData();
+  }, []); // Run once on component mount
+
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-5 w-full">
-        <div className="flex flex-col gap-7 items-center justify-start max-w-[1365px] mb-36 mt-[23px] mx-auto md:px-5 w-full">
-          <div className="flex sm:flex-col flex-row md:gap-10 items-start justify-between w-full">
-            <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-center justify-center p-2.5 w-[433px] sm:w-full">
+        <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
+          <div className="flex flex-col items-center justify-start w-full">
+          <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
               <Text
                 className="md:text-5xl text-6xl text-teal-400"
                 size="txtJockeyOneRegular60"
@@ -16,25 +40,41 @@ const ProfielPaginaBedrijvenPage = () => {
                 Profiel
               </Text>
             </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start sm:mt-0 mt-[5px] p-2.5 w-[116px]">
-              <Img
-                className="md:h-auto h-full object-cover w-full"
-                src="images/img_reshotillustra.png"
+            <Img
+                className="md:h-auto h-full items-right object-cover ml-[-100px] w-[104px]"
+                src="images/img_Logo.png"
                 alt="reshotillustra"
+                onClick={() => navigate("/menupagina")} //NOG VERANDEREN
               />
-            </div>
           </div>
-          <div className="flex flex-col font-inter items-start justify-start w-[36%] md:w-full">
-            <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
               Bedrijfsnaam
             </Text>
+          </div>
+          <div>
+            {Array.isArray(jsonData) ? (
+        jsonData.map((jsonData, index) => (
+          <div key={index}>
+            <p>Name: {jsonData.name}</p>
+          </div>
+        ))
+      ) : (
+        <p></p>
+      )}
+    </div>
+            </div>
+              <div>
+                <div>
             <Input
               name="rectanglenine"
               placeholder=""
               className="p-0 w-full"
               wrapClassName="flex h-[49px] mt-2 rounded-[24px] w-full"
               color="deep_orange_50"
+              value={jsonData.name}
               variant="fill"
+              style={{ fontSize: "20px", color: 'black'}}
             ></Input>
             <Text
               className="mt-[31px] text-white-A700 text-xl"
@@ -49,6 +89,7 @@ const ProfielPaginaBedrijvenPage = () => {
               wrapClassName="flex h-[54px] mt-[11px] w-full"
               shape="round"
               color="deep_orange_50"
+              value={jsonData.contactEmail}
               variant="fill"
             ></Input>
             <Text
@@ -64,6 +105,7 @@ const ProfielPaginaBedrijvenPage = () => {
               wrapClassName="flex h-[54px] mt-[11px] w-full"
               shape="round"
               color="deep_orange_50"
+              value={jsonData.websiteURL}
               variant="fill"
             ></Input>
             <Text
@@ -79,6 +121,7 @@ const ProfielPaginaBedrijvenPage = () => {
               wrapClassName="flex h-[54px] mt-[9px] w-full"
               shape="round"
               color="deep_orange_50"
+              value={jsonData.location}
               variant="fill"
             ></Input>
             <Text

@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
+import { msalInstance } from "index";
+
 const ProfielPaginaPage = () => {
   const [jsonData, setJsonData] = useState([]);
   const navigate = useNavigate();
@@ -13,7 +15,7 @@ const ProfielPaginaPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7258/api/users');
+        const response = await axios.get('https://localhost:7258/api/users/${userId}');
         const data = await response.data;
         setJsonData(data);
       } catch (error) {
@@ -38,9 +40,9 @@ const ProfielPaginaPage = () => {
                 Aanpassen
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-100px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[-100px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Accessibility Logo"
                 onClick={() => navigate("/menupagina")}
               />
             </div>
@@ -68,12 +70,9 @@ const ProfielPaginaPage = () => {
           </div>
         ))
       ) : (
-        <p>Loading or no data available</p>
+        <p></p>
       )}
     </div>
-    
-
-            
             </div>
             <div>
             <Input
@@ -102,6 +101,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
+              value={jsonData.lastName}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -117,6 +117,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
+              value={jsonData.birthDate}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -132,6 +133,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
+              value={jsonData.email}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -147,6 +149,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
+              value={jsonData.phone}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -162,6 +165,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
+              value={jsonData.phone}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -177,6 +181,7 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
+              value={jsonData.phone}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
