@@ -1,7 +1,16 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.OpenApi.Models;
+using Azure.Identity;
+using Azure.Security.KeyVault.Secrets;
+
+using System.Text;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+
 namespace WPR
 {
     public class Startup
@@ -89,6 +98,7 @@ namespace WPR
                 builder.AddConsole();
             });
 
+            services.AddSwaggerGen();
             services.AddCors(options =>
                    {
                        options.AddPolicy("ReactPolicy",
@@ -97,7 +107,6 @@ namespace WPR
                                              .AllowAnyHeader()
                                              .AllowCredentials());
                    });
-            services.AddSwaggerGen();
 
         }
 
@@ -114,9 +123,11 @@ namespace WPR
                 app.UseHsts();
             }
 
-            //app.UsePathBase("https://wdp2.azurewebsites.net/");
+            //app.UsePathBase("https://accessibilityh.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseCors("AllowLocalhost");
 
             app.UseRouting();
 
@@ -131,9 +142,14 @@ namespace WPR
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
+            // c => {
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "WPR");
+            // }
+            // );
         }
-
-
     }
 }
 
