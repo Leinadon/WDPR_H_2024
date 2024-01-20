@@ -11,17 +11,19 @@ namespace WPR
         [Required] [StringLength(1024, MinimumLength = 2)]
         public string? Description{get; set;}
         public DateTime StartDate{get; set;}
-        public string? Location{get; set;}
         [Required] [StringLength(256, MinimumLength = 2)]
         public string Reward{get; set;}
         [Required]
         public string Status{get; set;}
         public ICollection<DoesResearch>? doesResearches {get;}
         public int CompanyId{get; set;}
-        [ForeignKey(nameof(CompanyId))]
+        [NotMapped][ForeignKey(nameof(CompanyId))]
         public Company? Company{get; set;}
-        [Required]
+        [Required] 
         public Boolean English{get;set;}
+        public int disabilityTypeId{get; set;}
+        [NotMapped][ForeignKey(nameof(disabilityTypeId))]
+        public DisabilityType disabilityType {get; set;}
         public Research()
         {
             Title = string.Empty;

@@ -10,10 +10,10 @@ namespace WPR
         [Key]
         public int DisabilityId { get; set; }
         public int DisabilityTypeId {get ;set;}
-        [ForeignKey(nameof(DisabilityTypeId))]
+        [NotMapped][ForeignKey(nameof(DisabilityTypeId))]
         public DisabilityType? DisabilityType {get; set;}
         public string SpecialistId {get; set;}
-        [ForeignKey(nameof(SpecialistId))]
+        [NotMapped][ForeignKey(nameof(SpecialistId))]
         public Specialist? Specialist { get; private set; }
         
         [Required] [StringLength(1024, MinimumLength =5)]

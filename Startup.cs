@@ -1,27 +1,7 @@
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Graph.Models;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Identity.Web;
-using Microsoft.AspNetCore.Identity.UI;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-
-using System.Text;
-using Microsoft.AspNetCore.Authentication.AzureAD.UI;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-
-
-
-
 namespace WPR
 {
     public class Startup
@@ -117,6 +97,7 @@ namespace WPR
                                              .AllowAnyHeader()
                                              .AllowCredentials());
                    });
+            services.AddSwaggerGen();
 
         }
 
@@ -141,7 +122,8 @@ namespace WPR
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseCors("ReactPolicy");
 

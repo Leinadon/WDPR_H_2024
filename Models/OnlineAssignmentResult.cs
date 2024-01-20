@@ -12,11 +12,11 @@ namespace WPR
     [StringLength(1024, MinimumLength = 5)]
     public string Comment{get; set;}
     public int DoesResearchID{get; set;}
-    [ForeignKey(nameof(DoesResearchID))]
+    [NotMapped][ForeignKey(nameof(DoesResearchID))]
     public DoesResearch? doesResearch{get; set;}
     public int OnlineAssignmentID{get; set;}
     [DeleteBehavior(DeleteBehavior.NoAction)]
-    [ForeignKey(nameof(OnlineAssignmentID))]
+    [NotMapped][ForeignKey(nameof(OnlineAssignmentID))]
     public OnlineAssignment? OnlineAssignment{get; set;}
     
 
