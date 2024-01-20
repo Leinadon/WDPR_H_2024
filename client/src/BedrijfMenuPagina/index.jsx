@@ -34,9 +34,9 @@ const BedrijfMenuPaginaPage = () => {
               onClick={() => navigate("/profielpagina")}
               rightIcon={
                 <Img
-                  className="h-[46px] ml-2.5 mr-[177px]"
-                  src="images/img_image1.png"
-                  alt="imageOne"
+                  className="ml-2.5 max-w-full max-h-full"
+                  src="images/img_Profile.png"
+                  alt="Profiel Afbeelding"
                 />
               }
               shape="round"
@@ -53,9 +53,9 @@ const BedrijfMenuPaginaPage = () => {
               onClick={() => navigate("/onderzoekpagina")}
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[115px]"
-                  src="images/img_googleforms.png"
-                  alt="googleforms"
+                  className="ml-2.5 max-w-full max-h-full"
+                  src="images/img_Research.png"
+                  alt="Research afbeelding"
                 />
               }
               shape="round"
@@ -72,9 +72,9 @@ const BedrijfMenuPaginaPage = () => {
               onClick={() => navigate("/ondersteuningpagina")}
               rightIcon={
                 <Img
-                  className="ml-2.5"
-                  src="images/img_barchart2.svg"
-                  alt="bar-chart-2"
+                  className="ml-2.5 max-w-full max-h-full"
+                  src="images/img_Research.png"
+                  alt="Research afbeelding"
                 />
               }
               shape="round"
@@ -91,9 +91,9 @@ const BedrijfMenuPaginaPage = () => {
               onClick={() => navigate("/chatpagina")}
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[179px]"
-                  src="images/img_image2_44x46.png"
-                  alt="imageTwo"
+                  className="ml-2.5 max-w-full max-h-full"
+                  src="images/img_Chat.png"
+                  alt="Chat afbeelding"
                 />
               }
               shape="round"
