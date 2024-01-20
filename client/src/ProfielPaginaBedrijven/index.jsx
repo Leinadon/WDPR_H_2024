@@ -42,7 +42,7 @@ const ProfielPaginaBedrijvenPage = () => {
               <Img
                 className="md:h-auto h-full items-right object-cover ml-[-100px] max-w-[104px]"
                 src="images/img_Logo.png"
-                alt="reshotillustra"
+                alt="Accessibility Logo"
                 onClick={() => navigate("/menupagina")} //NOG VERANDEREN
               />
             </div>
