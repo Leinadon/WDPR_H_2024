@@ -32,40 +32,42 @@ const ProfielPaginaBedrijvenPage = () => {
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-5 w-full">
         <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
           <div className="flex flex-col items-center justify-start w-full">
-          <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
+            <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px] md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
               <Text
                 className="md:text-5xl text-6xl text-teal-400"
                 size="txtJockeyOneRegular60"
               >
-                Profiel
+                Profiel Bedrijven
               </Text>
-            </div>
-            <Img
-                className="md:h-auto h-full items-right object-cover ml-[-100px] w-[104px]"
+              <Img
+                className="md:h-auto h-full items-right object-cover ml-[-100px] max-w-[104px]"
                 src="images/img_Logo.png"
                 alt="reshotillustra"
                 onClick={() => navigate("/menupagina")} //NOG VERANDEREN
               />
+            </div>
           </div>
-            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
-              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-              Bedrijfsnaam
-            </Text>
+          <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
           </div>
           <div>
             {Array.isArray(jsonData) ? (
-        jsonData.map((jsonData, index) => (
-          <div key={index}>
-            <p>Name: {jsonData.name}</p>
+              jsonData.map((jsonData, index) => (
+                <div key={index}>
+                  <p>Name: {jsonData.name}</p>
+                </div>
+              ))
+            ) : (
+              <p></p>
+            )}
           </div>
-        ))
-      ) : (
-        <p></p>
-      )}
-    </div>
-            </div>
-              <div>
-                <div>
+        </div>
+        <div>
+          <div>
+            <Text className="mt-[31px] text-white-A700 text-xl"
+              size="txtInterBlack20"
+            >
+              Bedrijfsnaam
+            </Text>
             <Input
               name="rectanglenine"
               placeholder=""
@@ -74,7 +76,7 @@ const ProfielPaginaBedrijvenPage = () => {
               color="deep_orange_50"
               value={jsonData.name}
               variant="fill"
-              style={{ fontSize: "20px", color: 'black'}}
+              style={{ fontSize: "20px", color: 'black' }}
             ></Input>
             <Text
               className="mt-[31px] text-white-A700 text-xl"
@@ -151,7 +153,7 @@ const ProfielPaginaBedrijvenPage = () => {
               placeholder=""
             ></TextArea>
             <Button
-              className="cursor-pointer font-black h-14 leading-[normal] mt-[60px] text-center text-xl w-[486px]"
+              className="cursor-pointer font-black h-14 leading-[normal] mt-[60px] mb-10 text-center text-xl w-[486px]"
               shape="round"
               color="teal_400"
               size="lg"
