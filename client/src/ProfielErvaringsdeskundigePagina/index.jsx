@@ -19,9 +19,9 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               Profiel
             </Text>
             <Img
-                className="md:h-auto h-full items-right object-cover ml-[-px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[-px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Accessibility Logo"
                 onClick={() => navigate("/menupagina")}
               />
           </div>
@@ -52,7 +52,7 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               </div>
               <Img
                 className="absolute h-[150px] left-[2%] object-cover top-[0] w-[150px] ml-[-6px]"
-                src="images/img_images2modified.png"
+                src="images/img_StockPicture.png"
                 alt="images2modified"
               />
             </div>
@@ -78,7 +78,7 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               rightIcon={
                 <Img
                   className="md:h-auto h-full object-cover w-[50px]"
-                  src="images/img_image12.png"
+                  src="images/img_EditProfile.png"
                   alt="imageTwelve"
                 />
               }

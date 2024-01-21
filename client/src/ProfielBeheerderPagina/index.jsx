@@ -19,8 +19,8 @@ const ProfielBeheerderPaginaPage = () => {
             <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
               <Img
                 className="h-[79px] md:h-auto object-cover w-24"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                src="images/img_Logo.png"
+                alt="Logo Accessobility"
               />
             </div>
           </div>

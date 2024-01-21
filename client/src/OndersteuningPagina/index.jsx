@@ -21,8 +21,8 @@ const OndersteuningPaginaPage = () => {
             </Text>
             <Img
                 className="md:h-auto h-full items-right object-cover ml-[-188.5px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                src="images/img_Logo.png"
+                alt="Logo Accessobility"
                 onClick={() => navigate("/menupagina")}
               />
           </div>

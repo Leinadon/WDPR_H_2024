@@ -25,7 +25,7 @@ const ProfielBedrijfPaginaPage = () => {
               <Img
                 className="md:h-auto h-full object-cover w-full"
                 src="images/img_Logo.png"
-                alt="reshotillustra"
+                alt="Logo Accessobility"
               />
             </div>
           </div>

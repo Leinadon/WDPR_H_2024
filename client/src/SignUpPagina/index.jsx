@@ -20,9 +20,9 @@ const SignUpPaginaPage = () => {
                 Sign Up
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-20px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Accessibility Logo"
               />
             </div>
           </div>
