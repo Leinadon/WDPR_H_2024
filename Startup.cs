@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
+using Microsoft.Extensions.DependencyInjection;
+
+
 namespace WPR
 {
     public class Startup
@@ -91,13 +94,16 @@ namespace WPR
             .AddRoles<IdentityRole>()
             .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
-            services.AddAuthentication(opt =>
+            services.AddAuthentication(options =>
                 {
-                    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                }).AddJwtBearer(opt =>
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultScheme = IdentityConstants.ApplicationScheme;
+                    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+
+                }).AddJwtBearer(options =>
                 {
-                    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
@@ -107,11 +113,17 @@ namespace WPR
                         ValidAudience = "https://localhost:7258",
                         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
                     };
-                });
+                })
+                .AddIdentityCookies();
             //services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-             //   .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-      
-            services.AddAuthorization();
+            //   .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+            services.AddAuthorization(options =>
+                {
+                    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                    options.AddPolicy("RequireUserRole", policy => policy.RequireRole("User"));
+                    options.AddPolicy("RequireCompanyRole", policy => policy.RequireRole("Company"));
+                }
+                );
             services.AddControllers();
             services.AddRazorPages();
             services.AddLogging(builder =>
@@ -128,16 +140,16 @@ namespace WPR
                                              .AllowAnyHeader()
                                              .AllowCredentials());
                    });
-            services.AddSwaggerGen(c => 
+            services.AddSwaggerGen(c =>
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
-                    In = ParameterLocation.Header,
-                    Description = "JWT Authorization header using the Bearer scheme."
-                })
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "JWT Authorization header using the Bearer scheme."
+            })
             );
 
         }
@@ -176,20 +188,20 @@ namespace WPR
             });
         }
         public void ConfigureRoles(RoleManager<IdentityRole> roleManager)
-            {
-                // Create roles if they don't exist
-                CreateRole(roleManager, "Admin");
-                CreateRole(roleManager, "Employee");
-                CreateRole(roleManager, "Specialist");
-            }
-        private void CreateRole(RoleManager<IdentityRole> roleManager, string roleName)
-{
-        if (!roleManager.RoleExistsAsync(roleName).Result)
         {
-            var role = new IdentityRole(roleName);
-            roleManager.CreateAsync(role).Wait();
+            // Create roles if they don't exist
+            CreateRole(roleManager, "Admin");
+            CreateRole(roleManager, "Employee");
+            CreateRole(roleManager, "Specialist");
         }
-}
+        private void CreateRole(RoleManager<IdentityRole> roleManager, string roleName)
+        {
+            if (!roleManager.RoleExistsAsync(roleName).Result)
+            {
+                var role = new IdentityRole(roleName);
+                roleManager.CreateAsync(role).Wait();
+            }
+        }
 
     }
 }

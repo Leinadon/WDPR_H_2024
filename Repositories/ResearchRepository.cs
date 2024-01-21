@@ -17,7 +17,6 @@ namespace WPR
         Task UpdateInterview(int id, Research interview);
         Task<Research> CreateInterview(int id, Research OnlineAssignment);
 
-
         // Online
         Task UpdateOnlineAssignment(int id, Research online);
         Task<Research> CreateOnlineAssignment(int id, Research OnlineAssignment);
