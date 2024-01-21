@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using WPR;
 
-public class WPRDbContext : DbContext
+public class WPRDbContext : IdentityDbContext<IdentityUser>
 {
     public DbSet<Company> Companies { get; set; }
     public DbSet<OurChat> OurChats { get; set; }
@@ -19,6 +19,8 @@ public class WPRDbContext : DbContext
     public DbSet<OnlineAssignmentResult> OnlineAssignmentResults{get;set;}
     public DbSet<Question> Questions{get;set;}
     public DbSet<Research> Researches{get; set;}
+    public DbSet<OnlineAssignment> OnlineAssignments{get; set;}
+
     public DbSet<Answer> Answers{get; set;}
     
     public WPRDbContext(DbContextOptions<WPRDbContext> options) : base(options) {
@@ -37,7 +39,10 @@ public class WPRDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("MyCustomSchema");
+        
+        
         base.OnModelCreating(modelBuilder);
+
         
     }
 }

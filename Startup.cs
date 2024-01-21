@@ -10,6 +10,9 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace WPR
 {
@@ -85,11 +88,29 @@ namespace WPR
             services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<WPRDbContext>()
             .AddDefaultTokenProviders()
+            .AddRoles<IdentityRole>()
             .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
-
-            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+            services.AddAuthentication(opt =>
+                {
+                    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "https://localhost:7258",
+                        ValidAudience = "https://localhost:7258",
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
+                    };
+                });
+            //services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+             //   .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+      
             services.AddAuthorization();
             services.AddControllers();
             services.AddRazorPages();
@@ -107,6 +128,17 @@ namespace WPR
                                              .AllowAnyHeader()
                                              .AllowCredentials());
                    });
+            services.AddSwaggerGen(c => 
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                })
+            );
 
         }
 
@@ -142,14 +174,23 @@ namespace WPR
             {
                 endpoints.MapControllers();
             });
-
-            app.UseSwagger();
-            app.UseSwaggerUI();
-            // c => {
-            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "WPR");
-            // }
-            // );
         }
+        public void ConfigureRoles(RoleManager<IdentityRole> roleManager)
+            {
+                // Create roles if they don't exist
+                CreateRole(roleManager, "Admin");
+                CreateRole(roleManager, "Employee");
+                CreateRole(roleManager, "Specialist");
+            }
+        private void CreateRole(RoleManager<IdentityRole> roleManager, string roleName)
+{
+        if (!roleManager.RoleExistsAsync(roleName).Result)
+        {
+            var role = new IdentityRole(roleName);
+            roleManager.CreateAsync(role).Wait();
+        }
+}
+
     }
 }
 
