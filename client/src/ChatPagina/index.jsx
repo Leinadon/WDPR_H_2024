@@ -58,7 +58,7 @@ const ChatPaginaPage = () => {
             <Line className="bg-blue_gray-100_02 h-0.5 mb-[480px] rotate-[180deg] w-full" />
           </div>
           <Button
-              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mr-2.5 mt-[60px] text-center text-xl w-[600px]"
+              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mt-[60px] text-center text-xl w-[600px]"
               onClick={() => navigate("/menupagina")}
               shape="round"
               color="blue_gray_100_01"

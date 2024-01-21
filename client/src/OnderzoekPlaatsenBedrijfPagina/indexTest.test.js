@@ -2,14 +2,14 @@ import React from 'react';
 
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import PageToTest from './index';
-import MenuPagina from '../MenuPagina/index';
+import OverzichtPagina from '../OnderzoekOverzicht/index';
 
 test('renders component "Onderzoek aanmaken" without crashing', () => {
   render(<PageToTest />);
 });
 
-test('renders component "MenuPagina" without crashing', () => {
-  render(<MenuPagina />);
+test('renders component "OverzichtPagina" without crashing', () => {
+  render(<OverzichtPagina />);
 });
 
 test('updates state on input change', async () => {
@@ -29,6 +29,7 @@ test('updates state on input change', async () => {
     expect(descInput.value).toBe('Hoe snel is onze website?'); //veld moet aangepast zijn
   });
 });
+
 
 
 test('radiobutton check', async () => {
