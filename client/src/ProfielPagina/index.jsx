@@ -40,7 +40,7 @@ const ProfielPaginaPage = () => {
                 Aanpassen
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-100px] max-w-[104px]"
+                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
                 src="images/img_Logo.png"
                 alt="Accessibility Logo"
                 onClick={() => navigate("/menupagina")}

@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
 import { Button, Img, Text } from "components";
 
 const ProfielErvaringsdeskundigePaginaPage = () => {
+  const [jsonData, setJsonData] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7258/api/users/${userId}');
+        const data = await response.data;
+        setJsonData(data);
+      } catch (error) {
+        console.error('Error fetching JSON data:', error);
+        console.log('Server Response:', error.response); // Log the response for more details
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -19,9 +38,9 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               Profiel
             </Text>
             <Img
-                className="md:h-auto h-full items-right object-cover ml-[-px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[80px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessability"
                 onClick={() => navigate("/menupagina")}
               />
           </div>
@@ -37,6 +56,7 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
                   <Text
                     className="text-lg text-white-A700 w-auto"
                     size="txtInterBlack18"
+                    value={`${jsonData.firstName || ''} ${jsonData.lastName || ''}`}
                   >
                     Naam:{" "}
                   </Text>
@@ -46,20 +66,22 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
                 <Text
                   className="text-lg text-white-A700 w-auto"
                   size="txtInterBlack18"
+                  value={jsonData.email}
                 >
                   Email:{" "}
                 </Text>
               </div>
               <Img
                 className="absolute h-[150px] left-[2%] object-cover top-[0] w-[150px] ml-[-6px]"
-                src="images/img_images2modified.png"
-                alt="images2modified"
-              />
+                src="images/img_StockPicture.png"
+                alt="StockPicture"
+              />  
             </div>
             <div className="flex flex-col h-[117px] md:h-auto items-left justify-center mt-[15px] p-2.5 w-[600px] sm:w-full">
               <Text
                 className="text-lg text-white-A700 w-auto"
                 size="txtInterBlack18"
+                value={jsonData.beperkingsType}
               >
                 Beperkingstype(s):{" "}
               </Text>
@@ -68,7 +90,9 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               <Text
                 className="text-lg text-white-A700 w-auto"
                 size="txtInterBlack18"
-              >
+                value={jsonData.hulpmiddel}
+                >
+              
                 Hulpmiddel(en):{" "}
               </Text>
             </div>
@@ -78,8 +102,8 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               rightIcon={
                 <Img
                   className="md:h-auto h-full object-cover w-[50px]"
-                  src="images/img_image12.png"
-                  alt="imageTwelve"
+                  src="images/img_EditProfile.png"
+                  alt="EditProfile"
                 />
               }
               shape="round"
