@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 namespace WPR
 {
-    [Table("Users")]
     public class User : IdentityUser
     {
         
@@ -14,6 +14,8 @@ namespace WPR
         public DateOnly BirthDate { get; set; }
         [Required][StringLength(15, MinimumLength = 2)]
         public string Phone { get; set; }
+        [Required]
+        public string idenitityUserId{get;set;}
         public string Role {get; set;}
         [InverseProperty(nameof(OurChat.User2))]
         public ICollection<OurChat>? Chats2 {get;}

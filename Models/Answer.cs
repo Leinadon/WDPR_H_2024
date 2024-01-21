@@ -19,10 +19,6 @@ namespace WPR
         [NotMapped]
         public Question? Question{get; set;}
         
-        [ForeignKey(nameof(SpecialistID))]
-        [NotMapped]
-        public Specialist? Specialist{get; private set;}
-        public string SpecialistID{get; set;}
 
         [ForeignKey(nameof(DoesResearchID))]
         [NotMapped]
@@ -32,7 +28,6 @@ namespace WPR
         public Answer()
         {
             Text = string.Empty;
-            SpecialistID = string.Empty;
 
         }
     }
