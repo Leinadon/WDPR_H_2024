@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 namespace WPR
 {
-    public class User : IdentityUser
+    [Table("OurUsers")]
+    public class OurUser : IdentityUser
     {
         
         [Required][StringLength(64, MinimumLength = 2)]
@@ -14,7 +15,7 @@ namespace WPR
         public DateOnly BirthDate { get; set; }
         [Required][StringLength(15, MinimumLength = 2)]
         public string Phone { get; set; }
-        [Required]
+        [Required][StringLength(450)]
         public string idenitityUserId{get;set;}
         public string Role {get; set;}
         [InverseProperty(nameof(OurChat.User2))]
@@ -22,7 +23,7 @@ namespace WPR
         public ICollection<OurChat>? Chats {get;}
         public ICollection<OurChatMessage>? ChatMessages {get;}
 
-        public User(){
+        public OurUser(){
             FirstName = string.Empty;
             LastName = string.Empty;
             Phone = string.Empty;

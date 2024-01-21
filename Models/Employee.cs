@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WPR
 {
     [Table("Employees")]
-    public class Employee : User
+    public class Employee : OurUser
 
     {
         [Required] [StringLength(64, MinimumLength =2)]

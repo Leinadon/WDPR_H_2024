@@ -15,13 +15,13 @@ namespace WPR
         [NotMapped]
         [ForeignKey(nameof(User1ID))]
         [DeleteBehavior(DeleteBehavior.NoAction)]
-        public User? User1 {get; set;}
+        public OurUser? User1 {get; set;}
         public string User2ID {get; set;}
         [ForeignKey(nameof(User2ID))]
         [InverseProperty(nameof(User2.Chats2))]
         [DeleteBehavior(DeleteBehavior.NoAction)]
         [NotMapped]
-        public User? User2 {get; set;}   
+        public OurUser? User2 {get; set;}   
         
         public IList<OurChatMessage> Messages { get; }  = new List<OurChatMessage>();
         public OurChatStatus Status { get; set; }
@@ -56,7 +56,7 @@ namespace WPR
         [DeleteBehavior(DeleteBehavior.NoAction)]
         [ForeignKey(nameof(SenderUserId))]
 
-        public User? Sender { get; set; }
+        public OurUser? Sender { get; set; }
 
         public OurChatMessage(){
             Text = string.Empty;
