@@ -20,9 +20,9 @@ const OndersteuningPaginaPage = () => {
               Ondersteuning
             </Text>
             <Img
-                className="md:h-auto h-full items-right object-cover ml-[-188.5px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[-110px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessability"
                 onClick={() => navigate("/menupagina")}
               />
           </div>

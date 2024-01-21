@@ -20,9 +20,9 @@ const OnderzoekPaginaPage = () => {
                   Onderzoek
                 </Text>
               <Img
-                className="md:h-auto h-full object-cover w-[104px] ml-[-100px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessability"
                 onClick={() => navigate("/menupagina")}
               />
             </div>

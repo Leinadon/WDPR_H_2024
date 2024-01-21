@@ -20,9 +20,9 @@ const ChatPaginaPage = () => {
                 Chats
               </Text>
               <Img
-                className="common-pointer md:h-auto h-full object-cover w-full"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[100px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessability"
                 onClick={() => navigate("/menupagina")}
               />
             </div>
@@ -49,7 +49,7 @@ const ChatPaginaPage = () => {
             >
               <Img
                 className="h-[30px] md:h-auto mr-[7px] object-cover w-[30px]"
-                src="images/img_image5.png"
+                src="images/img_Search.png"
                 alt="imagefive"
               />
             </Button>

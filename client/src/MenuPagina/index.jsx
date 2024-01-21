@@ -20,9 +20,9 @@ const MenuPaginaPage = () => {
                 Menu
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-100px] max-w-[104px]"
+                className="md:h-auto h-full items-right object-cover ml-[100px] max-w-[104px]"
                 src="images/img_Logo.png"
-                alt="Logo Accessobility"
+                alt="Logo Accessability"
               />
             </div>
           </div>
