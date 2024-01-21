@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { Img, Line, Text, Button, Input } from "components";
 
-const ChatPaginaPage = () => {
+const ChatPaginaBedrijfPage = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState();
 
   return (
     <>
@@ -24,16 +23,13 @@ const ChatPaginaPage = () => {
                 className="md:h-auto h-full items-right object-cover ml-[100px] max-w-[104px]"
                 src="images/img_Logo.png"
                 alt="Logo Accessability"
-                onClick={() => navigate("/menupagina")}
+                onClick={() => navigate("/bedrijfmenupagina")}
               />
             </div>
           </div>
           <div className="bg-deep_orange-50 flex flex-col gap-[58px] mt-[50px] items-center justify-center py-[21px] rounded-[27px] w-[600px] md:w-full">
             <div className="bg-deep_orange-50 border-[3px] h-[60px] mb-[-30px] border-black-900 border-solid flex flex-row items-center justify-between p-3 rounded-[27px] w-[560px] md:w-full">
             <Input
-              type="text"
-              value={search}
-              onChange={ (e) => setSearch(e.target.value)}
               name="rectanglethree"
               placeholder="Zoek hier..."
               className="p-0 placeholder:bg-deep_orange-50 w-full"
@@ -63,7 +59,7 @@ const ChatPaginaPage = () => {
           </div>
           <Button
               className="common-pointer cursor-pointer font-black h-14 leading-[normal] mt-[41px] text-center text-xl w-[600px]"
-              onClick={() => navigate("/menupagina")}
+              onClick={() => navigate("/bedrijfmenupagina")}
               shape="round"
               color="blue_gray_100_01"
               size="lg"
@@ -78,4 +74,4 @@ const ChatPaginaPage = () => {
   );
 };
 
-export default ChatPaginaPage;
+export default ChatPaginaBedrijfPage;

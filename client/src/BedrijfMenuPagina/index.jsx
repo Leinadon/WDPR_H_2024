@@ -86,7 +86,7 @@ const BedrijfMenuPaginaPage = () => {
             </Button>
             <Button
               className="common-pointer cursor-pointer flex h-14 items-center justify-center w-[600px]"
-              onClick={() => navigate("/chatpagina")}
+              onClick={() => navigate("/chatpaginabedrijf")}
               rightIcon={
                 <Img
                   className="ml-2.5 max-w-full max-h-full"

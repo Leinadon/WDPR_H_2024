@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+
 import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
 
 import { Button, CheckBox, Img, Input, Text, TextArea } from "components";
 
 const OnderzoekPlaatsenBedrijfPaginaPage = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState();
   const [english, setLanguage] = useState(false);
   const [description, setDescription] = useState();
@@ -54,18 +58,23 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
-        <div className="flex flex-col gap-[18px] items-center justify-start max-w-[1337px] mb-[19px] mx-auto w-full">
-          <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-between w-full">
-            <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-center justify-center p-2.5 w-[445px] sm:w-full">
-              <Text className="md:text-5xl text-6xl text-teal-400" size="txtJockeyOneRegular60">Onderzoek</Text>
-            </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
-              <Img className="md:h-auto h-full object-cover w-full" src="images/img_Logo.png" alt="Accessibility Logo" />
+        <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
+          <div className="flex flex-col items-center justify-start w-full">
+            <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px]  md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
+                <Text
+                  className="md:text-5xl text-6xl text-teal-400 items-left ml-[-60px]"
+                  size="txtJockeyOneRegular60"
+                > Onderzoek
+                </Text>
+                <Img
+                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessability"
+                onClick={() => navigate("/bedrijfmenupagina")}
+              />
             </div>
           </div>
-
-
-          <div className="flex flex-col font-inter items-start justify-start w-[37%] md:w-full">
+          <div className="flex flex-col justify-center font-inter w-[600px] ml-[420px] mt-[35px]">
             <Text className="mt-[22px] text-white-A700 text-xl" size="txtInterBlack20">Titel van het onderzoek</Text>
             <Input name="researchTitle" placeholder="Titel van het onderzoek" className="p-0 w-full" wrapClassName="flex h-[54px] mt-[17px] w-full" shape="round" color="deep_orange_50" variant="fill"
               id="title"
@@ -88,20 +97,20 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
 
 
 
-            <Text className="text-white-A700 text-xl" size="txtInterBlack20">Soort onderzoek</Text>
+            <Text className="text-white-A700 text-xl mt-[20px]" size="txtInterBlack20">Soort onderzoek</Text>
             <div className="flex sm:flex-col flex-row gap-[33px] items-center justify-between mt-4 w-full">
-              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[226px]" shape="round" color="teal_400" size="xl" variant="fill">Vragenlijst</Button>
-              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[226px]" shape="round" color="teal_400" size="xl" variant="fill">Uitnodigingen</Button>
+              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[280px]" shape="round" color="teal_400" size="xl" variant="fill">Vragenlijst</Button>
+              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[280px]" shape="round" color="teal_400" size="xl" variant="fill">Uitnodigingen</Button>
             </div>
 
-            <Button className="cursor-pointer font-black h-14 leading-[normal] mt-[19px] text-base text-center w-[226px]" shape="round" color="teal_400" size="xl" variant="fill">Online Opdracht</Button>
+            <Button className="cursor-pointer font-black h-14 leading-[normal] mt-[19px] text-base text-center w-[280px]" shape="round" color="teal_400" size="xl" variant="fill">Online Opdracht</Button>
 
             <Text className="mt-[33px] text-white-A700 text-xl" size="txtInterBlack20">Taal</Text>
             <div className="flex sm:flex-col flex-row gap-[33px] items-center justify-between mt-3.5 w-full">
-              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[226px]" shape="round" color="teal_400" size="xl" variant="fill"
+              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[280px]" shape="round" color="teal_400" size="xl" variant="fill"
                 onClick={() => setLanguage(false)}
               >Nederlands</Button>
-              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[226px]" shape="round" color="teal_400" size="xl" variant="fill"
+              <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[280px]" shape="round" color="teal_400" size="xl" variant="fill"
                 onClick={() => setLanguage(true)}>Engels</Button>
             </div>
 
@@ -136,7 +145,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Ontwikkeling</Text>
             </div>
 
-            <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-[43%] md:w-full">
+            <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-[70%] md:w-full">
               <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="OntwikkelingBox" shape="round" color="blue_gray_100" variant="fill"
                 onChange={() => setDisability(5)}>
               </input>
@@ -165,15 +174,15 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
               }
             ></TextArea>
 
-            <Text className="mt-10 text-white-A700 text-xl" size="txtInterBlack20">Upload Bestand</Text>
-            <Input name="uploadFile" type="file" placeholder="" className="p-0 w-full mx-auto" wrapClassName="flex h-[54px] mt-3.5 min-w-1/4 items-center" shape="round" color="deep_orange_50" variant="fill"></Input>
+            <Text className="mt-[20px] mb-[15px] text-white-A700 text-xl" size="txtInterBlack20" >Upload Bestand</Text>
+            <Input name="uploadFile" type="file" placeholder=""  className="p-0 w-full mx-auto" variant="fill" ></Input>
 
-            <Button className="cursor-pointer font-black h-12 leading-[normal] mt-[72px] rounded-[24px] text-center text-xl w-[486px]" color="teal_400" size="md" variant="fill"
+            <Button className="cursor-pointer font-black h-14 leading-[normal] mt-[70px]  mr-3 text-center text-xl w-[600px]" shape="round" color="teal_400" size="md" variant="fill"
               type="submit" id="submitbutton" value="Submit" onClick={() => CreateResearch()}
             >
               Onderzoek Plaatsen
             </Button>
-            <Button className="cursor-pointer font-black h-14 leading-[normal] mt-[57px] text-center text-xl w-[486px]" shape="round" color="blue_gray_100_01" size="lg" variant="fill">Annuleren</Button>
+            <Button className="cursor-pointer font-black h-14 leading-[normal] mt-[57px] text-center text-xl w-[600px]" shape="round" color="blue_gray_100_01" size="lg" variant="fill" onClick={() => navigate("/bedrijfmenupagina")}>Annuleren</Button>
           </div>
         </div>
       </div>

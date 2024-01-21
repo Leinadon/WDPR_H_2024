@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../msalConfig";
 import { UnauthenticatedTemplate, useMsal, MsalProvider} from '@azure/msal-react';
@@ -9,6 +8,8 @@ import { msalInstance } from "index";
 
 const LogInPaginaPage = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
     
     function signInClickHandler(instance) {
       instance.loginPopup()
@@ -19,17 +20,6 @@ const LogInPaginaPage = () => {
       });
     }
     
-
-
-    // const handleLogoutPopup = () => {
-    //   msalInstance
-    //         .logoutPopup({
-    //             mainWindowRedirectUri: '/', // redirects the top level app after logout
-    //             account: msalInstance.getActiveAccount(),
-    //         })
-    //         .catch((error) => console.log(error));
-    // };
-
   return (
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
         <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
@@ -42,9 +32,9 @@ const LogInPaginaPage = () => {
                 Log In 
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[77px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessibility"
               />
             </div>
           </div>
@@ -75,7 +65,10 @@ const LogInPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: '20px', backgroundColor: '#F8F0E5'}}
+              type="text"
+              value={username}
+              onChange={ (e) => setUsername(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -91,6 +84,9 @@ const LogInPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              type="text"
+              value={password}
+              onChange={ (e) => setPassword(e.target.value)}
             ></Input>
               <div>
                 <Button

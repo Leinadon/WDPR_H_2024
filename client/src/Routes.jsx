@@ -35,6 +35,8 @@ const ChatErvaringsdeskundigeBedrijfPagina = React.lazy(
   () => import("ChatErvaringsdeskundigeBedrijfPagina"),
 );
 const ChatPagina = React.lazy(() => import("ChatPagina"));
+const ChatPaginaBedrijfPage = React.lazy(() => import("ChatPaginaBedrijf"));
+const ChatPaginaBeheerderPage = React.lazy(() => import("ChatPaginaBeheerder"));
 const OndersteuningPagina = React.lazy(
   () => import("OndersteuningPagina"),
 );
@@ -77,6 +79,8 @@ const ProjectRoutes = () => {
             element={<OndersteuningPagina />}
           />
           <Route path="/chatpagina" element={<ChatPagina />} />
+          <Route path="/chatpaginabedrijf" element={<ChatPaginaBedrijfPage />} />
+          <Route path="/chatpaginabeheerder" element={<ChatPaginaBeheerderPage />} />
           <Route
             path="/chatervaringsdeskundigebedrijfpagina"
             element={<ChatErvaringsdeskundigeBedrijfPagina />}

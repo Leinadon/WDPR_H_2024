@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,31 @@ import { Button, Img, Text, Input } from "components";
 
 const OnderzoekPaginaPage = () => {
   const navigate = useNavigate();
+  const [vragenlijst, setVragenlijst] = useState('#CCCCCC');
+  const handleButtonClickVragenlijst = () => {
+    const newColor = vragenlijst === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    setVragenlijst(newColor);
+  };
+  const [uitnodigingen, setUitnodigingen] = useState('#CCCCCC');
+  const handleButtonClickUitnodigingen = () => {
+    const newColor = uitnodigingen === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    setUitnodigingen(newColor);
+  };
+  const [online_Opdracht, setOnline_Opdracht] = useState('#CCCCCC');
+  const handleButtonClickOnline_Opdracht = () => {
+    const newColor = online_Opdracht === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    setOnline_Opdracht(newColor);
+  };
+  const [nederlands, setNederlands] = useState('#CCCCCC');
+  const handleButtonClickNederlands = () => {
+    const newColor = nederlands === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    setNederlands(newColor);
+  };
+  const [engels, setEngels] = useState('#CCCCCC');
+  const handleButtonClickEngels = () => {
+    const newColor = engels === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    setEngels(newColor);
+  };
 
   return (
     <>
@@ -40,6 +65,8 @@ const OnderzoekPaginaPage = () => {
                 color="teal_400"
                 size="xl"
                 variant="fill"
+                style={{ backgroundColor: vragenlijst }}
+                onClick={handleButtonClickVragenlijst}
               >
                 Vragenlijst
               </Button>
@@ -49,6 +76,8 @@ const OnderzoekPaginaPage = () => {
                 color="teal_400"
                 size="xl"
                 variant="fill"
+                style={{ backgroundColor: uitnodigingen }}
+                onClick={handleButtonClickUitnodigingen}
               >
                 Uitnodigingen
               </Button>
@@ -59,6 +88,8 @@ const OnderzoekPaginaPage = () => {
               color="teal_400"
               size="xl"
               variant="fill"
+              style={{ backgroundColor: online_Opdracht }}
+              onClick={handleButtonClickOnline_Opdracht}
             >
               Online Opdracht
             </Button>
@@ -74,6 +105,8 @@ const OnderzoekPaginaPage = () => {
                 color="teal_400"
                 size="xl"
                 variant="fill"
+                style={{ backgroundColor: nederlands }}
+                onClick={handleButtonClickNederlands}
               >
                 Nederlands
               </Button>
@@ -83,13 +116,15 @@ const OnderzoekPaginaPage = () => {
                 color="teal_400"
                 size="xl"
                 variant="fill"
+                style={{ backgroundColor: engels}}
+                onClick={handleButtonClickEngels}
               >
                 English
               </Button>
             </div>
             <div className="flex flex-col h-11 md:h-auto items-left justify-center mt-[17px] p-2.5 w-[496px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Resultaten:
+                Resultaten
               </Text>
             </div>
             <div className="bg-deep_orange-50 flex flex-col gap-[58px] mt-[6px] items-center justify-center h-[600px] py-[21px] rounded-[27px] w-[600px] md:w-full">
