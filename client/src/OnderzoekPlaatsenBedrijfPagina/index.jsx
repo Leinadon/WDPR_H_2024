@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
 
 import { Button, CheckBox, Img, Input, Text, TextArea } from "components";
 
@@ -69,6 +69,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             <Text className="mt-[22px] text-white-A700 text-xl" size="txtInterBlack20">Titel van het onderzoek</Text>
             <Input name="researchTitle" placeholder="Titel van het onderzoek" className="p-0 w-full" wrapClassName="flex h-[54px] mt-[17px] w-full" shape="round" color="deep_orange_50" variant="fill"
               id="title"
+              data-testid ="title"
               value={title}
               // value=""
               // onChange={handleChange}
@@ -107,7 +108,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
 
             <Text className="mt-5 text-white-A700 text-xl" size="txtInterBlack20">Type Beperking</Text>
             <div className="flex flex-row gap-[63px] items-start justify-start mt-4 w-[30%] md:w-full">
-              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5"  name="disabilities" id="FysiekBox" shape="round" color="blue_gray_100" variant="fill"
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5"  name="disabilities" id="FysiekBox" data-testid="FysiekBox" shape="round" color="blue_gray_100" variant="fill"
                 onChange={() => setDisability(1)}>
               </input>
 
@@ -115,7 +116,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             </div>
 
             <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-2/5 md:w-full">
-              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="ZintuigelijkBox" shape="round" color="blue_gray_100" variant="fill"
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="ZintuigelijkBox" data-testid="ZintuigelijkBox" shape="round" color="blue_gray_100" variant="fill"
                 onChange={() => setDisability(2)}>
               </input>
 
@@ -123,7 +124,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             </div>
 
             <div className="flex flex-row gap-[63px] items-center justify-start mt-[19px] w-[36%] md:w-full">
-              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="CognitiefBox" shape="round" color="blue_gray_100" variant="fill"
+              <input type="radio" className="my-0.5 h-5 mr-[5px] rounded-[3px] w-5" name="disabilities" id="CognitiefBox" data-testid="CognitiefBox" shape="round" color="blue_gray_100" variant="fill"
                 onChange={() => setDisability(3)}>
               </input>
               <Text className="text-white-A700 text-xl" size="txtInterSemiBold20">Visueel</Text>
@@ -148,6 +149,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             <Text className="mt-[31px] text-white-A700 text-xl" size="txtInterBlack20">Beschrijving Opdracht</Text>
             <TextArea className="bg-deep_orange-50 h-[188px] mt-[15px] rounded-[27px] w-full"
               id="description"
+              data-testid ="description"
               value={description}
               onChange={
                 (e) => setDescription(e.target.value)
@@ -157,7 +159,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
 
             <Text className="mt-[31px] text-white-A700 text-xl" size="txtInterBlack20">Beloning</Text>
             <TextArea className="bg-deep_orange-50 h-[112px] mt-[15px] rounded-[27px] w-full"
-              id="description"
+              id="reward"
               rows={2}
               value={reward}
               onChange={
