@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WPR.Migrations
 {
     [DbContext(typeof(WPRDbContext))]
-    partial class WPRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240121020254_MigrationsForRelationsImprovement5")]
+    partial class MigrationsForRelationsImprovement5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -639,10 +642,6 @@ namespace WPR.Migrations
                         .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("idenitityUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

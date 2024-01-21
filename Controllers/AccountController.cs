@@ -1,62 +1,62 @@
-using System.Linq.Expressions;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Identity.Web;
-
+using Microsoft.Graph.Models;
+using Microsoft.IdentityModel.Tokens;
 namespace WPR{
 
-    [Authorize]
-    public class AccountController : ControllerBase
+
+public class GebruikerMetWachwoord : IdentityUser
+{
+    public string? Password { get; init; }
+}
+[Route("api/identityUser")]
+[ApiController]
+public class AccountController : ControllerBase
+{
+    private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<IdentityUser> _signInManager;
+    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
     {
-        
-        [AllowAnonymous]
-        public IActionResult SignIn()
-        {
-            //TODO deze class moet beter
-            try{
-                var redirectUrl = Url.Action(nameof(HomeController.Index), "Home");
-                return Challenge(new AuthenticationProperties { RedirectUri = redirectUrl });
-            }catch{
-                return Problem();
-            }
-            
-            
-        }
+        _signInManager = signInManager;
+        _userManager = userManager;
+    }
 
-        public new async Task<IActionResult> SignOut()
-        {
-            try{
-                if(User.Identity != null){
-                    if(User.Identity.IsAuthenticated){
-                        var callbackUrl = Url.Action(nameof(SignedOut), "Account", values: null, protocol: Request.Scheme);
-                        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                        return Ok();
-                    }
-                    return Unauthorized();
-                }
-                return NoContent();
-            }catch{
-                return Problem("Er is een probleem opgetreden bij het uitloggen van een gebruiker");
-            }
-        }
+    [HttpPost]
+    [Route("registreer")]
+    public async Task<ActionResult<IEnumerable<IdentityUser>>> Registreer([FromBody] GebruikerMetWachwoord gebruikerMetWachwoord)
+    {
+        var resultaat = await _userManager.CreateAsync(gebruikerMetWachwoord, gebruikerMetWachwoord.Password);
+        return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
+    }
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(string Username, string passwordHash)
+    {
+        var _user = await _userManager.FindByNameAsync(Username);
+        if (_user != null)
+            if (await _userManager.CheckPasswordAsync(_user, passwordHash))
+            {
+                var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"));
 
-        public IActionResult SignedOut()
-        {
-            try{
-                if(User.Identity != null){
-                    if (User.Identity.IsAuthenticated)
-                    {
-                        // Redirect to home page if the user is authenticated.
-                        return RedirectToAction(nameof(HomeController.Index), "Home");
-                    }
-                    return NoContent();
-                }
-                return Unauthorized();
-            } catch{
-                return Problem("Er is een probleem opgetreden bij het Redirecten na het uilogge van een gebruiker");
+                var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+                var claims = new List<Claim> { new Claim(ClaimTypes.Name, _user.UserName) };
+                //var roles = await _userManager.GetRolesAsync(_user);
+                //foreach (var role in roles)
+                //    claims.Add(new Claim(ClaimTypes.Role, role));
+                var tokenOptions = new JwtSecurityToken
+                (
+                    issuer: "https://localhost:7258",
+                    audience: "https://localhost:7258",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(10),
+                    signingCredentials: signingCredentials
+                );
+                return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });
             }
-        }
+
+        return Unauthorized();
+    }
     }
 }
