@@ -35,8 +35,8 @@ const BedrijfMenuPaginaPage = () => {
               rightIcon={
                 <Img
                   className="ml-2.5 max-w-full max-h-full"
-                  src="images/img_Profile.png"
-                  alt="Profiel Afbeelding"
+                  src="images/img_image1.png"
+                  alt="Profiel Icoon"
                 />
               }
               shape="round"
@@ -50,12 +50,12 @@ const BedrijfMenuPaginaPage = () => {
             </Button>
             <Button
               className="common-pointer cursor-pointer flex h-14 items-center justify-center w-[486px]"
-              onClick={() => navigate("/onderzoekpagina")}
+              onClick={() => navigate("/OnderzoekPlaatsenBedrijfPagina")}
               rightIcon={
                 <Img
                   className="ml-2.5 max-w-full max-h-full"
-                  src="images/img_Research.png"
-                  alt="Research afbeelding"
+                  src="images/img_AddInfoList.png"
+                  alt="Onderzoek Icoon"
                 />
               }
               shape="round"
@@ -73,8 +73,8 @@ const BedrijfMenuPaginaPage = () => {
               rightIcon={
                 <Img
                   className="ml-2.5 max-w-full max-h-full"
-                  src="images/img_Research.png"
-                  alt="Research afbeelding"
+                  src="images/img_InfoList.png"
+                  alt="Onderzoeks resultaten icoon"
                 />
               }
               shape="round"

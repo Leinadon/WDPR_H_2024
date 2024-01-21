@@ -33,8 +33,8 @@ const MenuPaginaPage = () => {
               rightIcon={
                 <Img
                   className="ml-2.5 max-w-full max-h-full"
-                  src="images/img_Profile.png"
-                  alt="Profiel afbeelding"
+                  src="images/img_image1.png"
+                  alt="Profiel Icoon"
                 />
               }
               shape="round"
@@ -53,7 +53,7 @@ const MenuPaginaPage = () => {
                 <Img
                   className="ml-2.5 max-w-full max-h-full"
                   src="images/img_reading.png"
-                  alt="reading"
+                  alt="Onderzoekspagina Icoon"
                 />
               }
               shape="round"
@@ -72,7 +72,7 @@ const MenuPaginaPage = () => {
                 <Img
                   className="ml-2.5 max-w-full max-h-full"
                   src="images/img_Contact.png"
-                  alt="Contact afbeelding"
+                  alt="Contact icoon"
                 />
               }
               shape="round"
@@ -91,7 +91,7 @@ const MenuPaginaPage = () => {
                 <Img
                   className="ml-2.5 max-w-full max-h-full"
                   src="images/img_Chat.png"
-                  alt="imageTwo_One"
+                  alt="Chatberichten Icoon"
                 />
               }
               shape="round"

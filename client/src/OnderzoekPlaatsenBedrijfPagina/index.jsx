@@ -9,7 +9,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
   const [description, setDescription] = useState();
   const [startdate, setStartdate] = useState();
   const [location, setLocation] = useState();
-  const [reward, setReward] = useState("60 euro");
+  const [reward, setReward] = useState();
 
   const [disabilityType, setDisability] = useState();
  
@@ -34,7 +34,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
         "reward": reward,
         "status": "Open",
 
-        "companyId": 2,
+        "companyId": 2, //AANPASSEN
 
         "english": english,
         "disabilityTypeId": disabilityType,
