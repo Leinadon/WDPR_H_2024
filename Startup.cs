@@ -13,6 +13,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Microsoft.Graph.Models.Security;
+using App.Metrics;
+using App.Metrics.AspNetCore;
+using App.Metrics.Formatters.Prometheus;
+using Microsoft.CodeAnalysis.Options;
+
 
 namespace WPR
 {
@@ -66,6 +72,11 @@ namespace WPR
             options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"))
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
+
+            var metrics = AppMetrics.CreateDefaultBuilder().Build();
+            services.AddMetrics(metrics);
+            services.AddMetricsTrackingMiddleware();
+            services.AddMetricsEndpoints();
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -110,13 +121,19 @@ namespace WPR
                 });
             //services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
              //   .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-      
+            services.Configure<CookiePolicyOptions>(options =>
+             {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+             });
             services.AddAuthorization();
             services.AddControllers();
             services.AddRazorPages();
             services.AddLogging(builder =>
             {
                 builder.AddConsole();
+                builder.AddDebug();
+                
             });
 
             services.AddSwaggerGen();
@@ -145,6 +162,7 @@ namespace WPR
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -154,11 +172,12 @@ namespace WPR
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+            
 
             //app.UsePathBase("https://accessibilityh.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseCookiePolicy();
             app.UseCors("AllowLocalhost");
 
             app.UseRouting();
@@ -169,7 +188,7 @@ namespace WPR
             app.UseSwaggerUI();
 
             app.UseCors("ReactPolicy");
-
+            app.UseMetricsAllMiddleware();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
