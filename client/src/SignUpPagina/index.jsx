@@ -125,6 +125,21 @@ const SignUpPaginaPage = () => {
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+                Gebruikersnaam
+              </Text>
+            </div>
+            <Input
+              name="rectanglesix"
+              placeholder=""
+              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
+              shape="round"
+              color="deep_orange_50"
+              variant="fill"
+              style={{ fontSize: '20px' }}
+            ></Input>
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Wachtwoord
               </Text>
             </div>
