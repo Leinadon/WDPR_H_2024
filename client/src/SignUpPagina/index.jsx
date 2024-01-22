@@ -67,7 +67,7 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={firstName}
-              onChange={ (e) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -84,7 +84,7 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={lastName}
-                onChange={ (e) => setLastName(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -101,7 +101,7 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={birthdate}
-                onChange={ (e) => setBirthdate(e.target.value)}
+              onChange={(e) => setBirthdate(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -118,7 +118,7 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={email}
-                onChange={ (e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -135,9 +135,9 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={phone}
-              onChange={ (e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             ></Input>
-           <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Postcode
               </Text>
@@ -152,7 +152,7 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={postalCode}
-              onChange={ (e) => setPostalCode(e.target.value)}
+              onChange={(e) => setPostalCode(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -169,7 +169,7 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={username}
-              onChange={ (e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -186,13 +186,13 @@ const SignUpPaginaPage = () => {
               variant="fill"
               style={{ fontSize: '20px' }}
               value={password}
-              onChange={ (e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Type Beperking
-                </Text>
-              </div>  
+              </Text>
+            </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[16px] w-[24%] md:w-full">
               <CheckBox
                 className="my-0.5"
@@ -200,7 +200,7 @@ const SignUpPaginaPage = () => {
                 name="rectanglefiveon"
                 id="rectanglefiveon"
                 shape="round"
-                color="blue_gray_100"       
+                color="blue_gray_100"
                 variant="fill"
               ></CheckBox>
               <Text
@@ -284,7 +284,7 @@ const SignUpPaginaPage = () => {
               color="teal_400"
               size="lg"
               variant="fill"
-              style={{ backgroundColor: voogdColor}}
+              style={{ backgroundColor: voogdColor }}
               onClick={handleButtonClickVoogd}
             >
               {voogdText}
@@ -296,52 +296,52 @@ const SignUpPaginaPage = () => {
             </div>
             <div>
               <Input
-              name="rectanglesix"
-              placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-              shape="round"
-              color="deep_orange_50"
-              variant="fill"
-              style={{ fontSize: '20px' }}
-              value={resources}
-              onChange={ (e) => setResources(e.target.value)}
+                name="rectanglesix"
+                placeholder=""
+                className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+                wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
+                shape="round"
+                color="deep_orange_50"
+                variant="fill"
+                style={{ fontSize: '20px' }}
+                value={resources}
+                onChange={(e) => setResources(e.target.value)}
               ></Input>
             </div>
-              <div>
-                <Button
+            <div>
+              <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px] "
                 onClick={() => navigate("/menupagina")}
                 shape="round"
                 color="teal_400"
                 size="lg"
                 variant="fill"
-                > Sign Up
-                </Button>
-              </div>
+              > Sign Up
+              </Button>
+            </div>
             <Button
               className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] ml-[20px] leading-[normal] ml-3 md:ml-[] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] items-center text-center text-white-A700 w-[600px]"
               onClick={() => navigate("/loginpagina")}
               size="xs"
             ></Button>
             <div
-            className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] justify-center p-2.5 w-[446px] sm:w-full"
-            onClick={() => navigate("/loginpagina")}
-          >
-            <Text
-              className="text-3xl text-right justify-right text-white-A700 w-full"
-              size="txtInterSemiBold30"
+              className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] justify-center p-2.5 w-[446px] sm:w-full"
+              onClick={() => navigate("/loginpagina")}
             >
-              <span className="text-white-A700 font-inter font-semibold">
-                Al een account?{" "}
-              </span>
-              <a
-                href="javascript:"
-                className="text-gray-400 font-inter font-black underline"
+              <Text
+                className="text-3xl text-right justify-right text-white-A700 w-full"
+                size="txtInterSemiBold30"
               >
-                Log in
-              </a>
-            </Text>
+                <span className="text-white-A700 font-inter font-semibold">
+                  Al een account?{" "}
+                </span>
+                <a
+                  href="javascript:"
+                  className="text-gray-400 font-inter font-black underline"
+                >
+                  Log in
+                </a>
+              </Text>
             </div>
           </div>
         </div>
