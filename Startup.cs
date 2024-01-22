@@ -120,8 +120,8 @@ namespace WPR
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = "https://localhost:7258",
-                        ValidAudience = "https://localhost:7258",
+                        ValidIssuer = "https://accessibilityh.azurewebsites.net",
+                        ValidAudience = "https://accessibilityh.azurewebsites.net",
                         IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
                     };
                 })
@@ -155,7 +155,7 @@ namespace WPR
             services.AddCors(options =>
                    {
                        options.AddPolicy("ReactPolicy",
-                           builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's URL
+                           builder => builder.WithOrigins("https://accessibilityh.azurewebsites.net/") // Replace with your React app's URL
                                              .AllowAnyMethod()
                                              .AllowAnyHeader()
                                              .AllowCredentials());
@@ -189,7 +189,7 @@ namespace WPR
             }
             
 
-            //app.UsePathBase("https://accessibilityh.azurewebsites.net/");
+            app.UsePathBase("https://accessibilityh.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();

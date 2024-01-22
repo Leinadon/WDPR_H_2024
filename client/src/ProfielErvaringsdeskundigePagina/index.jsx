@@ -28,7 +28,7 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://localhost:7258/api/users/6");
+        const response = await axios.get("https://accessibilityh.azurewebsites.net/api/users/6");
         const data = await response.data;
         setJsonData(data);
       } catch (error) {

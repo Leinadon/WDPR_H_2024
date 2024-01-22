@@ -13,7 +13,7 @@ const ProfielBedrijfPaginaPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7258/api/users/${userId}');
+        const response = await axios.get('https://accessibilityh.azurewebsites.net/api/users/${userId}');
         const data = await response.data;
         setJsonData(data);
       } catch (error) {
