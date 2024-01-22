@@ -1,25 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.OpenApi.Models;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
-
-using System.Text;
-using Microsoft.AspNetCore.Authentication.AzureAD.UI;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Microsoft.Graph.Models.Security;
-using App.Metrics;
-using App.Metrics.AspNetCore;
-using App.Metrics.Formatters.Prometheus;
-using Microsoft.CodeAnalysis.Options;
-
-
 namespace WPR
 {
     public class Startup
@@ -47,7 +29,6 @@ namespace WPR
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IResearchService, ResearchService>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<ILocationService, LocationService>();
 
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<IAnswerRepository, AnswerRepository>();
@@ -61,8 +42,6 @@ namespace WPR
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IResearchRepository, ResearchRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<ILocationService, LocationService>();
-
 
             services.AddStackExchangeRedisCache(options =>
             {
@@ -75,11 +54,6 @@ namespace WPR
             options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"))
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
-
-            var metrics = AppMetrics.CreateDefaultBuilder().Build();
-            services.AddMetrics(metrics);
-            services.AddMetricsTrackingMiddleware();
-            services.AddMetricsEndpoints();
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -102,82 +76,34 @@ namespace WPR
             services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<WPRDbContext>()
             .AddDefaultTokenProviders()
-            .AddRoles<IdentityRole>()
             .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = IdentityConstants.ApplicationScheme;
-                    options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
 
-                }).AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = "https://accessibilityh.azurewebsites.net",
-                        ValidAudience = "https://accessibilityh.azurewebsites.net",
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
-                    };
-                })
-                .AddIdentityCookies();
-            //services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-            //   .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-            services.AddAuthorization(options =>
-                {
-                    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                    options.AddPolicy("RequireUserRole", policy => policy.RequireRole("User"));
-                    options.AddPolicy("RequireCompanyRole", policy => policy.RequireRole("Company"));
-                }
-                );
-             //   .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-            services.Configure<CookiePolicyOptions>(options =>
-             {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-             });
+            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
             services.AddAuthorization();
             services.AddControllers();
             services.AddRazorPages();
             services.AddLogging(builder =>
             {
                 builder.AddConsole();
-                builder.AddDebug();
-                
             });
 
-            services.AddSwaggerGen();
             services.AddCors(options =>
                    {
                        options.AddPolicy("ReactPolicy",
-                           builder => builder.WithOrigins("https://accessibilityh.azurewebsites.net/") // Replace with your React app's URL
+                           builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's URL
                                              .AllowAnyMethod()
                                              .AllowAnyHeader()
                                              .AllowCredentials());
                    });
-            services.AddSwaggerGen(c =>
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Name = "Authorization",
-                Type = SecuritySchemeType.ApiKey,
-                Scheme = "Bearer",
-                BearerFormat = "JWT",
-                In = ParameterLocation.Header,
-                Description = "JWT Authorization header using the Bearer scheme."
-            })
-            );
+            services.AddSwaggerGen();
 
         }
 
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -187,13 +113,10 @@ namespace WPR
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            
 
-            app.UsePathBase("https://accessibilityh.azurewebsites.net/");
+            //app.UsePathBase("https://wdp2.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-            app.UseCors("AllowLocalhost");
 
             app.UseRouting();
 
@@ -203,28 +126,13 @@ namespace WPR
             app.UseSwaggerUI();
 
             app.UseCors("ReactPolicy");
-            app.UseMetricsAllMiddleware();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
-        public void ConfigureRoles(RoleManager<IdentityRole> roleManager)
-        {
-            // Create roles if they don't exist
-            CreateRole(roleManager, "Admin");
-            CreateRole(roleManager, "Employee");
-            CreateRole(roleManager, "Specialist");
-        }
-        private void CreateRole(RoleManager<IdentityRole> roleManager, string roleName)
-        {
-            if (!roleManager.RoleExistsAsync(roleName).Result)
-            {
-                var role = new IdentityRole(roleName);
-                roleManager.CreateAsync(role).Wait();
-            }
-        }
+
 
     }
 }
-
