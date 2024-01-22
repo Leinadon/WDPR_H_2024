@@ -10,6 +10,14 @@ const OndersteuningPaginaPage = () => {
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+  const [verstuurdColor, setVerstuurdColor] = useState('#1ca883');
+  const [verstuurdText, setVerstuurdText] = useState('Verstuur Bericht');
+  const handleButtonClickVerstuurd = () => {
+    const newColor = verstuurdColor === '#1ca883' ? '#CCCCCC' : '#1ca883';
+    const newText = verstuurdColor === '#1ca883' ? 'Bericht is verstuurd' : 'Verstuur Bericht';
+    setVerstuurdColor(newColor);
+    setVerstuurdText(newText);
+  };
 
   return (
     <>
@@ -198,8 +206,10 @@ const OndersteuningPaginaPage = () => {
               color="teal_400"
               size="lg"
               variant="fill"
+              style={{ backgroundColor: verstuurdColor}}
+              onClick={handleButtonClickVerstuurd}
             >
-              Verstuur Bericht
+              {verstuurdText}
             </Button>
             <Button
               className="common-pointer cursor-pointer font-black h-14 leading-[normal] mt-[41px] text-center text-xl w-[600px]"
