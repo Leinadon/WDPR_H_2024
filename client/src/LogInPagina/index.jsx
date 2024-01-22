@@ -8,7 +8,7 @@ import AuthContext from "../AuthProvider";
 
 import axios from 'axios';
 import axiosAPI from '../api/axios';
-const LOGIN_URL = 'https://localhost:7258/api/identityUser/login';
+const LOGIN_URL = 'https://accessibilityh.azurewebsites.net/api/identityUser/login';
 
 
 const LogInPaginaPage = () => {
