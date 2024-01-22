@@ -1,11 +1,47 @@
-import React from "react";
-
 import { useNavigate } from "react-router-dom";
 
 import { Button, CheckBox, Img, Input, Text } from "components";
 
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
+
+import { msalInstance } from "index";
+
 const ProfielPaginaPage = () => {
+  const [jsonData, setJsonData] = useState({});
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('', jsonData.firstName);
+  const [lastName, setLastName] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const [phone, setPhone] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [resources, setResources] = useState('');
+  const [voogdColor, setVoogdColor] = useState('#CCCCCC');
+  const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');
+  const handleButtonClickVoogd = () => {
+    const newColor = voogdColor === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    const newText = voogdColor === '#CCCCCC' ? 'Ik heb een Voogd' : 'Ik heb geen Voogd';
+    setVoogdColor(newColor);
+    setVoogdText(newText);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7258/api/users/6');
+        const data = await response.data;
+        setJsonData(data);
+      } catch (error) {
+        console.error('Error fetching JSON data:', error);
+        console.log('Server Response:', error.response); // Log the response for more details
+      }
+    };
+
+    fetchData();
+  }, []); // Run once on component mount
 
   return (
     <>
@@ -20,9 +56,9 @@ const ProfielPaginaPage = () => {
                 Aanpassen
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-100px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Accessibility Logo"
                 onClick={() => navigate("/menupagina")}
               />
             </div>
@@ -36,10 +72,15 @@ const ProfielPaginaPage = () => {
           <div className="flex flex-col justify-center font-inter w-[600px] ml-[400px] mt-[35px] ">
             <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Voornaam
+                <div>
+                  <h1>Voornaam</h1>
+                </div>
               </Text>
             </div>
+            <div>
             <Input
+              type="text"
+              onChange={ (e) => setFirstName(e.target.value)}
               name="rectanglethree"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
@@ -47,14 +88,16 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              value={jsonData.firstName}
+              style={{ fontSize: "20px", color: 'black'}}
             ></Input>
+            </div>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Achternaam
               </Text>
             </div>
-            <Input
+            <Input  
               name="rectangleseven"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
@@ -62,7 +105,8 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              value={jsonData.lastName}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -77,22 +121,8 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
-            ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
-              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Email
-              </Text>
-            </div>
-            <Input
-              name="rectangleeight"
-              placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-              shape="round"
-              color="deep_orange_50"
-              variant="fill"
-              style={{ fontSize: '20px' }}
+              value={jsonData.birthDate}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -107,9 +137,10 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              value={jsonData.phone}
+              style={{ fontSize: "20px" }}
             ></Input>
-           <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Postcode
               </Text>
@@ -123,27 +154,31 @@ const ProfielPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              type="text"
+              value={postalCode}
+              onChange={ (e) => setPostalCode(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Wachtwoord
+                Gebruikersnaam
               </Text>
             </div>
             <Input
-              name="rectanglesixone"
+              name="rectanglesix"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              value={jsonData.userName}
+              style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Type Beperking
-                </Text>
-              </div>  
+              </Text>
+            </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[16px] w-[24%] md:w-full">
               <CheckBox
                 className="my-0.5"
@@ -235,8 +270,10 @@ const ProfielPaginaPage = () => {
               color="teal_400"
               size="lg"
               variant="fill"
+              style={{ backgroundColor: voogdColor}}
+              onClick={handleButtonClickVoogd}
             >
-              Ik heb geen Voogd
+              {voogdText}
             </Button>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -245,38 +282,44 @@ const ProfielPaginaPage = () => {
             </div>
             <div>
               <Input
-              name="rectanglesix"
-              placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-              shape="round"
-              color="deep_orange_50"
-              variant="fill"
-              style={{ fontSize: '20px' }}
+                name="rectanglesix"
+                placeholder=""
+                className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+                wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
+                shape="round"
+                color="deep_orange_50"
+                variant="fill"
+                style={{ fontSize: "20px" }}
+                type="text"
+                value={resources}
+                onChange={ (e) => setResources(e.target.value)}
               ></Input>
             </div>
-              <div>
-                <Button
+            <div>
+              <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px]"
                 shape="round"
                 color="teal_400"
                 size="lg"
                 variant="fill"
-                > Opslaan
-                </Button>
-              </div>
-              <div>
-                <Button
+              >
+                {" "}
+                Opslaan
+              </Button>
+            </div>
+            <div>
+              <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[80px] text-center text-xl w-[600px]"
                 shape="round"
                 color="blue_gray_100_01"
                 size="lg"
                 variant="fill"
                 onClick={() => navigate("/profielervaringsdeskundigepagina")}
-                > Annuleren
-                </Button>
-              </div>
-              
+              >
+                {" "}
+                Annuleren
+              </Button>
+            </div>
           </div>
         </div>
       </div>

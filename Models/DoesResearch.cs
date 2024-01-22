@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.Graph.Models;
 
 namespace WPR
 {
@@ -9,13 +8,10 @@ namespace WPR
         [Key] 
         public int ID {get; set;}
         public string SpecialistId{get; set;}
-        [ForeignKey(nameof(SpecialistId))]
+        [NotMapped][ForeignKey(nameof(SpecialistId))]
         public Specialist? specialist {get;}
-        public int ChatId{get; set;}
-        [ForeignKey(nameof(ChatId))]
-        public OurChat? chat {get;}
         public int ResearchID{get; set;}
-        [ForeignKey(nameof(ResearchID))]
+        [NotMapped][ForeignKey(nameof(ResearchID))]
         public Research? research{get;}
         
         [Required] [StringLength(1024, MinimumLength = 5)] 

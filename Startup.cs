@@ -1,16 +1,8 @@
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Graph.Models;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.Identity.Web;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.OpenApi.Models;
 using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 
@@ -18,15 +10,21 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.AzureAD.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
-
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Microsoft.Graph.Models.Security;
+using App.Metrics;
+using App.Metrics.AspNetCore;
+using App.Metrics.Formatters.Prometheus;
+using Microsoft.CodeAnalysis.Options;
 
 
 namespace WPR
 {
     public class Startup
     {
-        
+
         public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration)
@@ -35,7 +33,8 @@ namespace WPR
         }
 
 
-        public void ConfigureServices(IServiceCollection services){
+        public void ConfigureServices(IServiceCollection services)
+        {
             services.AddScoped<IChatService, ChatService>();
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<ICompanyService, CompanyService>();
@@ -48,6 +47,7 @@ namespace WPR
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IResearchService, ResearchService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILocationService, LocationService>();
 
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<IAnswerRepository, AnswerRepository>();
@@ -61,7 +61,9 @@ namespace WPR
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IResearchRepository, ResearchRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
-            
+            services.AddScoped<ILocationService, LocationService>();
+
+
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = Configuration.GetConnectionString("AZURE_REDIS_CONNECTIONSTRING");
@@ -73,6 +75,11 @@ namespace WPR
             options.UseSqlServer(Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING"))
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors());
+
+            var metrics = AppMetrics.CreateDefaultBuilder().Build();
+            services.AddMetrics(metrics);
+            services.AddMetricsTrackingMiddleware();
+            services.AddMetricsEndpoints();
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = true;
@@ -85,7 +92,7 @@ namespace WPR
                 options.SignIn.RequireConfirmedEmail = true;
                 options.SignIn.RequireConfirmedAccount = true;
             });
-            services.ConfigureApplicationCookie(options => 
+            services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(30);
@@ -95,25 +102,70 @@ namespace WPR
             services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<WPRDbContext>()
             .AddDefaultTokenProviders()
+            .AddRoles<IdentityRole>()
             .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory<IdentityUser, IdentityRole>>();
 
-        
-            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+            services.AddAuthentication(opt =>
+                {
+                    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "https://localhost:7258",
+                        ValidAudience = "https://localhost:7258",
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
+                    };
+                });
+            //services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+             //   .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+            services.Configure<CookiePolicyOptions>(options =>
+             {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+             });
             services.AddAuthorization();
             services.AddControllers();
             services.AddRazorPages();
             services.AddLogging(builder =>
             {
                 builder.AddConsole();
+                builder.AddDebug();
+                
             });
-            
+
+            services.AddSwaggerGen();
+            services.AddCors(options =>
+                   {
+                       options.AddPolicy("ReactPolicy",
+                           builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's URL
+                                             .AllowAnyMethod()
+                                             .AllowAnyHeader()
+                                             .AllowCredentials());
+                   });
+            services.AddSwaggerGen(c => 
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme."
+                })
+            );
 
         }
-            
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -124,20 +176,43 @@ namespace WPR
                 app.UseHsts();
             }
             
-            //app.UsePathBase("https://wdp2.azurewebsites.net/");
+
+            //app.UsePathBase("https://accessibilityh.azurewebsites.net/");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
+            app.UseCors("AllowLocalhost");
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
+            app.UseCors("ReactPolicy");
+            app.UseMetricsAllMiddleware();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
+        public void ConfigureRoles(RoleManager<IdentityRole> roleManager)
+            {
+                // Create roles if they don't exist
+                CreateRole(roleManager, "Admin");
+                CreateRole(roleManager, "Employee");
+                CreateRole(roleManager, "Specialist");
+            }
+        private void CreateRole(RoleManager<IdentityRole> roleManager, string roleName)
+{
+        if (!roleManager.RoleExistsAsync(roleName).Result)
+        {
+            var role = new IdentityRole(roleName);
+            roleManager.CreateAsync(role).Wait();
+        }
+}
+
     }
 }
 

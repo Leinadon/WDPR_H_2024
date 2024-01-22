@@ -22,6 +22,206 @@ namespace WPR.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", "MyCustomSchema");
+
+                    b.UseTptMappingStrategy();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", "MyCustomSchema");
+                });
+
             modelBuilder.Entity("WPR.Answer", b =>
                 {
                     b.Property<int>("ID")
@@ -36,10 +236,6 @@ namespace WPR.Migrations
                     b.Property<int>("QuestionID")
                         .HasColumnType("int");
 
-                    b.Property<string>("SpecialistID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -49,8 +245,6 @@ namespace WPR.Migrations
                     b.HasIndex("DoesResearchID");
 
                     b.HasIndex("QuestionID");
-
-                    b.HasIndex("SpecialistID");
 
                     b.ToTable("Answers", "MyCustomSchema");
                 });
@@ -67,6 +261,10 @@ namespace WPR.Migrations
                         .IsRequired()
                         .HasMaxLength(320)
                         .HasColumnType("nvarchar(320)");
+
+                    b.Property<string>("LocationId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -150,9 +348,6 @@ namespace WPR.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ChatId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
@@ -209,10 +404,6 @@ namespace WPR.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("SpecialistID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Guardians", "MyCustomSchema");
@@ -225,9 +416,6 @@ namespace WPR.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CompanyID")
-                        .HasColumnType("int");
 
                     b.Property<string>("HouseNumber")
                         .IsRequired()
@@ -244,19 +432,12 @@ namespace WPR.Migrations
                         .HasMaxLength(6)
                         .HasColumnType("nvarchar(6)");
 
-                    b.Property<string>("SpecialistID")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("StreetName")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyID")
-                        .IsUnique()
-                        .HasFilter("[CompanyID] IS NOT NULL");
 
                     b.ToTable("Locations", "MyCustomSchema");
                 });
@@ -303,24 +484,30 @@ namespace WPR.Migrations
                     b.Property<int?>("DoesResearchID")
                         .HasColumnType("int");
 
+                    b.Property<string>("OurUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("OurUserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("User1ID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("User2ID")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
                     b.HasIndex("DoesResearchID");
 
-                    b.HasIndex("User1ID");
+                    b.HasIndex("OurUserId");
 
-                    b.HasIndex("User2ID");
+                    b.HasIndex("OurUserId1");
 
                     b.ToTable("OurChats", "MyCustomSchema");
                 });
@@ -362,10 +549,10 @@ namespace WPR.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("InterviewId")
+                    b.Property<int?>("InterviewId")
                         .HasColumnType("int");
 
-                    b.Property<int>("QuestionnaireId")
+                    b.Property<int?>("QuestionnaireId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -374,10 +561,6 @@ namespace WPR.Migrations
                         .HasColumnType("nvarchar(1024)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("InterviewId");
-
-                    b.HasIndex("QuestionnaireId");
 
                     b.ToTable("Questions", "MyCustomSchema");
                 });
@@ -401,9 +584,6 @@ namespace WPR.Migrations
                     b.Property<bool>("English")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Reward")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -421,6 +601,9 @@ namespace WPR.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<int?>("disabilityTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.HasIndex("CompanyId");
@@ -430,25 +613,12 @@ namespace WPR.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("WPR.User", b =>
+            modelBuilder.Entity("WPR.OurUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<DateOnly>("BirthDate")
                         .HasColumnType("date");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -460,57 +630,21 @@ namespace WPR.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("idenitityUserId")
+                        .IsRequired()
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users", "MyCustomSchema");
-
-                    b.UseTptMappingStrategy();
-                });
-
-            modelBuilder.Entity("WPR.Interview", b =>
-                {
-                    b.HasBaseType("WPR.Research");
-
-                    b.ToTable("Interviews", "MyCustomSchema");
+                    b.ToTable("OurUsers", "MyCustomSchema");
                 });
 
             modelBuilder.Entity("WPR.OnlineAssignment", b =>
@@ -530,16 +664,9 @@ namespace WPR.Migrations
                     b.ToTable("OnlineAssignments", "MyCustomSchema");
                 });
 
-            modelBuilder.Entity("WPR.Questionnaire", b =>
-                {
-                    b.HasBaseType("WPR.Research");
-
-                    b.ToTable("Questionnaires", "MyCustomSchema");
-                });
-
             modelBuilder.Entity("WPR.Employee", b =>
                 {
-                    b.HasBaseType("WPR.User");
+                    b.HasBaseType("WPR.OurUser");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -556,7 +683,7 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.Specialist", b =>
                 {
-                    b.HasBaseType("WPR.User");
+                    b.HasBaseType("WPR.OurUser");
 
                     b.Property<bool>("ApproachCommercialParties")
                         .HasColumnType("bit");
@@ -583,61 +710,88 @@ namespace WPR.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("GuardianID")
-                        .IsUnique()
-                        .HasFilter("[GuardianID] IS NOT NULL");
-
-                    b.HasIndex("LocationId")
-                        .IsUnique()
-                        .HasFilter("[LocationId] IS NOT NULL");
-
                     b.ToTable("Specialists", "MyCustomSchema");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WPR.Answer", b =>
                 {
-                    b.HasOne("WPR.DoesResearch", "DoesResearch")
+                    b.HasOne("WPR.DoesResearch", null)
                         .WithMany("Answers")
                         .HasForeignKey("DoesResearchID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("WPR.Question", "Question")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("WPR.Specialist", "Specialist")
-                        .WithMany()
-                        .HasForeignKey("SpecialistID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DoesResearch");
-
-                    b.Navigation("Question");
-
-                    b.Navigation("Specialist");
+                    b.HasOne("WPR.Question", null)
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WPR.Disability", b =>
                 {
-                    b.HasOne("WPR.DisabilityType", "DisabilityType")
+                    b.HasOne("WPR.DisabilityType", null)
                         .WithMany("disabilities")
                         .HasForeignKey("DisabilityTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WPR.Specialist", "Specialist")
+                    b.HasOne("WPR.Specialist", null)
                         .WithMany("Disabilities")
                         .HasForeignKey("SpecialistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("DisabilityType");
-
-                    b.Navigation("Specialist");
                 });
 
             modelBuilder.Entity("WPR.DoesResearch", b =>
@@ -655,18 +809,9 @@ namespace WPR.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WPR.Location", b =>
-                {
-                    b.HasOne("WPR.Company", "Company")
-                        .WithOne("Location")
-                        .HasForeignKey("WPR.Location", "CompanyID");
-
-                    b.Navigation("Company");
-                });
-
             modelBuilder.Entity("WPR.OnlineAssignmentResult", b =>
                 {
-                    b.HasOne("WPR.DoesResearch", "doesResearch")
+                    b.HasOne("WPR.DoesResearch", null)
                         .WithMany("OnlineAssignmentResults")
                         .HasForeignKey("DoesResearchID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -675,12 +820,10 @@ namespace WPR.Migrations
                     b.HasOne("WPR.OnlineAssignment", "OnlineAssignment")
                         .WithMany("OnlineAssignmentResults")
                         .HasForeignKey("OnlineAssignmentID")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("OnlineAssignment");
-
-                    b.Navigation("doesResearch");
                 });
 
             modelBuilder.Entity("WPR.OurChat", b =>
@@ -689,23 +832,15 @@ namespace WPR.Migrations
                         .WithMany()
                         .HasForeignKey("DoesResearchID");
 
-                    b.HasOne("WPR.User", "User1")
+                    b.HasOne("WPR.OurUser", null)
                         .WithMany("Chats")
-                        .HasForeignKey("User1ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OurUserId");
 
-                    b.HasOne("WPR.User", "User2")
+                    b.HasOne("WPR.OurUser", null)
                         .WithMany("Chats2")
-                        .HasForeignKey("User2ID")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .HasForeignKey("OurUserId1");
 
                     b.Navigation("DoesResearch");
-
-                    b.Navigation("User1");
-
-                    b.Navigation("User2");
                 });
 
             modelBuilder.Entity("WPR.OurChatMessage", b =>
@@ -716,7 +851,7 @@ namespace WPR.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WPR.User", "Sender")
+                    b.HasOne("WPR.OurUser", "Sender")
                         .WithMany("ChatMessages")
                         .HasForeignKey("SenderUserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -727,41 +862,20 @@ namespace WPR.Migrations
                     b.Navigation("ourChat");
                 });
 
-            modelBuilder.Entity("WPR.Question", b =>
-                {
-                    b.HasOne("WPR.Interview", "Interview")
-                        .WithMany("Questions")
-                        .HasForeignKey("InterviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WPR.Questionnaire", "Questionnaire")
-                        .WithMany("Questions")
-                        .HasForeignKey("QuestionnaireId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Interview");
-
-                    b.Navigation("Questionnaire");
-                });
-
             modelBuilder.Entity("WPR.Research", b =>
                 {
-                    b.HasOne("WPR.Company", "Company")
+                    b.HasOne("WPR.Company", null)
                         .WithMany("Researches")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("WPR.Interview", b =>
+            modelBuilder.Entity("WPR.OurUser", b =>
                 {
-                    b.HasOne("WPR.Research", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
-                        .HasForeignKey("WPR.Interview", "ID")
+                        .HasForeignKey("WPR.OurUser", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -775,63 +889,33 @@ namespace WPR.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WPR.Questionnaire", b =>
-                {
-                    b.HasOne("WPR.Research", null)
-                        .WithOne()
-                        .HasForeignKey("WPR.Questionnaire", "ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("WPR.Employee", b =>
                 {
-                    b.HasOne("WPR.Company", "Company")
+                    b.HasOne("WPR.Company", null)
                         .WithMany("Employees")
                         .HasForeignKey("CompanyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WPR.User", null)
+                    b.HasOne("WPR.OurUser", null)
                         .WithOne()
                         .HasForeignKey("WPR.Employee", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("WPR.Specialist", b =>
                 {
-                    b.HasOne("WPR.Guardian", "Guardian")
-                        .WithOne("specialist")
-                        .HasForeignKey("WPR.Specialist", "GuardianID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WPR.User", null)
+                    b.HasOne("WPR.OurUser", null)
                         .WithOne()
                         .HasForeignKey("WPR.Specialist", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("WPR.Location", "Location")
-                        .WithOne("specialist")
-                        .HasForeignKey("WPR.Specialist", "LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Guardian");
-
-                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("WPR.Company", b =>
                 {
                     b.Navigation("Employees");
-
-                    b.Navigation("Location")
-                        .IsRequired();
 
                     b.Navigation("Researches");
                 });
@@ -846,17 +930,6 @@ namespace WPR.Migrations
                     b.Navigation("Answers");
 
                     b.Navigation("OnlineAssignmentResults");
-                });
-
-            modelBuilder.Entity("WPR.Guardian", b =>
-                {
-                    b.Navigation("specialist")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WPR.Location", b =>
-                {
-                    b.Navigation("specialist");
                 });
 
             modelBuilder.Entity("WPR.OurChat", b =>
@@ -874,7 +947,7 @@ namespace WPR.Migrations
                     b.Navigation("doesResearches");
                 });
 
-            modelBuilder.Entity("WPR.User", b =>
+            modelBuilder.Entity("WPR.OurUser", b =>
                 {
                     b.Navigation("ChatMessages");
 
@@ -883,19 +956,9 @@ namespace WPR.Migrations
                     b.Navigation("Chats2");
                 });
 
-            modelBuilder.Entity("WPR.Interview", b =>
-                {
-                    b.Navigation("Questions");
-                });
-
             modelBuilder.Entity("WPR.OnlineAssignment", b =>
                 {
                     b.Navigation("OnlineAssignmentResults");
-                });
-
-            modelBuilder.Entity("WPR.Questionnaire", b =>
-                {
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("WPR.Specialist", b =>

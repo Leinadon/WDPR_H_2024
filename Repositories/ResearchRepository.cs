@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Expressions;
 
 namespace WPR
 {
@@ -51,7 +50,7 @@ namespace WPR
 
         public async Task Delete(int id)
         {
-            Research? research = await _dbContext.Researches.FirstAsync(r => r.ID == id);
+            Research? research = await _dbContext.Researches.SingleOrDefaultAsync(r => r.ID == id);
             if(research != null){
                 _dbContext.Researches.Remove(research);
                 await _dbContext.SaveChangesAsync();
@@ -65,7 +64,7 @@ namespace WPR
 
             _dbContext.Researches.Add(questionnaire);
             await _dbContext.SaveChangesAsync();
-            return questionnaire;
+            return questionnaire;   
         }
         public async Task<Interview> CreateInterview(Interview interview)
         {

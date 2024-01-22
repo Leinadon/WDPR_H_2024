@@ -1,23 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
+﻿
 namespace WPR
 {
     public interface IUserService
     {
-        Task<List<User>> Get();
-        Task<User?> GetByIDString(string id);
-        Task<User?> GetByID(int id);
-        Task<User> Create(User user);
-        Task Update(int id, User user);
+        Task<List<OurUser>> Get();
+        Task<OurUser?> GetByIDString(string id);
+        Task<OurUser?> GetByID(int id);
+        Task<OurUser> Create(OurUser user);
+        Task Update(int id, OurUser user);
         Task Delete(int id);
-        Task<User> GetByEmail(string email);
-        Task<User> CreateEmployee(Employee employee);
-        Task<User> CreateAdmin(Administrator admin);
-        Task<User> CreateSpecialist(Specialist specialist);
-        Task UpdateEmployee(int id, Employee employee);
-        Task UpdateAdmin(int id, Administrator admin);
-        Task UpdateSpecialist(int id, Specialist specialist);
+        Task<OurUser> GetByEmail(string email);
+        Task<OurUser> CreateEmployee(OurUser employee);
+        Task<OurUser> CreateAdmin(OurUser admin);
+        Task<OurUser> CreateSpecialist(OurUser specialist);
+        Task UpdateEmployee(int id, OurUser employee);
+        Task UpdateAdmin(int id, OurUser admin);
+        Task UpdateSpecialist(int id, OurUser specialist);
     }
 
 
@@ -30,20 +28,20 @@ namespace WPR
             this._userRepository = userRepository;
         }
 
-        public async Task<List<User>> Get()
+        public async Task<List<OurUser>> Get()
         {
             return await _userRepository.Get();
         }
 
-        public async Task<User?> GetByID(int id)
+        public async Task<OurUser?> GetByID(int id)
         {
             return await _userRepository.GetByID(id);
         }
-        public async Task<User?> GetByIDString(string id)
+        public async Task<OurUser?> GetByIDString(string id)
         {
             return await _userRepository.GetByIDString(id);
         }
-        public async Task<User> Create(User user)
+        public async Task<OurUser> Create(OurUser user)
         {
             return await _userRepository.Create(user);
         }
@@ -53,12 +51,12 @@ namespace WPR
             await _userRepository.Delete(id);
         }
 
-        public async Task Update(int id, User user)
+        public async Task Update(int id, OurUser user)
         {
             await _userRepository.Update(id, user);
         }
 
-        public async Task<User?> GetEmployeeByID(int id)
+        public async Task<OurUser?> GetEmployeeByID(int id)
         {
             return await _userRepository.GetByID(id);
         }
@@ -67,38 +65,38 @@ namespace WPR
 
         
 
-        public async Task<User> CreateEmployee(Employee employee)
+        public async Task<OurUser> CreateEmployee(OurUser employee)
         {
             return await _userRepository.CreateEmployee(employee);
         }
 
-        public async Task<User> CreateAdmin(Administrator admin)
+        public async Task<OurUser> CreateAdmin(OurUser admin)
         {
             return await _userRepository.CreateAdmin(admin);
         }
 
-        public async Task<User> CreateSpecialist(Specialist specialist)
+        public async Task<OurUser> CreateSpecialist(OurUser specialist)
         {
             return await _userRepository.CreateSpecialist(specialist);
         }
 
-        public async Task UpdateEmployee(int id, Employee employee)
+        public async Task UpdateEmployee(int id, OurUser employee)
         {
             await _userRepository.UpdateEmployee(id, employee);
         }
 
-        public async Task UpdateAdmin(int id, Administrator admin)
+        public async Task UpdateAdmin(int id, OurUser admin)
         {
             await _userRepository.UpdateAdmin(id, admin);
         }
 
-        public async Task UpdateSpecialist(int id, Specialist specialist)
+        public async Task UpdateSpecialist(int id, OurUser specialist)
         {
             await _userRepository.UpdateSpecialist(id, specialist);
         }
 
 
-        public async Task<User> GetByEmail(string email)
+        public async Task<OurUser> GetByEmail(string email)
         {
             return await _userRepository.GetByEmail(email);
         }

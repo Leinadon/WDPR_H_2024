@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import { Img, Line, Text, Button, Input } from "components";
 
 const ChatPaginaPage = () => {
   const navigate = useNavigate();
+  const [search, setSearch] = useState();
 
   return (
     <>
@@ -20,9 +21,9 @@ const ChatPaginaPage = () => {
                 Chats
               </Text>
               <Img
-                className="common-pointer md:h-auto h-full object-cover w-full"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[100px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessability"
                 onClick={() => navigate("/menupagina")}
               />
             </div>
@@ -30,6 +31,9 @@ const ChatPaginaPage = () => {
           <div className="bg-deep_orange-50 flex flex-col gap-[58px] mt-[50px] items-center justify-center py-[21px] rounded-[27px] w-[600px] md:w-full">
             <div className="bg-deep_orange-50 border-[3px] h-[60px] mb-[-30px] border-black-900 border-solid flex flex-row items-center justify-between p-3 rounded-[27px] w-[560px] md:w-full">
             <Input
+              type="text"
+              value={search}
+              onChange={ (e) => setSearch(e.target.value)}
               name="rectanglethree"
               placeholder="Zoek hier..."
               className="p-0 placeholder:bg-deep_orange-50 w-full"
@@ -49,7 +53,7 @@ const ChatPaginaPage = () => {
             >
               <Img
                 className="h-[30px] md:h-auto mr-[7px] object-cover w-[30px]"
-                src="images/img_image5.png"
+                src="images/img_Search.png"
                 alt="imagefive"
               />
             </Button>
@@ -58,12 +62,13 @@ const ChatPaginaPage = () => {
             <Line className="bg-blue_gray-100_02 h-0.5 mb-[480px] rotate-[180deg] w-full" />
           </div>
           <Button
-              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mr-2.5 mt-[60px] text-center text-xl w-[600px]"
+              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mt-[41px] text-center text-xl w-[600px]"
               onClick={() => navigate("/menupagina")}
               shape="round"
               color="blue_gray_100_01"
               size="lg"
               variant="fill"
+              
             >
               Terug naar Menu
             </Button>

@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 namespace WPR
 {
@@ -13,13 +12,16 @@ namespace WPR
         public int ID { get; private set; }
         
         public string User1ID {get; set;}
+        [NotMapped]
         [ForeignKey(nameof(User1ID))]
-        public User? User1 {get; set;}
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+        public OurUser? User1 {get; set;}
         public string User2ID {get; set;}
         [ForeignKey(nameof(User2ID))]
         [InverseProperty(nameof(User2.Chats2))]
         [DeleteBehavior(DeleteBehavior.NoAction)]
-        public User? User2 {get; set;}   
+        [NotMapped]
+        public OurUser? User2 {get; set;}   
         
         public IList<OurChatMessage> Messages { get; }  = new List<OurChatMessage>();
         public OurChatStatus Status { get; set; }
@@ -54,7 +56,7 @@ namespace WPR
         [DeleteBehavior(DeleteBehavior.NoAction)]
         [ForeignKey(nameof(SenderUserId))]
 
-        public User? Sender { get; set; }
+        public OurUser? Sender { get; set; }
 
         public OurChatMessage(){
             Text = string.Empty;

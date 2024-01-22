@@ -6,7 +6,7 @@ import { Button, Img, Text } from "components";
 
 const HomePaginaPage = () => {
   const navigate = useNavigate();
-
+  
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col items-center justify-start mx-auto p-[47px] md:px-10 sm:px-5 w-full">
@@ -20,9 +20,9 @@ const HomePaginaPage = () => {
         </div>
         <div className="flex flex-col h-[269px] md:h-auto items-center justify-center max-w-[836px] mt-7 p-2.5 w-full">
           <Img
-            className="md:h-auto h-full object-cover w-full"
-            src="images/img_reshotillustra.png"
-            alt="reshotillustra"
+            className="md:h-auto max-h-full object-cover max-w-full"
+            src="images/img_Logo.png"
+            alt="Accessibility Logo"
           />
         </div>
         <div className="flex flex-col font-jockeyone h-[70px] md:h-auto items-center justify-center max-w-[1336px] mt-7 mx-auto py-2.5 w-full">

@@ -10,7 +10,7 @@ namespace WPR
     public class ResearchController : ControllerBase
     {
         private readonly IResearchService _researchService;
-        
+
         private readonly IUserService _userService;
         private readonly ILogger<ResearchController> _logger;
 
@@ -71,7 +71,7 @@ namespace WPR
         }
 
         [HttpPost("questionnaire")]
-        public async Task<ActionResult<Questionnaire>> CreateQuestionnaire(int id,[FromBody] Questionnaire questionnaire)
+        public async Task<ActionResult<Questionnaire>> CreateQuestionnaire(int id, [FromBody] Questionnaire questionnaire)
         {
             try
             {
@@ -226,7 +226,7 @@ namespace WPR
                 {
                     return BadRequest(ModelState);
                 }
-
+                Console.WriteLine("past here");
                 var createdInterview = await _researchService.CreateInterview(id, interview);
                 return CreatedAtAction(nameof(GetResearchById), new { id = createdInterview.ID }, createdInterview);
             }
@@ -235,6 +235,7 @@ namespace WPR
                 _logger.LogError(ex, "Fout bij het ophalen van research_controller, GET: api/chats");
                 return Problem("Probleem bij het toevoegen van een interview");
             }
+            
         }
 
         [HttpGet("{id}/interview")]

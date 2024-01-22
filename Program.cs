@@ -1,39 +1,42 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.Graph;
-using Microsoft.Graph.Authentication;
-using Microsoft.Graph.Models.ExternalConnectors;
-using Microsoft.Identity.Web;
-using Microsoft.Identity.Client;
-using WPR;
-using Azure.Identity;
-using Microsoft.AspNetCore.Routing.Constraints;
-using Microsoft.Graph.Drives.Item.Items.Item.Workbook.Functions.Var_P;
-using System.ComponentModel;
+using App.Metrics;
+using App.Metrics.AspNetCore;
+using App.Metrics.Formatters.Prometheus;
+
 namespace WPR{
     public class Program
     {
+        public static IMetricsRoot Metrics {get; set;}
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-            
             Console.WriteLine("Succesvol gestart");
+            BuildHost(args).Run();
+            Console.WriteLine("Succesvol afgesloten");
+
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    
-                    webBuilder.UseStartup<Startup>();
-                }
+        public static IHost BuildHost(string[] args)
+        {
+            Metrics = AppMetrics.CreateDefaultBuilder()
+                    .OutputMetrics.AsPrometheusPlainText()
+                    .OutputMetrics.AsPrometheusProtobuf()
+                    .Build();
 
-                
-        );
-        
+            return Host.CreateDefaultBuilder(args)
+                            .ConfigureMetrics(Metrics)
+                            .UseMetrics(
+                                options =>
+                                {
+                                    options.EndpointOptions = endpointsOptions =>
+                                    {
+                                        endpointsOptions.MetricsTextEndpointOutputFormatter = Metrics.OutputMetricsFormatters.OfType<MetricsPrometheusTextOutputFormatter>().First();
+                                        endpointsOptions.MetricsEndpointOutputFormatter = Metrics.OutputMetricsFormatters.OfType<MetricsPrometheusProtobufOutputFormatter>().First();
+                                    };
+                                })
+                            .ConfigureWebHostDefaults(webBuilder =>
+                            {
+                                webBuilder.UseStartup<Startup>();
+                            })
+                            .Build();
+        }
     }
-    
 }

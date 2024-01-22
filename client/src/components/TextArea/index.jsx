@@ -7,8 +7,11 @@ const TextArea = React.forwardRef(
     { className, name, placeholder, children, errors, onChange, ...restProps },
     ref,
   ) => {
+    // const handleChange = (e) => {
+    //   if (onChange) onChange(e?.target?.value);
+    // };
     const handleChange = (e) => {
-      if (onChange) onChange(e?.target?.value);
+      if (onChange) onChange(e);
     };
 
     return (

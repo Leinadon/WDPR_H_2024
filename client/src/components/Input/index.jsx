@@ -29,12 +29,16 @@ const Input = React.forwardRef(
       size = "",
       variant = "",
       color = "",
+      value = "",
       ...restProps
     },
     ref,
   ) => {
+    // const handleChange = (e) => {
+    //   if (onChange) onChange(e?.target?.value);
+    // };
     const handleChange = (e) => {
-      if (onChange) onChange(e?.target?.value);
+      if (onChange) onChange(e);
     };
 
     return (
@@ -54,6 +58,7 @@ const Input = React.forwardRef(
             name={name}
             onChange={handleChange}
             placeholder={placeholder}
+            value={value}
             {...restProps}
           />
           {!!suffix && suffix}
@@ -74,6 +79,7 @@ Input.propTypes = {
   size: PropTypes.oneOf(["xs"]),
   variant: PropTypes.oneOf(["fill"]),
   color: PropTypes.oneOf(["deep_orange_50", "blue_gray_100"]),
+  value: PropTypes.string
 };
 
 export { Input };

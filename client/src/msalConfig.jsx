@@ -4,7 +4,6 @@
  */
 
 import { LogLevel } from "@azure/msal-browser";
-
 /**
  * Configuration object to be passed to MSAL instance on creation. 
  * For a full list of MSAL.js configuration parameters, visit:
@@ -24,10 +23,13 @@ export const msalConfig = {
     },
     system: {
         loggerOptions: {
+            piiLoggingEnabled: false,
+            logLevel: LogLevel.Info,
             loggerCallback: (level, message, containsPii) => {
                 if (containsPii) {
                     return;
                 }
+                
                 switch (level) {
                     case LogLevel.Error:
                         console.error(message);
