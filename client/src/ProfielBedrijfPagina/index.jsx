@@ -138,8 +138,7 @@ const ProfielBedrijfPaginaPage = () => {
             </Button>
           </div>
         </div>
-      </div>
-    </div>  
+      </div>  
     </>
   );
 };
