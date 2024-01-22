@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
+
 namespace WPR
 {
     public class Startup
@@ -89,16 +91,15 @@ namespace WPR
                 builder.AddConsole();
             });
 
+            services.AddSwaggerGen();
             services.AddCors(options =>
                    {
-                       options.AddPolicy("ReactPolicy",
+                       options.AddPolicy("AllowLocalhost",
                            builder => builder.WithOrigins("http://localhost:3000") // Replace with your React app's URL
                                              .AllowAnyMethod()
                                              .AllowAnyHeader()
                                              .AllowCredentials());
                    });
-            services.AddSwaggerGen();
-
         }
 
 
@@ -118,21 +119,22 @@ namespace WPR
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            // app.UseCors("AllowLocalhost");
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            app.UseCors("ReactPolicy");
+            app.UseCors("AllowLocalhost");
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
-
-
     }
 }

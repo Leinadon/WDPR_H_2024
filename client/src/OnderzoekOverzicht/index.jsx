@@ -15,18 +15,18 @@ const OnderzoekOverzicht = () => {
     console.log(searchPrompt)
   });
 
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://localhost:7258/api/research/researches');
+      const result = await response.json();
+
+      setData(result);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://localhost:7258/api/research/researches');
-        const result = await response.json();
-
-        setData(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -81,7 +81,7 @@ const OnderzoekOverzicht = () => {
 
               <div className="bg-blue_gray-100_02 w-full  h-96 mb-8 overflow-y-auto">
 
-                {searchPrompt == "" ? ( //when there is no search prompt
+                {searchPrompt === "" ? ( //when there is no search prompt
                   <ul className="">
                     {listWithResearches.map(research => (
                       <li key={research.id}>
