@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 
 import { useNavigate } from "react-router-dom";
 
@@ -6,6 +6,10 @@ import { Button, Img, Input, Text, TextArea } from "components";
 
 const OndersteuningPaginaPage = () => {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
 
   return (
     <>
@@ -121,6 +125,9 @@ const OndersteuningPaginaPage = () => {
               </Text>
             </div>
             <Input
+              type="text"
+              value={name}
+              onChange={ (e) => setName(e.target.value)}
               name="rectangleseven"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
@@ -136,6 +143,9 @@ const OndersteuningPaginaPage = () => {
               </Text>
             </div>
             <Input
+              type="text"
+              value={email}
+              onChange={ (e) => setEmail(e.target.value)}
               name="rectangleseven"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
@@ -151,6 +161,9 @@ const OndersteuningPaginaPage = () => {
               </Text>
             </div>
             <Input
+              type="text"
+              value={subject}
+              onChange={ (e) => setSubject(e.target.value)}
               name="rectangleseven"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
@@ -166,6 +179,9 @@ const OndersteuningPaginaPage = () => {
               </Text>
             </div>
             <TextArea
+              type="text"
+              value={message}
+              onChange={ (e) => setMessage(e.target.value)}
               name="rectangleseven"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 items-center justify-center ml-[4px] max-w-[592px] mb-2.5 w-full rounded-[10px]"

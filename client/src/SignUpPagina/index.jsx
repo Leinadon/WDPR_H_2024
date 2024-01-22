@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { Button, CheckBox, Img, Input, Text } from "components";
+// import { emitWarning } from "process";
 
 const SignUpPaginaPage = () => {
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [resources, setResources] = useState('');
+  const [voogdColor, setVoogdColor] = useState('#CCCCCC');
+  const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');
+  const handleButtonClickVoogd = () => {
+    const newColor = voogdColor === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    const newText = voogdColor === '#CCCCCC' ? 'Ik heb een Voogd' : 'Ik heb geen Voogd';
+    setVoogdColor(newColor);
+    setVoogdText(newText);
+  };
+
 
   return (
     <>
@@ -20,9 +39,9 @@ const SignUpPaginaPage = () => {
                 Sign Up
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-20px] w-[104px]"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                className="md:h-auto h-full items-right object-cover ml-[58px] max-w-[104px]"
+                src="images/img_Logo.png"
+                alt="Logo Accessibility"
               />
             </div>
           </div>
@@ -47,6 +66,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={firstName}
+              onChange={ (e) => setFirstName(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -62,6 +83,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={lastName}
+                onChange={ (e) => setLastName(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -77,6 +100,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={birthdate}
+                onChange={ (e) => setBirthdate(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -92,6 +117,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={email}
+                onChange={ (e) => setEmail(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -107,6 +134,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={phone}
+              onChange={ (e) => setPhone(e.target.value)}
             ></Input>
            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -122,6 +151,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={postalCode}
+              onChange={ (e) => setPostalCode(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -137,6 +168,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={username}
+              onChange={ (e) => setUsername(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -152,6 +185,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={password}
+              onChange={ (e) => setPassword(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -165,7 +200,7 @@ const SignUpPaginaPage = () => {
                 name="rectanglefiveon"
                 id="rectanglefiveon"
                 shape="round"
-                color="blue_gray_100"
+                color="blue_gray_100"       
                 variant="fill"
               ></CheckBox>
               <Text
@@ -249,8 +284,10 @@ const SignUpPaginaPage = () => {
               color="teal_400"
               size="lg"
               variant="fill"
+              style={{ backgroundColor: voogdColor}}
+              onClick={handleButtonClickVoogd}
             >
-              Ik heb geen Voogd
+              {voogdText}
             </Button>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -267,6 +304,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={resources}
+              onChange={ (e) => setResources(e.target.value)}
               ></Input>
             </div>
               <div>

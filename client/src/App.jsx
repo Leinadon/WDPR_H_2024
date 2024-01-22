@@ -7,9 +7,9 @@ import "./styles/App.css";
 
 function App() {
         return (
-                // <MsalProvider instance={msalInstance}>
+                <MsalProvider instance={msalInstance}>
                         <Routes />
-                // </MsalProvider>
+                </MsalProvider>
         )
 }
 

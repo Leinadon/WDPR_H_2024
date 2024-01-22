@@ -31,7 +31,8 @@ export const msalInstance = new PublicClientApplication(msalConfig);
 // });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<MsalProvider instance={msalInstance}>
-    <App />
+root.render(
+  <MsalProvider instance={msalInstance}> 
+  <App />
   </MsalProvider>
 );
