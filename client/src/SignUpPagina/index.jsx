@@ -221,7 +221,7 @@ const SignUpPaginaPage = () => {
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
               >
-                Zintuigelijk
+                Auditief
               </Text>
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
@@ -238,7 +238,7 @@ const SignUpPaginaPage = () => {
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
               >
-                Cognitief
+                Visueel
               </Text>
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
@@ -252,7 +252,7 @@ const SignUpPaginaPage = () => {
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
               >
-                Neurologisch
+              Ontwikkeling
               </Text>
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[25px] w-[37%] md:w-full">
@@ -264,12 +264,12 @@ const SignUpPaginaPage = () => {
                 shape="round"
                 color="blue_gray_100"
                 variant="fill"
-              ></CheckBox>
+                ></CheckBox>
               <Text
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
-              >
-                Ontwikkeling
+                >
+                Cognitief of neurologisch
               </Text>
             </div>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
