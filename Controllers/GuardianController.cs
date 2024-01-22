@@ -31,7 +31,7 @@ namespace WPR
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Fout bij het ophalen van guardians, GET: api/chats");
+                _logger.LogError(ex, "Fout bij het ophalen van guardians, GET: api/Guardians");
                 return Problem("Probleem bij het opvragen van alle instanties van een Guardian object"); //Loggen
             }
         }

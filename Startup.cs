@@ -47,6 +47,7 @@ namespace WPR
             services.AddScoped<IQuestionService, QuestionService>();
             services.AddScoped<IResearchService, ResearchService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILocationService, LocationService>();
 
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<IAnswerRepository, AnswerRepository>();
@@ -60,6 +61,8 @@ namespace WPR
             services.AddScoped<IQuestionRepository, QuestionRepository>();
             services.AddScoped<IResearchRepository, ResearchRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILocationService, LocationService>();
+
 
             services.AddStackExchangeRedisCache(options =>
             {
