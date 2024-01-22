@@ -7,6 +7,10 @@ import { useNavigate } from "react-router-dom";
 import { Button, CheckBox, Img, Input, Text, TextArea } from "components";
 
 const OnderzoekPlaatsenBedrijfPaginaPage = () => {
+  const [knopNederlands, setNederlands] = useState('#CCCCCC');
+  const [knopEngels, setEngels] = useState('#CCCCCC');
+
+  
   const navigate = useNavigate();
   const [title, setTitle] = useState();
   const [english, setLanguage] = useState(false);
@@ -14,9 +18,25 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
   const [startdate, setStartdate] = useState();
   const [location, setLocation] = useState();
   const [reward, setReward] = useState();
-
   const [disabilityType, setDisability] = useState();
- 
+  
+  
+  const handleButtonClick = (state) => {
+    const selectedColor = '#1ca883';
+    if (state) {
+      
+      setEngels(selectedColor);
+      setNederlands('#CCCCCC');
+    } else {
+      
+      setNederlands(selectedColor);
+      setEngels('#CCCCCC');
+    }
+  };
+  useEffect(() => {
+    console.log("research in english: "+english)
+    handleButtonClick(english);
+  }, [english])
 
 
   function CreateResearch() {
@@ -110,9 +130,10 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
             <div className="flex sm:flex-col flex-row gap-[33px] items-center justify-between mt-3.5 w-full">
               <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[280px]" shape="round" color="teal_400" size="xl" variant="fill"
                 onClick={() => setLanguage(false)}
-              >Nederlands</Button>
+                style={{ backgroundColor: knopNederlands}}>Nederlands</Button>
               <Button className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[280px]" shape="round" color="teal_400" size="xl" variant="fill"
-                onClick={() => setLanguage(true)}>Engels</Button>
+                onClick={() => setLanguage(true)} 
+                style={{ backgroundColor: knopEngels}}>Engels</Button>
             </div>
 
             <Text className="mt-5 text-white-A700 text-xl" size="txtInterBlack20">Type Beperking</Text>

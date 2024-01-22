@@ -121,6 +121,28 @@ const LogInPaginaPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Input>
+          
+          <div className="h-7 md:h-[66px] md:ml-[0] ml-[18.8px] mt-7 relative w-[94%] sm:w-full">
+              <div className="absolute bottom-[0] flex flex-row gap-[9px] h-[25px] md:h-auto items-center justify-start left-[0] right-[55%] top-[11%] w-[197px]">
+                <div className="bg-blue_gray-100 h-5 rounded-[3px] w-[21px]"></div>
+                <Text
+                  className="flex-1 text-white-A700 text-xl"
+                  size="txtInterSemiBold20"
+                >
+                  Onthoud mij
+                </Text>
+              </div>
+              <div className="absolute bottom-[11%] flex flex-col h-[25px] md:h-auto items-center justify-start left-[42%] p-2.5 right-[0] top-[0] w-[252px]">
+                <Text
+                  className="text-white-A700 text-xl w-auto"
+                  size="txtInterSemiBold20"
+                >
+                  Wachtwoord vergeten?
+                </Text>
+              </div>
+            </div>
+
+
           <div>
             <Button
               className="cursor-pointer font-black h-14 leading-[normal] mt-[100px] mr-3 text-center text-xl w-[600px]"

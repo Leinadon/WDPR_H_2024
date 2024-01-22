@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Button, CheckBox, Img, Input, Text } from "components";
-import { emitWarning } from "process";
+// import { emitWarning } from "process";
 
 const SignUpPaginaPage = () => {
   const navigate = useNavigate();
