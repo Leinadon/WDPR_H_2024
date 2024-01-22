@@ -44,7 +44,7 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
     console.log(startdate)
     console.log(disabilityType)
 
-    fetch("https://accessibilityh.azurewebsites.net/api/research/interview/", {
+    fetch("https://localhost:7258/api/research/interview/", {
 
       method: "POST",
       mode: "cors",
