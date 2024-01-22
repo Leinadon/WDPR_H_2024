@@ -91,7 +91,7 @@ namespace WPR
                 }
 
                 await _locationService.Delete(id);
-                return NoContent(); //return 204
+                return Ok(); //return 200
             }catch
             {
                 return Problem("Probleem bij het deleten van een object");
