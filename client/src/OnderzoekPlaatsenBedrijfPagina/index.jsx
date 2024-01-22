@@ -12,6 +12,8 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
 
   
   const navigate = useNavigate();
+  const selectedColor = '#1ca883';
+  
   const [title, setTitle] = useState();
   const [english, setLanguage] = useState(false);
   const [description, setDescription] = useState();
@@ -22,7 +24,6 @@ const OnderzoekPlaatsenBedrijfPaginaPage = () => {
   
   
   const handleButtonClick = (state) => {
-    const selectedColor = '#1ca883';
     if (state) {
       
       setEngels(selectedColor);
