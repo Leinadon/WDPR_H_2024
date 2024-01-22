@@ -18,7 +18,7 @@ const OnderzoekOverzicht = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://localhost:7258/api/research/researches');
+        const response = await fetch('https://accessibilityh.azurewebsites.net/api/research/researches');
         const result = await response.json();
 
         setData(result);

@@ -1,62 +1,132 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { Button, CheckBox, Img, Input, Text } from "components";
+import { msalInstance } from "index";
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../msalConfig";
 import { UnauthenticatedTemplate, useMsal, MsalProvider } from '@azure/msal-react';
-import axios from 'axios';
+import AuthContext from "../AuthProvider";
 
-import { Button, CheckBox, Img, Input, Text } from "components";
-import { msalInstance } from "index";
+import axios from 'axios';
+import axiosAPI from '../api/axios';
+const LOGIN_URL = 'https://accessibilityh.azurewebsites.net/api/identityUser/login';
+
 
 const LogInPaginaPage = () => {
-  // const history = useHistory();
   const navigate = useNavigate();
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMsg, setErrormMsg] = useState('');
+  const [success, setSuccess] = useState('');
 
-  
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, [])
+
+  useEffect(() => {
+    setErrormMsg('');
+  }, [username, password])
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await axiosAPI.post(LOGIN_URL,
+            JSON.stringify({ username, password }),
+            {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true
+            }
+        );
+        console.log(JSON.stringify(response?.data));
+        //console.log(JSON.stringify(response));
+        const accessToken = response?.data?.accessToken;
+        const roles = response?.data?.roles;
+        setAuth({ username, password, roles, accessToken });
+        setUsername('');
+        setPassword('');
+        setSuccess(true);
+    } catch (err) {
+        if (!err?.response) {
+          setErrormMsg('No Server Response');
+        } else if (err.response?.status === 400) {
+          setErrormMsg('Missing Username or Password');
+        } else if (err.response?.status === 401) {
+          setErrormMsg('Unauthorized');
+        } else {
+          setErrormMsg('Login Failed');
+        }
+        errRef.current.focus();
+    }
+}
+
+  // const navigate = useNavigate();
+
+
   function signInClickHandler(instance) {
     instance.loginPopup()
-    .then(response => {
-      navigate("/menupagina");
-      console.log('Login successful', response);
-      
-    });
-  }
-  
-  const handleLogin = async () => {
-    const loginData = {
-      Username: username,
-      passwordHash: password
-    };
-    
-    try {
-      const response = await fetch('http://localhost:7258/api/identityUser/Login', {
-        method: 'POST',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginData),
+      .then(response => {
+        navigate("/menupagina");
+        console.log('Login successful', response);
+
       });
-      console.log(JSON.stringify(loginData));
+  }
+
+  // useEffect(() =>{
+  //   console.log("changes applied");
+  // }, [username, password])
+
+  // const handleLogin = async () => {
+  //   const loginData = {
+  //     Username: username,
+  //     passwordHash: password
+  //   };
 
 
-      if (response.ok) {
-        // Login successful, handle the response accordingly
-        const data = await response.json();
-        console.log('Login successful:', data);
-      } else {
-        // Handle login failure
-        console.error('Login failed');
-      }
-    } catch (error) {
-      // Handle login error
-      console.error(error);
-      console.error('Error:', error.message);
-      console.error('Status Code:', error.response?.status);
-      console.error('Response Data:', error.response?.data);
-    }
-  };
+  //   console.log(JSON.stringify(loginData));
+  //   try {
+  //     // const response = await fetch('https://localhost:7258/api/identityUser/login?Username=naks&passwordHash=22021212HpEd%21', {
+  //     const response = await axios.post('https://localhost:7258/api/identityUser/login', {
+  //       Username: username,
+  //       passwordHash: password,
+
+  //       method: 'POST',
+  //       headers: {
+  //         // 'Access-Control-Allow-Origin': '*',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(loginData),
+  //     });
+
+  //     if (response.status === 200) {
+  //       console.log('Login successful:', response.data);
+  //     } else {
+  //       console.error('Login failed');
+  //     }
+
+  //     // if (response.ok) {
+  //     //   // Login successful, handle the response accordingly
+  //     //   const data = await response.json();
+  //     //   console.log('Login successful:', data);
+  //     // } else {
+  //     //   // Handle login failure
+  //     //   console.error('Login failed');
+  //     // }
+  //   } catch (error) {
+  //     console.error(error);
+  //     console.error('Error:', error.message);
+  //     console.error('Status Code:', error.response?.status);
+  //     console.error('Response Data:', error.response?.data);
+
+  //     if (error.response?.status === 400) {
+  //       // Log and handle validation errors
+  //       console.error('Validation Errors:', error.response.data.errors);
+  //     }
+  //   }
+  // };
 
 
   // const handleLogoutPopup = () => {
@@ -115,6 +185,7 @@ const LogInPaginaPage = () => {
             color="deep_orange_50"
             variant="fill"
             style={{ fontSize: '20px' }}
+            ref={userRef}
 
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -139,7 +210,7 @@ const LogInPaginaPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Input>
 
-          <div className="h-7 md:h-[66px] md:ml-[0] ml-[18.8px] mt-7 relative w-[94%] sm:w-full">
+          {/* <div className="h-7 md:h-[66px] md:ml-[0] ml-[18.8px] mt-7 relative w-[94%] sm:w-full">
             <div className="absolute bottom-[0] flex flex-row gap-[9px] h-[25px] md:h-auto items-center justify-start left-[0] right-[55%] top-[11%] w-[197px]">
               <div className="bg-blue_gray-100 h-5 rounded-[3px] w-[21px]"></div>
               <Text
@@ -157,7 +228,7 @@ const LogInPaginaPage = () => {
                 Wachtwoord vergeten?
               </Text>
             </div>
-          </div>
+          </div> */}
 
 
           <div>
