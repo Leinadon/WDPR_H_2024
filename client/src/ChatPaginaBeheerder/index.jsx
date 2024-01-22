@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { Img, Line, Text, Button, Input } from "components";
 
-const ChatPaginaPage = () => {
+const ChatPaginaBeheerderPage = () => {
   const navigate = useNavigate();
-  const [search, setSearch] = useState();
 
   return (
     <>
@@ -31,9 +30,6 @@ const ChatPaginaPage = () => {
           <div className="bg-deep_orange-50 flex flex-col gap-[58px] mt-[50px] items-center justify-center py-[21px] rounded-[27px] w-[600px] md:w-full">
             <div className="bg-deep_orange-50 border-[3px] h-[60px] mb-[-30px] border-black-900 border-solid flex flex-row items-center justify-between p-3 rounded-[27px] w-[560px] md:w-full">
             <Input
-              type="text"
-              value={search}
-              onChange={ (e) => setSearch(e.target.value)}
               name="rectanglethree"
               placeholder="Zoek hier..."
               className="p-0 placeholder:bg-deep_orange-50 w-full"
@@ -78,4 +74,4 @@ const ChatPaginaPage = () => {
   );
 };
 
-export default ChatPaginaPage;
+export default ChatPaginaBeheerderPage;

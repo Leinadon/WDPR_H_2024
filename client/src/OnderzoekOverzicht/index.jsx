@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
 
 import { Button, Img, Input, Line, Text } from "components";
+import { Search } from "semantic-ui-react";
 
 const OnderzoekOverzicht = () => {
   const [listWithResearches, setData] = useState([]);
+  const [searchPrompt, searchForPrompt] = useState("");
+
+  const filteredData = listWithResearches.filter(item =>
+    item.title.toLowerCase().includes(searchPrompt.toLowerCase()) || item.description.toLowerCase().includes(searchPrompt.toLowerCase())
+  );
+
+  useEffect(() => { //TEST & DEBUG SUPPORT
+    console.log(searchPrompt)
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +26,6 @@ const OnderzoekOverzicht = () => {
         console.error('Error fetching data:', error);
       }
     };
-
 
     fetchData();
   }, []);
@@ -43,40 +52,65 @@ const OnderzoekOverzicht = () => {
               />
             </div>
           </div>
-          <div className="flex flex-col gap-[50px] items-center justify-start w-[37%] md:w-full">
+          <div className="flex flex-col gap-[50px] items-center justify-start w-[77%] md:w-full">
             <div className="bg-deep_orange-50 flex flex-col font-jockeyone gap-11 items-center justify-start py-[35px] rounded-[27px] w-full">
               <Input
                 name="rowzoekhier"
+                type="text"
                 placeholder="Typ hier om een onderzoek te zoeken"
                 className="!placeholder:text-gray-500 !text-gray-500 leading-[normal] p-0 text-left text-xl w-full"
                 wrapClassName="flex outline outline-[3px] outline-black-900 w-[92%]"
                 suffix={
                   <Img
                     className="h-[30px] mr-2 my-px"
-                    src="images/img_image5.png"
+                    src="images/img_Search.png"
                     alt="Zoek icoon"
                   />
+                }
+                value={searchPrompt}
+                onChange={
+                  (e) => searchForPrompt(e.target.value)
                 }
                 shape="round"
                 color="deep_orange_50"
                 size="xs"
                 variant="fill"
               ></Input>
+
+
+
               <div className="bg-blue_gray-100_02 w-full  h-96 mb-8 overflow-y-auto">
-                <ul className="">
-                  {listWithResearches.map(research => (
-                    <li key={research.id}>
-                      <div key={research.id} className="border rounded p-4 m-4 max-w-m">
-                        <h3 className="text-lg font-semibold mb-2">{research.title}</h3>
-                        <div className="max-h-32 overflow-y-auto">
-                          <p>{research.description}</p>
-                          <p>Datum: {research.startDate}</p>
+
+                {searchPrompt == "" ? ( //when there is no search prompt
+                  <ul className="">
+                    {listWithResearches.map(research => (
+                      <li key={research.id}>
+                        <div key={research.id} className="border rounded p-4 m-4 max-w-m">
+                          <h3 className="text-lg font-semibold mb-2">{research.title}</h3>
+                          <div className="max-h-32 overflow-y-auto">
+                            <p>{research.description}</p>
+                            <p>Datum: {research.startDate}</p>
+                          </div>
                         </div>
-                      </div>
-                      <br />
-                    </li>
-                  ))}
-                </ul>
+                        <br />
+                      </li>
+                    ))}
+                  </ul>
+                ) : ( //when there is a search prompt
+                  <ul className="">
+                    {filteredData.map(research => (
+                      <li key={research.id}>
+                        <div key={research.id} className="border rounded p-4 m-4 max-w-m">
+                          <h3 className="text-lg font-semibold mb-2">{research.title}</h3>
+                          <div className="max-h-32 overflow-y-auto">
+                            <p>{research.description}</p>
+                            <p>Datum: {research.startDate}</p>
+                          </div>
+                        </div>
+                        <br />
+                      </li>
+                    ))}
+                  </ul>)}
               </div>
 
             </div>

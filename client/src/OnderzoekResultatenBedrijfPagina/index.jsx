@@ -1,36 +1,40 @@
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { Button, Img, Input, Text } from "components";
 
 const OnderzoekResultatenBedrijfPaginaPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
-        <div className="flex flex-col gap-[17px] items-center justify-start max-w-[1337px] mb-[11px] mx-auto w-full">
-          <div className="flex sm:flex-col flex-row md:gap-10 items-center justify-between w-full">
-            <div className="flex sm:flex-1 flex-col h-[104px] md:h-auto items-center justify-center p-2.5 w-[465px] sm:w-full">
-              <Text
-                className="md:text-5xl text-6xl text-teal-400"
-                size="txtJockeyOneRegular60"
-              >
-                Resultaten
-              </Text>
-            </div>
-            <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
+        <div className="flex flex-col justify-start max-w-[1440px] mb-[108px] mx-auto w-full">
+          <div className="flex flex-col items-center justify-start w-full">
+            <div className="flex flex-row font-jockeyone md:gap-10 gap-[885px] h-[104px] md:h-auto items-center justify-start max-w-[1368px]  md:pl-10 sm:pl-5 pl-[121px] pr-2.5 py-2.5 w-full">
+                <Text
+                  className="md:text-5xl text-6xl text-teal-400 items-left ml-[-60px]"
+                  size="txtJockeyOneRegular60"
+                >
+                  Onderzoek
+                </Text>
               <Img
-                className="md:h-auto h-full object-cover w-full"
+                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
                 src="images/img_Logo.png"
-                alt="Logo Accessobility"
+                alt="Logo Accessability"
+                onClick={() => navigate("/bedrijfmenupagina")}
               />
             </div>
           </div>
-          <div className="flex flex-col items-start justify-start w-[37%] md:w-full">
-            <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-              Soort onderzoek
-            </Text>
-            <div className="flex sm:flex-col flex-row font-inter gap-4 items-center justify-between mt-3 w-full">
+          <div className="flex flex-col justify-center font-inter w-[600px] ml-[420px] mt-[35px] ">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start  mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+                Soort onderzoek
+              </Text>
+            </div>  
+            <div className="flex sm:flex-col flex-row sm:gap-[46px] items-center justify-between w-[100%] md:w-full">
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[227px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -39,7 +43,7 @@ const OnderzoekResultatenBedrijfPaginaPage = () => {
                 Vragenlijst
               </Button>
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[243px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -49,7 +53,7 @@ const OnderzoekResultatenBedrijfPaginaPage = () => {
               </Button>
             </div>
             <Button
-              className="cursor-pointer font-black font-inter h-14 leading-[normal] mt-[23px] text-base text-center w-[227px]"
+              className="cursor-pointer font-black h-14 leading-[normal] mr-[276px] mt-[21px] text-base text-center w-[270px]"
               shape="round"
               color="teal_400"
               size="xl"
@@ -57,15 +61,14 @@ const OnderzoekResultatenBedrijfPaginaPage = () => {
             >
               Online Opdracht
             </Button>
-            <Text
-              className="mt-5 text-white-A700 text-xl"
-              size="txtInterBlack20"
-            >
-              Taal
-            </Text>
-            <div className="flex sm:flex-col flex-row font-inter gap-[15px] items-center justify-between mt-[5px] w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-center mt-[17px] p-2.5 w-[496px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+                Taal
+              </Text>
+            </div>
+            <div className="flex sm:flex-col flex-row sm:gap-[46px] items-center justify-between w-[100%] md:w-full">
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[225px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -74,7 +77,7 @@ const OnderzoekResultatenBedrijfPaginaPage = () => {
                 Nederlands
               </Button>
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[243px]"
+                className="cursor-pointer font-black h-14 leading-[normal] text-base text-center underline w-[270px]"
                 shape="round"
                 color="teal_400"
                 size="xl"
@@ -83,23 +86,16 @@ const OnderzoekResultatenBedrijfPaginaPage = () => {
                 English
               </Button>
             </div>
-            <Text
-              className="mt-7 text-white-A700 text-xl"
-              size="txtInterBlack20"
-            >
-              Afgeronde Onderzoeken:
-            </Text>
-            <Input
-              name="stackzoekhier"
-              placeholder=""
-              className="!placeholder:text-gray-500 !text-gray-500 font-jockeyone leading-[normal] p-0 placeholder:bg-deep_orange-50 text-left text-xl w-full"
-              wrapClassName="mt-2.5 outline outline-[3px] outline-black-900 w-full"
-              shape="round"
-              color="deep_orange_50"
-              variant="fill"
-            ></Input>
-            <Button
-              className="cursor-pointer font-black font-inter h-14 leading-[normal] mt-[47px] text-center text-xl w-[486px]"
+            <div className="flex flex-col h-11 md:h-auto items-left justify-center mt-[17px] p-2.5 w-[496px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+                Afgeronde onderzoeken
+              </Text>
+            </div>
+            <div className="bg-deep_orange-50 flex flex-col gap-[58px] mt-[6px] items-center justify-center h-[600px] py-[21px] rounded-[27px] w-[600px] md:w-full">
+            </div>
+              <Button
+              className="common-pointer cursor-pointer font-black h-14 leading-[normal] mr-2.5 mt-[39px] text-center text-xl w-[600px]"
+              onClick={() => navigate("/bedrijfmenupagina")}
               shape="round"
               color="blue_gray_100_01"
               size="lg"
@@ -110,6 +106,7 @@ const OnderzoekResultatenBedrijfPaginaPage = () => {
           </div>
         </div>
       </div>
+      
     </>
   );
 };

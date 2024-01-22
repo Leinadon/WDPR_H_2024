@@ -35,6 +35,8 @@ const ChatErvaringsdeskundigeBedrijfPagina = React.lazy(
   () => import("ChatErvaringsdeskundigeBedrijfPagina"),
 );
 const ChatPagina = React.lazy(() => import("ChatPagina"));
+const ChatPaginaBedrijfPage = React.lazy(() => import("ChatPaginaBedrijf"));
+const ChatPaginaBeheerderPage = React.lazy(() => import("ChatPaginaBeheerder"));
 const OndersteuningPagina = React.lazy(
   () => import("OndersteuningPagina"),
 );
@@ -62,7 +64,7 @@ const ProjectRoutes = () => {
           <Route path="/signuppagina" element={<SignUpPagina />} />
           <Route path="/menupagina" element={<MenuPagina />} />
           <Route path="/profielpagina" element={<ProfielPagina />} />
-          <Route path="/OnderzoekOVerzicht" element={<OnderzoekOverzicht />} />
+          <Route path="/alle_onderzoeken" element={<OnderzoekOverzicht />} />
           <Route
             path="/profielervaringsdeskundigepagina"
             element={<ProfielErvaringsdeskundigePagina />}
@@ -77,6 +79,8 @@ const ProjectRoutes = () => {
             element={<OndersteuningPagina />}
           />
           <Route path="/chatpagina" element={<ChatPagina />} />
+          <Route path="/chatpaginabedrijf" element={<ChatPaginaBedrijfPage />} />
+          <Route path="/chatpaginabeheerder" element={<ChatPaginaBeheerderPage />} />
           <Route
             path="/chatervaringsdeskundigebedrijfpagina"
             element={<ChatErvaringsdeskundigeBedrijfPagina />}

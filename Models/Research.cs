@@ -21,7 +21,7 @@ namespace WPR
         public Company? Company{get; set;}
         [Required] 
         public Boolean English{get;set;}
-        public int disabilityTypeId{get; set;}
+        public int? disabilityTypeId{get; set;}
         [NotMapped][ForeignKey(nameof(disabilityTypeId))]
         public DisabilityType disabilityType {get; set;}
         public Research()

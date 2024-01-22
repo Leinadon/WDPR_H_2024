@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WPR.Migrations
 {
     [DbContext(typeof(WPRDbContext))]
-    partial class WPRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240121131903_FixedUserControllerBug")]
+    partial class FixedUserControllerBug
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -348,6 +351,9 @@ namespace WPR.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<int>("ChatId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
@@ -484,12 +490,6 @@ namespace WPR.Migrations
                     b.Property<int?>("DoesResearchID")
                         .HasColumnType("int");
 
-                    b.Property<string>("OurUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("OurUserId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -501,13 +501,19 @@ namespace WPR.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ID");
 
                     b.HasIndex("DoesResearchID");
 
-                    b.HasIndex("OurUserId");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex("OurUserId1");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("OurChats", "MyCustomSchema");
                 });
@@ -549,10 +555,10 @@ namespace WPR.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("InterviewId")
+                    b.Property<int>("InterviewId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("QuestionnaireId")
+                    b.Property<int>("QuestionnaireId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -601,7 +607,7 @@ namespace WPR.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<int?>("disabilityTypeId")
+                    b.Property<int>("disabilityTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -613,7 +619,7 @@ namespace WPR.Migrations
                     b.UseTptMappingStrategy();
                 });
 
-            modelBuilder.Entity("WPR.OurUser", b =>
+            modelBuilder.Entity("WPR.User", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -666,7 +672,7 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.Employee", b =>
                 {
-                    b.HasBaseType("WPR.OurUser");
+                    b.HasBaseType("WPR.User");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -683,7 +689,7 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.Specialist", b =>
                 {
-                    b.HasBaseType("WPR.OurUser");
+                    b.HasBaseType("WPR.User");
 
                     b.Property<bool>("ApproachCommercialParties")
                         .HasColumnType("bit");
@@ -832,13 +838,13 @@ namespace WPR.Migrations
                         .WithMany()
                         .HasForeignKey("DoesResearchID");
 
-                    b.HasOne("WPR.OurUser", null)
+                    b.HasOne("WPR.User", null)
                         .WithMany("Chats")
-                        .HasForeignKey("OurUserId");
+                        .HasForeignKey("UserId");
 
-                    b.HasOne("WPR.OurUser", null)
+                    b.HasOne("WPR.User", null)
                         .WithMany("Chats2")
-                        .HasForeignKey("OurUserId1");
+                        .HasForeignKey("UserId1");
 
                     b.Navigation("DoesResearch");
                 });
@@ -851,7 +857,7 @@ namespace WPR.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WPR.OurUser", "Sender")
+                    b.HasOne("WPR.User", "Sender")
                         .WithMany("ChatMessages")
                         .HasForeignKey("SenderUserId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -871,11 +877,11 @@ namespace WPR.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WPR.OurUser", b =>
+            modelBuilder.Entity("WPR.User", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
-                        .HasForeignKey("WPR.OurUser", "Id")
+                        .HasForeignKey("WPR.User", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -897,7 +903,7 @@ namespace WPR.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WPR.OurUser", null)
+                    b.HasOne("WPR.User", null)
                         .WithOne()
                         .HasForeignKey("WPR.Employee", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -906,7 +912,7 @@ namespace WPR.Migrations
 
             modelBuilder.Entity("WPR.Specialist", b =>
                 {
-                    b.HasOne("WPR.OurUser", null)
+                    b.HasOne("WPR.User", null)
                         .WithOne()
                         .HasForeignKey("WPR.Specialist", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -947,7 +953,7 @@ namespace WPR.Migrations
                     b.Navigation("doesResearches");
                 });
 
-            modelBuilder.Entity("WPR.OurUser", b =>
+            modelBuilder.Entity("WPR.User", b =>
                 {
                     b.Navigation("ChatMessages");
 

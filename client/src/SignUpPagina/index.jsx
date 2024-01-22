@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import { Button, CheckBox, Img, Input, Text } from "components";
+// import { emitWarning } from "process";
 
 const SignUpPaginaPage = () => {
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [resources, setResources] = useState('');
+  const [voogdColor, setVoogdColor] = useState('#CCCCCC');
+  const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');
+  const handleButtonClickVoogd = () => {
+    const newColor = voogdColor === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    const newText = voogdColor === '#CCCCCC' ? 'Ik heb een Voogd' : 'Ik heb geen Voogd';
+    setVoogdColor(newColor);
+    setVoogdText(newText);
+  };
+
 
   return (
     <>
@@ -20,9 +39,9 @@ const SignUpPaginaPage = () => {
                 Sign Up
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
+                className="md:h-auto h-full items-right object-cover ml-[58px] max-w-[104px]"
                 src="images/img_Logo.png"
-                alt="Accessibility Logo"
+                alt="Logo Accessibility"
               />
             </div>
           </div>
@@ -47,6 +66,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -62,6 +83,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -77,6 +100,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={birthdate}
+              onChange={(e) => setBirthdate(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -92,6 +117,8 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -107,8 +134,10 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             ></Input>
-           <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Postcode
               </Text>
@@ -122,6 +151,25 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
+            ></Input>
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+                Gebruikersnaam
+              </Text>
+            </div>
+            <Input
+              name="rectanglesix"
+              placeholder=""
+              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
+              shape="round"
+              color="deep_orange_50"
+              variant="fill"
+              style={{ fontSize: '20px' }}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -137,12 +185,14 @@ const SignUpPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Type Beperking
-                </Text>
-              </div>  
+              </Text>
+            </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[16px] w-[24%] md:w-full">
               <CheckBox
                 className="my-0.5"
@@ -171,7 +221,7 @@ const SignUpPaginaPage = () => {
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
               >
-                Zintuigelijk
+                Auditief
               </Text>
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
@@ -188,7 +238,7 @@ const SignUpPaginaPage = () => {
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
               >
-                Cognitief
+                Visueel
               </Text>
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
@@ -202,7 +252,7 @@ const SignUpPaginaPage = () => {
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
               >
-                Neurologisch
+              Ontwikkeling
               </Text>
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[25px] w-[37%] md:w-full">
@@ -214,12 +264,12 @@ const SignUpPaginaPage = () => {
                 shape="round"
                 color="blue_gray_100"
                 variant="fill"
-              ></CheckBox>
+                ></CheckBox>
               <Text
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
-              >
-                Ontwikkeling
+                >
+                Cognitief of neurologisch
               </Text>
             </div>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
@@ -234,8 +284,10 @@ const SignUpPaginaPage = () => {
               color="teal_400"
               size="lg"
               variant="fill"
+              style={{ backgroundColor: voogdColor }}
+              onClick={handleButtonClickVoogd}
             >
-              Ik heb geen Voogd
+              {voogdText}
             </Button>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -244,50 +296,52 @@ const SignUpPaginaPage = () => {
             </div>
             <div>
               <Input
-              name="rectanglesix"
-              placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-              shape="round"
-              color="deep_orange_50"
-              variant="fill"
-              style={{ fontSize: '20px' }}
+                name="rectanglesix"
+                placeholder=""
+                className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+                wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
+                shape="round"
+                color="deep_orange_50"
+                variant="fill"
+                style={{ fontSize: '20px' }}
+                value={resources}
+                onChange={(e) => setResources(e.target.value)}
               ></Input>
             </div>
-              <div>
-                <Button
+            <div>
+              <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px] "
                 onClick={() => navigate("/menupagina")}
                 shape="round"
                 color="teal_400"
                 size="lg"
                 variant="fill"
-                > Sign Up
-                </Button>
-              </div>
+              > Sign Up
+              </Button>
+            </div>
             <Button
               className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] ml-[20px] leading-[normal] ml-3 md:ml-[] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] items-center text-center text-white-A700 w-[600px]"
               onClick={() => navigate("/loginpagina")}
               size="xs"
             ></Button>
             <div
-            className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] justify-center p-2.5 w-[446px] sm:w-full"
-            onClick={() => navigate("/loginpagina")}
-          >
-            <Text
-              className="text-3xl text-right justify-right text-white-A700 w-full"
-              size="txtInterSemiBold30"
+              className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] justify-center p-2.5 w-[446px] sm:w-full"
+              onClick={() => navigate("/loginpagina")}
             >
-              <span className="text-white-A700 font-inter font-semibold">
-                Al een account?{" "}
-              </span>
-              <a
-                href="javascript:"
-                className="text-gray-400 font-inter font-black underline"
+              <Text
+                className="text-3xl text-right justify-right text-white-A700 w-full"
+                size="txtInterSemiBold30"
               >
-                Log in
-              </a>
-            </Text>
+                <span className="text-white-A700 font-inter font-semibold">
+                  Al een account?{" "}
+                </span>
+                <a
+                  href="javascript:"
+                  className="text-gray-400 font-inter font-black underline"
+                >
+                  Log in
+                </a>
+              </Text>
             </div>
           </div>
         </div>

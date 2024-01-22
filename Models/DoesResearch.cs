@@ -10,9 +10,6 @@ namespace WPR
         public string SpecialistId{get; set;}
         [NotMapped][ForeignKey(nameof(SpecialistId))]
         public Specialist? specialist {get;}
-        public int ChatId{get; set;}
-        [NotMapped][ForeignKey(nameof(ChatId))]
-        public OurChat? chat {get;}
         public int ResearchID{get; set;}
         [NotMapped][ForeignKey(nameof(ResearchID))]
         public Research? research{get;}

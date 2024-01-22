@@ -9,13 +9,29 @@ import axios from "axios";
 import { msalInstance } from "index";
 
 const ProfielPaginaPage = () => {
-  const [jsonData, setJsonData] = useState([]);
+  const [jsonData, setJsonData] = useState({});
   const navigate = useNavigate();
+  const [firstName, setFirstName] = useState('', jsonData.firstName);
+  const [lastName, setLastName] = useState('');
+  const [birthdate, setBirthdate] = useState('');
+  const [phone, setPhone] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [resources, setResources] = useState('');
+  const [voogdColor, setVoogdColor] = useState('#CCCCCC');
+  const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');
+  const handleButtonClickVoogd = () => {
+    const newColor = voogdColor === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
+    const newText = voogdColor === '#CCCCCC' ? 'Ik heb een Voogd' : 'Ik heb geen Voogd';
+    setVoogdColor(newColor);
+    setVoogdText(newText);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7258/api/users/${userId}');
+        const response = await axios.get('https://localhost:7258/api/users/6');
         const data = await response.data;
         setJsonData(data);
       } catch (error) {
@@ -40,7 +56,7 @@ const ProfielPaginaPage = () => {
                 Aanpassen
               </Text>
               <Img
-                className="md:h-auto h-full items-right object-cover ml-[-100px] max-w-[104px]"
+                className="md:h-auto h-full items-right object-cover ml-[-20px] max-w-[104px]"
                 src="images/img_Logo.png"
                 alt="Accessibility Logo"
                 onClick={() => navigate("/menupagina")}
@@ -60,23 +76,12 @@ const ProfielPaginaPage = () => {
                   <h1>Voornaam</h1>
                 </div>
               </Text>
-              <div>
-
-                {Array.isArray(jsonData) ? (
-                  jsonData.map((jsonData, index) => (
-                    <div key={index}>
-                      <p>Name: {jsonData.firstName}</p>
-                      {/* Add more properties as needed */}
-                    </div>
-                  ))
-                ) : (
-                  <p></p>
-                )}
-              </div>
             </div>
             <div>
               <Input
-                name="rectanglethree"
+                type="text"
+              onChange={ (e) => setFirstName(e.target.value)}
+              name="rectanglethree"
                 placeholder=""
                 className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
                 wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -84,8 +89,7 @@ const ProfielPaginaPage = () => {
                 color="deep_orange_50"
                 variant="fill"
                 value={jsonData.firstName}
-                type="text"
-                style={{ fontSize: "20px", color: 'black' }}
+                  style={{ fontSize: "20px", color: 'black' }}
               ></Input>
             </div>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -93,7 +97,7 @@ const ProfielPaginaPage = () => {
                 Achternaam
               </Text>
             </div>
-            <Input
+            <Input  
               name="rectangleseven"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
@@ -118,22 +122,6 @@ const ProfielPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               value={jsonData.birthDate}
-              style={{ fontSize: "20px" }}
-            ></Input>
-            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
-              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Email
-              </Text>
-            </div>
-            <Input
-              name="rectangleeight"
-              placeholder=""
-              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-              shape="round"
-              color="deep_orange_50"
-              variant="fill"
-              value={jsonData.email}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -165,23 +153,25 @@ const ProfielPaginaPage = () => {
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              value={jsonData.phone}
-              style={{ fontSize: "20px" }}
+              style={{ fontSize: '20px' }}
+              type="text"
+              value={postalCode}
+              onChange={ (e) => setPostalCode(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Wachtwoord
+                Gebruikersnaam
               </Text>
             </div>
             <Input
-              name="rectanglesixone"
+              name="rectanglesix"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              value={jsonData.phone}
+              value={jsonData.userName}
               style={{ fontSize: "20px" }}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 w-[500px] sm:w-full">
@@ -280,8 +270,10 @@ const ProfielPaginaPage = () => {
               color="teal_400"
               size="lg"
               variant="fill"
+              style={{ backgroundColor: voogdColor}}
+              onClick={handleButtonClickVoogd}
             >
-              Ik heb geen Voogd
+              {voogdText}
             </Button>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -298,6 +290,9 @@ const ProfielPaginaPage = () => {
                 color="deep_orange_50"
                 variant="fill"
                 style={{ fontSize: "20px" }}
+                type="text"
+                value={resources}
+                onChange={ (e) => setResources(e.target.value)}
               ></Input>
             </div>
             <div>

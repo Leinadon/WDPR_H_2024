@@ -10,7 +10,7 @@ const ChatBedrijfErvaringsdeskundigePaginaPage = () => {
           <div className="bg-blue_gray-900 flex md:flex-col flex-row md:gap-5 items-center justify-start px-1 w-full">
             <Img
               className="h-[90px] md:h-auto object-cover w-[90px]"
-              src="images/img_download5removebgpreview.png"
+              src="images/img_Logo.png"
               alt="download5remove"
             />
             <Line className="bg-blue_gray-900_01 md:h-[3px] h-[90px] ml-1 md:ml-[0] w-[3px] md:w-full" />

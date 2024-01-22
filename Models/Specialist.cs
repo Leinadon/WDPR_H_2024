@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace WPR
 {
     [Table("Specialists")]
-    public class Specialist : User
+    public class Specialist : OurUser
 
     {
         public int LocationId {get; set;}

@@ -13,7 +13,7 @@ public class WPRDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Disability> Disabilities { get; set; }
     public DbSet<DoesResearch> DoesResearches { get; set; }
     public DbSet<Guardian> Guardians { get; set; }
-    public DbSet<User> Users { get; set; }
+    public DbSet<OurUser> OurUsers { get; set; }
     public DbSet<Specialist> Specialists { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<OnlineAssignmentResult> OnlineAssignmentResults { get; set; }

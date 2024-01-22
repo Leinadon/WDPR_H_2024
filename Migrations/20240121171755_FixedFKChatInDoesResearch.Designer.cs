@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace WPR.Migrations
 {
     [DbContext(typeof(WPRDbContext))]
-    partial class WPRDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240121171755_FixedFKChatInDoesResearch")]
+    partial class FixedFKChatInDoesResearch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -549,10 +552,10 @@ namespace WPR.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int?>("InterviewId")
+                    b.Property<int>("InterviewId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("QuestionnaireId")
+                    b.Property<int>("QuestionnaireId")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -601,7 +604,7 @@ namespace WPR.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
-                    b.Property<int?>("disabilityTypeId")
+                    b.Property<int>("disabilityTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("ID");

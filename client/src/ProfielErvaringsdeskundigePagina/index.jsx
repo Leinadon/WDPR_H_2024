@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-import { Button, Img, Text } from "components";
+import { Button, Img, Text, Input } from "components";
 
 const ProfielErvaringsdeskundigePaginaPage = () => {
+  const [jsonData, setJsonData] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://localhost:7258/api/users/6');
+        const data = await response.data;
+        setJsonData(data);
+      } catch (error) {
+        console.error('Error fetching JSON data:', error);
+        console.log('Server Response:', error.response); // Log the response for more details
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -19,59 +38,63 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
               Profiel
             </Text>
             <Img
-                className="md:h-auto h-full items-right object-cover ml-[-px] max-w-[104px]"
+                className="md:h-auto h-full items-right object-cover ml-[80px] max-w-[104px]"
                 src="images/img_Logo.png"
-                alt="Accessibility Logo"
+                alt="Logo Accessability"
                 onClick={() => navigate("/menupagina")}
               />
           </div>
-          <div className="flex flex-col font-inter items-center justify-start w-[600px] mt-[60px] md:w-full">
+          <div className="flex flex-col font-inter items-center justify-start w-[600px] mt-[60px] md:w-full ">
             <div className="md:h-[150px] h-[291px] relative w-full" >
               <div className="absolute bottom-[19%] h-[119px] md:h-[42px] inset-x-[0] mx-auto w-full">
-                <div className="absolute flex flex-col h-[65px] md:h-auto items-center justify-center p-2.5 right-[2%] top-[0] w-60">
+                <div className="absolute flex flex-col h-[65px] md:h-auto items-center justify-center p-2.5 right-[0%] top-[0] w-60">
                   <Button className="bg-transparent cursor-pointer font-black leading-[normal] min-w-[220px] text-base text-center text-white-A700 underline">
                     Verander Profiel afbeelding
                   </Button>
                 </div>
                 <div className="absolute bottom-[0] flex flex-col h-[61px] md:h-auto inset-x-[0] items-left justify-center mx-auto p-2.5 w-[600px] sm:w-full">
-                  <Text
-                    className="text-lg text-white-A700 w-auto"
+                  <label htmlFor="myInput" className="mt-[40px]" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>Naam: </label>
+                    <Input
+                    className="text-lg text-white-A700 w-auto ml-[-12px] mt-[2px]"
                     size="txtInterBlack18"
-                  >
-                    Naam:{" "}
-                  </Text>
+                    style={{ color: 'white', fontSize: '18px'}}
+                    value={`${jsonData.firstName || ''} ${jsonData.lastName || ''}`}
+                  ></Input>
                 </div>
               </div>
-              <div className="absolute bottom-[0] flex flex-col h-[61px] md:h-auto inset-x-[0] items-left justify-center mx-auto p-2.5 w-[600px] sm:w-full">
-                <Text
-                  className="text-lg text-white-A700 w-auto"
-                  size="txtInterBlack18"
-                >
-                  Email:{" "}
-                </Text>
-              </div>
+              <div className="absolute bottom-[0] flex flex-col h-[61px] md:h-auto inset-x-[0] items-left justify-center mb-[-30px] mx-auto p-2.5 w-[600px] sm:w-full">
+                <label htmlFor="myInput" className="mt-[40px]" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>Email: </label>
+                  <Input
+                    className="text-lg text-white-A700 w-auto ml-[-12px] mt-[2px]"
+                    size="txtInterBlack18"
+                    style={{ color: 'white', fontSize: '18px'}}
+                    value={jsonData.email}
+                  ></Input>
+                </div>
               <Img
                 className="absolute h-[150px] left-[2%] object-cover top-[0] w-[150px] ml-[-6px]"
                 src="images/img_StockPicture.png"
-                alt="images2modified"
-              />
+                alt="StockPicture"
+              />  
             </div>
-            <div className="flex flex-col h-[117px] md:h-auto items-left justify-center mt-[15px] p-2.5 w-[600px] sm:w-full">
-              <Text
-                className="text-lg text-white-A700 w-auto"
-                size="txtInterBlack18"
-              >
-                Beperkingstype(s):{" "}
-              </Text>
+            <div className="flex flex-col h-[117px] md:h-auto items-left justify-center mt-[15px] p-2.5 w-[600px] mt-[30px] sm:w-full">
+              <label htmlFor="myInput" className="mt-[40px]" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>Geboortedatum: </label>
+                <Input
+                  className="text-lg text-white-A700 w-auto ml-[-12px] mt-[2px]"
+                  size="txtInterBlack18"
+                  style={{ color: 'white', fontSize: '18px'}}
+                  value={jsonData.birthDate}
+                ></Input>
             </div>
-            <div className="flex flex-col h-[115px] md:h-auto items-left justify-center p-2.5 w-[600px] sm:w-full">
-              <Text
-                className="text-lg text-white-A700 w-auto"
-                size="txtInterBlack18"
-              >
-                Hulpmiddel(en):{" "}
-              </Text>
-            </div>
+            <div className="flex flex-col h-[115px] md:h-auto items-left justify-center p-2.5 w-[600px] mt-[-30px] sm:w-full">
+              <label htmlFor="myInput" className="mt-[40px]" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>Telefoonnummer: </label>
+                <Input
+                  className="text-lg text-white-A700 w-auto ml-[-12px] mt-[2px]"
+                  size="txtInterBlack18"
+                  style={{ color: 'white', fontSize: '18px'}}
+                  value={jsonData.phone}
+                ></Input>
+              </div>
             <Button
               className="cursor-pointer flex h-[60px] items-center justify-center mt-[15px] w-[600px]"
               onClick={() => navigate("/profielpagina")}
@@ -79,7 +102,7 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
                 <Img
                   className="md:h-auto h-full object-cover w-[50px]"
                   src="images/img_EditProfile.png"
-                  alt="imageTwelve"
+                  alt="EditProfile"
                 />
               }
               shape="round"

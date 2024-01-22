@@ -7,7 +7,9 @@ namespace WPR
     public class Location
 	{
         [Key]
-        public int Id {get; set;}
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
+        public int Id {get; private set;}
         [Required][StringLength(256, MinimumLength = 2)]
         public string StreetName { get; set; }
         [Required][StringLength(6, MinimumLength = 6)]

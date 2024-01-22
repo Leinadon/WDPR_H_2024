@@ -19,8 +19,8 @@ const MenuBeheerderPaginaPage = () => {
             <div className="flex flex-col h-[100px] md:h-auto items-center justify-start p-2.5 w-[116px]">
               <Img
                 className="h-[79px] md:h-auto object-cover w-24"
-                src="images/img_reshotillustra.png"
-                alt="reshotillustra"
+                src="images/img_Logo.png"
+                alt="Accessibility logo"
               />
             </div>
           </div>
@@ -29,9 +29,9 @@ const MenuBeheerderPaginaPage = () => {
               className="cursor-pointer flex h-14 items-center justify-center w-[486px]"
               rightIcon={
                 <Img
-                  className="h-11 ml-2.5 mr-[177px]"
+                  className="h-11 ml-2.5"
                   src="images/img_image1.png"
-                  alt="imageOne"
+                  alt="Profiel Icoon"
                 />
               }
               shape="round"
@@ -47,9 +47,9 @@ const MenuBeheerderPaginaPage = () => {
               className="cursor-pointer flex h-14 items-center justify-center w-[486px]"
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[115px]"
-                  src="images/img_googleforms.png"
-                  alt="googleforms"
+                  className="h-11 ml-2.5"
+                  src="images/img_AddInfoList.png"
+                  alt="imageOne"
                 />
               }
               shape="round"
@@ -58,16 +58,16 @@ const MenuBeheerderPaginaPage = () => {
               variant="fill"
             >
               <div className="font-black leading-[normal] text-center text-xl">
-                Opdracht Plaatsen
+                Onderzoek Plaatsen
               </div>
             </Button>
             <Button
               className="cursor-pointer flex h-14 items-center justify-center w-[486px]"
               rightIcon={
                 <Img
-                  className="ml-2.5"
+                className="h-11 ml-2.5"
                   src="images/img_barchart2.svg"
-                  alt="bar-chart-2"
+                  alt="Onderzoeks resultaten Icoon"
                 />
               }
               shape="round"
@@ -76,15 +76,15 @@ const MenuBeheerderPaginaPage = () => {
               variant="fill"
             >
               <div className="font-black leading-[normal] text-center text-xl">
-                Opdracht Resultaten
+                Onderzoeks Resultaten
               </div>
             </Button>
             <Button
               className="cursor-pointer flex h-14 items-center justify-center w-[486px]"
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[120px]"
-                  src="images/img_image9.png"
+                className="h-11 ml-2.5"
+                  src="images/img_InfoList.png"
                   alt="imageNine"
                 />
               }
@@ -101,8 +101,8 @@ const MenuBeheerderPaginaPage = () => {
               className="cursor-pointer flex h-14 items-center justify-center w-[486px]"
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[117px]"
-                  src="images/img_image11_44x46.png"
+                className="h-11 ml-2.5"
+                  src="images/img_AddCompany.png"
                   alt="imageEleven"
                 />
               }
@@ -119,8 +119,8 @@ const MenuBeheerderPaginaPage = () => {
               className="cursor-pointer flex h-14 items-center justify-center w-[486px]"
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[111px]"
-                  src="images/img_image11_1.png"
+                className="h-11 ml-2.5"
+                  src="images/img_RemoveCompany.png"
                   alt="imageEleven_One"
                 />
               }
@@ -137,9 +137,9 @@ const MenuBeheerderPaginaPage = () => {
               className="cursor-pointer flex h-14 items-center justify-center w-[486px]"
               rightIcon={
                 <Img
-                  className="ml-2.5 mr-[184px]"
-                  src="images/img_image2_44x46.png"
-                  alt="imageTwo"
+                  className="h-11 ml-2.5"
+                  src="images/img_Chat.png"
+                  alt="Chat Icoon"
                 />
               }
               shape="round"
