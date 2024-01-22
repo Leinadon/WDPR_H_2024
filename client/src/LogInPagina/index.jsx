@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-
-// import { useNavigate, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../msalConfig";
 import { UnauthenticatedTemplate, useMsal, MsalProvider } from '@azure/msal-react';
