@@ -1,0 +1,5 @@
+# Prometheus Configuratie (prometheus.yml)
+scrape_configs:
+  - job_name: 'my-aspnet-core-app'
+    static_configs:
+      - targets: ['localhost:7258'] # De locatie van je ASP.NET Core-applicatie
