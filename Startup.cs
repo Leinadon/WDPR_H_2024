@@ -91,6 +91,8 @@ namespace WPR
                 builder.AddConsole();
             });
 
+
+
             services.AddSwaggerGen();
             services.AddCors(options =>
                    {
@@ -135,6 +137,46 @@ namespace WPR
             {
                 endpoints.MapControllers();
             });
+
+            CreateFirstRoles(app.ApplicationServices).Wait(); // Note: This is just an example; async should be avoided in Configure
+        }
+
+        private async Task CreateFirstRoles(IServiceProvider serviceProvider)
+        {
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+                // List of roles to create
+                var rolesToCreate = new List<string> { "Admin", "Gebruiker", "Company" };
+
+                foreach (var roleName in rolesToCreate)
+                {
+                    if (!await roleManager.RoleExistsAsync(roleName))
+                    {
+                        var result = await roleManager.CreateAsync(new IdentityRole(roleName));
+
+                        if (result.Succeeded)
+                        {
+                            // Role creation succeeded
+                            Console.WriteLine("Success creation of role: "+ roleName);
+                            // Additional logic if needed
+                        }
+                        else
+                        {
+                            // Role creation failed
+                            Console.WriteLine("Fail of role: "+ roleName);
+                            // Handle errors
+                        }
+                    }
+                    else
+                    {
+                            Console.WriteLine("Role exists: "+ roleName);
+                        // Role already exists
+                        // Additional logic if needed
+                    }
+                }
+            }
         }
     }
 }

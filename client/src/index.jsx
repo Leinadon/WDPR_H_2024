@@ -7,6 +7,7 @@ import { msalConfig } from './msalConfig';
 import { useNavigate } from "react-router-dom";
 import { AuthProvider } from 'AuthProvider';
 
+
 import './styles/index.css';
 
 /**

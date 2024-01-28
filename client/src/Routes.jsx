@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Redirect, Switch } from "react-router-dom";
+import PrivateRoute from "./components/auth/PrivateRoute";
+import AuthProvider from "./AuthProvider";
 import NotFound from "NotFound";
 import InformatieLijstenBeheerderPaginaPage from "InformatieLijstenBeheerderPagina";
 
@@ -50,9 +52,12 @@ const ProfielErvaringsdeskundigePagina = React.lazy(
 const OnderzoekOverzicht = React.lazy(() => import("OnderzoekOverzicht"));
 const ProfielPagina = React.lazy(() => import("ProfielPagina"));
 const MenuPagina = React.lazy(() => import("MenuPagina"));
-const SignUpPagina = React.lazy(() => import("SignUpPagina"));
+const SignUpPagina = React.lazy(() => import("SignUpPagina")); //OLD ONE
+const SignUp = React.lazy(() => import("SignUp"));
 const LogInPagina = React.lazy(() => import("LogInPagina"));
 const HomePagina = React.lazy(() => import("HomePagina"));
+
+
 const ProjectRoutes = () => {
   return (
     <React.Suspense fallback={<>Loading...</>}>
@@ -60,11 +65,19 @@ const ProjectRoutes = () => {
         <Routes>
           <Route path="/" element={<HomePagina />} />
           <Route path="*" element={<NotFound />} />
-          <Route path="/loginpagina" element={<LogInPagina />} />
+          <Route path="/signup" element={<SignUp />} />
+
+          <Route path="/login" element={<LogInPagina />} />
           <Route path="/signuppagina" element={<SignUpPagina />} />
           <Route path="/menupagina" element={<MenuPagina />} />
           <Route path="/profielpagina" element={<ProfielPagina />} />
           <Route path="/alle_onderzoeken" element={<OnderzoekOverzicht />} />
+
+          <Route path="/admin" element={<PrivateRoute Component={MenuBeheerderPagina} />}  />
+
+
+
+    {/* ################## */}
           <Route
             path="/profielervaringsdeskundigepagina"
             element={<ProfielErvaringsdeskundigePagina />}
@@ -109,10 +122,6 @@ const ProjectRoutes = () => {
           <Route
             path="/chatbedrijfervaringsdeskundigepagina"
             element={<ChatBedrijfErvaringsdeskundigePagina />}
-          />
-          <Route
-            path="/menubeheerderpagina"
-            element={<MenuBeheerderPagina />}
           />
           <Route
             path="/profielpaginabeheerder"

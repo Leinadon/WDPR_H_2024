@@ -45,12 +45,22 @@ const SignUpPaginaPage = () => {
               />
             </div>
           </div>
-          <Text
+          <h1
             className="flex flex-col items-left justify-left ml-[430px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
             size="txtJockeyOneRegular36"
           >
-            Maak een Account!
-          </Text>
+            Nieuw bij Stichting Accessibility!
+          </h1>
+          <p className="flex flex-col items-left justify-left ml-[430px] mt-[10px] text-xl sm:text-[18px] md:text-[20px] text-white-A700" size="txtJockeyOneRegular36">
+            Maak een account aan en start met een onderzoek.
+          </p>
+
+          <h2
+            className="flex flex-col items-left justify-left ml-[430px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
+            size="txtJockeyOneRegular36"
+          >
+            Persoonlijke gegevens
+          </h2>
           <div className="flex flex-col justify-center font-inter w-[600px] ml-[420px] mt-[35px] ">
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -58,7 +68,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglethree"
+              name="firstName"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -75,7 +85,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectangleseven"
+              name="lastName"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -92,7 +102,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglefour"
+              name="dob"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -109,7 +119,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectangleeight"
+              name="email"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -126,7 +136,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglefive"
+              name="phonenumber"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]" //wrapClassName="flex h-[54px] ml-6 md:ml-[0] mt-[0] w-[100%]"
@@ -143,7 +153,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglesix"
+              name="postalcode"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -160,7 +170,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglesix"
+              name="username"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -177,7 +187,7 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglesixone"
+              name="password"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -197,7 +207,7 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="my-0.5"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectanglefiveon"
+                name="disability1"
                 id="rectanglefiveon"
                 shape="round"
                 color="blue_gray_100"
@@ -214,7 +224,7 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="mb-1"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectangleFive_Three"
+                name="disability2"
                 id="rectangleFive_Three"
               ></CheckBox>
               <Text
@@ -228,7 +238,7 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="mb-1"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectanglefiveth"
+                name="disability3"
                 id="rectanglefiveth"
                 shape="round"
                 color="blue_gray_100"
@@ -245,30 +255,30 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="mb-1"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectangleFive_Three"
+                name="disability4"
                 id="rectangleFive_Three"
               ></CheckBox>
               <Text
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
               >
-              Ontwikkeling
+                Ontwikkeling
               </Text>
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[25px] w-[37%] md:w-full">
               <CheckBox
                 className="mb-1"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectanglefivefi"
+                name="disability5"
                 id="rectanglefivefi"
                 shape="round"
                 color="blue_gray_100"
                 variant="fill"
-                ></CheckBox>
+              ></CheckBox>
               <Text
                 className="text-center text-white-A700 text-xl"
                 size="txtInterSemiBold20"
-                >
+              >
                 Cognitief of neurologisch
               </Text>
             </div>

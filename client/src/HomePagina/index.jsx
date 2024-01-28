@@ -43,7 +43,7 @@ const HomePaginaPage = () => {
         </div>
         <Button
           className="common-pointer cursor-pointer font-black font-inter h-14 leading-[normal] max-w-[682px] mt-[34px] text-center text-xl w-full"
-          onClick={() => navigate("/loginpagina")}
+          onClick={() => navigate("/login")}
           shape="round"
           color="teal_400"
           size="lg"
@@ -53,7 +53,7 @@ const HomePaginaPage = () => {
         </Button>
         <Button
           className="common-pointer cursor-pointer font-black font-inter h-14 leading-[normal] max-w-[682px] my-[57px] text-center text-xl w-full"
-          onClick={() => navigate("/signuppagina")}
+          onClick={() => navigate("/signup")}
           shape="round"
           color="teal_400"
           size="lg"
