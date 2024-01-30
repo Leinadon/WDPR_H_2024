@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
 namespace WPR
 {
     public interface IRolesService
@@ -20,9 +23,10 @@ namespace WPR
             return await _rolesRepository.GetById(id);
         }
 
-        public Task<List<Roles>> GetRoles()
+        public async Task<List<Roles>> GetRoles()
         {
-            throw new NotImplementedException();
+            return await _rolesRepository.GetRolesFromDatabase();
         }
     }
 }
+

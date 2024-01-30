@@ -3,39 +3,33 @@ using StackExchange.Redis;
 
 namespace WPR
 {
-
     public interface IRoleRepository
     {
-        
-        Task<List<Roles>> Get();
+        Task<List<Roles>> GetRolesFromDatabase();
         Task<Roles?> GetById(int id);
-        
-
     }
 
-    public class RoleRepository: IRoleRepository
+    public class RoleRepository : IRoleRepository
     {
+        private readonly WPRDbContext _rolesRepository;
 
-        private readonly WPRDbContext _dbContext;
-
-        public RoleRepository(WPRDbContext dbContext)
+        public RoleRepository(WPRDbContext rolesRepository)
         {
-            this._dbContext = dbContext;
+            _rolesRepository = rolesRepository;
         }
 
-        public async Task<List<Roles>> Get()
+        public async Task<List<Roles>> GetRolesFromDatabase()
         {
-            return await _dbContext.Roles.ToListAsync();
+
+            return await _rolesRepository.Roles.ToListAsync();
         }
 
         public async Task<Roles?> GetById(int id)
         {
-            Roles? roles = await _dbContext.Roles.FirstOrDefaultAsync(r => r.ID == id);
-            if(roles != null){
-                return roles;
-            } else {
-                throw new InvalidOperationException($"Roles with ID {id} not found");
-            }
+
+            return await _rolesRepository.Roles.FindAsync(id);
         }
     }
+
+
 }
