@@ -129,7 +129,7 @@ const ProfielErvaringsdeskundigePaginaPage = () => {
                           />
                         ))}
                       </div>
-                      <button className="confirm-button mt-[20px] ml-[-2px]" style={{ color: 'white', fontSize: "20px", fontWeight: "bold", textDecoration: 'underline', }} onClick={handleConfirm}>Bevestig</button>
+                      <button className="confirm-button mt-[20px] ml-[-2px]" style={{ color: 'white', fontSize: "20px", fontWeight: "bold", textDecoration: 'underline', }} onClick={handleToggleModal}>Bevestig</button>
                     </div>
                   </div>
                 )}

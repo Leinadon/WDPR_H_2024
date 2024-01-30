@@ -1,30 +1,76 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axiosAPI from "../api/axios";
 import { Button, CheckBox, Img, Input, Text } from "components";
+import AuthContext from "../AuthProvider";
+import { msalInstance } from "index";
+
+const SIGNUP_URL = "https://localhost:7258/api/identityUser/signup";
 // import { emitWarning } from "process";
 
 const SignUpPaginaPage = () => {
   const navigate = useNavigate();
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [birthdate, setBirthdate] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [resources, setResources] = useState('');
-  const [voogdColor, setVoogdColor] = useState('#CCCCCC');
-  const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [birthdate, setBirthdate] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [postalCode, setPostalCode] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkboxFysiek, setCheckboxFysiek] = useState(false);
+  const [checkboxAuditief, setCheckboxAuditief] = useState(false);
+  const [checkboxVisueel, setCheckboxVisueel] = useState(false);
+  const [checkboxOntwikkeling, setCheckboxOntwikkeling] = useState(false);
+  const [checkboxCognitief, setCheckboxCognitief] = useState(false);
+  const [hulpmiddelen, setHulpmiddelen] = useState("");
+  const [resources, setResources] = useState("");
+  const [voogdColor, setVoogdColor] = useState("#CCCCCC");
+  const [voogdText, setVoogdText] = useState("Ik heb geen Voogd");
+  const { setAuth } = useContext(AuthContext);
+  const userRef = useRef();
+  const errRef = useRef();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const handleButtonClickVoogd = () => {
-    const newColor = voogdColor === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
-    const newText = voogdColor === '#CCCCCC' ? 'Ik heb een Voogd' : 'Ik heb geen Voogd';
+    const newColor = voogdColor === "#CCCCCC" ? "#1ca883" : "#CCCCCC";
+    const newText =
+      voogdColor === "#CCCCCC" ? "Ik heb een Voogd" : "Ik heb geen Voogd";
     setVoogdColor(newColor);
     setVoogdText(newText);
   };
 
+  const handleCheckboxChange = (checkboxNumber, setterFunction) => {
+    setterFunction((prevValue) => !prevValue);
+  };
+
+  const validateFields = () => {
+    // Check if at least one checkbox is checked
+    if (!(checkboxFysiek || checkboxAuditief || checkboxVisueel || checkboxOntwikkeling || checkboxCognitief)) {
+      setError('Vink minimaal 1 checkbox.');
+      return false;
+    }
+
+    // Check if other input values are present
+    if (!firstName || !lastName || !phone || !email) {
+      setError('Vul alle velden in.');
+      return false;
+    }
+
+    if (!email.includes('@')) {
+      setError('Voer een geldig emailadres in.');
+      return false;
+    }
+
+    setError('');
+    return true;
+  };
+
+  const handleSignUp = () => {
+    if (validateFields()) {
+      console.log('Performing signup actions:', {firstName, lastName, birthdate, email, phone, postalCode, username, password, checkboxFysiek, checkboxAuditief, checkboxVisueel, checkboxOntwikkeling, checkboxCognitief, hulpmiddelen});     
+    }
+  };
 
   return (
     <>
@@ -58,14 +104,15 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglethree"
+              type="text"
+              name="firstname"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             ></Input>
@@ -75,16 +122,18 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectangleseven"
+              type="text"
+              name="lastname"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
+              required
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -92,14 +141,15 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglefour"
+              type="date"
+              name="birthdate"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={birthdate}
               onChange={(e) => setBirthdate(e.target.value)}
             ></Input>
@@ -109,14 +159,15 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectangleeight"
+              type="mail"
+              name="email"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             ></Input>
@@ -126,14 +177,15 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglefive"
+              type="phone"
+              name="phone"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]" //wrapClassName="flex h-[54px] ml-6 md:ml-[0] mt-[0] w-[100%]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             ></Input>
@@ -143,14 +195,15 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglesix"
+              type="postalcode"
+              name="postalcode"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={postalCode}
               onChange={(e) => setPostalCode(e.target.value)}
             ></Input>
@@ -160,14 +213,15 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglesix"
+              type="username"
+              name="username"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             ></Input>
@@ -177,14 +231,15 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="rectanglesixone"
+              type="password"
+              name="password"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
+              style={{ fontSize: "20px" }}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             ></Input>
@@ -195,13 +250,16 @@ const SignUpPaginaPage = () => {
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[16px] w-[24%] md:w-full">
               <CheckBox
-                className="my-0.5"
+                className="fysiek"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
                 name="rectanglefiveon"
                 id="rectanglefiveon"
                 shape="round"
                 color="blue_gray_100"
                 variant="fill"
+                type="checkbox"
+                checked={checkboxFysiek}
+                onChange={() => handleCheckboxChange(1, setCheckboxFysiek)}
               ></CheckBox>
               <Text
                 className="text-center text-white-A700 text-xl"
@@ -212,13 +270,19 @@ const SignUpPaginaPage = () => {
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
               <CheckBox
-                className="mb-1"
+                className="auditief"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
                 name="rectangleFive_Three"
                 id="rectangleFive_Three"
+                shape="round"
+                color="blue_gray_100"
+                variant="fill"
+                type="checkbox"
+                checked={checkboxAuditief}
+                onChange={() => handleCheckboxChange(2, setCheckboxAuditief)}
               ></CheckBox>
               <Text
-                className="text-center text-white-A700 text-xl"
+                className="text-center text-white-A700 text-xl mt-[-2px]"
                 size="txtInterSemiBold20"
               >
                 Auditief
@@ -226,16 +290,20 @@ const SignUpPaginaPage = () => {
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
               <CheckBox
-                className="mb-1"
+                className="visueel"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
                 name="rectanglefiveth"
                 id="rectanglefiveth"
                 shape="round"
                 color="blue_gray_100"
                 variant="fill"
+                type="checkbox"
+                checked={checkboxVisueel}
+                onChange={() => handleCheckboxChange(3, setCheckboxVisueel)}
               ></CheckBox>
+              
               <Text
-                className="text-center text-white-A700 text-xl"
+                className="text-center text-white-A700 text-xl mt-[-2px]"
                 size="txtInterSemiBold20"
               >
                 Visueel
@@ -243,32 +311,41 @@ const SignUpPaginaPage = () => {
             </div>
             <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[22px] w-[29%] md:w-full">
               <CheckBox
-                className="mb-1"
+                className="ontwikkeling"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectangleFive_Three"
-                id="rectangleFive_Three"
+                name="rectanglefiveth"
+                id="rectanglefiveth"
+                shape="round"
+                color="blue_gray_100"
+                variant="fill"
+                type="checkbox"
+                checked={checkboxOntwikkeling}
+                onChange={() => handleCheckboxChange(4, setCheckboxOntwikkeling)}
               ></CheckBox>
               <Text
-                className="text-center text-white-A700 text-xl"
+                className="text-center text-white-A700 text-xl mt-[-2px]"
                 size="txtInterSemiBold20"
               >
-              Ontwikkeling
+                Ontwikkeling
               </Text>
             </div>
-            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[25px] w-[37%] md:w-full">
+            <div className="flex flex-row gap-7 items-start justify-start ml-2.5 md:ml-[] mt-[25px] w-[100%] md:w-full">
               <CheckBox
-                className="mb-1"
+                className="cognitief_neurologisch"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
                 name="rectanglefivefi"
                 id="rectanglefivefi"
                 shape="round"
                 color="blue_gray_100"
                 variant="fill"
-                ></CheckBox>
+                type="checkbox"
+                checked={checkboxCognitief}
+                onChange={() => handleCheckboxChange(5, setCheckboxCognitief)}
+              ></CheckBox>
               <Text
-                className="text-center text-white-A700 text-xl"
+                className="text-center text-white-A700 text-xl mt-[-2px]"
                 size="txtInterSemiBold20"
-                >
+              >
                 Cognitief of neurologisch
               </Text>
             </div>
@@ -296,27 +373,33 @@ const SignUpPaginaPage = () => {
             </div>
             <div>
               <Input
-                name="rectanglesix"
+                type="hulp"
+                name="hulpmiddelen"
                 placeholder=""
                 className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
                 wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
                 shape="round"
                 color="deep_orange_50"
                 variant="fill"
-                style={{ fontSize: '20px' }}
-                value={resources}
-                onChange={(e) => setResources(e.target.value)}
+                style={{ fontSize: "20px" }}
+                value={hulpmiddelen}
+                onChange={(e) => setHulpmiddelen(e.target.value)}
               ></Input>
             </div>
+            <Text className="mt-[20px] ml-[6px]">
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            </Text>
             <div>
               <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px] "
-                onClick={() => navigate("/menupagina")}
                 shape="round"
                 color="teal_400"
                 size="lg"
                 variant="fill"
-              > Sign Up
+                onClick={() => handleSignUp()}
+              >
+                {" "}
+                Sign Up
               </Button>
             </div>
             <Button
