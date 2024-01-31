@@ -5,8 +5,7 @@ import { Button, CheckBox, Img, Input, Text } from "components";
 import AuthContext from "../AuthProvider";
 import { msalInstance } from "index";
 
-const SIGNUP_URL = "https://localhost:7258/api/identityUser/signup";
-// import { emitWarning } from "process";
+const SIGNUP_URL = "https://localhost:3000/signup";
 
 const SignUpPaginaPage = () => {
   const navigate = useNavigate();
@@ -47,13 +46,13 @@ const SignUpPaginaPage = () => {
   };
 
   const validateFields = () => {
-    if (!(checkboxFysiek || checkboxAuditief || checkboxVisueel || checkboxOntwikkeling || checkboxCognitief)) {
-      setError('Vink minimaal 1 checkbox.');
+    if (!firstName || !lastName || !birthdate || !email || !phone || !postalCode || !username || !password || !hulpmiddelen) {
+      setError('Vul alle velden in.');
       return false;
     }
 
-    if (!firstName || !lastName || !phone || !email) {
-      setError('Vul alle velden in.');
+    if (!(checkboxFysiek || checkboxAuditief || checkboxVisueel || checkboxOntwikkeling || checkboxCognitief)) {
+      setError('Vink minimaal 1 checkbox.');
       return false;
     }
 
@@ -66,12 +65,47 @@ const SignUpPaginaPage = () => {
     return true;
   };
 
-  const handleSignUp = () => {
+  const handleSignUpAndSaveData = async () => {
     if (validateFields()) {
-      console.log('Performing signup actions:', {firstName, lastName, birthdate, email, phone, postalCode, username, password, checkboxFysiek, checkboxAuditief, checkboxVisueel, checkboxOntwikkeling, checkboxCognitief, voogdValue, hulpmiddelen});     
+      try {
+        const signUpResponse = await axiosAPI.post(SIGNUP_URL, {
+          firstName,
+          lastName,
+          birthdate,
+          email,
+          phone,
+          postalCode,
+          username,
+          password,
+          checkboxFysiek,
+          checkboxAuditief,
+          checkboxVisueel,
+          checkboxOntwikkeling,
+          checkboxCognitief,
+          voogdValue,
+          hulpmiddelen,
+        });
+
+        if (signUpResponse.status === 200) {
+          console.log('User signed up successfully!');
+          
+          const saveDataResponse = await axiosAPI.post('save-data-api-endpoint', {
+          });
+
+          if (saveDataResponse.status === 200) {
+            console.log('Data saved successfully!');
+          } else {
+            console.error('Failed to save data');
+          }
+        } else {
+          console.error('Failed to sign up user');
+        }
+      } catch (error) {
+        console.error('Error during signup and data saving:', error);
+      }
     }
   };
-
+  
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -396,7 +430,7 @@ const SignUpPaginaPage = () => {
                     color="teal_400"
                     size="lg"
                 variant="fill"
-                onClick={() => handleSignUp()}
+                onClick={() => handleSignUpAndSaveData()}
               >
                 {" "}
                 Sign Up
