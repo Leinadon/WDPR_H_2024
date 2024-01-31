@@ -27,6 +27,7 @@ const SignUpPaginaPage = () => {
   const [resources, setResources] = useState("");
   const [voogdColor, setVoogdColor] = useState("#CCCCCC");
   const [voogdText, setVoogdText] = useState("Ik heb geen Voogd");
+  const [voogdValue, setVoogdValue] = useState(false);
   const { setAuth } = useContext(AuthContext);
   const userRef = useRef();
   const errRef = useRef();
@@ -34,10 +35,11 @@ const SignUpPaginaPage = () => {
   const [success, setSuccess] = useState("");
   const handleButtonClickVoogd = () => {
     const newColor = voogdColor === "#CCCCCC" ? "#1ca883" : "#CCCCCC";
-    const newText =
-      voogdColor === "#CCCCCC" ? "Ik heb een Voogd" : "Ik heb geen Voogd";
+    const newText = voogdColor === "#CCCCCC" ? "Ik heb een Voogd" : "Ik heb geen Voogd";
+    const newValue = voogdColor === "#1ca883";
     setVoogdColor(newColor);
     setVoogdText(newText);
+    setVoogdValue(newValue);
   };
 
   const handleCheckboxChange = (checkboxNumber, setterFunction) => {
@@ -45,13 +47,11 @@ const SignUpPaginaPage = () => {
   };
 
   const validateFields = () => {
-    // Check if at least one checkbox is checked
     if (!(checkboxFysiek || checkboxAuditief || checkboxVisueel || checkboxOntwikkeling || checkboxCognitief)) {
       setError('Vink minimaal 1 checkbox.');
       return false;
     }
 
-    // Check if other input values are present
     if (!firstName || !lastName || !phone || !email) {
       setError('Vul alle velden in.');
       return false;
@@ -68,7 +68,7 @@ const SignUpPaginaPage = () => {
 
   const handleSignUp = () => {
     if (validateFields()) {
-      console.log('Performing signup actions:', {firstName, lastName, birthdate, email, phone, postalCode, username, password, checkboxFysiek, checkboxAuditief, checkboxVisueel, checkboxOntwikkeling, checkboxCognitief, hulpmiddelen});     
+      console.log('Performing signup actions:', {firstName, lastName, birthdate, email, phone, postalCode, username, password, checkboxFysiek, checkboxAuditief, checkboxVisueel, checkboxOntwikkeling, checkboxCognitief, voogdValue, hulpmiddelen});     
     }
   };
 
@@ -393,14 +393,14 @@ const SignUpPaginaPage = () => {
               <Button
                 className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px] "
                 shape="round"
-                color="teal_400"
-                size="lg"
+                    color="teal_400"
+                    size="lg"
                 variant="fill"
                 onClick={() => handleSignUp()}
               >
                 {" "}
                 Sign Up
-              </Button>
+                </Button>
             </div>
             <Button
               className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] ml-[20px] leading-[normal] ml-3 md:ml-[] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] items-center text-center text-white-A700 w-[600px]"
