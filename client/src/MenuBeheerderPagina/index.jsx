@@ -124,6 +124,7 @@ const MenuBeheerderPaginaPage = () => {
                   alt="imageEleven"
                 />
               }
+              onClick={() => navigate("/add_company")}
               shape="round"
               color="teal_400"
               size="sm"

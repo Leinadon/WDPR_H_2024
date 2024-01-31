@@ -70,7 +70,7 @@ const ProjectRoutes = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="/unauthorized" element={<UnAuthorized />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup_company" element={<SignUpCompany />} />
+          <Route path="/add_company" element={<SignUpCompany />} />
           <Route path="/signuppagina" element={<SignUpPagina />} />
           <Route path="/login" element={<LogInPagina />} />
 
