@@ -21,7 +21,6 @@ const LogInPaginaPage = () => {
   const [errorMsg, setErrormMsg] = useState('');
   const [success, setSuccess] = useState('');
 
-
   useEffect(() => {
     userRef.current.focus();
   }, [])
