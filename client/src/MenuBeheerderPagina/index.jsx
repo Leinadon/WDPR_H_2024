@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAuth } from '../AuthProvider';
 
+import { useNavigate } from "react-router-dom";
 import { Button, Img, Text } from "components";
 
 const MenuBeheerderPaginaPage = () => {
+  const navigate = useNavigate();
+  const { auth, logout, user } = useAuth();
+
+  useEffect(() => {
+    console.log("print when arrived");
+    // navigate("/unauthorized");
+  },[])
+
+  const menuClick = (destination) =>{
+    console.log(destination);
+    navigate(destination);
+  };
+  
+  
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -67,16 +83,17 @@ const MenuBeheerderPaginaPage = () => {
                 <Img
                 className="h-11 ml-2.5"
                   src="images/img_barchart2.svg"
-                  alt="Onderzoeks resultaten Icoon"
+                  alt="Onderzoeks database"
                 />
               }
               shape="round"
               color="teal_400"
               size="sm"
               variant="fill"
+              onClick={menuClick("/alle_onderzoeken")}
             >
               <div className="font-black leading-[normal] text-center text-xl">
-                Onderzoeks Resultaten
+                Onderzoeken database
               </div>
             </Button>
             <Button

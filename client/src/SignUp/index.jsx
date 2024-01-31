@@ -35,7 +35,6 @@ const SignUpPaginaPage = () => {
   const [confirmFocus, setConfirmFocus] = useState(false);
 
   const [errorMessage, setErrorMsg] = useState('');
-  const [success, setSuccess] = useState(false);
   const errorRef = useRef();
 
 
@@ -43,17 +42,13 @@ const SignUpPaginaPage = () => {
   //   userRef.current.focus();
   // }, [])
 
-  useEffect(() => { //checking if username is valid
+  useEffect(() => { 
     const result = USER_REGEX.test(username);
-    console.log(result);
-    console.log(username);
     setUserValid(result);
   }, [username])
 
-  useEffect(() => { //checking if password is valid and matches eachother
+  useEffect(() => {
     const result = PWD_REGEX.test(password);
-    console.log(result);
-    console.log(password);
     setPasswordValid(result)
 
     const match = password === confirmPassword;
@@ -66,27 +61,22 @@ const SignUpPaginaPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // if button enabled with JS hack
     const v1 = USER_REGEX.test(username);
     const v2 = PWD_REGEX.test(password);
     if (!v1 || !v2) {
       setErrorMsg("Invalid Entry");
       return;
     }
+
     try {
       const response = await axios.post("https://localhost:7258/api/identityUser/registreer",
-      // const response = await axios.post("https://localhost:7258/api/users/specialists",
         JSON.stringify({ username, password, birthdate, email, phone, postalCode, toolsUsing }),
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         }
       );
-      console.log(response?.data);
-      console.log(response?.accessToken);
-      console.log(JSON.stringify(response))
-      setSuccess(true);
-
+   
       //clear state and controlled inputs
       //need value attrib on inputs for this
       setUsername('');

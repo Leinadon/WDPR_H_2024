@@ -56,6 +56,7 @@ const SignUpPagina = React.lazy(() => import("SignUpPagina")); //OLD ONE
 const SignUp = React.lazy(() => import("SignUp"));
 const LogInPagina = React.lazy(() => import("LogInPagina"));
 const HomePagina = React.lazy(() => import("HomePagina"));
+const UnAuthorized = React.lazy(() => import("UnAuthorized"));
 
 
 const ProjectRoutes = () => {
@@ -65,19 +66,27 @@ const ProjectRoutes = () => {
         <Routes>
           <Route path="/" element={<HomePagina />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/unauthorized" element={<UnAuthorized />} />
           <Route path="/signup" element={<SignUp />} />
-
-          <Route path="/login" element={<LogInPagina />} />
           <Route path="/signuppagina" element={<SignUpPagina />} />
-          <Route path="/menupagina" element={<MenuPagina />} />
-          <Route path="/profielpagina" element={<ProfielPagina />} />
-          <Route path="/alle_onderzoeken" element={<OnderzoekOverzicht />} />
+          <Route path="/login" element={<LogInPagina />} />
 
-          <Route path="/admin" element={<PrivateRoute Component={MenuBeheerderPagina} />}  />
+          <Route element={<PrivateRoute allowedRoles={['Gebruiker']} />}>
+            <Route path="/menupagina" element={<MenuPagina />} />
+            <Route path="/profielpagina" element={<ProfielPagina />} />
+          </Route>
+
+
+          {/* <Route path="/admin" element={<PrivateRoute Component={MenuBeheerderPagina} />}  /> */}
+
+          <Route element={<PrivateRoute allowedRoles={["Admin"]} />}>
+            <Route path="/alle_onderzoeken" element={<OnderzoekOverzicht />} />
+            <Route path="/admin" element={<MenuBeheerderPagina />} />
+          </Route>
 
 
 
-    {/* ################## */}
+          {/* ################## */}
           <Route
             path="/profielervaringsdeskundigepagina"
             element={<ProfielErvaringsdeskundigePagina />}

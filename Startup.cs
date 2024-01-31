@@ -1,8 +1,14 @@
+using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
+using System.Text;
 
 namespace WPR
 {
@@ -83,6 +89,53 @@ namespace WPR
 
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+
+            // services.AddAuthentication(options =>
+            //     {
+            //         options.DefaultScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            //         options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            //     })
+            // .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
+
+            // services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //     .AddJwtBearer(options =>
+            //     {
+            //         options.TokenValidationParameters = new TokenValidationParameters
+            //         {
+            //             ValidateIssuer = true,
+            //             ValidateAudience = true,
+            //             ValidateLifetime = true,
+            //             ValidateIssuerSigningKey = true,
+            //             ValidIssuer = "https://localhost:7258",
+            //             ValidAudience = "https://localhost:7258",
+            //             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"))
+            //         };
+
+            //         options.Events = new JwtBearerEvents
+            //         {
+            //             OnTokenValidated = context =>
+            //             {
+            //                 var roles = new[] { "Admin", "Gebruiker", "Company" };
+
+            //                 context.Response.Headers.Add("X-User-Roles", string.Join(",", roles));
+
+            //                 return Task.CompletedTask;
+            //             }
+            //         };
+            //     });
+
+        //     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //     .AddJwtBearer(options =>
+        //     {
+        //        options.Audience = "https://localhost:5000/";
+        //        options.Authority = "https://localhost:5000/identity/";
+        //     })
+        //    .AddJwtBearer("AzureAD", options =>
+        //     {
+        //        options.Audience = "https://localhost:5000/";
+        //        options.Authority = "https://login.microsoftonline.com/eb971100-6f99-4bdc-8611-1bc8edd7f436/";
+        //     });
+
             services.AddAuthorization();
             services.AddControllers();
             services.AddRazorPages();
@@ -90,7 +143,6 @@ namespace WPR
             {
                 builder.AddConsole();
             });
-
 
 
             services.AddSwaggerGen();
@@ -138,7 +190,7 @@ namespace WPR
                 endpoints.MapControllers();
             });
 
-            CreateFirstRoles(app.ApplicationServices).Wait(); // Note: This is just an example; async should be avoided in Configure
+            //CreateFirstRoles(app.ApplicationServices).Wait(); // Note: This is just an example; async should be avoided in Configure
         }
 
         private async Task CreateFirstRoles(IServiceProvider serviceProvider)
@@ -159,19 +211,19 @@ namespace WPR
                         if (result.Succeeded)
                         {
                             // Role creation succeeded
-                            Console.WriteLine("Success creation of role: "+ roleName);
+                            Console.WriteLine("Success creation of role: " + roleName);
                             // Additional logic if needed
                         }
                         else
                         {
                             // Role creation failed
-                            Console.WriteLine("Fail of role: "+ roleName);
+                            Console.WriteLine("Fail of role: " + roleName);
                             // Handle errors
                         }
                     }
                     else
                     {
-                            Console.WriteLine("Role exists: "+ roleName);
+                        Console.WriteLine("Role exists: " + roleName);
                         // Role already exists
                         // Additional logic if needed
                     }

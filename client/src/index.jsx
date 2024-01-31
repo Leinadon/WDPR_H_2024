@@ -4,8 +4,11 @@ import App from './App';
 import { EventType, PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
 import { msalConfig } from './msalConfig';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, BrowserRouter } from "react-router-dom";
 import { AuthProvider } from 'AuthProvider';
+
+
+import Routes from "./Routes";
 
 
 import './styles/index.css';
@@ -34,10 +37,11 @@ export const msalInstance = new PublicClientApplication(msalConfig);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-
-  <MsalProvider instance={msalInstance}>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
-  </MsalProvider>
+  // <BrowserRouter>
+    <MsalProvider instance={msalInstance}>
+      <AuthProvider>
+          <App />
+      </AuthProvider>
+    </MsalProvider>
+  // </BrowserRouter>
 );

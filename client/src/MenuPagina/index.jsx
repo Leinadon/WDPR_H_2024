@@ -1,4 +1,5 @@
   import React from "react";
+  import { useAuth } from '../AuthProvider';
 
   import { useNavigate } from "react-router-dom";
 
@@ -6,6 +7,7 @@
 
   const MenuPaginaPage = () => {
     const navigate = useNavigate();
+    const { auth, logout } = useAuth();
 
     return (
       <>

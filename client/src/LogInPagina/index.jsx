@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Button, CheckBox, Img, Input, Text } from "components";
 import { msalInstance } from "index";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { loginRequest } from "../msalConfig";
 import { UnauthenticatedTemplate, useMsal, MsalProvider } from '@azure/msal-react';
 
@@ -15,8 +15,11 @@ const LOGIN_URL = 'https://localhost:7258/api/identityUser/login';
 
 const LogInPaginaPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
-  const { setAuth, logout, login } = useContext(AuthContext);
+  const [data, setData] = useState();
+  const { logout, login, auth } = useContext(AuthContext);
 
   const userRef = useRef();
   const errRef = useRef(null);
@@ -24,7 +27,7 @@ const LogInPaginaPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrormMsg] = useState('');
-  const [success, setSuccess] = useState('');
+  // const [success, setSuccess] = useState('');
 
   // const { auth, login, logout } = useAuth();
 
@@ -48,9 +51,6 @@ const LogInPaginaPage = () => {
     try {
       // const response = await fetch('https://localhost:7258/api/identityUser/login?Username=admin&passwordHash=Admin123%21', {
       const response = await fetch('https://localhost:7258/api/identityUser/login', {
-        // Username: username,
-        // passwordHash: password,
-
         method: 'POST',
         headers: {
           'Access-Control-Allow-Origin': '*',
@@ -62,33 +62,33 @@ const LogInPaginaPage = () => {
       });
 
 
+      if (response.ok) {
+        // Parse and use the response data
+        console.log("response was ok");
+      } else {
+        // Handle error responses
+        console.error('Error fetching data');
+      }
+
+
       if (response?.status === 200) {
-        const token = localStorage.getItem('TokenCookie');
-        console.log(token);
-        // const decodedToken = jwt.decode(token);
-        // console.log(decodedToken);
+        const responseData = await response.json();
+        setData(responseData);
 
-        console.log("Login Succeeded");
-        // const userId = decodedToken.sub; // Assuming 'sub' is the key for user ID in your claims
-        // const username = decodedToken.username; // Replace 'username' with the key used in your claims
-        // const role = decodedToken.role; // Re
-
-        login(["GEBRUIKER", "ADMIN"]);
-        console.log("Finished setting roles");
+        const userRoles = responseData.roles;
+        const userToken = responseData.token;
+        const userObject = responseData.user;
+        login(userRoles, userToken, userObject);
+        
+        // console.log(userRoles);
+        // console.log(userToken);
+        // console.log(userObject);
 
         // navigate("/menupagina");
       }
-
-      console.log(response);
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-
-
-      // setAuth({ username, password, roles, accessToken });
-      // setUsername('');
-      setPassword('');
-      setSuccess(true);
-
+      
+      
+      
     } catch (err) {
       if (!err?.response) {
         setErrormMsg('No Server Response');
@@ -102,8 +102,9 @@ const LogInPaginaPage = () => {
       errRef.current.focus();
     }
   }
-
-
+  
+  navigate(from, {replace: false});
+  
   function signInClickHandler(instance) {
     instance.loginPopup()
       .then(response => {

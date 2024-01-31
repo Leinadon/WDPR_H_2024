@@ -9,7 +9,7 @@ namespace WPR
 {
 
 
-    public class GebruikerMetWachwoord : IdentityUser//AANPASSENIdentityUser
+    public class GebruikerMetWachwoord : IdentityUser
     {
         public string? Password { get; init; }
     }
@@ -17,7 +17,6 @@ namespace WPR
     {
         public string? Username { get; set; }
         public string? PasswordHash { get; set; }
-        // public List<Roles>? Roles { get; set; }
     }
 
 
@@ -25,7 +24,7 @@ namespace WPR
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;//AANPASSENIdentityUser
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
@@ -46,16 +45,11 @@ namespace WPR
             var user = await _userManager.FindByIdAsync(gebruikerMetWachwoord.Id);
             if (user != null)
             {
-                // Check if the user is not already in the role
-                if (!await _userManager.IsInRoleAsync(gebruikerMetWachwoord, "Admin"))
+                if (!await _userManager.IsInRoleAsync(gebruikerMetWachwoord, "Gebruiker"))
                 {
-                    Console.WriteLine("User not in Roleschema, applying now");
-                    // Add the user to the role
-                    await _userManager.AddToRoleAsync(gebruikerMetWachwoord, "Admin");
+                    await _userManager.AddToRoleAsync(gebruikerMetWachwoord, "Gebruiker");
                 }
             }
-            else { Console.WriteLine("User not in Roleschema, applying now"); }
-
             return !resultaat.Succeeded ? new BadRequestObjectResult(resultaat) : StatusCode(201);
         }
 
@@ -89,11 +83,15 @@ namespace WPR
                     Console.WriteLine("User has no roles assigned");
                     return Unauthorized("User has no roles assigned");
                 }
+                else
+                {
+                    Console.WriteLine("There's a role");
+                }
                 foreach (var role in roles)
                 {
                     Console.WriteLine(role);
                     claims.Add(new Claim(ClaimTypes.Role, role));
-                    break;
+                
                 }
 
                 var tokenOptions = new JwtSecurityToken
@@ -116,7 +114,7 @@ namespace WPR
                     Expires = DateTime.Now.AddDays(1)
                 });
 
-                return Ok(new { Token = token });
+                return Ok(new { Token = token, Roles = roles, user = _user });
             }
 
             return Unauthorized("Invalid username or password");
