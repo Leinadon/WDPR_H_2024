@@ -118,7 +118,7 @@ const LogInPaginaPage = () => {
               Log In
             </Text>
             <Img
-              className="md:h-auto h-full items-right object-cover w-[104px]"
+              className="md:h-auto h-full items-right object-cover ml-[58px] max-w-[104px]"
               src="images/img_Logo.png"
               alt="Accessibility Logo"
             />
