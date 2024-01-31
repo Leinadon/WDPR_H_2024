@@ -58,6 +58,7 @@ const SignUpCompany = React.lazy(() => import("SignUpCompany"));
 const LogInPagina = React.lazy(() => import("LogInPagina"));
 const HomePagina = React.lazy(() => import("HomePagina"));
 const UnAuthorized = React.lazy(() => import("UnAuthorized"));
+const WachtwoordVeranderenPagina = React.lazy(() => import("WachtwoordVeranderenPagina"));
 
 
 const ProjectRoutes = () => {
@@ -145,6 +146,10 @@ const ProjectRoutes = () => {
           <Route
             path="/informatielijstenbeheerder"
             element={<InformatieLijstenBeheerderPaginaPage />}
+          />
+          <Route
+            path="/wachtwoordveranderenpagina"
+            element={<WachtwoordVeranderenPagina />}
           />
         </Routes>
       </Router>
