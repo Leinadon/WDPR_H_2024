@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import axios from '../api/axios';
 
 import { useNavigate } from "react-router-dom";
@@ -33,63 +33,54 @@ const SignUpPaginaPage = () => {
   const [errorMessage, setErrorMsg] = useState('');
   const errorRef = useRef();
 
+  const [listWithCompanies, setData] = useState([]);
 
-  // useEffect(() => {
-  //   userRef.current.focus();
-  // }, [])
 
-  useEffect(() => { 
-    const result = USER_REGEX.test(username);
-    setUserValid(result);
-  }, [username])
+  const fetchData = async () => {
+    try {
+      const response = await fetch('https://localhost:7258/api/companies');
+      const result = await response.json();
 
-  useEffect(() => {
-    const result = PWD_REGEX.test(password);
-    setPasswordValid(result)
-
-    const match = password === confirmPassword;
-    setConfirmValid(match)
-  }, [password, confirmPassword])
+      setData(result);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   useEffect(() => {
-    setErrorMsg('');
-  }, [username, password, confirmPassword])
+    fetchData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const v1 = USER_REGEX.test(username);
-    const v2 = PWD_REGEX.test(password);
-    if (!v1 || !v2) {
-      setErrorMsg("Invalid Entry");
-      return;
-    }
-
+  
     try {
-      // const response = await axios.post("https://localhost:7258/api/identityUser/registreer",
-      const response = await axios.post("https://localhost:7258/api/companies/registreer",
-        JSON.stringify({  Name: name, Sector: sector, WebsiteURL: url, ContactEmail: email }),
+      const response = await axios.post(
+        "https://localhost:7258/api/companies/registreer",
+        {
+          name: name,
+          sector: sector,
+          websiteURL: url,
+          contactEmail: email
+        },
         {
           headers: { 'Content-Type': 'application/json' },
           withCredentials: true
         }
       );
-   
-      
-      setUsername('');
-      setPassword('');
-      setConfirmPassword('');
+  
     } catch (err) {
       if (!err?.response) {
         setErrorMsg('No Server Response');
       } else if (err.response?.status === 409) {
-        setErrorMsg('No Server Response');
+        setErrorMsg('Conflict: Duplicate Entry');
       } else {
-        setErrorMsg('Registration Failed')
+        setErrorMsg('Registration Failed');
       }
       errorRef.current.focus();
     }
   }
-
+  
   return (
     <>
       <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -134,9 +125,9 @@ const SignUpPaginaPage = () => {
               <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
                 <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                   Naam van het bedrijf
-                <span className="text-red-900 text-4xl" size="txtInterBlack20">
-                *
-                </span>
+                  <span className="text-red-900 text-4xl" size="txtInterBlack20">
+                    *
+                  </span>
                 </Text>
               </div>
               <Input
@@ -165,7 +156,7 @@ const SignUpPaginaPage = () => {
                 shape="round"
                 color="deep_orange_50"
                 variant="fill"
-                
+
                 style={{ fontSize: '20px' }}
                 value={sector}
                 onChange={(e) => setSector(e.target.value)}
@@ -174,9 +165,9 @@ const SignUpPaginaPage = () => {
               <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
                 <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                   Link naar de website
-                <span className="text-red-900 text-4xl" size="txtInterBlack20">
-                *
-                </span>
+                  <span className="text-red-900 text-4xl" size="txtInterBlack20">
+                    *
+                  </span>
                 </Text>
               </div>
               <Input
@@ -192,7 +183,6 @@ const SignUpPaginaPage = () => {
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
               ></Input>
-
               <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
                 <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                   Email*
@@ -211,102 +201,22 @@ const SignUpPaginaPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></Input>
-              
-
-
-
-              {/* <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 mt-3 mt-[30px] w-[500px] sm:w-full">
-              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                Voogd
-              </Text>
+              <div className="border rounded mt-[80px] bg-blue_gray-100_02 w-full  h-96 mb-8 overflow-y-auto">
+                <ul className="">
+                  {listWithCompanies.map(companies => (
+                    <li key={companies.companyId}>
+                      <div key={companies.companyId} className="border rounded p-4 m-4 max-w-m">
+                        <h3 className="text-lg font-semibold mb-2"> Bedrijf: {companies.name}</h3>
+                        <div className="max-h-32 overflow-y-auto">
+                          <p>Link: {companies.websiteURL}</p>
+                          <p>Email: {companies.contactEmail}</p>
+                        </div>
+                      </div>
+                      <br/>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <Button
-              className="cursor-pointer font-black h-[54px] leading-[normal] mr-3 mt-[0] text-center text-xl underline w-[600px]"
-              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-              shape="round"
-              color="teal_400"
-              size="lg"
-              variant="fill"
-              style={{ backgroundColor: voogdColor }}
-              onClick={handleButtonClickVoogd}
-             >
-              {voogdText}
-              </Button> */}
-            
-
-              <h2
-                className=" mt-[49px] font-jockeyone  text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
-                size="txtJockeyOneRegular36"
-              >
-                Inlog gegevens
-              </h2>
-              <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
-                <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                  Gebruikersnaam*
-                </Text>
-              </div>
-              <Input
-                className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-                wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-                shape="round"
-                color="deep_orange_50"
-                variant="fill"
-
-                name="usernameField"
-                autoComplete="off"
-                placeholder=""
-                required
-                style={{ fontSize: '20px' }}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              ></Input>
-
-              <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
-                <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                  Wachtwoord*
-                </Text>
-              </div>
-              <Input
-                className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-                wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-                shape="round"
-                color="deep_orange_50"
-                variant="fill"
-
-                name="passwordField"
-                id="password"
-                placeholder=""
-                autoComplete="off"
-                type="password"
-                required
-                style={{ fontSize: '20px' }}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></Input>
-
-              <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
-                <Text className="text-white-A700 text-xl" size="txtInterBlack20">
-                  Bevestig wachtwoord
-                </Text>
-              </div>
-              <Input
-                className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
-                wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
-                shape="round"
-                color="deep_orange_50"
-                variant="fill"
-
-                name="confirmpasswordField"
-                id="confirmPassword"
-                placeholder=""
-                type="password"
-                required
-                style={{ fontSize: '20px' }}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              ></Input>
-
-
               <div>
                 <Button
                   className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px] "
@@ -314,9 +224,6 @@ const SignUpPaginaPage = () => {
                   color="teal_400"
                   size="lg"
                   variant="fill"
-
-                  disabled={!userValid || !passwordValid || !confirmPassword ? true : false}
-
                 > Registreer
                 </Button>
               </div>
@@ -325,18 +232,6 @@ const SignUpPaginaPage = () => {
             <div
               className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] justify-center p-2.5 w-[446px] sm:w-full"
               onClick={() => navigate("/login")}>
-              <Text
-                className="text-3xl text-right justify-right text-white-A700 w-full"
-                size="txtInterSemiBold30">
-                <span className="text-white-A700 font-inter font-semibold">
-                  Al een account?{" "}
-                </span>
-                <a
-                  href="javascript:"
-                  className="text-gray-400 font-inter font-black underline">
-                  Log in
-                </a>
-              </Text>
             </div>
           </div>
         </div>
