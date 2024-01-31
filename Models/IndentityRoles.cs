@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-public class Roles : IdentityRole
+public class Roles : IdentityRole<string>
 {
-    public int ID { get; internal set; }
+    [Key]
+    public int ID { get; set; }
+    // public int ID { get; internal set; }
+    
 }
 
 public static class SeedData

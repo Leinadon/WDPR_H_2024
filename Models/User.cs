@@ -18,6 +18,9 @@ namespace WPR
         [Required][StringLength(450)]
         public string idenitityUserId{get;set;}
         public string Role {get; set;}
+
+
+
         [InverseProperty(nameof(OurChat.User2))]
         public ICollection<OurChat>? Chats2 {get;}
         public ICollection<OurChat>? Chats {get;}
@@ -27,7 +30,8 @@ namespace WPR
             FirstName = string.Empty;
             LastName = string.Empty;
             Phone = string.Empty;
-            Role = string.Empty;
+            // Role = string.Empty;
+            Role = "Gebruiker";
         }
     }
 }

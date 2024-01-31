@@ -91,12 +91,22 @@ const SignUpPaginaPage = () => {
               />
             </div>
           </div>
-          <Text
+          <h1
             className="flex flex-col items-left justify-left ml-[430px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
             size="txtJockeyOneRegular36"
           >
-            Maak een Account!
-          </Text>
+            Nieuw bij Stichting Accessibility!
+          </h1>
+          <p className="flex flex-col items-left justify-left ml-[430px] mt-[10px] text-xl sm:text-[18px] md:text-[20px] text-white-A700" size="txtJockeyOneRegular36">
+            Maak een account aan en start met een onderzoek.
+          </p>
+
+          <h2
+            className="flex flex-col items-left justify-left ml-[430px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
+            size="txtJockeyOneRegular36"
+          >
+            Persoonlijke gegevens
+          </h2>
           <div className="flex flex-col justify-center font-inter w-[600px] ml-[420px] mt-[35px] ">
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-5 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -104,8 +114,8 @@ const SignUpPaginaPage = () => {
               </Text>
             </div>
             <Input
+              name="firstName"
               type="text"
-              name="firstname"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -123,7 +133,7 @@ const SignUpPaginaPage = () => {
             </div>
             <Input
               type="text"
-              name="lastname"
+              name="lastName"
               placeholder=""
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -252,7 +262,7 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="fysiek"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectanglefiveon"
+                name="disability1"
                 id="rectanglefiveon"
                 shape="round"
                 color="blue_gray_100"
@@ -272,7 +282,7 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="auditief"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectangleFive_Three"
+                name="disability2"
                 id="rectangleFive_Three"
                 shape="round"
                 color="blue_gray_100"
@@ -292,7 +302,7 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="visueel"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectanglefiveth"
+                name="disability3"
                 id="rectanglefiveth"
                 shape="round"
                 color="blue_gray_100"
@@ -333,7 +343,7 @@ const SignUpPaginaPage = () => {
               <CheckBox
                 className="cognitief_neurologisch"
                 inputClassName="h-5 mr-[5px] rounded-[3px] w-5"
-                name="rectanglefivefi"
+                name="disability5"
                 id="rectanglefivefi"
                 shape="round"
                 color="blue_gray_100"
