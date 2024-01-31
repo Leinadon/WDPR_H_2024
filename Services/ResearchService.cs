@@ -1,6 +1,4 @@
-﻿
-
-namespace WPR
+﻿namespace WPR
 {
     public interface IResearchService
     {

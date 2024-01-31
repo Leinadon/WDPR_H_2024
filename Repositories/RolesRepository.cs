@@ -30,6 +30,4 @@ namespace WPR
             return await _rolesRepository.Roles.FindAsync(id);
         }
     }
-
-
 }
