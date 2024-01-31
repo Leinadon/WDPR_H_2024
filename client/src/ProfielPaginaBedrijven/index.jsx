@@ -6,15 +6,19 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
+import Links from "Links";
+
 
 const ProfielPaginaBedrijvenPage = () => {
   const [jsonData, setJsonData] = useState([]);
   const navigate = useNavigate();
+  const LinkProfielPagina = new Links.LinkProfielPagina();
+  const LinkBedrijf = new LinkProfielPagina.LinkBedrijf();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7258/api/companies/1');
+        const response = await axios.get(LinkBedrijf.link);
         const data = await response.data;
         setJsonData(data);
       } catch (error) {
