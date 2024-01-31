@@ -60,6 +60,7 @@ namespace WPR
 
         // POST: api/companies
         [HttpPost]
+        [Route("registreer")]
         public async Task<ActionResult<Company>> Create([FromBody] Company company)
         {
             try
