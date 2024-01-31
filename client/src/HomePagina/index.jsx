@@ -11,7 +11,7 @@ const HomePaginaPage = () => {
   const { auth, logout, user } = useAuth();
 
   const handleLogout = () => {
-    console.log(user);
+    logout();
     console.log("logging out");
   };
 
@@ -46,7 +46,16 @@ const HomePaginaPage = () => {
                 Hallo, {user.userName}!
               </Text>
             </div>
-            <button onClick={handleLogout}>Logout</button>
+            <Button
+              className="common-pointer cursor-pointer font-black font-inter h-14 leading-[normal] max-w-[682px] mt-[34px] text-center text-xl w-full"
+              onClick={handleLogout}
+              shape="round"
+              color="teal_400"
+              size="lg"
+              variant="fill"
+            >
+              Uitloggen
+            </Button>
           </div>
         ) : (
           
@@ -70,8 +79,7 @@ const HomePaginaPage = () => {
             </div>
             <Button
               className="common-pointer cursor-pointer font-black font-inter h-14 leading-[normal] max-w-[682px] mt-[34px] text-center text-xl w-full"
-              onClick={handleLogout}
-              // onClick={() => navigate("/login")}
+              onClick={() => navigate("/login")}
               shape="round"
               color="teal_400"
               size="lg"

@@ -54,6 +54,7 @@ const ProfielPagina = React.lazy(() => import("ProfielPagina"));
 const MenuPagina = React.lazy(() => import("MenuPagina"));
 const SignUpPagina = React.lazy(() => import("SignUpPagina")); //OLD ONE
 const SignUp = React.lazy(() => import("SignUp"));
+const SignUpCompany = React.lazy(() => import("SignUpCompany"));
 const LogInPagina = React.lazy(() => import("LogInPagina"));
 const HomePagina = React.lazy(() => import("HomePagina"));
 const UnAuthorized = React.lazy(() => import("UnAuthorized"));
@@ -68,6 +69,7 @@ const ProjectRoutes = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="/unauthorized" element={<UnAuthorized />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup_company" element={<SignUpCompany />} />
           <Route path="/signuppagina" element={<SignUpPagina />} />
           <Route path="/login" element={<LogInPagina />} />
 

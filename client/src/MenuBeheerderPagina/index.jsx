@@ -90,7 +90,8 @@ const MenuBeheerderPaginaPage = () => {
               color="teal_400"
               size="sm"
               variant="fill"
-              onClick={menuClick("/alle_onderzoeken")}
+              // onClick={menuClick("/alle_onderzoeken")}
+              onClick={() => navigate("/alle_onderzoeken")}
             >
               <div className="font-black leading-[normal] text-center text-xl">
                 Onderzoeken database

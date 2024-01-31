@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
 
-    }, [auth]); // Include auth in the dependency array
+    }, [auth]); 
 
     const logout = () => {
         setAuth({ isAuthenticated: false, userRoles: [] });

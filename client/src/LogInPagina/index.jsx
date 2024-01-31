@@ -20,6 +20,7 @@ const LogInPaginaPage = () => {
 
   const [data, setData] = useState();
   const { logout, login, auth } = useContext(AuthContext);
+  // const { auth, login, logout } = useAuth();
 
   const userRef = useRef();
   const errRef = useRef(null);
@@ -27,9 +28,7 @@ const LogInPaginaPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMsg, setErrormMsg] = useState('');
-  // const [success, setSuccess] = useState('');
 
-  // const { auth, login, logout } = useAuth();
 
 
   useEffect(() => {
@@ -62,14 +61,6 @@ const LogInPaginaPage = () => {
       });
 
 
-      if (response.ok) {
-        // Parse and use the response data
-        console.log("response was ok");
-      } else {
-        // Handle error responses
-        console.error('Error fetching data');
-      }
-
 
       if (response?.status === 200) {
         const responseData = await response.json();
@@ -85,6 +76,8 @@ const LogInPaginaPage = () => {
         // console.log(userObject);
 
         // navigate("/menupagina");
+
+        navigate(from, {replace: false});
       }
       
       
@@ -103,7 +96,6 @@ const LogInPaginaPage = () => {
     }
   }
   
-  navigate(from, {replace: false});
   
   function signInClickHandler(instance) {
     instance.loginPopup()
@@ -236,7 +228,7 @@ const LogInPaginaPage = () => {
           </div>
           <div
             className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[50px] justify-center p-2.5 w-[446px] sm:w-full"
-            onClick={() => navigate("/signuppagina")}
+            onClick={() => navigate("/signup")}
           >
             <Text
               className="text-3xl text-right justify-right text-white-A700 mt-[100px] w-full"

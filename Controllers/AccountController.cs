@@ -120,49 +120,5 @@ namespace WPR
             return Unauthorized("Invalid username or password");
             // return Unauthorized();
         }
-
-
-        //         [HttpPost("login")]
-        //         public async Task<IActionResult> Login(string Username, string passwordHash)
-        //         {
-        //             var _user = await _userManager.FindByNameAsync(Username);
-        //             if (_user != null)
-        //                 if (await _userManager.CheckPasswordAsync(_user, passwordHash))
-        //                 {
-        //                     var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("awef98awef978haweof8g7aw789efhh789awef8h9awh89efh89awe98f89uawef9j8aw89hefawef"));
-
-        //                     var signingCredentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
-        //                     var claims = new List<Claim> { new Claim(ClaimTypes.Name, _user.UserName) };
-        //                     //var roles = await _userManager.GetRolesAsync(_user);
-        //                     //foreach (var role in roles)
-        //                     //    claims.Add(new Claim(ClaimTypes.Role, role));
-        //                     var tokenOptions = new JwtSecurityToken
-        //                     (
-        //                         issuer: "https://localhost:7258",
-        //                         audience: "https://localhost:7258",
-        //                         claims: claims,
-        //                         expires: DateTime.Now.AddMinutes(10),
-        //                         signingCredentials: signingCredentials
-        //                     );
-        //                     // return Ok(new { Token = new JwtSecurityTokenHandler().WriteToken(tokenOptions) });
-
-        // //----
-        //                     var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-
-        //                     // Set the token in a cookie
-        //                     Response.Cookies.Append("TokenCookie", token, new CookieOptions
-        //                     {
-        //                         HttpOnly = true, // This prevents client-side scripts from accessing the cookie
-        //                         Secure = true,   // Ensures that the cookie is only sent over HTTPS if your app is running on HTTPS
-        //                         SameSite = SameSiteMode.Strict, // Adjust as needed
-        //                         Expires = DateTime.Now.AddDays(1) // Set the expiration time for the cookie
-        //                     });
-
-        //                     return Ok(new { Token = token });
-        // //----                    
-        //                 }
-
-        //             return Unauthorized();
-        //         }
     }
 }
