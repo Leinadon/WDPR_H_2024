@@ -74,7 +74,7 @@ const LogInPaginaPage = () => {
         // console.log(userToken);
         // console.log(userObject);
 
-        // navigate("/menupagina");
+        navigate("/menupagina");
 
         navigate(from, {replace: false});
       }

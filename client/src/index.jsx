@@ -38,10 +38,10 @@ export const msalInstance = new PublicClientApplication(msalConfig);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <BrowserRouter>
+  <AuthProvider>
     <MsalProvider instance={msalInstance}>
-      <AuthProvider>
-          <App />
-      </AuthProvider>
+      <App />
     </MsalProvider>
+  </AuthProvider>
   // </BrowserRouter>
 );

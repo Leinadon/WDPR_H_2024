@@ -8,6 +8,8 @@ import axios from "axios";
 
 import { msalInstance } from "index";
 
+import Links from "Links";
+
 const ProfielPaginaPage = () => {
   const [jsonData, setJsonData] = useState({});
   const navigate = useNavigate();
@@ -21,7 +23,9 @@ const ProfielPaginaPage = () => {
   const stylePointer = {cursor: 'pointer', textDecoration: 'underline'};
   const [resources, setResources] = useState('');
   const [voogdColor, setVoogdColor] = useState('#CCCCCC');
-  const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');
+  const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');      
+  const LinkProfielPagina = new Links.LinkProfielPagina();
+  const LinkErvaring = new LinkProfielPagina.LinkErvaring();
   const handleButtonClickVoogd = () => {
     const newColor = voogdColor === '#CCCCCC' ? '#1ca883' : '#CCCCCC';
     const newText = voogdColor === '#CCCCCC' ? 'Ik heb een Voogd' : 'Ik heb geen Voogd';
@@ -32,7 +36,7 @@ const ProfielPaginaPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://localhost:7258/api/users/6');
+        const response = await axios.get(LinkErvaring.Link);
         const data = await response.data;
         setJsonData(data);
       } catch (error) {
