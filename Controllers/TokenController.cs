@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WPR{
@@ -10,6 +11,11 @@ namespace WPR{
 
         public TokenController(IUserService userService){
             _userservice = userService;
+        }
+
+        private string CreateRandomToken()
+        {
+            return Convert.ToHexString(RandomNumberGenerator.GetBytes(64));
         }
     }
 }

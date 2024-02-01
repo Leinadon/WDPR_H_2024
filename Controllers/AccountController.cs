@@ -3,8 +3,10 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Graph.Models;
 using Microsoft.IdentityModel.Tokens;
+using NuGet.Protocol;
 namespace WPR
 {
 
@@ -91,7 +93,7 @@ namespace WPR
                 {
                     Console.WriteLine(role);
                     claims.Add(new Claim(ClaimTypes.Role, role));
-                
+
                 }
 
                 var tokenOptions = new JwtSecurityToken
@@ -119,6 +121,35 @@ namespace WPR
 
             return Unauthorized("Invalid username or password");
             // return Unauthorized();
+        }
+
+        [HttpPost("reset")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest model)
+        {
+            if (model.Password != model.ConfirmPassword)
+            {
+                return BadRequest("New password and confirmed password do not match.");
+            }
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await _userManager.ResetPasswordAsync(user, resetToken, model.Password);
+
+            if (result.Succeeded)
+            {
+                return Ok("Password reset successfully");
+            }
+            else
+            {
+                // Handle password reset failure
+                return BadRequest(result.Errors);
+            }
         }
     }
 }

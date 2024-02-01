@@ -328,7 +328,6 @@ const SignUpPaginaPage = () => {
                 shape="round"
                 color="deep_orange_50"
                 variant="fill"
-
                 name="passwordField"
                 id="password"
                 placeholder=""
@@ -351,7 +350,6 @@ const SignUpPaginaPage = () => {
                 shape="round"
                 color="deep_orange_50"
                 variant="fill"
-
                 name="confirmpasswordField"
                 id="confirmPassword"
                 placeholder=""

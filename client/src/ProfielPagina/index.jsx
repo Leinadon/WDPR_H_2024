@@ -18,6 +18,7 @@ const ProfielPaginaPage = () => {
   const [postalCode, setPostalCode] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const stylePointer = {cursor: 'pointer', textDecoration: 'underline'};
   const [resources, setResources] = useState('');
   const [voogdColor, setVoogdColor] = useState('#CCCCCC');
   const [voogdText, setVoogdText] = useState('Ik heb geen Voogd');
@@ -80,8 +81,8 @@ const ProfielPaginaPage = () => {
             <div>
               <Input
                 type="text"
-              onChange={ (e) => setFirstName(e.target.value)}
-              name="rectanglethree"
+                onChange={ (e) => setFirstName(e.target.value)}
+                name="rectanglethree"
                 placeholder=""
                 className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
                 wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
@@ -89,7 +90,7 @@ const ProfielPaginaPage = () => {
                 color="deep_orange_50"
                 variant="fill"
                 value={jsonData.firstName}
-                  style={{ fontSize: "20px", color: 'black' }}
+                style={{ fontSize: "20px", color: 'black' }}
               ></Input>
             </div>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
@@ -295,9 +296,14 @@ const ProfielPaginaPage = () => {
                 onChange={ (e) => setResources(e.target.value)}
               ></Input>
             </div>
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 mt-[30px] p-2.5 w-[500px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20" onClick={() => navigate("/wachtwoordveranderenpagina")} style={stylePointer}>
+                Wachtwoord veranderen? Klik hier!
+              </Text>
+            </div>
             <div>
               <Button
-                className="cursor-pointer font-black h-14 leading-[normal] mt-[113px] mr-3 text-center text-xl w-[600px]"
+                className="cursor-pointer font-black h-14 leading-[normal] mt-[70px] mr-3 text-center text-xl w-[600px]"
                 shape="round"
                 color="teal_400"
                 size="lg"
