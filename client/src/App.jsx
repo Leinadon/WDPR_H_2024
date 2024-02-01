@@ -9,9 +9,9 @@ import "./styles/App.css";
 function App() {
         return (
                 <MsalProvider instance={msalInstance}>
-                        <AuthProvider>
+                        {/* <AuthProvider> */}
                                 <Routes />
-                        </AuthProvider>
+                        {/* </AuthProvider> */}
                 </MsalProvider>
         )
 }
