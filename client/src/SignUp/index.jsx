@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../api/axios';
 
 import { useNavigate } from "react-router-dom";
@@ -292,7 +291,7 @@ const SignUpPaginaPage = () => {
 
 
               <h2
-                className=" mt-[49px] font-jockeyone  text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
+                className=" mt-[49px] font-jockeyone ml-2.5 text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
                 size="txtJockeyOneRegular36"
               >
                 Inlog gegevens
@@ -380,7 +379,7 @@ const SignUpPaginaPage = () => {
             </form>
 
             <div
-              className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] justify-center p-2.5 w-[446px] sm:w-full"
+              className="common-pointer flex flex-col h-[39px] md:h-auto items-center ml-[32px] mt-[40px] justify-center p-2.5 w-[446px] sm:w-full"
               onClick={() => navigate("/login")}>
               <Text
                 className="text-3xl text-right justify-right text-white-A700 w-full"
