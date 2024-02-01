@@ -55,13 +55,21 @@ const SignUpPaginaPage = () => {
     e.preventDefault();
   
     try {
-      const response = await axios.post(
+        const response = await axios.post(
         "https://localhost:7258/api/companies/registreer",
         {
-          name: name,
-          sector: sector,
-          websiteURL: url,
-          contactEmail: email
+          "name": name,
+          "sector": sector,
+          "websiteURL": url,
+          "contactEmail": email,
+          "trackingID": null,
+          "locationId": null,
+          "location": {
+            "streetName": null,
+            "postalCode": null,
+            "houseNumber": null,
+            "place": null
+          }          
         },
         {
           headers: { 'Content-Type': 'application/json' },
@@ -106,10 +114,6 @@ const SignUpPaginaPage = () => {
           >
             Nieuw bij Stichting Accessibility!
           </h1>
-          <p className="flex flex-col items-left justify-left ml-[430px] mt-[10px] text-xl sm:text-[18px] md:text-[20px] text-white-A700" size="txtJockeyOneRegular36">
-            Maak een account aan en laat je website testen op toegankelijkheid.
-          </p>
-
           <h2
             className="flex flex-col items-left justify-left ml-[430px] mt-[49px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
             size="txtJockeyOneRegular36"
