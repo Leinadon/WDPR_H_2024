@@ -7,28 +7,36 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
 
     const login = (roles, t, userObj) => {
-        setAuth({ isAuthenticated: true, userRoles: roles, token: t });
+        setAuth(prev => ({
+            ...prev,
+            isAuthenticated: true,
+            userRoles: roles,
+            token: t
+        }));
+
         setUser(userObj);
         localStorage.setItem('user', JSON.stringify(userObj));
+        localStorage.setItem('roles', JSON.stringify(roles));
     };
 
-    useEffect(() => {
 
-    }, [auth]); 
 
     const logout = () => {
         setAuth({ isAuthenticated: false, userRoles: [] });
         setUser(null);
         localStorage.removeItem('user');
+        localStorage.removeItem('roles');
     };
 
     const getSessionData = () => {
-
-        console.log("going to check");
-        const storedUser = localStorage.getItem('user');
-
-        // console.log(storedUser);
-        return storedUser ? JSON.parse(storedUser) : null;
+        try {
+            const stored = localStorage.getItem('user');
+            return stored ? JSON.parse(stored) : null;
+        } catch (error) {
+            // console.log(storedUser);
+            console.error('Error parsing stored data:', error);
+            return null;
+        }
     };
 
     useEffect(() => {
@@ -37,6 +45,11 @@ export const AuthProvider = ({ children }) => {
         if (storedUser) {
             setUser(storedUser);
         }
+
+        // const storedRoles = getSessionData('roles');
+        // if (storedRoles) {
+        //     setUser(storedRoles);
+        // }
     }, []);
 
     return (

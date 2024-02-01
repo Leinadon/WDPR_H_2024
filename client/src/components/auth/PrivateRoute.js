@@ -8,6 +8,8 @@ const RequireAuth = ({ allowedRoles }) => {
     const location = useLocation();
     
     console.log(auth);
+    
+    console.log("auth");
 
     return (
       auth?.userRoles.find(role => allowedRoles?.includes(role))

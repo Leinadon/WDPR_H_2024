@@ -25,7 +25,7 @@ const OnderzoekOverzicht = () => {
       console.error('Error fetching data:', error);
     }
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -91,6 +91,17 @@ const OnderzoekOverzicht = () => {
                             <p>{research.description}</p>
                             <p>Datum: {research.startDate}</p>
                           </div>
+                          <div className="max-h-32 overflow-y-auto">
+                            <Button
+                              className="cursor-pointer font-black font-inter h-14 leading-[normal] text-center text-xl w-[486px]"
+                              shape="round"
+                              color="blue_gray_100_01"
+                              size="lg"
+                              variant="fill"
+                            >
+                              Open
+                            </Button>
+                          </div>
                         </div>
                         <br />
                       </li>
@@ -107,6 +118,7 @@ const OnderzoekOverzicht = () => {
                             <p>Datum: {research.startDate}</p>
                           </div>
                         </div>
+                        <li>lala</li>
                         <br />
                       </li>
                     ))}
