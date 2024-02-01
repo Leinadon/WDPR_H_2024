@@ -9,7 +9,7 @@ const Links = {
     };
 
     LinkBeheerder = class {
-      Link = "https://localhost:7258/api/companies/1"
+      Link = "https://localhost:7258/api/beheerder/1"
     }
   }
 
