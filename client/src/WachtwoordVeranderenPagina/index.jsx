@@ -26,84 +26,45 @@ const LogInPaginaPage = () => {
   const errRef = useRef(null);
 
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const [errorMsg, setErrormMsg] = useState('');
+  const [email, setEmail] = useState('');
+  
+  const [password, setPassword] = useState('');
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [passwordFocus, setPasswordFocus] = useState(false);
 
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, [])
-
-  useEffect(() => {
-    setErrormMsg('');
-  }, [username, password])
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmValid, setConfirmValid] = useState(false);
+  const [confirmFocus, setConfirmFocus] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    const loginData = {
-      Username: username,
-      passwordHash: password
-    }
-
-    try {
-      // const response = await fetch('https://localhost:7258/api/identityUser/login?Username=admin&passwordHash=Admin123%21', {
-      const response = await fetch('https://localhost:7258/api/identityUser/login', {
-        method: 'POST',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(loginData),
-        credentials: 'include' // Include credentials in the request
-
-      });
-
-
-
-      if (response?.status === 200) {
-        const responseData = await response.json();
-        setData(responseData);
-
-        const userRoles = responseData.roles;
-        const userToken = responseData.token;
-        const userObject = responseData.user;
-        login(userRoles, userToken, userObject);
-        
-        // console.log(userRoles);
-        // console.log(userToken);
-        // console.log(userObject);
-
-        // navigate("/menupagina");
-
-        navigate(from, {replace: false});
-      }
-      
-      
-      
-    } catch (err) {
-      if (!err?.response) {
-        setErrormMsg('No Server Response');
-      } else if (err.response?.status === 400) {
-        setErrormMsg('Missing Username or Password');
-      } else if (err.response?.status === 401) {
-        setErrormMsg('Unauthorized');
-      } else {
-        setErrormMsg('Login Failed');
-      }
-      errRef.current.focus();
-    }
   }
+    const resetPassword = async () => {
+      if (password !== confirmPassword) {
+        alert('Nieuw wachtwoord en herhaal nieuw wachtwoord komen niet overeen.');
+        return;
+      }
   
-  function signInClickHandler(instance) {
-    instance.loginPopup()
-      .then(response => {
-        navigate("/menupagina");
-        console.log('Login successful', response);
-
-      });
-  }
-
+      try {
+        const response = await axios.post("https://localhost:7258/api/identityUser/reset",
+          JSON.stringify({ email, password, confirmPassword, }),
+          {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true
+          }
+        );
+  
+        if (response.ok) {
+          alert('Wachtwoord succesvol verandert!');
+        } else {
+          const result = await response.json();
+          alert(`Wachtwoord verandering mislukt: ${result}`);
+        }
+      } catch (error) {
+        console.error('Error verandering wachtwoord:', error);
+      }
+    };
 
   return (
     <div className="bg-blue_gray-900 flex flex-col font-jockeyone items-center justify-start mx-auto p-[43px] md:px-10 sm:px-5 w-full">
@@ -117,9 +78,10 @@ const LogInPaginaPage = () => {
               Verander
             </Text>
             <Img
-              className="md:h-auto h-full items-right object-cover ml-[58px] max-w-[104px]"
+              className="md:h-auto h-full items-right object-cover ml-[ 8px] max-w-[104px]"
               src="images/img_Logo.png"
               alt="Accessibility Logo"
+              onClick={() => navigate("/menupagina")}
             />
           </div>
         </div>
@@ -138,27 +100,43 @@ const LogInPaginaPage = () => {
         </Text>
 
         <div className="flex flex-col justify-center font-inter w-[600px] ml-[400px] mt-[35px] ">
-          <form onSubmit={handleLogin}>
+            <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
+              <Text className="text-white-A700 text-xl" size="txtInterBlack20">
+                Email
+              </Text>
+            </div>
+            <Input
+              name="email"
+              placeholder="Email"
+              className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
+              wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
+              shape="round"
+              color="deep_orange_50"
+              variant="fill"
+              style={{ fontSize: '20px' }}  
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
                 Nieuw wachtwoord
               </Text>
             </div>
             <Input
-              name="userNameField"
-              type="text"
+              name="passwordField"
+              type="password" 
+              required
               placeholder="Nieuw wachtwoord"
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
               wrapClassName="flex h-[54px] ml-1 md:ml-[0] mt-1 rounded-[54px]"
               shape="round"
+              id="password"
               color="deep_orange_50"
               variant="fill"
-              style={{ fontSize: '20px' }}
-              ref={userRef}
-
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+              style={{ fontSize: '20px' }}  
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             ></Input>
             <div className="flex flex-col h-11 md:h-auto items-left justify-start mr-3 p-2.5 mb-1.5 w-[500px] sm:w-full">
               <Text className="text-white-A700 text-xl" size="txtInterBlack20">
@@ -166,7 +144,8 @@ const LogInPaginaPage = () => {
               </Text>
             </div>
             <Input
-              name="passwordField"
+              name="confirmpasswordField"
+              id="confirmPassword"
               type="password"
               placeholder="Nieuw wachtwoord"
               className="p-0 placeholder:bg-deep_orange-50 ml-3.5 mr-3.5 mt-2.5 mb-2.5 w-full"
@@ -175,13 +154,9 @@ const LogInPaginaPage = () => {
               color="deep_orange_50"
               variant="fill"
               style={{ fontSize: '20px' }}
-
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             ></Input>
-
-
 
             <p ref={errRef} className={errorMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errorMsg}</p>
 
@@ -193,33 +168,18 @@ const LogInPaginaPage = () => {
                 color="teal_400"
                 size="lg"
                 variant="fill"
-              > Log in
+                onClick={resetPassword}
+              > Opslaan
               </Button>
             </div>
-            <Button
-              className="common-pointer bg-transparent cursor-pointer font-semibold h-[39px] leading-[normal] ml-3 md:ml-[0] mt-[47px] text-3xl sm:text-[26px] md:text-[28px] items-center text-center text-white-A700 w-[600px]"
-              onClick={() => navigate("/loginpagina")}
-              size="xs"
-            ></Button>
-          </form>
-
-          <div>
-            <Text
-              className="flex flex-col items-center justify-center mt-[-60px] text-4xl sm:text-[32px] md:text-[34px] text-white-A700"
-              size="text-white-A700 font-inter font-semibold"
-              style={{ fontSize: '28px' }}
-            >
-              Of
-            </Text>
-          </div>
           <div>
             <Button
-              className="cursor-pointer font-black h-14 leading-[normal] mt-[10px] mr-3 text-center text-xl w-[600px]"
+              className="cursor-pointer font-black h-14 leading-[normal] mt-[80px] mr-3 text-center text-xl w-[600px]"
               shape="round"
-              color="teal_400"
+              color="blue_gray_100_01"
               size="lg"
               variant="fill"
-              onClick={() => navigate("/profielervaringsdeskundigepagina")}
+              onClick={() => navigate("/profielpagina")}
             > Annuleren
             </Button>
           </div>
